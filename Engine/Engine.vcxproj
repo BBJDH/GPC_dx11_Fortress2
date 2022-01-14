@@ -148,22 +148,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="220113_\Engine.cpp" />
-    <ClCompile Include="220113_\Entry.cpp" />
-    <ClCompile Include="220113_\Piepline.cpp" />
-    <ClCompile Include="220113_\Rendering.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="220113_\Matrix.h" />
-    <ClInclude Include="220113_\Vector.h" />
-    <ClInclude Include="220113_\Rendering.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Shader\HLSL\Layout.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\HLSL\Pixel.hlsl" />
     <FxCompile Include="Shader\HLSL\Vertex.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Engine.cpp" />
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Entry.cpp" />
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Piepline.cpp" />
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Rendering.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Matrix.h" />
+    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Rendering.h" />
+    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

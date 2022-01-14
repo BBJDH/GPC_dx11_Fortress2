@@ -389,7 +389,7 @@ namespace Rendering::Pipeline
 
                 DeviceContext->Release();
                 Device->Release();
-
+                
 
                 return ;
             }

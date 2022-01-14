@@ -15,35 +15,35 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="220113_\Entry.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="220113_\Piepline.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="220113_\Engine.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="220113_\Rendering.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="220113_\Matrix.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="220113_\Vector.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="220113_\Rendering.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Shader\HLSL\Layout.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\HLSL\Pixel.hlsl" />
     <FxCompile Include="Shader\HLSL\Vertex.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Engine.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Entry.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Piepline.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Rendering.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Matrix.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Rendering.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Vector.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
