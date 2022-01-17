@@ -151,19 +151,75 @@
     <None Include="Shader\HLSL\Layout.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\HLSL\Pixel.hlsl" />
-    <FxCompile Include="Shader\HLSL\Vertex.hlsl" />
+    <FxCompile Include="Shader\HLSL\Pixel.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Shader::Pixel</EntryPointName>
+      <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</EnableDebuggingInformation>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatWarningAsError>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Bytecode</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Shader\Bytecode\Pixel.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ObjectFileOutput>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Shader::Pixel</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</TreatWarningAsError>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Bytecode</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Shader\Bytecode\Pixel.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\HLSL\Vertex.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Shader::Vertex</EntryPointName>
+      <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</EnableDebuggingInformation>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatWarningAsError>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Bytecode</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Shader\Bytecode\Vertex.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ObjectFileOutput>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Shader::Vertex</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</TreatWarningAsError>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Bytecode</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Shader\Bytecode\Vertex.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ObjectFileOutput>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Engine.cpp" />
-    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Entry.cpp" />
-    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Piepline.cpp" />
-    <ClCompile Include="220114_프레임워크구조_미리컴파일된헤더\Rendering.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Circle.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Collision.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Engine.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Entry.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Input.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Physics.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Pipeline.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Point.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Quadrangle.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Rendering.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Resource.cpp" />
+    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Matrix.h" />
-    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Rendering.h" />
-    <ClInclude Include="220114_프레임워크구조_미리컴파일된헤더\Vector.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Circle.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Collision.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\FreeImage.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Game.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Initialize.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Input.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Matrix.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Physics.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Pipeline.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Point.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Quadrangle.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Rendering.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Resource.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Time.h" />
+    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
