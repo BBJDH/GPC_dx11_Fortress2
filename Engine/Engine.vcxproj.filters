@@ -22,87 +22,81 @@
     <FxCompile Include="Shader\HLSL\Vertex.hlsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Circle.cpp">
+    <ClCompile Include="엔진\Circle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Collision.cpp">
+    <ClCompile Include="엔진\Engine.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Engine.cpp">
+    <ClCompile Include="엔진\Entry.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Entry.cpp">
+    <ClCompile Include="엔진\Input.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Input.cpp">
+    <ClCompile Include="엔진\Physics.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Physics.cpp">
+    <ClCompile Include="엔진\Pipeline.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Pipeline.cpp">
+    <ClCompile Include="엔진\Point.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Point.cpp">
+    <ClCompile Include="엔진\Quadrangle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Quadrangle.cpp">
+    <ClCompile Include="엔진\Rendering.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Rendering.cpp">
+    <ClCompile Include="엔진\Resource.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Resource.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Time.cpp">
+    <ClCompile Include="엔진\Time.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Circle.h">
+    <ClInclude Include="엔진\Circle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Collision.h">
+    <ClInclude Include="엔진\FreeImage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\FreeImage.h">
+    <ClInclude Include="엔진\Game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Game.h">
+    <ClInclude Include="엔진\Initialize.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Initialize.h">
+    <ClInclude Include="엔진\Input.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Input.h">
+    <ClInclude Include="엔진\Matrix.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Matrix.h">
+    <ClInclude Include="엔진\Physics.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Physics.h">
+    <ClInclude Include="엔진\Pipeline.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Pipeline.h">
+    <ClInclude Include="엔진\Point.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Point.h">
+    <ClInclude Include="엔진\Quadrangle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Quadrangle.h">
+    <ClInclude Include="엔진\Rendering.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Rendering.h">
+    <ClInclude Include="엔진\Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Resource.h">
+    <ClInclude Include="엔진\Time.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Time.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="220117_surface_getdc_shader설정_uv좌표계_drawtext_Import\Vector.h">
+    <ClInclude Include="엔진\Vector.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
