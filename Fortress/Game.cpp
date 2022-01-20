@@ -1,6 +1,6 @@
 #include "Game.h"
 
-#include "Stage1.h"
+#include "Scene_Battle.h"
 
 void Game::Start()
 {

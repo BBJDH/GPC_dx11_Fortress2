@@ -21,16 +21,43 @@
     <ClInclude Include="Game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Stage1.h">
+    <ClInclude Include="Scene_Battle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Stage2.h">
+    <ClInclude Include="Engine\Vector.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Circle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Game.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Initialize.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Input.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Matrix.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Physics.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Point.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Quadrangle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Rendering.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Time.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,13 +65,7 @@
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage1.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage2.cpp">
+    <ClCompile Include="Scene_Battle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
