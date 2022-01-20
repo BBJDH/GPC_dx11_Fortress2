@@ -370,6 +370,7 @@ namespace Engine::Rendering::Pipeline
                     Descriptor.RenderTarget->BlendOpAlpha = D3D11_BLEND_OP_ADD;
                     Descriptor.RenderTarget->RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
+
                     ID3D11BlendState* BlendState = nullptr;
 
                     MUST(Device->CreateBlendState(&Descriptor, &BlendState));

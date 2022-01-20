@@ -19,8 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Missile.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="Singleton\Camera.h" />
     <ClInclude Include="Engine\Circle.h" />
     <ClInclude Include="Engine\Game.h" />
     <ClInclude Include="Engine\Initialize.h" />
@@ -33,20 +35,25 @@
     <ClInclude Include="Engine\Time.h" />
     <ClInclude Include="Engine\Vector.h" />
     <ClInclude Include="Fortress.h" />
-    <ClInclude Include="Mouse.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SingletonT.h" />
-    <ClInclude Include="S_Battle.h" />
+    <ClInclude Include="Singleton\Mouse.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Singleton\SingletonT.h" />
+    <ClInclude Include="Scene\S_Battle.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Tank.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Missile.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Singleton\Camera.cpp" />
     <ClCompile Include="Fortress.cpp" />
-    <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="S_Battle.cpp" />
+    <ClCompile Include="Singleton\Mouse.cpp" />
+    <ClCompile Include="Scene\S_Battle.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Tank.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

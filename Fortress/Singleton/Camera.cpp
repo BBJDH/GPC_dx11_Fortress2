@@ -4,33 +4,33 @@
 
 void Camera::up()
 {
-	pos.y -= speed;
-	if(pos.y <0)
-		pos.y =0;
+	pos.y += speed;
+	if(pos.y >MAPSIZE_H/2-CAM_SIZE_H/2)
+		pos.y = MAPSIZE_H/2-CAM_SIZE_H/2;
 }
 
 void Camera::down()
 {
-	pos.y += speed;
-	if(pos.y + CAM_SIZE_Y>MAPSIZE_H+UI_H)
-		pos.y = MAPSIZE_H+UI_H-CAM_SIZE_Y;
+	pos.y -= speed;
+	if(pos.y <-MAPSIZE_H/2+CAM_SIZE_H/2-UI_H/2)
+		pos.y =-MAPSIZE_H/2+CAM_SIZE_H/2-UI_H/2;
 }
 
 void Camera::left()
 {
 	pos.x -= speed;
-	if(pos.x <0)
-		pos.x =0;
+	if(pos.x <-MAPSIZE_W/2+CAM_SIZE_W/2)
+		pos.x =-MAPSIZE_W/2+CAM_SIZE_W/2;
 }
 
 void Camera::right()
 {
 	pos.x += speed;
-	if(pos.x + CAM_SIZE_X>MAPSIZE_W)
-		pos.x = MAPSIZE_W-CAM_SIZE_X;
+	if(pos.x  >MAPSIZE_W/2-CAM_SIZE_W/2)
+		pos.x = MAPSIZE_W/2-CAM_SIZE_W/2;
 }
 
-Camera::Camera() :pos{ 1.0f,1.0f }, speed{UI_SCREEN_SCROLL}
+Camera::Camera() :pos{ 0.0f,0.0f }, speed{UI_SCREEN_SCROLL}
 {}
 
 void Camera::move(Mouse::POS_STATE state)

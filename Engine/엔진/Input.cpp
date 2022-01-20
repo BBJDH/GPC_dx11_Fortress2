@@ -91,6 +91,14 @@ namespace Engine::Input
             case WM_MOUSEWHEEL:  { Wheel.y += GET_WHEEL_DELTA_WPARAM(wParameter) / WHEEL_DELTA; return; }
             case WM_MOUSEMOVE:
             {
+                RECT Clip;
+                GetClientRect(hWindow, &Clip);
+                ClientToScreen(hWindow, (LPPOINT)&Clip);
+                ClientToScreen(hWindow, (LPPOINT)(&Clip.right));
+                ClipCursor(&Clip);
+                //_Mouse->x = LOWORD(lparameter);
+                //_Mouse->y = HIWORD(lparameter);
+
                 Cursor.x = static_cast<SHORT>(LOWORD(lParameter));
                 Cursor.y = static_cast<SHORT>(HIWORD(lParameter));
 
