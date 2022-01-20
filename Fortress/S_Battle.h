@@ -1,12 +1,8 @@
 #pragma once
 
-#include "Engine/Rendering.h"
-#include "Engine/Physics.h"
-#include "Engine/Circle.h"
+#include"stdafx.h"
 
-#include "Scene.h"
-
-class Stage1 final : public Scene
+class S_Battle final : public Scene
 {
 public:
     void     Start() final override;
@@ -15,5 +11,6 @@ public:
 
 private:
     Engine::Rendering::Image::Component Background;
-
+    Engine::Rendering::Image::Component Map;
+    Engine::Rendering::Camera Camera;
 };

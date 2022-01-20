@@ -1,17 +1,19 @@
-#include "Game.h"
 
-#include "Scene_Battle.h"
+#include"stdafx.h"
 
-void Game::Start()
+
+void Fortress::Start()
 {
-    Now = new Stage1;
+    Now = new S_Battle;
 
     Now->Start();
 }
 
-void Game::Update()
+void Fortress::Update()
 {
     Scene * const Next = Now->Update();
+
+
 
     if(Next != nullptr)
     {
@@ -25,7 +27,7 @@ void Game::Update()
     }
 }
 
-void Game::End()
+void Fortress::End()
 {
     Now->End();
 
@@ -34,5 +36,5 @@ void Game::End()
 
 Engine::Game * Engine::Initialize()
 {
-    return new ::Game();
+    return new Fortress();
 }

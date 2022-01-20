@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Engine\Circle.h" />
     <ClInclude Include="Engine\Game.h" />
     <ClInclude Include="Engine\Initialize.h" />
@@ -31,13 +32,21 @@
     <ClInclude Include="Engine\Rendering.h" />
     <ClInclude Include="Engine\Time.h" />
     <ClInclude Include="Engine\Vector.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="Fortress.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Scene_Battle.h" />
+    <ClInclude Include="SingletonT.h" />
+    <ClInclude Include="S_Battle.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Scene_Battle.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Fortress.cpp" />
+    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="S_Battle.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -143,6 +152,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

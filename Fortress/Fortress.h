@@ -1,8 +1,8 @@
 #pragma once
+#include"stdafx.h"
 
-#include "Engine/Game.h"
 
-class Game final : public Engine::Game
+class Fortress final : public Engine::Game
 {
 public:
     void  Start() final override;

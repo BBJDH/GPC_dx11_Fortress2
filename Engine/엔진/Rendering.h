@@ -15,7 +15,7 @@ namespace Engine::Rendering
         float     Angle    = { 0.0f };
     };
 
-    namespace Text
+    namespace Text  
     {
         class Component final
         {

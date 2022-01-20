@@ -179,23 +179,29 @@ namespace Engine::Rendering::Pipeline
         {
             case WM_CREATE:
             {
+#pragma region Swap Chain 생성
                 {
                     DXGI_SWAP_CHAIN_DESC Descriptor = DXGI_SWAP_CHAIN_DESC();
-                    
-                    Descriptor.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-                    Descriptor.SampleDesc.Count  = 1;
-                    Descriptor.BufferUsage       = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-                    Descriptor.BufferCount       = 1;
-                    Descriptor.OutputWindow      = hWindow;
-                    Descriptor.Windowed          = true;
-                    Descriptor.Flags             = DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE;
 
+                    Descriptor.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+                    //하나의 채널당 얼만큼의 메모리를 할당할지
+                    //형식 : DXGI_MODE_DESC(너비높이,주사율,데이터 포멧형식 등) 
+                    //각 채널별 8비트 할당(0~255),UNORM 크기 1로 정규화
+                    //BPP : Bits Per Pixel(32), BPC : Bits Per Channel(8)
+                    //Signed NORM : -1 ~ +1 , Unsigned NORM : 0 ~ 1
+                    Descriptor.SampleDesc.Count = 1;//최대 32 개까지 가능
+                    Descriptor.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+                    Descriptor.BufferCount = 1;
+                    Descriptor.OutputWindow = hWindow;
+                    Descriptor.Windowed = true;
+                    Descriptor.Flags = DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE;
+                    //어댑터와 스왑체인은 같은 팩토리에서 생성되어야 한다
                     MUST(D3D11CreateDeviceAndSwapChain
                     (
+                        nullptr,                            //내부적으로 팩토리와 어댑터를 만든다
+                        D3D_DRIVER_TYPE_HARDWARE,           //어댑터 널, 하드웨어 타입으로 지정하면 주 사용 어댑터를 가져온다
                         nullptr,
-                        D3D_DRIVER_TYPE_HARDWARE,
-                        nullptr,
-                        D3D11_CREATE_DEVICE_SINGLETHREADED,
+                        D3D11_CREATE_DEVICE_SINGLETHREADED, //약간의 퍼포먼스 상승
                         nullptr,
                         0,
                         D3D11_SDK_VERSION,
@@ -206,8 +212,11 @@ namespace Engine::Rendering::Pipeline
                         &DeviceContext
                     ));
                 }
+#pragma endregion
+
                 {
                     #include "../Shader/Bytecode/Vertex.h"
+#pragma region Input Layout 생성
                     {
                         D3D11_INPUT_ELEMENT_DESC const Descriptor[2]
                         {
@@ -215,12 +224,12 @@ namespace Engine::Rendering::Pipeline
                             { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 1 }
                         };
 
-                        ID3D11InputLayout * InputLayout = nullptr;
+                        ID3D11InputLayout* InputLayout = nullptr;
 
                         MUST(Device->CreateInputLayout
                         (
                             Descriptor,
-                            2,
+                            2, //sizeof(Descriptor)/sizeof(*Descriptor) //_ARRAYSIZE(Descriptor) -> winapi에서 지원하는 매크로
                             Bytecode,
                             sizeof(Bytecode),
                             &InputLayout
@@ -230,8 +239,11 @@ namespace Engine::Rendering::Pipeline
 
                         InputLayout->Release();
                     }
+#pragma endregion
+
+#pragma region Vertex Shader 생성
                     {
-                        ID3D11VertexShader * VertexShader = nullptr;
+                        ID3D11VertexShader* VertexShader = nullptr;
 
                         MUST(Device->CreateVertexShader
                         (
@@ -245,11 +257,14 @@ namespace Engine::Rendering::Pipeline
 
                         VertexShader->Release();
                     }
+#pragma endregion
+
                 }
                 {
                     #include "../Shader/Bytecode/Pixel.h"
+#pragma region Pixel Shader 생성
                     {
-                        ID3D11PixelShader * PixelShader = nullptr;
+                        ID3D11PixelShader* PixelShader = nullptr;
 
                         MUST(Device->CreatePixelShader
                         (
@@ -263,10 +278,16 @@ namespace Engine::Rendering::Pipeline
 
                         PixelShader->Release();
                     }
+#pragma endregion
+
                 }
+#pragma region IA Topology 세팅
                 {
                     DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
                 }
+#pragma endregion
+
+#pragma region Vertex Buffer 생성
                 {
                     float const Coordinates[4][2]
                     {
@@ -287,7 +308,7 @@ namespace Engine::Rendering::Pipeline
                         Coordinates
                     };
 
-                    ID3D11Buffer * Buffer = nullptr;
+                    ID3D11Buffer* Buffer = nullptr;
 
                     MUST(Device->CreateBuffer(&Descriptor, &Subresource, &Buffer));
 
@@ -298,6 +319,9 @@ namespace Engine::Rendering::Pipeline
 
                     Buffer->Release();
                 }
+#pragma endregion
+
+#pragma region Pixel buffer 생성
                 {
                     D3D11_BUFFER_DESC const Descriptor
                     {
@@ -314,6 +338,9 @@ namespace Engine::Rendering::Pipeline
 
                     DeviceContext->IASetVertexBuffers(1, 1, &Buffer::Vertex, &Stride, &Offset);
                 }
+#pragma endregion
+
+#pragma region Constant Buffer 생성(world, view, proj 행렬)
                 {
                     D3D11_BUFFER_DESC const Descriptor
                     {
@@ -323,11 +350,14 @@ namespace Engine::Rendering::Pipeline
                         D3D11_CPU_ACCESS_WRITE
                     };
 
-                    for(UINT u = 0; u < 3; ++u)
+                    for (UINT u = 0; u < 3; ++u)
                         MUST(Device->CreateBuffer(&Descriptor, nullptr, &Buffer::Constant[u]));
 
                     DeviceContext->VSSetConstantBuffers(0, 3, Buffer::Constant);
                 }
+#pragma endregion
+
+#pragma region Blend State 생성및 결합
                 {
                     D3D11_BLEND_DESC Descriptor = D3D11_BLEND_DESC();
 
@@ -348,6 +378,8 @@ namespace Engine::Rendering::Pipeline
 
                     BlendState->Release();
                 }
+#pragma endregion
+
 
                 return;
             }
