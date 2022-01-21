@@ -11,65 +11,6 @@
 #include<string>
 
 
-//=====================================
-//	## 내가 만든 구조체 이곳에 추가 ##
-//=====================================
-
-//구조체
-struct Position
-{
-	float x;
-	float y;
-};
-
-
-//=====================================
-//	## 엔진 헤더 파일 ##
-//=====================================
-
-#include "Engine/Physics.h"
-#include "Engine/Rendering.h"
-#include "Engine/Input.h"
-#include "Engine/Game.h"
-#include "Engine/Circle.h"
-#include "Engine/Time.h"
-
-
-
-//=====================================
-//	## 내가 만든 헤더파일 이곳에 추가 ##
-//=====================================
-
-//게임안 보여질 객체들
-#include"Object.h"
-#include"Tank.h"
-#include"Missile.h"
-
-//랜덤추출함수
-#include"Random.h"
-
-//싱글톤 생성
-#include"./Singleton/Mouse.h"
-#include"./Singleton/Camera.h"
-//#include"Turnmanager.h"
-
-//Scene
-#include "./Scene/Scene.h"
-#include "./Scene/S_Battle.h"
-
-//메인 게임 클래스
-#include "Fortress.h"
-
-
-
-
-//=====================================
-//	## 싱글톤 추가 ##
-//=====================================
-#define _Mouse Mouse::get_singleton()
-#define _CAM Camera::get_singleton()
-#define _Turn Turnmanager::get_singleton()
-
 
 //=====================================
 //	## 디파인문 ## (윈도우 초기화 셋팅)
@@ -131,6 +72,71 @@ struct Position
 #define Transparent_Color RGB(255, 0, 255)
 #define Power_Color RGB(255, 0, 0)
 #define GUIDE_ANGLE_Color RGB(255, 212, 0)
+
+
+
+
+//=====================================
+//	## 내가 만든 구조체 이곳에 추가 ##
+//=====================================
+
+//구조체
+struct Position
+{
+	float x;
+	float y;
+};
+
+
+//=====================================
+//	## 엔진 헤더 파일 ##
+//=====================================
+
+#include "Engine/Physics.h"
+#include "Engine/Rendering.h"
+#include "Engine/Input.h"
+#include "Engine/Game.h"
+#include "Engine/Circle.h"
+#include "Engine/Time.h"
+
+
+
+//=====================================
+//	## 내가 만든 헤더파일 이곳에 추가 ##
+//=====================================
+
+//게임안 보여질 객체들
+#include"Object.h"
+#include"Tank.h"
+#include"Missile.h"
+
+//랜덤추출함수
+#include"Random.h"
+
+//싱글톤 생성
+#include"./Singleton/Mouse.h"
+#include"./Singleton/Camera.h"
+//#include"Turnmanager.h"
+
+//메인 게임 클래스
+#include "Fortress.h"
+
+//Scene
+#include "./Scene/Scene.h"
+#include "./Scene/S_Battle.h"
+
+
+
+
+
+//=====================================
+//	## 싱글톤 추가 ##
+//=====================================
+#define _Mouse Mouse::get_singleton()
+#define _CAM Camera::get_singleton()
+//#define _Turn Turnmanager::get_singleton()
+
+
 
 
 

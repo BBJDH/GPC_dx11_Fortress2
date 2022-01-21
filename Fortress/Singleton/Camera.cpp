@@ -1,5 +1,6 @@
 
 #include"Camera.h"
+#include"../stdafx.h"
 #include"stdafx.h"
 
 void Camera::up()

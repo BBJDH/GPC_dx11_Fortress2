@@ -1,5 +1,4 @@
 #pragma once
-#include"stdafx.h"
 
 
 class Fortress final : public Engine::Game

@@ -1,6 +1,5 @@
 #pragma once
 
-#include"stdafx.h"
 
 class S_Battle final : public Scene
 {
@@ -10,6 +9,7 @@ private:
     Engine::Rendering::Image::UI UI_Back;
     Engine::Rendering::Image::UI UI_Front;
     Engine::Rendering::Camera Camera;
+    Engine::Rendering::Text::Component debug_mouse_x;
 
 
 private:

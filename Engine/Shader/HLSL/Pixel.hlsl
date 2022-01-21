@@ -10,7 +10,9 @@ namespace Shader
         {
             Resource.Load(int3(Input.TexCoord.x, Input.TexCoord.y, 0))
         };
-
+        if (Output.r == 1 && Output.g == 0 && Output.b == 1)
+            discard;
+            
         return Output;
     }
 }

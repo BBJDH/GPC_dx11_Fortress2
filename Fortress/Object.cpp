@@ -52,7 +52,7 @@ void Object::moveto(Position const & pos)
 
 void Object::ballistics_initialize(float const moving_angle, float const velocity)
 {
-	this->image.Name   = "Image/Canon";
+	this->image.Name   = "Image/Canon_M";
 	this->image.Length = Vector<2>(width, height);
 
 	this->moving_angle = moving_angle*Radian;
