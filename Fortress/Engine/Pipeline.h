@@ -4,8 +4,8 @@ namespace Engine::Rendering::Pipeline
 {
     namespace HmemDC
     {
-        void Create_hmemdc(HWND const hWindow);
         HDC getdc();
+        void Create_hmemdc(HWND const hWindow);
         void Transparents_Color(HDC hdc_mem, COLORREF const transparents_color, SIZE const& size, POINT const& start);
     }
 

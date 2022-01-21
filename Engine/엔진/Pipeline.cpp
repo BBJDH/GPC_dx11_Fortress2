@@ -1,7 +1,10 @@
+//#include<Windows.h>
+
 #include <cassert>
 #include <d3d11.h>
 
 #include "Pipeline.h"
+#pragma comment(lib, "msimg32.lib")
 
 #if not defined _DEBUG
 #define MUST(Expression) (      (         (Expression)))
@@ -26,6 +29,43 @@ namespace Engine::Rendering::Pipeline
         }
 
         ID3D11RenderTargetView * RenderTargetView;
+    }
+    namespace HmemDC
+    {
+        HDC hmemdc;
+
+        void Create_hmemdc(HWND const hWindow)
+        {
+            HDC hdc = GetDC(hWindow);
+            hmemdc = CreateCompatibleDC(hdc);
+            ReleaseDC(hWindow, hdc);
+        }
+
+        HDC getdc()
+        {
+            return hmemdc;
+        }
+
+        void Transparents_Color(HDC hdc_mem, COLORREF const transparents_color, SIZE const& size, POINT const& start)
+        {
+            IDXGISurface1 * Surface = nullptr;
+
+            MUST(SwapChain->GetBuffer(0, IID_PPV_ARGS(&Surface)));
+            {
+                HDC hDC = HDC();
+
+                MUST(Surface->GetDC(false, &hDC));
+
+                //TransparentBlt(hDC,0,0,size.cx,size.cy,
+                //                hdc_mem,0,0,size.cx,size.cy,transparents_color);
+
+                MUST(Surface->ReleaseDC(nullptr));
+            }
+            Surface->Release();
+
+            DeviceContext->OMSetRenderTargets(1, &RenderTargetView, nullptr);
+
+        }
     }
 
     namespace String
@@ -179,6 +219,9 @@ namespace Engine::Rendering::Pipeline
         {
             case WM_CREATE:
             {
+                Engine::Rendering::Pipeline::HmemDC::Create_hmemdc(hWindow);
+                //hmamdc 持失
+
 #pragma region Swap Chain 持失
                 {
                     DXGI_SWAP_CHAIN_DESC Descriptor = DXGI_SWAP_CHAIN_DESC();
@@ -475,3 +518,4 @@ namespace Engine::Rendering::Pipeline
         }
     }
 }
+

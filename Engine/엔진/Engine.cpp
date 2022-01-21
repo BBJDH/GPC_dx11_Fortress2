@@ -21,8 +21,8 @@ namespace Engine
     namespace
     {
         Game * const Portfolio = Initialize();
+        
     }
-
     LRESULT CALLBACK Procedure(HWND const hWindow, UINT const uMessage, WPARAM const wParameter, LPARAM const lParameter)
     {
         switch(uMessage)

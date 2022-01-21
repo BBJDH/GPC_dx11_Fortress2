@@ -13,6 +13,7 @@ public:
     };
 
 private:
+    HDC hmapdc;
     Engine::Rendering::Image::Component Background;
     Engine::Rendering::Image::Component Map;
     Engine::Rendering::Image::UI UI_Back;
@@ -22,6 +23,8 @@ private:
     Engine::Rendering::Image::Component iMissile;
 
     void render_object(Object const & obj, Obj_Type const type);
+    void drawbitmp(HDC const& hdc_dest,int const win_x, int const win_y,
+        int const width,int const height,int const image_x, int const image_y, HBITMAP const& hbitmap);
 
 public:
     void initialize();

@@ -15,7 +15,10 @@
 
 namespace Engine::Rendering
 {
-    namespace Pipeline { void Procedure(HWND const, UINT const, WPARAM const, LPARAM const); }
+    namespace Pipeline 
+    { 
+        void Procedure(HWND const, UINT const, WPARAM const, LPARAM const);
+    }
 
     namespace
     {
