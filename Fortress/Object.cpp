@@ -1,5 +1,5 @@
-#include "Object.h"
 #include"stdafx.h"
+#include "Object.h"
 
 
 
@@ -52,8 +52,7 @@ void Object::moveto(Position const & pos)
 
 void Object::ballistics_initialize(float const moving_angle, float const velocity)
 {
-	this->image.Name   = "Image/Canon_M";
-	this->image.Length = Vector<2>(width, height);
+
 
 	this->moving_angle = moving_angle*Radian;
 	this->velocity0.x = velocity*static_cast<float>(cos(this->moving_angle));
@@ -135,10 +134,9 @@ void Object::ballistics_equation(float const delta)
 					  -(grav_accerl*static_cast<float>(pow(moving_time,2)))/2;
 		int i =0;
 	}
-	if(this->pos.y>MAPSIZE_H+OUT_RANGE or this->pos.x >MAPSIZE_W+OUT_RANGE or this->pos.x<0-OUT_RANGE)
+	if(this->pos.y>MAPSIZE_H+OUT_RANGE or this->pos.x >MAPSIZE_W+OUT_RANGE or this->pos.x<0-OUT_RANGE-MAPSIZE_W)
 		this->out = true;
-	image.Location = {pos.x,pos.y};
-	image.Render();
+
 }
 
 

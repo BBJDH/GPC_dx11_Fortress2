@@ -1,5 +1,5 @@
-#include "Random.h"
 #include "stdafx.h"
+#include "Random.h"
 
 
 #pragma region Random 클래스 정의

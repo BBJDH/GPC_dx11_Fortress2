@@ -24,7 +24,6 @@ protected:
 	bool		   myturn;
 	bool		   out;
 
-	Engine::Rendering::Image::Component     image;
 
 
 

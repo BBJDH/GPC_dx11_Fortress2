@@ -1,5 +1,5 @@
 #pragma once
-//#include"stdafx.h"
+//#include"../stdafx.h"
 #include"SingletonT.h"
 
 class Mouse : public SingletonT<Mouse>
@@ -13,10 +13,13 @@ public:
 	};
 	LONG x;
 	LONG y;
+	LONG coordinate_x;
+	LONG coordinate_y;
 public:
 	Mouse();
 	~Mouse() {};
-	POS_STATE getpos();
+	void convert_coodinate();
+	POS_STATE getstate();
 
 };
 

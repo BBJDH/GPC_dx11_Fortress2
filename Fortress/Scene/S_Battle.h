@@ -4,13 +4,12 @@
 class S_Battle final : public Scene
 {
 private:
-    Engine::Rendering::Image::Component Background;
-    Engine::Rendering::Image::Component Map;
-    Engine::Rendering::Image::UI UI_Back;
-    Engine::Rendering::Image::UI UI_Front;
-    Engine::Rendering::Camera Camera;
-    Engine::Rendering::Text::Component debug_mouse_x;
 
+    //std::vector<Object> obj;
+    std::vector<Tank> tank;
+    std::vector<Missile> missile;
+    //Random rand_turn;
+    Engine::Rendering::Camera Camera;
 
 private:
     void    rendering();
