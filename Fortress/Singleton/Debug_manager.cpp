@@ -54,8 +54,8 @@ void Debug_manager::rendering()
     render_text(cursor_window_coodinate_y,"cood_y : "+std::to_string(_Mouse->coordinate_y));
     render_text(cursor_cam_location_x,"camdx_x : "+std::to_string(static_cast<int>(_CAM->pos.x)));
     render_text(cursor_cam_location_y,"camdx_y : "+std::to_string(static_cast<int>(_CAM->pos.y)));
-    render_text(cursor_cam_win_x, "camwin_x : " + std::to_string(static_cast<int>(_CAM->pos_win.x)));
-    render_text(cursor_cam_win_y, "camwin_y : " + std::to_string(static_cast<int>(_CAM->pos_win.y)));
+    render_text(cursor_cam_win_x, "cam_wx : " + std::to_string(static_cast<int>(_CAM->pos_win.x)));
+    render_text(cursor_cam_win_y, "cam_wy : " + std::to_string(static_cast<int>(_CAM->pos_win.y)));
     render_text(cursor_map_location_x,"map_x : "+std::to_string(static_cast<int>(_CAM->pos.x) + _Mouse->coordinate_x));
     render_text(cursor_map_location_y,"map_y : "+std::to_string(static_cast<int>(_CAM->pos.y) + _Mouse->coordinate_y));
 }

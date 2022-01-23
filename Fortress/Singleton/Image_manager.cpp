@@ -52,7 +52,7 @@ void Image_manager::render_map()
             800/*static_cast<long>(MAPSIZE_H)*/
         },
 
-        //좌상단을 고정좌표로 유동값은 계산
+        //좌상단을 고정좌표로 윈도우좌표계 카메라 좌상단점부터 카메라 사이즈만큼 가져옴
         {
             0 +static_cast<long>(-_CAM->pos.x)/*static_cast<long>(-MAPSIZE_W/2)*/,
             0 + static_cast<long>(_CAM->pos.y)/*static_cast<long>(-MAPSIZE_H/2)*/
