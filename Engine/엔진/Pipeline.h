@@ -4,21 +4,21 @@ namespace Engine::Rendering::Pipeline
 {
     namespace HmemDC
     {
-        void Create_hmemdc(HWND const hWindow);
         HDC getdc();
-        void Transparents_Color(HDC hdc_mem, COLORREF const transparents_color, SIZE const& size, POINT const& start);
+        void Create_hmemdc(HWND const hWindow);
+        void Transparents_Color(HDC hdc_mem, HBITMAP hbitmap, COLORREF const transparents_color, SIZE const& size, POINT const& start);
     }
 
     namespace String
     {
-        void Render(HFONT const hFont, LPCSTR const string, COLORREF const color, SIZE const & size, POINT const & center);
+        void Render(HFONT const hFont, LPCSTR const string, COLORREF const color, SIZE const& size, POINT const& center);
     }
 
     namespace Texture
     {
-        void Create(struct Handle       *       & handle, SIZE const & size, BYTE const * const data);
-        void Render(struct Handle const * const & handle, RECT const & area);
-        void Delete(struct Handle       * const & handle);
+        void Create(struct Handle*& handle, SIZE const& size, BYTE const* const data);
+        void Render(struct Handle const* const& handle, RECT const& area);
+        void Delete(struct Handle* const& handle);
     }
 
     namespace Transform
@@ -33,6 +33,6 @@ namespace Engine::Rendering::Pipeline
         using Matrix = float[4][4];
 
         template<Type type>
-        void Update(Matrix const & matrix);
+        void Update(Matrix const& matrix);
     }
 }

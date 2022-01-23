@@ -46,7 +46,7 @@ namespace Engine::Rendering::Pipeline
             return hmemdc;
         }
 
-        void Transparents_Color(HDC hdc_mem, COLORREF const transparents_color, SIZE const& size, POINT const& start)
+        void Transparents_Color(HDC hdc_mem, HBITMAP hbitmap, COLORREF const transparents_color, SIZE const& size, POINT const& start)
         {
             IDXGISurface1 * Surface = nullptr;
 
@@ -56,8 +56,10 @@ namespace Engine::Rendering::Pipeline
 
                 MUST(Surface->GetDC(false, &hDC));
 
-                //TransparentBlt(hDC,0,0,size.cx,size.cy,
-                //                hdc_mem,0,0,size.cx,size.cy,transparents_color);
+                SelectObject(hdc_mem,hbitmap);
+
+                TransparentBlt(hDC, start.x, start.y,size.cx,size.cy,
+                                hdc_mem,0,0,size.cx,size.cy,transparents_color);
 
                 MUST(Surface->ReleaseDC(nullptr));
             }

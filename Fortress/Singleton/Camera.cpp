@@ -6,32 +6,50 @@
 void Camera::up()
 {
 	pos.y += speed;
-	if(pos.y >MAPSIZE_H/2-CAM_SIZE_H/2)
+	pos_win.y += speed;
+
+	if (pos.y > MAPSIZE_H / 2 - CAM_SIZE_H / 2)
+	{
 		pos.y = MAPSIZE_H/2-CAM_SIZE_H/2;
+		pos_win.y = 0;
+
+	}
 }
 
 void Camera::down()
 {
 	pos.y -= speed;
-	if(pos.y <-MAPSIZE_H/2+CAM_SIZE_H/2-UI_H/2)
+	pos_win.y -= speed;
+	if (pos.y < -MAPSIZE_H / 2 + CAM_SIZE_H / 2 - UI_H / 2)
+	{
 		pos.y =-MAPSIZE_H/2+CAM_SIZE_H/2-UI_H/2;
+		pos_win.y = (MAPSIZE_H + UI_H) - CAM_SIZE_H;
+	}
 }
 
 void Camera::left()
 {
 	pos.x -= speed;
-	if(pos.x <-MAPSIZE_W/2+CAM_SIZE_W/2)
+	pos_win.x -= speed;
+	if (pos.x < -MAPSIZE_W / 2 + CAM_SIZE_W / 2)
+	{
 		pos.x =-MAPSIZE_W/2+CAM_SIZE_W/2;
+		pos_win.x =0;
+	}
 }
 
 void Camera::right()
 {
 	pos.x += speed;
-	if(pos.x  >MAPSIZE_W/2-CAM_SIZE_W/2)
+	pos_win.x += speed;
+	if (pos.x > MAPSIZE_W / 2 - CAM_SIZE_W / 2)
+	{
 		pos.x = MAPSIZE_W/2-CAM_SIZE_W/2;
+		pos_win.x = MAPSIZE_W-CAM_SIZE_W;
+	}
 }
 
-Camera::Camera() :pos{ 0.0f,0.0f }, speed{UI_SCREEN_SCROLL}
+Camera::Camera() :pos{ 0.0f,0.0f }, pos_win{ (MAPSIZE_W - CAM_SIZE_W)/2,(MAPSIZE_H - CAM_SIZE_H) / 2 }, speed{ UI_SCREEN_SCROLL }
 {}
 
 void Camera::move(Mouse::POS_STATE state)

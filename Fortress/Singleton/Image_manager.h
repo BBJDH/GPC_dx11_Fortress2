@@ -3,10 +3,10 @@
 
 
 
-class Image_manager: public SingletonT<Image_manager>
+class Image_manager : public SingletonT<Image_manager>
 {
 
-public: 
+public:
     enum class Obj_Type
     {
         Tank, Missile, Item
@@ -14,6 +14,8 @@ public:
 
 private:
     HDC hmapdc;
+    HBITMAP hmapbit;
+
     Engine::Rendering::Image::Component Background;
     Engine::Rendering::Image::Component Map;
     Engine::Rendering::Image::UI UI_Back;
@@ -22,9 +24,9 @@ private:
     Engine::Rendering::Image::Component iTank;
     Engine::Rendering::Image::Component iMissile;
 
-    void render_object(Object const & obj, Obj_Type const type);
-    void drawbitmp(HDC const& hdc_dest,int const win_x, int const win_y,
-        int const width,int const height,int const image_x, int const image_y, HBITMAP const& hbitmap);
+    void render_object(Object const& obj, Obj_Type const type);
+    void drawbitmp(HDC const& hdc_dest, int const win_x, int const win_y,
+        int const width, int const height, int const image_x, int const image_y, HBITMAP const& hbitmap);
 
 public:
     void initialize();

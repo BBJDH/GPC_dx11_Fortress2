@@ -40,6 +40,8 @@ void Debug_manager::initialize()
     init_text(cursor_window_coodinate_y, 3,0);
     init_text(cursor_cam_location_x, 4,0);
     init_text(cursor_cam_location_y, 5,0);
+    init_text(cursor_cam_win_x, 4, 2);
+    init_text(cursor_cam_win_y, 5, 2);
     init_text(cursor_map_location_x, 6,0);
     init_text(cursor_map_location_y, 7,0);
 }
@@ -50,8 +52,10 @@ void Debug_manager::rendering()
     render_text(cursor_window_location_y,"win_y : "+std::to_string(_Mouse->y));
     render_text(cursor_window_coodinate_x,"cood_x : "+std::to_string(_Mouse->coordinate_x));
     render_text(cursor_window_coodinate_y,"cood_y : "+std::to_string(_Mouse->coordinate_y));
-    render_text(cursor_cam_location_x,"cam_x : "+std::to_string(static_cast<int>(_CAM->pos.x)));
-    render_text(cursor_cam_location_y,"cam_y : "+std::to_string(static_cast<int>(_CAM->pos.y)));
+    render_text(cursor_cam_location_x,"camdx_x : "+std::to_string(static_cast<int>(_CAM->pos.x)));
+    render_text(cursor_cam_location_y,"camdx_y : "+std::to_string(static_cast<int>(_CAM->pos.y)));
+    render_text(cursor_cam_win_x, "camwin_x : " + std::to_string(static_cast<int>(_CAM->pos_win.x)));
+    render_text(cursor_cam_win_y, "camwin_y : " + std::to_string(static_cast<int>(_CAM->pos_win.y)));
     render_text(cursor_map_location_x,"map_x : "+std::to_string(static_cast<int>(_CAM->pos.x) + _Mouse->coordinate_x));
     render_text(cursor_map_location_y,"map_y : "+std::to_string(static_cast<int>(_CAM->pos.y) + _Mouse->coordinate_y));
 }

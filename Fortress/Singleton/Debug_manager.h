@@ -10,6 +10,8 @@ private:
     Engine::Rendering::Text::Component cursor_window_coodinate_y;
     Engine::Rendering::Text::Component cursor_cam_location_x;
     Engine::Rendering::Text::Component cursor_cam_location_y;
+    Engine::Rendering::Text::Component cursor_cam_win_x;
+    Engine::Rendering::Text::Component cursor_cam_win_y;
     Engine::Rendering::Text::Component cursor_map_location_x;
     Engine::Rendering::Text::Component cursor_map_location_y;
     void init_text(Engine::Rendering::Text::Component &text ,
