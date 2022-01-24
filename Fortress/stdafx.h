@@ -121,7 +121,7 @@ struct Position
 
 //UI 세팅
 #define UI_SCREEN_SCROLL	4
-#define UI_H				190*1.4
+#define UI_H				90*1.4
 #define UI_POWER_X			282
 #define UI_POWER_Y			550
 #define UI_POWER_H			 15
@@ -140,7 +140,7 @@ struct Position
 #define SPEED 6
 
 //색상관련
-#define Transparent_Color RGB(255, 0, 255)
+#define Transparent_Color RGB(0, 0, 0)
 #define Power_Color RGB(255, 0, 0)
 #define GUIDE_ANGLE_Color RGB(255, 212, 0)
 

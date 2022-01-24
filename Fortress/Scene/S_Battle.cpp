@@ -23,6 +23,12 @@ Scene * S_Battle::Update()
         float y = static_cast<float>(_Mouse->y);
         tank.push_back(Tank({(_CAM->pos.x) + _Mouse->coordinate_x,(_CAM->pos.y) + _Mouse->coordinate_y},	49,	42));
         tank.back().ballistics_initialize(0, 0);
+    }    if (Engine::Input::Get::Key::Press(VK_RBUTTON))
+    {
+        float x = static_cast<float>(_Mouse->x);
+        float y = static_cast<float>(_Mouse->y);
+        tank.push_back(Tank({(_CAM->pos.x) + _Mouse->coordinate_x,(_CAM->pos.y) + _Mouse->coordinate_y},	49,	42));
+        tank.back().ballistics_initialize(45, 60);
     }
     _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());
 
@@ -43,8 +49,8 @@ void S_Battle::rendering()
     //탱크 미사일 아이템 등 그리기
     _Image_manager->render_tank(tank);
 
-    _Image_manager->render_back_ui();
-    _Image_manager->render_front_ui();
+    //_Image_manager->render_back_ui();
+    //_Image_manager->render_front_ui();
     Camera.Location = { _CAM->pos.x,_CAM->pos.y };
     Camera.Set();
 

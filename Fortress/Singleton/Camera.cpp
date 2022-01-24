@@ -1,6 +1,6 @@
 
 #include"Camera.h"
-#include"../stdafx.h"
+
 #include"stdafx.h"
 
 void Camera::up()
@@ -19,8 +19,8 @@ void Camera::down()
 {
 	pos.y -= speed;
 	pos_win.y += speed;
-	if (pos.y < -MAPSIZE_H / 2 + CAM_SIZE_H / 2 - UI_H / 2)
-		pos.y =-MAPSIZE_H/2+CAM_SIZE_H/2-UI_H/2;
+	if (pos.y < -(MAPSIZE_H/2 + UI_H) + CAM_SIZE_H / 2 )
+		pos.y =-(MAPSIZE_H/2 + UI_H) + CAM_SIZE_H / 2 ;
 
 	if (pos_win.y + CAM_SIZE_H > MAPSIZE_H + UI_H)
 		pos_win.y = MAPSIZE_H + UI_H - CAM_SIZE_H;

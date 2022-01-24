@@ -14,7 +14,7 @@ public:
 
 private:
     HDC hmapdc;
-    HBITMAP hmapbit;
+    HBITMAP hmagentabit;
 
     Engine::Rendering::Image::Component Background;
     Engine::Rendering::Image::Component Map;

@@ -56,10 +56,10 @@ namespace Engine::Rendering::Pipeline
 
                 MUST(Surface->GetDC(false, &hDC));
 
-                SelectObject(hdc_mem,hbitmap);
+               // SelectObject(hdc_mem,hbitmap);
 
-                TransparentBlt(hDC, start.x, start.y,size.cx,size.cy,
-                                hdc_mem,0,0,size.cx,size.cy,transparents_color);
+                TransparentBlt(hDC, 0,0,size.cx,size.cy,
+                                hdc_mem,start.x, start.y,size.cx,size.cy,transparents_color);
 
                 MUST(Surface->ReleaseDC(nullptr));
             }
