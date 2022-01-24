@@ -38,10 +38,11 @@
     <ClInclude Include="Fortress.h" />
     <ClInclude Include="Singleton\Debug_manager.h" />
     <ClInclude Include="Singleton\Image_manager.h" />
+    <ClInclude Include="Singleton\Input_manager.h" />
     <ClInclude Include="Singleton\Map_manager.h" />
     <ClInclude Include="Singleton\Mouse.h" />
     <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Singleton\Physics.h" />
+    <ClInclude Include="Singleton\Physics_Manager.h" />
     <ClInclude Include="Singleton\SingletonT.h" />
     <ClInclude Include="Scene\S_Battle.h" />
     <ClInclude Include="Singleton\Turnmanager.h" />
@@ -56,10 +57,11 @@
     <ClCompile Include="Fortress.cpp" />
     <ClCompile Include="Singleton\Debug_manager.cpp" />
     <ClCompile Include="Singleton\Image_manager.cpp" />
+    <ClCompile Include="Singleton\Input_manager.cpp" />
     <ClCompile Include="Singleton\Map_manager.cpp" />
     <ClCompile Include="Singleton\Mouse.cpp" />
     <ClCompile Include="Scene\S_Battle.cpp" />
-    <ClCompile Include="Singleton\Physics.cpp" />
+    <ClCompile Include="Singleton\Physics_Manager.cpp" />
     <ClCompile Include="Singleton\Turnmanager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

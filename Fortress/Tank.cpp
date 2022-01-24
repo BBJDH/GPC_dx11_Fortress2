@@ -2,7 +2,7 @@
 #include "Object.h"
 
 Tank::Tank(Position const& pos, unsigned const width, unsigned const height)
-	:Object(pos, width, height), hp{ TANK_HP }, stamina{50},
+	:Object(pos, width, height), hp{ TANK_HP }, fuel{100},
 	fire_angle_min{35}, fire_angle_max{65},
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, state{State::Nomal_right}
 {
@@ -12,7 +12,7 @@ Tank& Tank::operator=(Tank const& other_tank)
 	assign(other_tank);
 	this->state          = other_tank.state;
 	this->hp             = other_tank.hp;
-	this->stamina        = other_tank.stamina;
+	this->fuel		     = other_tank.fuel;
 	this->fire_angle     = other_tank.fire_angle;
 	this->fire_velocity  = other_tank.fire_velocity;
 	return *this;
@@ -29,6 +29,11 @@ unsigned const Tank::gethp() const
 int const Tank::getpower() const
 {
 	return static_cast<int const>(fire_velocity);
+}
+
+int const Tank::getfuel() const
+{
+	return this->fuel;
 }
 
 int const Tank::getangle() const
@@ -60,7 +65,7 @@ void Tank::plus_power()
 
 void Tank::turn_setting()
 {
-	this->stamina = 50;
+	this->fuel = 100;
 	this->fire_velocity = 0;
 }
 
@@ -79,14 +84,14 @@ void Tank::input_key(WPARAM const wparam)
 	if (wparam == VK_RIGHT )
 	{
 		if (this->state == Tank::State::Nomal_right)
-			this->stamina++;
+			this->fuel--;
 		else
 			this->state = Tank::State::Nomal_right;
 	}
 	else if (wparam == VK_LEFT)
 	{
 		if(this->state == Tank::State::Nomal_left)
-			this->stamina++; //TODO:이동테스트종료후 --로
+			this->fuel--; //TODO:이동테스트종료후 --로
 		else
 		{
 			this->state = Tank::State::Nomal_left;

@@ -13,7 +13,7 @@ public:
 private:
 	State		    state;
 	unsigned	    hp;
-	unsigned	    stamina;
+	unsigned	    fuel;
 	float const		fire_angle_min;
 	float const		fire_angle_max;
 	float		    fire_angle;
@@ -26,6 +26,7 @@ public:
 	Tank & operator=(Tank const & other_tank);
 	unsigned const gethp() const;
 	int const getpower()const;
+	int const getfuel()const;
 	int const getangle()const;
 	int const getangle_min()const;
 	int const getangle_max()const;

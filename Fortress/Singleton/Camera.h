@@ -9,10 +9,14 @@ public:
 	Position pos;
 	Position pos_win;
 	unsigned const speed;
-	void up();
-	void down();
-	void left();
-	void right();
+	bool focus_w;
+	bool focus_h;
+	bool up();
+	bool down();
+	bool left();
+	bool right();
+	void focusing(Position const & obj_pos);
+	void focus_on();
 public:
 
 	Camera();

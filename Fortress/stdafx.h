@@ -54,8 +54,10 @@ struct Position
 #include"./Singleton/Camera.h"
 #include"./Singleton/Debug_manager.h"
 #include"./Singleton/Image_manager.h"
-#include"./Singleton/Physics.h"
-#include "./Singleton/Map_manager.h"
+#include"./Singleton/Physics_Manager.h"
+#include"./Singleton/Map_manager.h"
+#include"./Singleton/Turnmanager.h"
+#include"./Singleton/Input_manager.h"
 
 //#include"Turnmanager.h"
 
@@ -80,6 +82,7 @@ struct Position
 #define _Physics_manager Physics_Manager::get_singleton()
 #define _Map_manager Map_manager::get_singleton()
 #define _Turn Turnmanager::get_singleton()
+#define _Input_manager Input_manager::get_singleton()
 
 
 
@@ -113,22 +116,30 @@ struct Position
 #define BackgroundSIZE_W	MAPSIZE_W//CAM_SIZE_W//1280*1.2
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 //#define R_Image_SIZE 100
-#define Tank_SIZE 80
+#define Tank_SIZE 60
+#define Missile_SIZE 40
 
 #define PLAYERS		 8
 #define TANK_HP		 1000
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
+#define FIRE_MUL		 1.5
 
 
 
 //UI ¼¼ÆÃ
 #define UI_SCREEN_SCROLL	8
 #define UI_H				126 //1926
-#define UI_POWER_X			282
-#define UI_POWER_Y			550
-#define UI_POWER_H			 15
-#define UI_POWER_MUL		 4
+#define UI_Bar_X			450
+#define UI_Bar_H			 20
+
+#define UI_HP_Y				642
+#define UI_POWER_Y			669
+#define UI_FUEL_Y			695
+
+#define UI_POWER_MUL		 5
+#define UI_HP_MUL			 0.64
+#define UI_Fuel_MUL			 6.4
 #define UI_ANGLE_CENTER_X		92
 #define UI_ANGLE_CENTER_Y		534
 #define UI_ANGLE_MIN_Length		8

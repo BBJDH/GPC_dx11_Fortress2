@@ -8,6 +8,15 @@ void S_Battle::Start()
 {
     _Map_manager->initialize();
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+
+    srand(static_cast<unsigned>(time(NULL)));
+    Random r(10,MAPSIZE_W-10,PLAYERS);
+    for (unsigned i = 0; i < PLAYERS; i++)
+    {
+        tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE));
+        tank.back().ballistics_initialize(0, 0);
+    }
+
 }
 
 Scene * S_Battle::Update()
@@ -17,34 +26,9 @@ Scene * S_Battle::Update()
     _CAM->move(_Mouse->getstate()); //마우스 위치에 따라 카메라 이동
 
 
-    if (Engine::Input::Get::Key::Press(VK_LBUTTON))
-    {
-        float x = static_cast<float>(_Mouse->x);
-        float y = static_cast<float>(_Mouse->y);
-        tank.push_back
-        (
-            Tank
-            (
-                {
-                    static_cast<int>(_Mouse->x)+_CAM->pos_win.x,
-                    static_cast<int>(_Mouse->y)+_CAM->pos_win.y
-                },
-                Tank_SIZE,
-                Tank_SIZE
-            )
-        );
-        tank.back().ballistics_initialize(0, 0);
-    }    
-    if (Engine::Input::Get::Key::Press(VK_RBUTTON))
-    {
-        _Map_manager->make_crater
-        (
-            {
-                _Mouse->x+static_cast<int>(_CAM->pos_win.x),
-                _Mouse->y+static_cast<int>(_CAM->pos_win.y)},
-            { 50,40 }
-        );
-    }
+    _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
+    _Input_manager->input(tank,missile,Time::Get::Delta());
+
     _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());
     _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);
 
@@ -64,9 +48,10 @@ void S_Battle::rendering()
 
     //탱크 미사일 아이템 등 그리기
     _Image_manager->render_tank(tank);
+    _Image_manager->render_missile(missile);
 
-    _Image_manager->render_back_ui();
-    _Image_manager->render_front_ui();
+    _Image_manager->render_back_ui(tank[_Turn->whosturn()]);
+    _Image_manager->render_front_ui(tank[_Turn->whosturn()]);
     Camera.Location = { _CAM->pos.x,_CAM->pos.y };
     Camera.Set();
 
