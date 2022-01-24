@@ -119,7 +119,7 @@ struct Position
 #define Tank_SIZE 60
 #define Missile_SIZE 40
 
-#define PLAYERS		 8
+#define PLAYERS		 4
 #define TANK_HP		 1000
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15

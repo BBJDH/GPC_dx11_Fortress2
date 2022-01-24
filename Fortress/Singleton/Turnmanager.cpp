@@ -56,18 +56,18 @@ void Turnmanager::checkturn(std::vector<Tank>& tank, std::vector<Missile>& missi
 	//해당 턴을 받았는데 죽었다면 다음턴으로 넘기기
 	if (is_tank_turn(tank) )
 	{
-		_CAM->focusing(tank[whosturn()].getpos());
+		//_CAM->focusing(tank[whosturn()].getpos());
 		return ;
 	}
 	if (is_missile_turn(missile))
 	{	
-		_CAM->focusing(missile.back().getpos());
+		//_CAM->focusing(missile.back().getpos());
 		return ;
 	}
 	int const falling_tank_index = check_tank_falling(tank);
 	if (falling_tank_index!=-1)
 	{	
-		_CAM->focusing(tank[falling_tank_index].getpos());
+		//_CAM->focusing(tank[falling_tank_index].getpos());
 		return ;
 	}
 	//TODO:카메라 포커싱
