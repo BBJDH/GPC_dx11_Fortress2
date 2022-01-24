@@ -22,6 +22,10 @@ namespace Engine
 
 /* Register ¡æ Create ¡æ Show ¡æ Run (¡æ Close ¡æ Destroy ¡æ Unregister) */
 
+extern HWND hWindow = nullptr;
+
+
+
 int APIENTRY WinMain
 (
     _In_     HINSTANCE const hInstance,
@@ -30,7 +34,6 @@ int APIENTRY WinMain
     _In_     int       const nShowCmd
 )
 {
-    HWND hWindow = nullptr;
     {
         WNDCLASSEX Class = WNDCLASSEX();
 

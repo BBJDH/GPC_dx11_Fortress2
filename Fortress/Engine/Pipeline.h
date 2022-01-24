@@ -5,8 +5,9 @@ namespace Engine::Rendering::Pipeline
     namespace HmemDC
     {
         HDC getdc();
-        void Create_hmemdc(HWND const hWindow);
-        void Transparents_Color(HDC hdc_mem, HBITMAP hbitmap, COLORREF const transparents_color, SIZE const& size, POINT const& start);
+        void Create_hmemdc(HWND const& hWindow);
+        void draw_map(HBITMAP const &hbitmap);
+        void Transparents_Color(HDC const & hdc_mem, COLORREF const & transparents_color, SIZE const& size, POINT const& start);
     }
 
     namespace String

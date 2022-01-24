@@ -55,6 +55,8 @@ struct Position
 #include"./Singleton/Debug_manager.h"
 #include"./Singleton/Image_manager.h"
 #include"./Singleton/Physics.h"
+#include "./Singleton/Map_manager.h"
+
 //#include"Turnmanager.h"
 
 //메인 게임 클래스
@@ -76,7 +78,8 @@ struct Position
 #define _Debug_manager Debug_manager::get_singleton()
 #define _Image_manager Image_manager::get_singleton()
 #define _Physics_manager Physics_Manager::get_singleton()
-//#define _Turn Turnmanager::get_singleton()
+#define _Map_manager Map_manager::get_singleton()
+#define _Turn Turnmanager::get_singleton()
 
 
 
@@ -105,12 +108,12 @@ struct Position
 //게임 세팅
 #define CAM_SIZE_W 1280  //1280   //창의 크기가 아닌 창안에 표시할 해상도
 #define CAM_SIZE_H 720  //720
-#define MAPSIZE_W	 1525*2//CAM_SIZE_W
-#define MAPSIZE_H	 1120*1.4//CAM_SIZE_H
-#define BackgroundSIZE_W	1525*2//CAM_SIZE_W//1280*1.2
-#define BackgroundSIZE_H	1120*1.4//CAM_SIZE_H//720*1.2
+#define MAPSIZE_W	 3000//CAM_SIZE_W
+#define MAPSIZE_H	 1800//CAM_SIZE_H
+#define BackgroundSIZE_W	MAPSIZE_W//CAM_SIZE_W//1280*1.2
+#define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 //#define R_Image_SIZE 100
-#define Tank_SIZE 50
+#define Tank_SIZE 80
 
 #define PLAYERS		 8
 #define TANK_HP		 1000
@@ -120,8 +123,8 @@ struct Position
 
 
 //UI 세팅
-#define UI_SCREEN_SCROLL	4
-#define UI_H				90*1.4
+#define UI_SCREEN_SCROLL	8
+#define UI_H				126 //1926
 #define UI_POWER_X			282
 #define UI_POWER_Y			550
 #define UI_POWER_H			 15
@@ -140,7 +143,7 @@ struct Position
 #define SPEED 6
 
 //색상관련
-#define Transparent_Color RGB(0, 0, 0)
+#define Transparent_Color RGB(255, 0, 255)
 #define Power_Color RGB(255, 0, 0)
 #define GUIDE_ANGLE_Color RGB(255, 212, 0)
 

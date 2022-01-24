@@ -130,9 +130,8 @@ void Object::ballistics_equation(float const delta)
 	{
 		this->moving_time += delta* SPEED;
 		this->pos.x = this->pos0.x + velocity0.x * moving_time;
-		this->pos.y = this->pos0.y + velocity0.y * moving_time
-					  -(grav_accerl*static_cast<float>(pow(moving_time,2)))/2;
-		int i =0;
+		this->pos.y = this->pos0.y - velocity0.y * moving_time
+					  +(grav_accerl*static_cast<float>(pow(moving_time,2)))/2;
 	}
 	if(this->pos.y>MAPSIZE_H+OUT_RANGE or this->pos.x >MAPSIZE_W+OUT_RANGE or this->pos.x<0-OUT_RANGE-MAPSIZE_W)
 		this->out = true;

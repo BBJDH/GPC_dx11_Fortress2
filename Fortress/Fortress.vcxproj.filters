@@ -93,6 +93,12 @@
     <ClInclude Include="Engine\Pipeline.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton\Map_manager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton\Turnmanager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fortress.cpp">
@@ -129,6 +135,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Physics.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton\Map_manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton\Turnmanager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,7 +8,7 @@ private:
     //std::vector<Object> obj;
     std::vector<Tank> tank;
     std::vector<Missile> missile;
-    //Random rand_turn;
+    Random rand_turn;
     Engine::Rendering::Camera Camera;
 
 private:

@@ -33,20 +33,42 @@ namespace Engine::Rendering::Pipeline
     namespace HmemDC
     {
         HDC hmemdc;
-
-        void Create_hmemdc(HWND const hWindow)
+        HBITMAP magenta_hbit;
+        SIZE  bit_size;
+        void Create_hmemdc(HWND const& hWindow)
         {
             HDC hdc = GetDC(hWindow);
             hmemdc = CreateCompatibleDC(hdc);
+            magenta_hbit = CreateCompatibleBitmap
+            (hdc, 3000,1926);           //맵 사이즈 지정 필요, 렌더링 세팅이 우선실행으로
+            //아니면 if문 걸고 app에서 한번만 생성토록 
+            SelectObject(hmemdc, magenta_hbit);
             ReleaseDC(hWindow, hdc);
         }
+        void drawbitmp(HDC const& hdc_dest, int const win_x, int const win_y, int const width, int const height, int const image_x, int const image_y, HBITMAP const& hbitmap)
+        {
+            HDC hbufferdc = CreateCompatibleDC(hdc_dest);
+            HBITMAP oldbit = static_cast<HBITMAP>(SelectObject(hbufferdc, hbitmap));
+            BitBlt(hdc_dest, win_x, win_y, width, height, hbufferdc, image_x, image_y, SRCCOPY);
+            //윈도우에서 출력할 위치, 너비높이, 가져올 이미지의 시작점(왼쪽위)
+            SelectObject(hbufferdc, oldbit);
+            DeleteDC(hbufferdc);
+        }
+        void draw_map(HBITMAP const &hbitmap)
+        {
+            BITMAP mapbit;
+            GetObject(hbitmap, sizeof(BITMAP), &mapbit);
+            drawbitmp(hmemdc, 0, 0, mapbit.bmWidth, mapbit.bmHeight, 0,0, hbitmap);	
+        }
+
+
 
         HDC getdc()
         {
             return hmemdc;
         }
 
-        void Transparents_Color(HDC hdc_mem, HBITMAP hbitmap, COLORREF const transparents_color, SIZE const& size, POINT const& start)
+        void Transparents_Color(HDC const & hdc_mem, COLORREF const & transparents_color, SIZE const& size, POINT const& start)
         {
             IDXGISurface1 * Surface = nullptr;
 
@@ -56,10 +78,8 @@ namespace Engine::Rendering::Pipeline
 
                 MUST(Surface->GetDC(false, &hDC));
 
-               // SelectObject(hdc_mem,hbitmap);
-
                 TransparentBlt(hDC, 0,0,size.cx,size.cy,
-                                hdc_mem,start.x, start.y,size.cx,size.cy,transparents_color);
+                    hmemdc,start.x, start.y,size.cx,size.cy,transparents_color);
 
                 MUST(Surface->ReleaseDC(nullptr));
             }

@@ -5,27 +5,9 @@
 
 void Image_manager::initialize()
 {
-    this->hmapdc = Engine::Rendering::Pipeline::HmemDC::getdc();
-    hmagentabit = CreateCompatibleBitmap
-    (hmapdc, static_cast<int>(MAPSIZE_W), static_cast<int>(MAPSIZE_H+UI_H));
-    SelectObject(hmapdc, hmagentabit);
-
-    HBITMAP hmapbit = static_cast<HBITMAP>(LoadImage
-    (
-        NULL,
-        TEXT("Asset/Image/Sky_M_30501568.bmp"),
-        IMAGE_BITMAP,
-        0,
-        0,
-        LR_LOADFROMFILE | LR_DEFAULTSIZE
-    ));
-
-    drawbitmp(hmapdc, 0, 0, static_cast<int>(MAPSIZE_W), static_cast<int>(MAPSIZE_H), 0,0, hmapbit);	
-
-
     Background.Name = "Image/background";
     Background.Length = Vector<2>(BackgroundSIZE_W, BackgroundSIZE_H);
-    Map.Name = "Image/Sky_M";
+    Map.Name = "Image/Sky_M_ 30001800";
     Map.Length = Vector<2>(MAPSIZE_W, MAPSIZE_H);
     UI_Back.Name = "Image/UI_Back";
     UI_Back.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
@@ -38,7 +20,6 @@ void Image_manager::initialize()
     iTank.Length = Vector<2>(Tank_SIZE, Tank_SIZE);
     iTank.Location = Vector<2>(Tank_SIZE / 2, Tank_SIZE / 2);
 
-    DeleteObject(hmapbit);
 }
 
 void Image_manager::render_background()
@@ -46,23 +27,6 @@ void Image_manager::render_background()
     Background.Render();
 }
 
-void Image_manager::render_map()
-{
-
-    Engine::Rendering::Pipeline::HmemDC::Transparents_Color(hmapdc, hmagentabit, Transparent_Color,
-        {
-            static_cast<long>(CAM_SIZE_W),
-            static_cast<long>(CAM_SIZE_H)
-        },
-
-        //좌상단을 고정좌표로 윈도우좌표계 카메라 좌상단점부터 카메라 사이즈만큼 가져옴
-        {
-            static_cast<long>(_CAM->pos_win.x)/*static_cast<long>(-MAPSIZE_W/2)*/,
-            static_cast<long>(_CAM->pos_win.y)/*static_cast<long>(-MAPSIZE_H/2)*/
-        }
-    );
-    //Map.Render();
-}
 
 void Image_manager::render_back_ui()
 {
@@ -97,19 +61,11 @@ void Image_manager::render_object(Object const& obj, Obj_Type const type)
     default:
         return;
     }
-    p_image->Location = { obj.getpos().x,obj.getpos().y };
+    p_image->Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
     p_image->Render();
 }
 
-void Image_manager::drawbitmp(HDC const& hdc_dest, int const win_x, int const win_y, int const width, int const height, int const image_x, int const image_y, HBITMAP const& hbitmap)
-{
-    HDC hbufferdc = CreateCompatibleDC(hdc_dest);
-    HBITMAP oldbit = static_cast<HBITMAP>(SelectObject(hbufferdc, hbitmap));
-    BitBlt(hdc_dest, win_x, win_y, width, height, hbufferdc, image_x, image_y, SRCCOPY);
-    //윈도우에서 출력할 위치, 너비높이, 가져올 이미지의 시작점(왼쪽위)
-    SelectObject(hbufferdc, oldbit);
-    DeleteDC(hbufferdc);
-}
+
 
 void Image_manager::render_tank(std::vector<Tank> const& tank)
 {
