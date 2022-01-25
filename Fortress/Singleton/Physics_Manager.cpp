@@ -61,7 +61,6 @@ bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 
 	for (unsigned j = start_y; j < start_y + 6; ++j) 
 	{
-
 		if(Collide(hmapdc, start_x, j))
 		{
 			obj.moveto({obj.getpos().x, static_cast<float>(j- obj.getheight()/2)});
@@ -113,7 +112,6 @@ void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& m
 				tank[i].take_damage(TANK_HP);
 				tank[i].stop_move(0.0f);
 			}
-
 		}
 	}
 	if (!missile.empty())

@@ -27,6 +27,11 @@ void Debug_manager::render_text(Engine::Rendering::Text::Component &text, std::s
     text.Render();
 }
 
+void Debug_manager::set_delta(float const delta)
+{
+    this->delta = delta;
+}
+
 Debug_manager::Debug_manager()
 {
     initialize();
@@ -34,6 +39,9 @@ Debug_manager::Debug_manager()
 
 void Debug_manager::initialize()
 {
+    init_text(fps, 0,1);
+
+
     init_text(cursor_window_location_x, 0,0);
     init_text(cursor_window_location_y, 1,0);
     init_text(cursor_window_coodinate_x, 2,0);
@@ -48,6 +56,8 @@ void Debug_manager::initialize()
 
 void Debug_manager::rendering()
 {
+    render_text(fps,"FPS : "+std::to_string(static_cast<int>(1/delta)));
+
     render_text(cursor_window_location_x,"win_x : "+std::to_string(_Mouse->x));
     render_text(cursor_window_location_y,"win_y : "+std::to_string(_Mouse->y));
     render_text(cursor_window_coodinate_x,"cood_x : "+std::to_string(_Mouse->coordinate_x));

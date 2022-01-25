@@ -3,6 +3,9 @@
 
 #include"stdafx.h"
 
+Camera::Camera() :pos{ 0.0f,0.0f }, pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 }, speed{ UI_SCREEN_SCROLL }, focus_w{ false }, focus_h{ false }, focus{false}
+{}
+
 bool Camera::up()
 {
 	pos.y += speed;
@@ -27,14 +30,15 @@ bool Camera::down()
 {
 	pos.y -= speed;
 	pos_win.y += speed;
-	if (pos.y < -(MAPSIZE_H / 2 + UI_H) + CAM_SIZE_H / 2)
-	{
-		pos.y =-(MAPSIZE_H/2 + UI_H) + CAM_SIZE_H / 2 ;
-		//return false;
-	}
+	//if (pos.y < -(MAPSIZE_H / 2 + UI_H) + CAM_SIZE_H / 2)
+	//{
+	//	//return false;
+	//}
 
 	if (pos_win.y + CAM_SIZE_H > MAPSIZE_H + UI_H)
 	{
+		pos.y =-(MAPSIZE_H/2 + UI_H) + CAM_SIZE_H / 2 ;
+
 		pos_win.y = MAPSIZE_H + UI_H - CAM_SIZE_H;
 		return false;
 	}
@@ -46,14 +50,15 @@ bool Camera::left()
 {
 	pos.x -= speed;
 	pos_win.x -= speed;
-	if (pos.x < -MAPSIZE_W / 2 + CAM_SIZE_W / 2)
-	{
-		pos.x =-MAPSIZE_W/2+CAM_SIZE_W/2;
-		//return false;
-	}
+	//if (pos.x < -MAPSIZE_W / 2 + CAM_SIZE_W / 2)
+	//{
+	//	//return false;
+	//}
 
 	if (pos_win.x < 0)
 	{
+		pos.x =-MAPSIZE_W/2+CAM_SIZE_W/2;
+
 		pos_win.x = 0;
 		return false;
 	}
@@ -65,24 +70,28 @@ bool Camera::right()
 {
 	pos.x += speed;
 	pos_win.x += speed;
-	
-	if (pos.x > MAPSIZE_W / 2 - CAM_SIZE_W / 2)
-	{
-		pos.x = MAPSIZE_W/2-CAM_SIZE_W/2;
-		//return false;
-	}
+
+	//if (pos.x > MAPSIZE_W / 2 - CAM_SIZE_W / 2)
+	//{
+	//	//return false;
+	//}
 
 	if (pos_win.x + CAM_SIZE_W > MAPSIZE_W)
 	{
+		pos.x = MAPSIZE_W/2-CAM_SIZE_W/2;
+
 		pos_win.x = MAPSIZE_W - CAM_SIZE_W;
 		return false;
 	}
 	return true;
 }
 
-void Camera::focusing(Position const& obj_pos)
+void Camera::focusing(Object const& obj)
 {
-	if (abs(obj_pos.x - pos.x) < 100 && abs(obj_pos.y - pos.y) < 100)
+	// { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y }
+	float const obj_x = obj.getpos().x-MAPSIZE_W/2;
+	float const obj_y = MAPSIZE_H/2-obj.getpos().y;
+	if (abs(obj_x - pos.x) < 100 && abs(obj_y - pos.y) < 100)
 	{
 		focus_w = false;
 		focus_h = false;
@@ -90,16 +99,16 @@ void Camera::focusing(Position const& obj_pos)
 	}
 	if (focus_w)
 	{
-		if(pos.x>obj_pos.x)
+		if(pos.x>obj_x)
 			focus_w = left();
-		if(pos.x<obj_pos.x)
+		if(pos.x<obj_x)
 			focus_w = right();
 	}
 	if (focus_h)
 	{
-		if(pos.y>obj_pos.y)
+		if(pos.y>obj_y)
 			focus_h = up();
-		if(pos.y<obj_pos.y)
+		if(pos.y<obj_y)
 			focus_h = down();
 	}
 	//TODO:카메라 포커싱
@@ -113,8 +122,6 @@ void Camera::focus_on()
 	focus_h = true;
 }
 
-Camera::Camera() :pos{ 0.0f,0.0f }, pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 }, speed{ UI_SCREEN_SCROLL }, focus_w{false},focus_h{false}
-{}
 
 void Camera::move(Mouse::POS_STATE state)
 {

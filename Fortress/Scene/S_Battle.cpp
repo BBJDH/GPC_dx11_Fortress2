@@ -55,7 +55,7 @@ void S_Battle::rendering()
     Camera.Location = { _CAM->pos.x,_CAM->pos.y };
     Camera.Set();
 
-
+    _Debug_manager->set_delta(Engine::Time::Get::Delta());
     _Debug_manager->rendering();
 
 }

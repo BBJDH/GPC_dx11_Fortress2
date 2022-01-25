@@ -4,24 +4,29 @@
 
 class Camera :public SingletonT<Camera>
 {
+
+private:
+	unsigned const speed;
+	bool focus_w;
+	bool focus_h;
+
 public:
 
 	Position pos;
 	Position pos_win;
-	unsigned const speed;
-	bool focus_w;
-	bool focus_h;
-	bool up();
-	bool down();
-	bool left();
-	bool right();
-	void focusing(Position const & obj_pos);
-	void focus_on();
+	bool focus;
+
 public:
 
 	Camera();
 	~Camera() {};
 
+	bool up();
+	bool down();
+	bool left();
+	bool right();
+	void focusing(Object const& obj);
+	void focus_on();
 	void move(Mouse::POS_STATE state);
 };
 
