@@ -73,7 +73,11 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
         unsigned	   stepx = static_cast<unsigned>(tank.getpos().x - 1); //기본 왼쪽일때 시작할 점
         unsigned const stepy = static_cast<unsigned>(tank.getpos().y+tank.getheight()/2 - 3); 
         if (isright)
+        {
             stepx = static_cast<unsigned>(tank.getpos().x+1);
+            tank.set_side(Tank::Side::Right);
+        }
+        tank.set_side(Tank::Side::Left);
 
         //왼쪽/오른쪽 바로앞 위로 3번째 점부터 검사
         //위에 세번째점에서 충돌이면 이동불가
@@ -83,20 +87,24 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
         {
             if ( i == stepy)
             {
-                if (_Physics_manager->Collide(hmapdc, stepx, i))
+                if (_Physics_manager->Collide(hmapdc, stepx, i))//못올라가면
                 {
-                    tank.setstate(Tank::State::Stop_right);
+                    tank.setstate(Tank::State::Stop);
                     return;
                 }
             }
-            if (_Physics_manager->Collide(hmapdc, stepx, i))
+            if (_Physics_manager->Collide(hmapdc, stepx, i))//갈수 있으면
             {
+                tank.setstate(Tank::State::Move);
+
                 tank.moveto({ static_cast<float>(stepx) ,static_cast<float>(i-tank.getheight()/2)});
                 tank.stop_move(_Physics_manager->calc_landing_angle(stepx, i, hmapdc));
                 return;
             }
         }
-        tank.moveto({ static_cast<float>(stepx) ,tank.getpos().y });
+        tank.setstate(Tank::State::Fall); 
+
+        tank.moveto({ static_cast<float>(stepx) ,tank.getpos().y }); //떨어지면
         tank.ballistics_initialize(0,0);
         return;
     }
@@ -107,9 +115,14 @@ void Input_manager::fire(Tank& tank, std::vector<Missile>& missile, bool const k
     if (tank.is_myturn()and!tank.is_falling())
     {
         if (keyon)
+        {
+            tank.setstate(Tank::State::Steady);
             tank.plus_power();
+        }
         else
         {
+            tank.setstate(Tank::State::Fire);
+
             //미사일 생성
             float const angle = -tank.getimage_angle() / Radian + tank.getangle_min() + tank.getangle();
             //60분법으로 받음

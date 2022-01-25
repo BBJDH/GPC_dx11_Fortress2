@@ -4,7 +4,7 @@
 Tank::Tank(Position const& pos, unsigned const width, unsigned const height)
 	:Object(pos, width, height), hp{ TANK_HP }, fuel{100},
 	fire_angle_min{35}, fire_angle_max{65},
-	fire_angle{ 0 }, fire_velocity{ 0.0f }, state{State::Nomal_right}
+	fire_angle{ 0 }, fire_velocity{ 0.0f }, state{ State::Nomal }, side{Side::Left}
 {
 }
 Tank& Tank::operator=(Tank const& other_tank)
@@ -53,8 +53,10 @@ int const Tank::getangle_max() const
 
 bool Tank::is_dead() const
 {
-	if(this->hp==0)
+	if (this->hp == 0)
+	{
 		return true;
+	}
 	return false;
 }
 
@@ -69,35 +71,36 @@ void Tank::turn_setting()
 	this->fire_velocity = 0;
 }
 
+void Tank::stop_move(float const thetha)
+{
+	setstate(State::Nomal);
+	Object::stop_move(thetha);
+}
+
+Tank::State Tank::get_state() const
+{
+	return state;
+}
+
+Tank::Side Tank::get_side() const
+{
+	return side;
+}
+
 void Tank::take_damage(unsigned const damage)
 {
 	if (damage >= this->hp)
 	{
 		this->hp =0;
+		state = State::Dead;
 		return;
 	}
 	this->hp -= damage;
 }
 
-void Tank::input_key(WPARAM const wparam)
+void Tank::set_side(Side const side)
 {
-	if (wparam == VK_RIGHT )
-	{
-		if (this->state == Tank::State::Nomal_right)
-			this->fuel--;
-		else
-			this->state = Tank::State::Nomal_right;
-	}
-	else if (wparam == VK_LEFT)
-	{
-		if(this->state == Tank::State::Nomal_left)
-			this->fuel--; //TODO:이동테스트종료후 --로
-		else
-		{
-			this->state = Tank::State::Nomal_left;
-		}
-
-	}
+	this->side = side;
 }
 
 void Tank::setstate(State const state)

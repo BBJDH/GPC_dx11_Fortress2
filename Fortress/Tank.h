@@ -7,11 +7,16 @@ class Tank : public Object
 public:
 	enum class State
 	{
-		Nomal_right, Nomal_left, Fire_right, Fire_left, Stop_right, Stop_left, //...
+		Nomal, Steady, Fire, Move, Stop, Fall, Dead, //...
+	};
+	enum class Side
+	{
+		Left, Right //...
 	};
 
 private:
 	State		    state;
+	Side		    side;
 	unsigned	    hp;
 	unsigned	    fuel;
 	float const		fire_angle_min;
@@ -31,12 +36,16 @@ public:
 	int const getangle_min()const;
 	int const getangle_max()const;
 	bool is_dead()const;
+	Tank::State get_state()const;
+	Tank::Side get_side()const;
 	void take_damage(unsigned const damage);
-	void input_key(WPARAM const wparam);
+	void set_side(Side const side);
 	void setstate(State const state);
 	void plus_angle(int angle);
 	void plus_power();
 	void turn_setting();
+	void stop_move(float const thetha);
+
 
 	
 };
