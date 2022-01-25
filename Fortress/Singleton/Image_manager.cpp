@@ -3,6 +3,11 @@
 
 
 
+Image_manager::Image_manager()
+{
+    initialize();
+}
+
 void Image_manager::initialize()
 {
     Background.Name = "Image/Background/background";
@@ -22,10 +27,10 @@ void Image_manager::initialize()
 
     iTank.Name = "Image/Tank/Canon";
     iTank.Length = Vector<2>(Tank_SIZE, Tank_SIZE);
-    iTank.Location = Vector<2>(Tank_SIZE / 2, Tank_SIZE / 2);
+    //iTank.Location = Vector<2>(Tank_SIZE / 2, Tank_SIZE / 2);
     iMissile.Name = "Image/Bomb/bomb";
     iMissile.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
-    iMissile.Location = Vector<2>(Missile_SIZE / 2, Missile_SIZE / 2);
+    //iMissile.Location = Vector<2>(Missile_SIZE / 2, Missile_SIZE / 2);
 }
 
 void Image_manager::render_background()

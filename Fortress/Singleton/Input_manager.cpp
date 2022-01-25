@@ -9,24 +9,24 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile
     if (interval > speed)
     {
         interval = 0;
-        if (Engine::Input::Get::Key::Press(VK_LBUTTON))
-        {
-            float x = static_cast<float>(_Mouse->x);
-            float y = static_cast<float>(_Mouse->y);
-            tank.push_back
-            (
-                Tank
-                (
-                    {
-                        static_cast<int>(_Mouse->x)+_CAM->pos_win.x,
-                        static_cast<int>(_Mouse->y)+_CAM->pos_win.y
-                    },
-                    Tank_SIZE,
-                    Tank_SIZE
-                )
-            );
-            tank.back().ballistics_initialize(0, 0);
-        }   
+        //if (Engine::Input::Get::Key::Press(VK_LBUTTON))
+        //{
+        //    float x = static_cast<float>(_Mouse->x);
+        //    float y = static_cast<float>(_Mouse->y);
+        //    tank.push_back
+        //    (
+        //        Tank
+        //        (
+        //            {
+        //                static_cast<int>(_Mouse->x)+_CAM->pos_win.x,
+        //                static_cast<int>(_Mouse->y)+_CAM->pos_win.y
+        //            },
+        //            Tank_SIZE,
+        //            Tank_SIZE
+        //        )
+        //    );
+        //    tank.back().ballistics_initialize(0, 0);
+        //}   
         if (Engine::Input::Get::Key::Press(VK_RBUTTON))
         {
             _Map_manager->make_crater
@@ -40,26 +40,29 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile
 
 
         }
-        if ((GetAsyncKeyState(VK_LEFT) & 0x8000))
-            find_nextstep(_Map_manager->hmapdc, tank[_Turn->whosturn()], false);
-        if ((GetAsyncKeyState(VK_RIGHT) & 0x8000))
-            find_nextstep(_Map_manager->hmapdc, tank[_Turn->whosturn()], true);
-        if ((GetAsyncKeyState(VK_UP) & 0x8000))
+        if (!tank[_Turn->whosturn()].is_dead())
         {
-            if(tank[_Turn->whosturn()].is_myturn() and !tank[_Turn->whosturn()].is_dead())
-                tank[_Turn->whosturn()].plus_angle(1);
-        }
-        if ((GetAsyncKeyState(VK_DOWN) & 0x8000))
-        {
-            if(tank[_Turn->whosturn()].is_myturn()and !tank[_Turn->whosturn()].is_dead())
-                tank[_Turn->whosturn()].plus_angle(-1);
-        }
-        if ((GetAsyncKeyState(VK_SPACE) & 0x8000))
-            fire(tank[_Turn->whosturn()],missile,true);
+            if ((GetAsyncKeyState(VK_LEFT) & 0x8000))
+                find_nextstep(_Map_manager->hmapdc, tank[_Turn->whosturn()], false);
+            if ((GetAsyncKeyState(VK_RIGHT) & 0x8000))
+                find_nextstep(_Map_manager->hmapdc, tank[_Turn->whosturn()], true);
+            if ((GetAsyncKeyState(VK_UP) & 0x8000))
+            {
+                if(tank[_Turn->whosturn()].is_myturn() and !tank[_Turn->whosturn()].is_dead())
+                    tank[_Turn->whosturn()].plus_angle(1);
+            }
+            if ((GetAsyncKeyState(VK_DOWN) & 0x8000))
+            {
+                if(tank[_Turn->whosturn()].is_myturn()and !tank[_Turn->whosturn()].is_dead())
+                    tank[_Turn->whosturn()].plus_angle(-1);
+            }
+            if ((GetAsyncKeyState(VK_SPACE) & 0x8000))
+                fire(tank[_Turn->whosturn()],missile,true);
 
+        }
 
     }
-    if (Engine::Input::Get::Key::Up(VK_SPACE))
+    if (Engine::Input::Get::Key::Up(VK_SPACE) and !tank[_Turn->whosturn()].is_dead())
         fire(tank[_Turn->whosturn()],missile,false);
 }
 

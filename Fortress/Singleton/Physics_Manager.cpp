@@ -144,7 +144,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 			tank_rect.Length = {static_cast<float const>(tank[i].getwidth()),static_cast<float const>(tank[i].getheight())};
 			if (bomb_circle.Collide(tank_rect))
 			{
-				tank[i].take_damage(100);
+				tank[i].take_damage(500);
 				tank[i].ballistics_initialize(0,0);
 			}
 		}

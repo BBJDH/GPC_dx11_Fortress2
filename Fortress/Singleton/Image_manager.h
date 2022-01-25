@@ -29,6 +29,7 @@ private:
 
 
 public:
+    Image_manager();
     void initialize();
     void render_background();
     void render_back_ui(Tank const & tank);

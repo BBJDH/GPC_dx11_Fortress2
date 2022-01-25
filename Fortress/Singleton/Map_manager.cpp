@@ -2,6 +2,11 @@
 #include "Map_manager.h"
 
 
+Map_manager::Map_manager()
+{
+    initialize();
+}
+
 void Map_manager::initialize()
 {
     HBITMAP hmapbit = static_cast<HBITMAP>(LoadImage

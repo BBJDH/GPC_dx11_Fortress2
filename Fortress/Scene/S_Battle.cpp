@@ -6,7 +6,7 @@
 
 void S_Battle::Start()
 {
-    _Map_manager->initialize();
+    //_Map_manager->initialize();
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
 
     srand(static_cast<unsigned>(time(NULL)));
@@ -33,6 +33,7 @@ Scene * S_Battle::Update()
     _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);
 
     rendering();            //렌더링
+
     return nullptr;
 }
 
@@ -48,7 +49,8 @@ void S_Battle::rendering()
 
     //탱크 미사일 아이템 등 그리기
     _Image_manager->render_tank(tank);
-    _Image_manager->render_missile(missile);
+    _Anime->render_missile(missile);
+    //_Image_manager->render_missile(missile);
 
     _Image_manager->render_back_ui(tank[_Turn->whosturn()]);
     _Image_manager->render_front_ui(tank[_Turn->whosturn()]);

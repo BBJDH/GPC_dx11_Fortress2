@@ -451,7 +451,7 @@ namespace Engine::Rendering::Pipeline
             }
             case WM_APP:
             {
-                MUST(SwapChain->Present(0, 0));
+                MUST(SwapChain->Present(0, 0)); //수직동기화 켜기 1
 
                 float const Color[4] { 0.0f, 0.0f, 0.0f, 1.0f };
 

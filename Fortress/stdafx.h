@@ -59,6 +59,7 @@ struct Position
 #include"./Singleton/Map_manager.h"
 #include"./Singleton/Turnmanager.h"
 #include"./Singleton/Input_manager.h"
+#include"./Singleton/Animation.h"
 
 //#include"Turnmanager.h"
 
@@ -84,7 +85,7 @@ struct Position
 #define _Map_manager Map_manager::get_singleton()
 #define _Turn Turnmanager::get_singleton()
 #define _Input_manager Input_manager::get_singleton()
-
+#define _Anime Animation::get_singleton()
 
 
 
@@ -118,9 +119,9 @@ struct Position
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 //#define R_Image_SIZE 100
 #define Tank_SIZE 60
-#define Missile_SIZE 40
+#define Missile_SIZE 150
 
-#define PLAYERS		 4
+#define PLAYERS		 12
 #define TANK_HP		 1000
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15

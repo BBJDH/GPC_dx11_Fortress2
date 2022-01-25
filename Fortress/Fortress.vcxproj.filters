@@ -102,6 +102,9 @@
     <ClInclude Include="Singleton\Input_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton\Animation.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fortress.cpp">
@@ -147,6 +150,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Input_manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton\Animation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
