@@ -44,7 +44,7 @@ void Image_manager::render_front_ui(Tank const & tank)
     UI_Front.Render();
     UI_Hp.Location = {UI_Bar_X + tank.gethp()*UI_HP_MUL/2,UI_HP_Y};
     UI_Hp.Length = {tank.gethp()*UI_HP_MUL,UI_Bar_H};
-
+    int i = tank.gethp();
     UI_Power.Location = {UI_Bar_X + tank.getpower() * UI_POWER_MUL/2 , UI_POWER_Y};
     UI_Power.Length = {tank.getpower() * UI_POWER_MUL , UI_Bar_H};
 

@@ -45,4 +45,5 @@ void Map_manager::make_crater(POINT const& center, SIZE const& size)
     SelectObject(hmapdc, hNewPen);
 
     Ellipse(hmapdc, center.x-size.cx, center.y-size.cy, center.x+size.cx, center.y+size.cy);
+
 }

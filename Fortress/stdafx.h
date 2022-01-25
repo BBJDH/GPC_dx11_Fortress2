@@ -32,6 +32,7 @@ struct Position
 #include "Engine/Input.h"
 #include "Engine/Game.h"
 #include "Engine/Circle.h"
+#include "Engine/Quadrangle.h"
 #include "Engine/Time.h"
 #include "Engine/Pipeline.h"
 
@@ -151,7 +152,7 @@ struct Position
 #define grav_accerl 9.8f //Gravialional accerleration
 #define PI 3.141592f
 #define Radian (PI/180.0f)
-#define SPEED 6
+#define SPEED 8
 
 //색상관련
 #define Transparent_Color RGB(255, 0, 255)

@@ -9,24 +9,24 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile
     if (interval > speed)
     {
         interval = 0;
-        //if (Engine::Input::Get::Key::Press(VK_LBUTTON))
-        //{
-        //    float x = static_cast<float>(_Mouse->x);
-        //    float y = static_cast<float>(_Mouse->y);
-        //    tank.push_back
-        //    (
-        //        Tank
-        //        (
-        //            {
-        //                static_cast<int>(_Mouse->x)+_CAM->pos_win.x,
-        //                static_cast<int>(_Mouse->y)+_CAM->pos_win.y
-        //            },
-        //            Tank_SIZE,
-        //            Tank_SIZE
-        //        )
-        //    );
-        //    tank.back().ballistics_initialize(0, 0);
-        //}   
+        if (Engine::Input::Get::Key::Press(VK_LBUTTON))
+        {
+            float x = static_cast<float>(_Mouse->x);
+            float y = static_cast<float>(_Mouse->y);
+            tank.push_back
+            (
+                Tank
+                (
+                    {
+                        static_cast<int>(_Mouse->x)+_CAM->pos_win.x,
+                        static_cast<int>(_Mouse->y)+_CAM->pos_win.y
+                    },
+                    Tank_SIZE,
+                    Tank_SIZE
+                )
+            );
+            tank.back().ballistics_initialize(0, 0);
+        }   
         if (Engine::Input::Get::Key::Press(VK_RBUTTON))
         {
             _Map_manager->make_crater
@@ -36,6 +36,9 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile
                     _Mouse->y+static_cast<int>(_CAM->pos_win.y)},
                 { 50,40 }
             );
+
+
+
         }
         if ((GetAsyncKeyState(VK_LEFT) & 0x8000))
             find_nextstep(_Map_manager->hmapdc, tank[_Turn->whosturn()], false);

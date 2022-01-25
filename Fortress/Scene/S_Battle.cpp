@@ -16,7 +16,7 @@ void S_Battle::Start()
         tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE));
         tank.back().ballistics_initialize(0, 0);
     }
-
+    _Turn->tankturn_start(tank);
 }
 
 Scene * S_Battle::Update()

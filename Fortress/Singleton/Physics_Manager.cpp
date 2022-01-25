@@ -53,13 +53,13 @@ float const Physics_Manager::calc_landing_angle(unsigned const start_x, unsigned
 
 }
 
-
+//낙하 계산, 이동계산
 bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 {
 	unsigned const start_x = static_cast<const unsigned>(obj.getpos().x);//이미지 가운데 x좌표
 	unsigned const start_y = static_cast<const unsigned>(obj.getpos().y+obj.getheight()/2);
 
-	for (unsigned j = start_y; j < start_y + 6; ++j) 
+	for (unsigned j = start_y; j < start_y + 8; ++j) 
 	{
 		if(Collide(hmapdc, start_x, j))
 		{
@@ -92,6 +92,7 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 				{
 					//부딪혔다면 폭발 후 제거
 					missile[i].boom(hmapdc);
+					collide_bomb(missile[i],tank);
 					missile.erase(missile.begin()+i);
 				}
 			}
@@ -124,6 +125,28 @@ void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& m
 				missile.erase(missile.begin()+i);
 
 
+		}
+	}
+}
+
+void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& tank)
+{
+	if (!tank.empty())
+	{
+		Engine::Physics::Component<Circle> bomb_circle;
+		bomb_circle.Center = {missile.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-missile.getpos().y};
+		bomb_circle.Radius = static_cast<float>(missile.get_range_w());
+
+		for (size_t i = 0; i < tank.size(); i++)
+		{
+			Engine::Physics::Component<Quadrangle> tank_rect;
+			tank_rect.Center = {tank[i].getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-tank[i].getpos().y};
+			tank_rect.Length = {static_cast<float const>(tank[i].getwidth()),static_cast<float const>(tank[i].getheight())};
+			if (bomb_circle.Collide(tank_rect))
+			{
+				tank[i].take_damage(100);
+				tank[i].ballistics_initialize(0,0);
+			}
 		}
 	}
 }

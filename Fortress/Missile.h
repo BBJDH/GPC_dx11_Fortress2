@@ -14,6 +14,7 @@ private:
 public:
 	Missile(Position const& pos, unsigned const width, unsigned const height);
 	Missile & operator=(Missile const& other_miss);
+	int const get_range_w()const;
 	void boom(HDC const& hmapdc);
 
 };

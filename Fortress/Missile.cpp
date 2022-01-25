@@ -13,6 +13,11 @@ Missile& Missile::operator=(Missile const& other_miss)
 	return *this;
 }
 
+int const Missile::get_range_w() const
+{
+	return bomb_range_w;
+}
+
 void Missile::boom(HDC const& hmapdc)
 {
 	HBRUSH hNewBrush = CreateSolidBrush(RGB(255,0,255));
