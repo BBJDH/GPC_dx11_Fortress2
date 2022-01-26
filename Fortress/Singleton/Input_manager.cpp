@@ -77,7 +77,8 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
             stepx = static_cast<unsigned>(tank.getpos().x+1);
             tank.set_side(Tank::Side::Right);
         }
-        tank.set_side(Tank::Side::Left);
+        else
+            tank.set_side(Tank::Side::Left);
 
         //왼쪽/오른쪽 바로앞 위로 3번째 점부터 검사
         //위에 세번째점에서 충돌이면 이동불가

@@ -118,10 +118,11 @@ struct Position
 #define BackgroundSIZE_W	MAPSIZE_W//CAM_SIZE_W//1280*1.2
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 //#define R_Image_SIZE 100
-#define Tank_SIZE 60
+#define Tank_SIZE 50
+#define Tank_ANI_SIZE 234
 #define Missile_SIZE 150
 
-#define PLAYERS		 12
+#define PLAYERS		 2
 #define TANK_HP		 1000
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15

@@ -25,7 +25,7 @@ void Image_manager::initialize()
     UI_Fuel.Name = "Image/UI/Yellow";
 
 
-    iTank.Name = "Image/Tank/Canon";
+    iTank.Name = "Image/Tank/Canon_R";
     iTank.Length = Vector<2>(Tank_SIZE, Tank_SIZE);
     //iTank.Location = Vector<2>(Tank_SIZE / 2, Tank_SIZE / 2);
     iMissile.Name = "Image/Bomb/bomb";
@@ -86,7 +86,6 @@ void Image_manager::render_object(Object const& obj, Obj_Type const type)
     }
     p_image->Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
     p_image->Angle = -obj.getimage_angle()/Radian;
-    p_image->Render();
 }
 
 
@@ -98,6 +97,14 @@ void Image_manager::render_tank(std::vector<Tank> const& tank)
         for (size_t i = 0; i < tank.size(); i++)
         {
             render_object(tank[i], Image_manager::Obj_Type::Tank);
+
+            if(tank[i].get_state()==Tank::State::Nomal and tank[i].get_side()==Tank::Side::Left)
+                iTank.Name = "Image/Tank/Canon_L";
+
+            if(tank[i].get_state()==Tank::State::Nomal and tank[i].get_side()==Tank::Side::Right)
+                iTank.Name = "Image/Tank/Canon_R";
+
+            iTank.Render();
         }
     }
 }
@@ -109,6 +116,8 @@ void Image_manager::render_missile(std::vector<Missile> const& missile)
         for (size_t i = 0; i < missile.size(); i++)
         {
             render_object(missile[i], Image_manager::Obj_Type::Missile);
+            iMissile.Render();
+
         }
     }
 }

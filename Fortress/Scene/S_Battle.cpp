@@ -48,8 +48,8 @@ void S_Battle::rendering()
     _Map_manager->render_map();
 
     //탱크 미사일 아이템 등 그리기
-    _Image_manager->render_tank(tank);
-    //_Anime->render_tanks(tank);
+    //_Image_manager->render_tank(tank);
+    _Anime->render_tanks(tank);
     _Anime->render_missile(missile);
     //_Image_manager->render_missile(missile);
 
