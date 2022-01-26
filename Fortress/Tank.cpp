@@ -6,8 +6,9 @@
 
 Tank::Tank(Position const& pos, unsigned const width, unsigned const height)
 	:Object(pos, width, height), hp{ TANK_HP }, fuel{100},
-	fire_angle_min{35}, fire_angle_max{65},
-	fire_angle{ 0 }, fire_velocity{ 0.0f }, state{ State::Nomal }, side{ Side::Left },
+	fire_angle_min{25}, fire_angle_max{55},//{25,55}
+	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
+	state{ State::Nomal }, side{ Side::Right },
 	ani_playtime{0.0f}
 {
 	set_ani_normal();
@@ -40,6 +41,11 @@ int const Tank::getpower() const
 int const Tank::getfuel() const
 {
 	return this->fuel;
+}
+
+int const Tank::get_left_angle() const
+{
+	return static_cast<int>(this->fire_angle_left_value);
 }
 
 int const Tank::getangle() const
@@ -77,12 +83,7 @@ void Tank::turn_setting()
 	this->fire_velocity = 0;
 }
 
-void Tank::stop_move(float const thetha)
-{
-	setstate(State::Nomal);
-	ani_playtime =0;
-	Object::stop_move(thetha);
-}
+
 
 Tank::State Tank::get_state() const
 {
@@ -100,6 +101,7 @@ void Tank::take_damage(unsigned const damage)
 	{
 		this->hp =0;
 		state = State::Dead;
+		ani_start();
 		return;
 	}
 	this->hp -= damage;
@@ -107,6 +109,20 @@ void Tank::take_damage(unsigned const damage)
 
 void Tank::set_side(Side const side)
 {
+	switch (side)
+	{
+	case Tank::Side::Left:
+	{
+		this->fire_angle_left_value = 180.0f;
+		break;
+	}
+	case Tank::Side::Right:
+	{
+		this->fire_angle_left_value = 0.0f;
+		break;
+	}
+
+	}
 	this->side = side;
 }
 
@@ -200,17 +216,38 @@ void Tank::set_ani_state()
 	}
 	case Tank::State::Move:
 	{
-		set_ani_move();
+		if (ani_playtime > ANI_Playtime_Move)
+		{
+			setstate(State::Nomal);
+			set_ani_normal();
+			ani_start();
+		}
+		else
+			set_ani_move();
 		break;
 	}
 	case Tank::State::Stop:
 	{
-		set_ani_stop();
+		if (ani_playtime > ANI_Playtime_Stop)
+		{
+			setstate(State::Nomal);
+			set_ani_normal();
+			ani_start();
+		}
+		else
+			set_ani_stop();
 		break;
 	}
 	case Tank::State::Fall:
 	{
-		set_ani_fall();
+		if (!falling and !hp==0)
+		{
+			setstate(State::Nomal);
+			set_ani_normal();
+			ani_start();
+		}
+		else
+			set_ani_fall();
 		break;
 	}
 	case Tank::State::Dead:
@@ -267,12 +304,16 @@ void Tank::set_ani_move()
 
 void Tank::set_ani_stop()
 {
-	set_ani_normal();
+	this->animation.Name = "Animation/Canon/stop";
+	this->animation.Duration = ANI_Playtime_Stop;
+	this->animation.Repeatable = true;
 }
 
 void Tank::set_ani_fall()
 {
-	set_ani_move();
+	this->animation.Name = "Animation/Canon/fall";
+	this->animation.Duration = ANI_Playtime_Fall;
+	this->animation.Repeatable = true;
 }
 
 void Tank::set_ani_dead()

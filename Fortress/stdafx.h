@@ -127,7 +127,11 @@ struct Position
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
 #define FIRE_MUL		 1.5
-#define Tank_Step_H		 8  //탱크가 올라갈수 있는 높이
+
+//충돌관련
+#define Tank_Step_H		 10  //탱크가 올라갈수 있는 높이
+#define Tank_Search_H		 10  //지지각 계산할 높이값
+#define Tank_Search_W		 4  //지지각 계산할 너비값
 
 
 
@@ -144,10 +148,10 @@ struct Position
 #define UI_POWER_MUL		 5
 #define UI_HP_MUL			 0.64
 #define UI_Fuel_MUL			 6.4
-#define UI_ANGLE_CENTER_X		92
-#define UI_ANGLE_CENTER_Y		534
-#define UI_ANGLE_MIN_Length		8
-#define UI_ANGLE_MAX_Length		 60
+#define UI_ANGLE_CENTER_X		150
+#define UI_ANGLE_CENTER_Y		642
+//#define UI_ANGLE_MIN_Length		8
+#define UI_ANGLE_MAX_Length		 35
 
 
 //애니매이션 세팅
@@ -156,15 +160,18 @@ struct Position
 #define ANI_Playtime_Idle 3.5f
 #define ANI_Playtime_Idle2 3.0f
 #define ANI_Playtime_Fire 0.25f
-#define ANI_Playtime_Move 0.25f
+#define ANI_Playtime_Move 0.1f
+#define ANI_Playtime_Fall 0.1f
 #define ANI_Playtime_Dead 3.0f
+#define ANI_Playtime_Stop 0.75f
+
 
 
 //물리, 수학관련
 #define grav_accerl 9.8f //Gravialional accerleration
 #define PI 3.141592f
 #define Radian (PI/180.0f)
-#define SPEED 8
+#define SPEED 6
 
 //색상관련
 #define Transparent_Color RGB(255, 0, 255)

@@ -17,14 +17,14 @@ bool Physics_Manager::Collide(HDC const hdc, int const x, int const y)
 
 float const Physics_Manager::calc_landing_angle(unsigned const start_x, unsigned const selected_y, HDC const& hmapdc)
 {
-	long double leftpoint_x =start_x-2;
+	long double leftpoint_x =start_x-Tank_Search_W;
 	long double leftpoint_y =0;
-	long double rightpoint_x =static_cast<long double>(start_x)+2;
+	long double rightpoint_x =static_cast<long double>(start_x)+Tank_Search_W;
 	long double rightpoint_y =0;
 	bool letfpoint_isfound = false;
 	bool rightpoint_isfound = false;
 
-	for (unsigned j = selected_y-4; j < selected_y + 4; ++j)
+	for (unsigned j = selected_y-Tank_Search_H; j < selected_y + Tank_Search_H; ++j)
 	{
 		if(!letfpoint_isfound)
 		{
@@ -53,7 +53,7 @@ float const Physics_Manager::calc_landing_angle(unsigned const start_x, unsigned
 
 }
 
-//³«ÇÏ °è»ê, ÀÌµ¿°è»ê
+//³«ÇÏ °è»ê
 bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 {
 	unsigned const start_x = static_cast<const unsigned>(obj.getpos().x);//ÀÌ¹ÌÁö °¡¿îµ¥ xÁÂÇ¥
@@ -65,6 +65,7 @@ bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 		{
 			obj.moveto({obj.getpos().x, static_cast<float>(j- obj.getheight()/2)});
 			obj.stop_move(calc_landing_angle(start_x,j,hmapdc));
+
 			return true;
 		}
 
@@ -78,23 +79,25 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			if (tank[i].is_falling())
-				Collide_object(tank[i], hmapdc);
+			if (tank[i].is_falling() and Collide_object(tank[i], hmapdc) and !tank[i].is_dead())
+			{
+				tank[i].setstate(Tank::State::Nomal);
+				tank[i].ani_start();
+			}
 		}
 	}
 	if (!missile.empty())
 	{
 		for (size_t i = 0; i < missile.size(); i++)
 		{
-			if (missile[i].is_falling())
+			if (missile[i].is_falling() and Collide_object(missile[i], hmapdc))
 			{
-				if (Collide_object(missile[i], hmapdc))
-				{
-					//ºÎµúÇû´Ù¸é Æø¹ß ÈÄ Á¦°Å
-					missile[i].boom(hmapdc);
-					collide_bomb(missile[i],tank);
-					missile.erase(missile.begin()+i);
-				}
+
+				//ºÎµúÇû´Ù¸é Æø¹ß ÈÄ Á¦°Å
+				missile[i].boom(hmapdc);
+				collide_bomb(missile[i],tank);
+				missile.erase(missile.begin()+i);
+
 			}
 
 		}

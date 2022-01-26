@@ -11,6 +11,10 @@ public:
     {
         Tank, Missile, Item
     };
+    enum class Color
+    {
+        Red, Yellow
+    };
 
 private:
 
@@ -21,12 +25,13 @@ private:
     Engine::Rendering::Image::UI UI_Hp;
     Engine::Rendering::Image::UI UI_Power;
     Engine::Rendering::Image::UI UI_Fuel;
+    Engine::Rendering::Image::UI UI_angle;
 
     Engine::Rendering::Image::Component iTank;
     Engine::Rendering::Image::Component iMissile;
 
     void render_object(Object const& obj, Obj_Type const type);
-
+    void ui_angle_line( int const angle,Color color);
 
 public:
     Image_manager();

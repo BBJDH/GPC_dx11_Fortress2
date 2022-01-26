@@ -23,6 +23,7 @@ void Image_manager::initialize()
     UI_Hp.Name = "Image/UI/Green";
     UI_Power.Name = "Image/UI/Red";
     UI_Fuel.Name = "Image/UI/Yellow";
+    UI_angle.Name ="Image/UI/angle_r";
 
 
     iTank.Name = "Image/Tank/Canon_R";
@@ -42,6 +43,23 @@ void Image_manager::render_background()
 void Image_manager::render_back_ui(Tank const & tank)
 {
     UI_Back.Render();
+    int  img_angle = -static_cast<int>(tank.getimage_angle()/Radian);
+    int  fire_angle = tank.getangle();
+    int  min_angle = tank.getangle_min();
+    int  max_angle = tank.getangle_max();
+    if (tank.get_side() == Tank::Side::Left)
+    {
+        img_angle += 180;
+        fire_angle *= -1;
+        min_angle *= -1;
+        max_angle *= -1;
+    }
+
+    ui_angle_line(img_angle + min_angle, Color::Yellow);
+    ui_angle_line(img_angle + max_angle, Color::Yellow);
+    ui_angle_line(img_angle + min_angle + fire_angle ,Color::Red);
+
+    UI_angle.Render();
 }
 
 void Image_manager::render_front_ui(Tank const & tank)
@@ -49,7 +67,6 @@ void Image_manager::render_front_ui(Tank const & tank)
     UI_Front.Render();
     UI_Hp.Location = {UI_Bar_X + tank.gethp()*UI_HP_MUL/2,UI_HP_Y};
     UI_Hp.Length = {tank.gethp()*UI_HP_MUL,UI_Bar_H};
-    int i = tank.gethp();
     UI_Power.Location = {UI_Bar_X + tank.getpower() * UI_POWER_MUL/2 , UI_POWER_Y};
     UI_Power.Length = {tank.getpower() * UI_POWER_MUL , UI_Bar_H};
 
@@ -86,6 +103,36 @@ void Image_manager::render_object(Object const& obj, Obj_Type const type)
     }
     p_image->Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
     p_image->Angle = -obj.getimage_angle()/Radian;
+}
+
+void Image_manager::ui_angle_line(int const angle, Color color)
+{
+    switch (color)
+    {
+    case Image_manager::Color::Red:
+    {
+        UI_angle.Name ="Image/UI/angle_r";
+        break;
+    }
+    case Image_manager::Color::Yellow:
+    {
+        UI_angle.Name ="Image/UI/angle_y";
+        break;
+    }
+    default:
+        break;
+    }
+
+    double cosval = cos(-angle*Radian);
+    double sinval = sin(-angle*Radian);
+    int max_x = static_cast<int>(UI_ANGLE_MAX_Length * cosval );
+    int max_y = static_cast<int>(UI_ANGLE_MAX_Length * sinval ); 
+
+
+    UI_angle.Location = {UI_ANGLE_CENTER_X+max_x,UI_ANGLE_CENTER_Y+max_y};
+    UI_angle.Length = {UI_ANGLE_MAX_Length*2,1};
+    UI_angle.Angle = static_cast<float>(angle);
+    UI_angle.Render();
 }
 
 

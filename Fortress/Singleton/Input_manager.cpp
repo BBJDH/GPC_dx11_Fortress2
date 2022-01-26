@@ -40,7 +40,7 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile
 
 
         }
-        if (!tank[_Turn->whosturn()].is_dead())
+        if (!tank[_Turn->whosturn()].is_dead()&&!tank[_Turn->whosturn()].is_falling())
         {
             if ((GetAsyncKeyState(VK_LEFT) & 0x8000))
                 find_nextstep(_Map_manager->hmapdc, tank[_Turn->whosturn()], false);
@@ -64,12 +64,24 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile
     }
     if (Engine::Input::Get::Key::Up(VK_SPACE) and !tank[_Turn->whosturn()].is_dead())
         fire(tank[_Turn->whosturn()],missile,false);
+    //if (Engine::Input::Get::Key::Up(VK_LEFT) and !tank[_Turn->whosturn()].is_dead())
+    //{
+    //    tank[_Turn->whosturn()].setstate(Tank::State::Nomal);
+    //    tank[_Turn->whosturn()].ani_start();
+    //}
+    //if (Engine::Input::Get::Key::Up(VK_RIGHT) and !tank[_Turn->whosturn()].is_dead())
+    //{
+    //    tank[_Turn->whosturn()].setstate(Tank::State::Nomal);
+    //    tank[_Turn->whosturn()].ani_start();
+    //}
 }
 
 void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isright)
 {
     if (tank.is_myturn()and !tank.is_falling())
     {
+        _CAM->focus_on();
+
         unsigned	   stepx = static_cast<unsigned>(tank.getpos().x - 1); //기본 왼쪽일때 시작할 점
         unsigned const stepy = static_cast<unsigned>(tank.getpos().y+tank.getheight()/2 - Tank_Step_H); 
         if (isright)
@@ -91,6 +103,7 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
                 if (_Physics_manager->Collide(hmapdc, stepx, i))//못올라가면
                 {
                     tank.setstate(Tank::State::Stop);
+
                     return;
                 }
             }
@@ -109,7 +122,7 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
         return;
     }
 }
-
+//30도 위에 15도로 사격, 뒤돌면 210도 방향으로부터 -15도이므로 195도
 void Input_manager::fire(Tank& tank, std::vector<Missile>& missile, bool const keyon)
 {
     if (tank.is_myturn()and!tank.is_falling())
@@ -124,7 +137,17 @@ void Input_manager::fire(Tank& tank, std::vector<Missile>& missile, bool const k
             tank.setstate(Tank::State::Fire);
             tank.ani_start();
             //미사일 생성
-            float const angle = -tank.getimage_angle() / Radian + tank.getangle_min() + tank.getangle();
+            float angle;
+            if (tank.get_side() == Tank::Side::Right)
+            {
+                angle = -tank.getimage_angle() / Radian 
+                    + tank.getangle_min() + tank.getangle() ;
+            }
+            else
+            {
+                angle = (-tank.getimage_angle() / Radian +180.0f)
+                    - (tank.getangle_min() + tank.getangle()) ;
+            }
             //60분법으로 받음
             double cosval = cos(angle*Radian);
             double sinval = sin(angle*Radian); 

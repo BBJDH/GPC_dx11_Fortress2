@@ -26,6 +26,7 @@ private:
 	float const		fire_angle_min;
 	float const		fire_angle_max;
 	float		    fire_angle;
+	float		    fire_angle_left_value;
 	float		    fire_velocity;
 
 	void set_ani_flip();
@@ -47,6 +48,7 @@ public:
 	unsigned const gethp() const;
 	int const getpower()const;
 	int const getfuel()const;
+	int const get_left_angle()const;
 	int const getangle()const;
 	int const getangle_min()const;
 	int const getangle_max()const;
@@ -59,7 +61,6 @@ public:
 	void plus_angle(int angle);
 	void plus_power();
 	void turn_setting();
-	void stop_move(float const thetha);
 	void ani_render(float const delta);
 	void ani_start();
 
