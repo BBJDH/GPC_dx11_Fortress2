@@ -3,7 +3,7 @@
 #include "Missile.h"
 
 Missile::Missile(Position const& pos, unsigned const width, unsigned const height):
-	Object(pos, width, height),bomb_range_w(60),bomb_range_h(40)
+	Object(pos, width, height),bomb_range_w(100),bomb_range_h(80)
 {
 }
 

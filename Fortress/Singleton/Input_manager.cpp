@@ -71,7 +71,7 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
     if (tank.is_myturn()and !tank.is_falling())
     {
         unsigned	   stepx = static_cast<unsigned>(tank.getpos().x - 1); //기본 왼쪽일때 시작할 점
-        unsigned const stepy = static_cast<unsigned>(tank.getpos().y+tank.getheight()/2 - 3); 
+        unsigned const stepy = static_cast<unsigned>(tank.getpos().y+tank.getheight()/2 - Tank_Step_H); 
         if (isright)
         {
             stepx = static_cast<unsigned>(tank.getpos().x+1);
@@ -84,7 +84,7 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
         //위에 세번째점에서 충돌이면 이동불가
         //이후 아래 두번째점까지 충돌지점을 찾아 옮김
         //충돌지점이 하나도 없다면 오른쪽으로 한칸이동 후 낙하
-        for (unsigned i = stepy; i < stepy+7; i++)
+        for (unsigned i = stepy; i < stepy+Tank_Step_H+1; i++)
         {
             if ( i == stepy)
             {
@@ -97,7 +97,6 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
             if (_Physics_manager->Collide(hmapdc, stepx, i))//갈수 있으면
             {
                 tank.setstate(Tank::State::Move);
-
                 tank.moveto({ static_cast<float>(stepx) ,static_cast<float>(i-tank.getheight()/2)});
                 tank.stop_move(_Physics_manager->calc_landing_angle(stepx, i, hmapdc));
                 return;
@@ -123,7 +122,7 @@ void Input_manager::fire(Tank& tank, std::vector<Missile>& missile, bool const k
         else
         {
             tank.setstate(Tank::State::Fire);
-
+            tank.ani_start();
             //미사일 생성
             float const angle = -tank.getimage_angle() / Radian + tank.getangle_min() + tank.getangle();
             //60분법으로 받음

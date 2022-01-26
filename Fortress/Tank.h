@@ -7,7 +7,7 @@ class Tank : public Object
 public:
 	enum class State
 	{
-		Nomal, Steady, Fire, Move, Stop, Fall, Dead, //...
+		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Dead, //...
 	};
 	enum class Side
 	{
@@ -15,6 +15,10 @@ public:
 	};
 
 private:
+
+	Engine::Rendering::Animation::Component animation;
+	float ani_playtime;
+
 	State		    state;
 	Side		    side;
 	unsigned	    hp;
@@ -24,6 +28,17 @@ private:
 	float		    fire_angle;
 	float		    fire_velocity;
 
+	void set_ani_flip();
+	void set_ani_state();
+	void set_ani_normal();
+	void set_ani_idle();
+	void set_ani_idle2();
+	void set_ani_steady();
+	void set_ani_fire();
+	void set_ani_move();
+	void set_ani_stop();
+	void set_ani_fall();
+	void set_ani_dead();
 
 public:
 
@@ -45,6 +60,8 @@ public:
 	void plus_power();
 	void turn_setting();
 	void stop_move(float const thetha);
+	void ani_render(float const delta);
+	void ani_start();
 
 
 	

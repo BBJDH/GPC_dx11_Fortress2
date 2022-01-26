@@ -59,7 +59,7 @@ bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 	unsigned const start_x = static_cast<const unsigned>(obj.getpos().x);//이미지 가운데 x좌표
 	unsigned const start_y = static_cast<const unsigned>(obj.getpos().y+obj.getheight()/2);
 
-	for (unsigned j = start_y; j < start_y + 8; ++j) 
+	for (unsigned j = start_y; j < start_y + 4; ++j) 
 	{
 		if(Collide(hmapdc, start_x, j))
 		{

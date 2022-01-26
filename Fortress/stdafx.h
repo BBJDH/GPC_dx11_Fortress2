@@ -119,14 +119,15 @@ struct Position
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 //#define R_Image_SIZE 100
 #define Tank_SIZE 50
-#define Tank_ANI_SIZE 234
+#define Tank_ANI_SIZE 250
 #define Missile_SIZE 150
 
-#define PLAYERS		 2
+#define PLAYERS		 20
 #define TANK_HP		 1000
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
 #define FIRE_MUL		 1.5
+#define Tank_Step_H		 10  //탱크가 올라갈수 있는 높이
 
 
 
@@ -148,6 +149,15 @@ struct Position
 #define UI_ANGLE_MIN_Length		8
 #define UI_ANGLE_MAX_Length		 60
 
+
+//애니매이션 세팅
+
+#define ANI_Playtime_Nomal 4.1f
+#define ANI_Playtime_Idle 3.5f
+#define ANI_Playtime_Idle2 3.0f
+#define ANI_Playtime_Fire 0.25f
+#define ANI_Playtime_Move 0.25f
+#define ANI_Playtime_Dead 3.0f
 
 
 //물리, 수학관련
