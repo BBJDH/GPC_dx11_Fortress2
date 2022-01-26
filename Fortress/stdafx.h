@@ -127,7 +127,7 @@ struct Position
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
 #define FIRE_MUL		 1.5
-#define Tank_Step_H		 10  //탱크가 올라갈수 있는 높이
+#define Tank_Step_H		 8  //탱크가 올라갈수 있는 높이
 
 
 
