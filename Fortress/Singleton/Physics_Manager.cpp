@@ -10,7 +10,7 @@ bool Physics_Manager::Collide(HDC const hdc, int const x, int const y)
 	int const g = GetGValue(color);
 	int const b = GetBValue(color);
 
-	if(!(r==255 and g ==0 and b == 255) and y < MAPSIZE_H and x>0 and x< MAPSIZE_W)
+	if(!(r==255 and g ==0 and b == 255) and y>0 and y < MAPSIZE_H and x>0 and x< MAPSIZE_W)
 		return true;
 	return false;
 }
@@ -92,14 +92,12 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 		{
 			if (missile[i].is_falling() and Collide_object(missile[i], hmapdc))
 			{
-
 				//부딪혔다면 폭발 후 제거
-				missile[i].boom(hmapdc);
-				collide_bomb(missile[i],tank);
-				missile.erase(missile.begin()+i);
-
+				missile[i].boom(hmapdc);  //맵파괴
+				missile[i].set_state(Missile::State::Boom);
+				missile[i].ani_start();
+				collide_bomb(missile[i],tank);  //충돌판정
 			}
-
 		}
 	}
 }
@@ -124,10 +122,8 @@ void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& m
 		{
 			missile[i].ballistics_equation(delta);
 			//화면밖으로 나가면 제거
-			if(missile[i].is_out())
+			if(missile[i].is_out() or missile[i].get_state() == Missile::State::Delete)
 				missile.erase(missile.begin()+i);
-
-
 		}
 	}
 }

@@ -121,6 +121,9 @@ struct Position
 #define Tank_SIZE 50
 #define Tank_ANI_SIZE 250
 #define Missile_SIZE 150
+#define Missile_Explosion_SIZE 300
+#define UI_Arrow_SIZE 100
+#define UI_Arrow_Location_H 60
 
 #define PLAYERS		 20
 #define TANK_HP		 1000
@@ -156,22 +159,23 @@ struct Position
 
 //애니매이션 세팅
 
-#define ANI_Playtime_Nomal 4.1f
-#define ANI_Playtime_Idle 3.5f
-#define ANI_Playtime_Idle2 3.0f
-#define ANI_Playtime_Fire 0.25f
-#define ANI_Playtime_Move 0.1f
-#define ANI_Playtime_Fall 0.1f
-#define ANI_Playtime_Dead 3.0f
-#define ANI_Playtime_Stop 0.75f
+#define ANI_Tank_Nomal 4.1f
+#define ANI_Tank_Idle 3.5f
+#define ANI_Tank_Idle2 3.0f
+#define ANI_Tank_Fire 0.25f
+#define ANI_Tank_Move 0.1f
+#define ANI_Tank_Fall 0.1f
+#define ANI_Tank_Dead 3.0f
+#define ANI_Tank_Stop 0.75f
 
-
+#define ANI_Bomb_Throw 0.5f
+#define ANI_Bomb_Boom 1.25f
 
 //물리, 수학관련
 #define grav_accerl 9.8f //Gravialional accerleration
 #define PI 3.141592f
 #define Radian (PI/180.0f)
-#define SPEED 6
+#define SPEED 8
 
 //색상관련
 #define Transparent_Color RGB(255, 0, 255)

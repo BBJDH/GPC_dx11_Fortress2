@@ -48,8 +48,7 @@ void S_Battle::rendering()
     _Map_manager->render_map();
 
 
-    _Anime->render_tanks(tank);
-    _Anime->render_missile(missile);
+    _Anime->render(tank,missile);
 
 
     _Image_manager->render_back_ui(tank[_Turn->whosturn()]);

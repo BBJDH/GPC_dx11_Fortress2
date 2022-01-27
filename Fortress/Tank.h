@@ -29,17 +29,17 @@ private:
 	float		    fire_angle_left_value;
 	float		    fire_velocity;
 
-	void set_ani_flip();
-	void set_ani_state();
-	void set_ani_normal();
-	void set_ani_idle();
-	void set_ani_idle2();
-	void set_ani_steady();
-	void set_ani_fire();
-	void set_ani_move();
-	void set_ani_stop();
-	void set_ani_fall();
-	void set_ani_dead();
+	void check_state();
+	void ani_set_flip();
+	void ani_set_normal();
+	void ani_set_idle();
+	void ani_set_idle2();
+	void ani_set_steady();
+	void ani_set_fire();
+	void ani_set_move();
+	void ani_set_stop();
+	void ani_set_fall();
+	void ani_set_dead();
 
 public:
 

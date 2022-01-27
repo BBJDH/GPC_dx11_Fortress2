@@ -8,34 +8,11 @@ Animation::Animation()
 
 void Animation::initialize()
 {
-	ani_missile.Name = "Animation/Bomb/bomb";
-	ani_missile.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
-	ani_missile.Duration = 0.5f;
-	ani_missile.Repeatable = true;
-
-
-
-	
+    arrow.Name = "Animation/UI/arrow";
+    arrow.Duration = 1.0f;
+    arrow.Repeatable = true;
 }
 
-void Animation::render_object(Object const& obj, Obj_Type const type)
-{
-    Engine::Rendering::Animation::Component * p_anime = nullptr;
-    switch (type)
-    {
-    case Obj_Type::Missile:
-    {
-        p_anime = &ani_missile;
-        break;
-    }
-
-    default:
-        return;
-    }
-    p_anime->Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
-    p_anime->Angle = -obj.getimage_angle()/Radian;
-    p_anime->Render();
-}
 
 void Animation::render_tanks(std::vector<Tank> & tank)
 {
@@ -48,13 +25,32 @@ void Animation::render_tanks(std::vector<Tank> & tank)
     }
 }
 
-void Animation::render_missile(std::vector<Missile> const& missile)
+void Animation::render_missile(std::vector<Missile> & missile)
 {
     if (!missile.empty())
     {
         for (size_t i = 0; i < missile.size(); i++)
         {
-            render_object(missile[i], Animation::Obj_Type::Missile);
+            missile[i].ani_render(Engine::Time::Get::Delta());
         }
     }
+}
+
+void Animation::render_arrow(Tank const & tank)
+{
+       arrow.Length = Vector<2>(UI_Arrow_SIZE, UI_Arrow_SIZE);
+       this->arrow.Location = { tank.getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank.getpos().y+UI_Arrow_Location_H };
+       this->arrow.Render();
+       arrow.Render();
+}
+
+void Animation::render(std::vector<Tank>& tank, std::vector<Missile>& missile)
+{
+    render_tanks(tank);
+    render_missile(missile);
+    if (_Turn->get_state() == Turnmanager::State::Tank_Turn)
+    {
+        render_arrow(tank[_Turn->whosturn()]);
+    }
+
 }

@@ -11,16 +11,16 @@ public:
 		Tank, Missile, Item
 	};
 private:
-	Engine::Rendering::Animation::Component ani_missile;
+	Engine::Rendering::Animation::Component arrow;
 
 
 	void initialize();
 
-	void render_object(Object const& obj, Obj_Type const type);
 
 public:
 	Animation();
 	void render_tanks(std::vector<Tank> & tank);
-	void render_missile(std::vector<Missile> const& missile);
-
+	void render_missile(std::vector<Missile> & missile);
+	void render_arrow(Tank const & tank);
+	void render(std::vector<Tank> & tank, std::vector<Missile> & missile);
 };

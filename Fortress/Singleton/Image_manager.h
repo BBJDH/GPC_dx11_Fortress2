@@ -27,6 +27,9 @@ private:
     Engine::Rendering::Image::UI UI_Fuel;
     Engine::Rendering::Image::UI UI_angle;
 
+    Engine::Rendering::Image::UI Tank_Hp;
+    Engine::Rendering::Image::UI Tank_Hp_Bar;
+
     Engine::Rendering::Image::Component iTank;
     Engine::Rendering::Image::Component iMissile;
 

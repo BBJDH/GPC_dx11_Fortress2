@@ -1,9 +1,36 @@
 #include "stdafx.h"
 #include "Turnmanager.h"
 
-unsigned const Turnmanager::whosturn()
+
+Turnmanager::Turnmanager():rand(Random(0,PLAYERS-1,PLAYERS)),index{0},state{State::Tank_Turn}
+{
+}
+
+unsigned const Turnmanager::whosturn()const
 {
 	return rand.GetResult(index);
+}
+
+Turnmanager::State Turnmanager::get_state()const
+{
+	return this->state;
+}
+
+void Turnmanager::is_gameover(std::vector<Tank>& tank)
+{
+	unsigned live_count =0;
+	if (!tank.empty())
+	{
+		for (size_t i = 0; i < tank.size(); i++)
+		{
+			if (!tank[i].is_dead())
+			{
+				live_count++;
+			}
+		}
+		if(live_count<2)
+			this->state = State::Over;
+	}
 }
 
 bool Turnmanager::is_obj_turn(Object const& obj)
@@ -20,6 +47,7 @@ bool Turnmanager::is_tank_turn(std::vector<Tank>& tank)
 			if (is_obj_turn(tank[i]) and !tank[i].is_dead())
 			{
 				_CAM->focusing(tank[i]);
+				this->state = State::Tank_Turn;
 				return true;
 			}
 		}
@@ -38,6 +66,8 @@ bool Turnmanager::check_tank_falling(std::vector<Tank>& tank)
 				_CAM->focus_on();
 
 				_CAM->focusing(tank[i]);
+
+
 				return true;
 			}
 		}
@@ -57,6 +87,8 @@ bool Turnmanager::is_missile_turn(std::vector<Missile>& missile)
 
 				_CAM->focusing(missile.back());
 				//미사일은 여러개일수 있으므로 마지막 미사일만 추적(멀탱)
+				this->state = State::Missile_Turn;
+
 				return true;
 			}
 		}
@@ -91,13 +123,4 @@ void Turnmanager::rerand()
 {
     rand = Random(0,PLAYERS-1,PLAYERS);
 	index =0;
-}
-
-Turnmanager::Turnmanager():rand(Random(0,PLAYERS-1,PLAYERS)),index{0}
-{
-}
-
-Turnmanager::~Turnmanager()
-{
-	rand.~Random();
 }

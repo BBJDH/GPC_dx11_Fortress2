@@ -25,6 +25,8 @@ void Image_manager::initialize()
     UI_Fuel.Name = "Image/UI/Yellow";
     UI_angle.Name ="Image/UI/angle_r";
 
+    Tank_Hp.Name ="Image / UI / base_bar";
+    Tank_Hp_Bar.Name ="Image / UI / blue_bar";
 
     iTank.Name = "Image/Tank/Canon_R";
     iTank.Length = Vector<2>(Tank_SIZE, Tank_SIZE);

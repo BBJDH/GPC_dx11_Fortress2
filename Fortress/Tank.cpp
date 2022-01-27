@@ -11,7 +11,7 @@ Tank::Tank(Position const& pos, unsigned const width, unsigned const height)
 	state{ State::Nomal }, side{ Side::Right },
 	ani_playtime{0.0f}
 {
-	set_ani_normal();
+	ani_set_normal();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
 }
 Tank& Tank::operator=(Tank const& other_tank)
@@ -140,7 +140,7 @@ void Tank::plus_angle(int angle)
 
 }
 
-void Tank::set_ani_flip()
+void Tank::ani_set_flip()
 {
 	if (this->side == Tank::Side::Left)
 		this->animation.Flipped = false;
@@ -148,94 +148,94 @@ void Tank::set_ani_flip()
 		this->animation.Flipped = true;
 }
 
-void Tank::set_ani_state()
+void Tank::check_state()
 {
 	switch (this->state)
 	{
 	case Tank::State::Nomal:
 	{
-		if (ani_playtime > ANI_Playtime_Nomal)
+		if (ani_playtime > ANI_Tank_Nomal)
 		{
 			if (rand() % 2)
 			{
 				setstate(State::Idle);
-				set_ani_idle();
+				ani_set_idle();
 				ani_start();
 			}
 			else
 			{
 				setstate(State::Idle2);
-				set_ani_idle2();
+				ani_set_idle2();
 				ani_start();
 			}
 		}
 		else
-			set_ani_normal();
+			ani_set_normal();
 		break;
 	}
 	case Tank::State::Idle:
 	{
-		if (ani_playtime > ANI_Playtime_Idle)
+		if (ani_playtime > ANI_Tank_Idle)
 		{
 			setstate(State::Nomal);
-			set_ani_normal();
+			ani_set_normal();
 			ani_start();
 		}
 		else
-			set_ani_idle();
+			ani_set_idle();
 		break;
 	}
 	case Tank::State::Idle2:
 	{
-		if (ani_playtime > ANI_Playtime_Idle2)
+		if (ani_playtime > ANI_Tank_Idle2)
 		{
 			setstate(State::Nomal);
-			set_ani_normal();
+			ani_set_normal();
 			ani_start();
 		}
 		else
-			set_ani_idle2();
+			ani_set_idle2();
 		break;
 	}
 	case Tank::State::Steady:
 	{
-		set_ani_steady();
+		ani_set_steady();
 		break;
 	}
 	case Tank::State::Fire:
 	{
-		if (ani_playtime > ANI_Playtime_Fire)
+		if (ani_playtime > ANI_Tank_Fire)
 		{
 			setstate(State::Nomal);
-			set_ani_normal();
+			ani_set_normal();
 			ani_start();
 		}
 		else
-			set_ani_fire();
+			ani_set_fire();
 		break;
 	}
 	case Tank::State::Move:
 	{
-		if (ani_playtime > ANI_Playtime_Move)
+		if (ani_playtime > ANI_Tank_Move)
 		{
 			setstate(State::Nomal);
-			set_ani_normal();
+			ani_set_normal();
 			ani_start();
 		}
 		else
-			set_ani_move();
+			ani_set_move();
 		break;
 	}
 	case Tank::State::Stop:
 	{
-		if (ani_playtime > ANI_Playtime_Stop)
+		if (ani_playtime > ANI_Tank_Stop)
 		{
 			setstate(State::Nomal);
-			set_ani_normal();
+			ani_set_normal();
 			ani_start();
 		}
 		else
-			set_ani_stop();
+			ani_set_stop();
 		break;
 	}
 	case Tank::State::Fall:
@@ -243,16 +243,16 @@ void Tank::set_ani_state()
 		if (!falling and !hp==0)
 		{
 			setstate(State::Nomal);
-			set_ani_normal();
+			ani_set_normal();
 			ani_start();
 		}
 		else
-			set_ani_fall();
+			ani_set_fall();
 		break;
 	}
 	case Tank::State::Dead:
 	{
-		set_ani_dead();
+		ani_set_dead();
 		break;
 	}
 	default:
@@ -260,74 +260,74 @@ void Tank::set_ani_state()
 	}
 }
 
-void Tank::set_ani_normal()
+void Tank::ani_set_normal()
 {
 	this->animation.Name = "Animation/Canon/nomal";
-	this->animation.Duration = ANI_Playtime_Nomal;
+	this->animation.Duration = ANI_Tank_Nomal;
 	this->animation.Repeatable = true;
 }
 
-void Tank::set_ani_idle()
+void Tank::ani_set_idle()
 {
 	this->animation.Name = "Animation/Canon/idle";
-	this->animation.Duration = ANI_Playtime_Idle;
+	this->animation.Duration = ANI_Tank_Idle;
 	this->animation.Repeatable = true;
 }
 
-void Tank::set_ani_steady()
+void Tank::ani_set_steady()
 {
 	this->animation.Name = "Animation/Canon/steady";
-	this->animation.Duration = ANI_Playtime_Fire;
+	this->animation.Duration = ANI_Tank_Fire;
 	this->animation.Repeatable = true;
 }
 
-void Tank::set_ani_idle2()
+void Tank::ani_set_idle2()
 {
 	this->animation.Name = "Animation/Canon/idle2";
-	this->animation.Duration = ANI_Playtime_Idle2;
+	this->animation.Duration = ANI_Tank_Idle2;
 	this->animation.Repeatable = true;
 }
 
-void Tank::set_ani_fire()
+void Tank::ani_set_fire()
 {
 	this->animation.Name = "Animation/Canon/fire";
-	this->animation.Duration = ANI_Playtime_Fire;
+	this->animation.Duration = ANI_Tank_Fire;
 	this->animation.Repeatable = false;
 }
 
-void Tank::set_ani_move()
+void Tank::ani_set_move()
 {
 	this->animation.Name = "Animation/Canon/move";
-	this->animation.Duration = ANI_Playtime_Move;
+	this->animation.Duration = ANI_Tank_Move;
 	this->animation.Repeatable = true;
 }
 
-void Tank::set_ani_stop()
+void Tank::ani_set_stop()
 {
 	this->animation.Name = "Animation/Canon/stop";
-	this->animation.Duration = ANI_Playtime_Stop;
+	this->animation.Duration = ANI_Tank_Stop;
 	this->animation.Repeatable = true;
 }
 
-void Tank::set_ani_fall()
+void Tank::ani_set_fall()
 {
 	this->animation.Name = "Animation/Canon/fall";
-	this->animation.Duration = ANI_Playtime_Fall;
+	this->animation.Duration = ANI_Tank_Fall;
 	this->animation.Repeatable = true;
 }
 
-void Tank::set_ani_dead()
+void Tank::ani_set_dead()
 {
 	this->animation.Name = "Animation/Canon/dead";
-	this->animation.Duration = ANI_Playtime_Dead;
+	this->animation.Duration = ANI_Tank_Dead;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_render(float const delta)
 {
 	ani_playtime += delta;
-	set_ani_state();
-	set_ani_flip();
+	check_state();
+	ani_set_flip();
 	this->animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
 	this->animation.Angle = -this->image_angle / Radian;
 	this->animation.Render();
