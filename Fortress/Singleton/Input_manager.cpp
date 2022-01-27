@@ -96,7 +96,7 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
         //위에 세번째점에서 충돌이면 이동불가
         //이후 아래 두번째점까지 충돌지점을 찾아 옮김
         //충돌지점이 하나도 없다면 오른쪽으로 한칸이동 후 낙하
-        for (unsigned i = stepy; i < stepy+Tank_Step_H+1; i++)
+        for (unsigned i = stepy; i < stepy+Tank_Step_H+2; i++)
         {
             if ( i == stepy)
             {

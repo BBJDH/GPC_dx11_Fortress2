@@ -151,7 +151,7 @@ struct Position
 #define UI_ANGLE_CENTER_X		150
 #define UI_ANGLE_CENTER_Y		642
 //#define UI_ANGLE_MIN_Length		8
-#define UI_ANGLE_MAX_Length		 35
+#define UI_ANGLE_Length		 35
 
 
 //애니매이션 세팅

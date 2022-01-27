@@ -91,32 +91,30 @@ void Camera::focusing(Object const& obj)
 	// { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y }
 	float const obj_x = obj.getpos().x-MAPSIZE_W/2;
 	float const obj_y = MAPSIZE_H/2-obj.getpos().y;
-	if (abs(obj_x - pos.x) < speed && abs(obj_y - pos.y) < speed)
-	{
+	if (abs(obj_x - pos.x) < speed )
 		focus_w = false;
+
+	if( abs(obj_y - pos.y) < speed)
 		focus_h = false;
-		return;
-	}
+
 	if (focus_w)
 	{
 		if(pos.x>obj_x) //카메라가 오브젝트 오른쪽
 			focus_w = left();
-		if(pos.x<obj_x)//카메라가 오브젝트 왼쪽
+		else//카메라가 오브젝트 왼쪽
 			focus_w = right();
 	}
 	if (focus_h)
 	{
 		if(pos.y>obj_y)//카메라가 위
 			focus_h = down();
-		if(pos.y<obj_y)
+		else
 			focus_h = up();
 	}
-	//TODO:카메라 포커싱
 
 }
 
 void Camera::focus_on()
-//TODO:카메라 포커싱
 {
 	focus_w = true;
 	focus_h = true;

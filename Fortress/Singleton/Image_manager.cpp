@@ -125,12 +125,12 @@ void Image_manager::ui_angle_line(int const angle, Color color)
 
     double cosval = cos(-angle*Radian);
     double sinval = sin(-angle*Radian);
-    int max_x = static_cast<int>(UI_ANGLE_MAX_Length * cosval );
-    int max_y = static_cast<int>(UI_ANGLE_MAX_Length * sinval ); 
+    int max_x = static_cast<int>(UI_ANGLE_Length * cosval );
+    int max_y = static_cast<int>(UI_ANGLE_Length * sinval ); 
 
 
     UI_angle.Location = {UI_ANGLE_CENTER_X+max_x,UI_ANGLE_CENTER_Y+max_y};
-    UI_angle.Length = {UI_ANGLE_MAX_Length*2,1};
+    UI_angle.Length = {UI_ANGLE_Length*2,1};
     UI_angle.Angle = static_cast<float>(angle);
     UI_angle.Render();
 }

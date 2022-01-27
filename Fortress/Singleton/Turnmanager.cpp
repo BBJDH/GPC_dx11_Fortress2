@@ -73,7 +73,6 @@ void Turnmanager::checkturn(std::vector<Tank>& tank, std::vector<Missile>& missi
 		return ;
 	}
 
-	//TODO:카메라 포커싱
 	index++;		
 	if(index>=PLAYERS)
 		rerand();

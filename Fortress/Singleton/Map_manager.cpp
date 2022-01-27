@@ -12,7 +12,7 @@ void Map_manager::initialize()
     HBITMAP hmapbit = static_cast<HBITMAP>(LoadImage
     (
         NULL,
-        TEXT("Asset/Image/Map/Sky_M_ 30001800.bmp"),
+        TEXT("Asset/Image/Map/Sky_M30001800.bmp"),
         IMAGE_BITMAP,
         0,
         0,
