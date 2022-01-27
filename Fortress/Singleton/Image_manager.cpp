@@ -25,8 +25,8 @@ void Image_manager::initialize()
     UI_Fuel.Name = "Image/UI/Yellow";
     UI_angle.Name ="Image/UI/angle_r";
 
-    Tank_Hp.Name ="Image / UI / base_bar";
-    Tank_Hp_Bar.Name ="Image / UI / blue_bar";
+    Tank_Hp.Name ="Image/UI/blue_bar";
+    Tank_Hp_Bar.Name ="Image/UI/base_bar";
 
     iTank.Name = "Image/Tank/Canon_R";
     iTank.Length = Vector<2>(Tank_SIZE, Tank_SIZE);
@@ -57,9 +57,9 @@ void Image_manager::render_back_ui(Tank const & tank)
         max_angle *= -1;
     }
 
-    ui_angle_line(img_angle + min_angle, Color::Yellow);
-    ui_angle_line(img_angle + max_angle, Color::Yellow);
-    ui_angle_line(img_angle + min_angle + fire_angle ,Color::Red);
+    ui_angle_line(img_angle + min_angle, Color::Yellow,UI_ANGLE_Length);
+    ui_angle_line(img_angle + max_angle, Color::Yellow,UI_ANGLE_Length);
+    ui_angle_line(img_angle + min_angle + fire_angle ,Color::Red,UI_ANGLE_Length);
 
     UI_angle.Render();
 }
@@ -67,8 +67,16 @@ void Image_manager::render_back_ui(Tank const & tank)
 void Image_manager::render_front_ui(Tank const & tank)
 {
     UI_Front.Render();
+
+    if(tank.gethp()<400)
+        UI_Hp.Name = "Image/UI/Red";
+    else
+        UI_Hp.Name = "Image/UI/Green";
+
+
     UI_Hp.Location = {UI_Bar_X + tank.gethp()*UI_HP_MUL/2,UI_HP_Y};
     UI_Hp.Length = {tank.gethp()*UI_HP_MUL,UI_Bar_H};
+
     UI_Power.Location = {UI_Bar_X + tank.getpower() * UI_POWER_MUL/2 , UI_POWER_Y};
     UI_Power.Length = {tank.getpower() * UI_POWER_MUL , UI_Bar_H};
 
@@ -79,6 +87,76 @@ void Image_manager::render_front_ui(Tank const & tank)
     UI_Fuel.Render();
 
 }
+
+void Image_manager::render_tanks_hp(std::vector<Tank> const& tank)
+{
+    if (!tank.empty())
+    {
+        for (size_t i = 0; i < tank.size(); i++)
+        {
+            render_tank_hp(tank[i]);
+        }
+    }
+}
+
+void Image_manager::render_ui(std::vector<Tank> const& tank)
+{
+    render_tanks_hp(tank);
+    render_back_ui(tank[_Turn->whosturn()]);
+    render_front_ui(tank[_Turn->whosturn()]);
+}
+
+
+void Image_manager::ui_angle_line(int const angle, Color color, int const length)
+{
+    switch (color)
+    {
+    case Image_manager::Color::Red:
+    {
+        UI_angle.Name ="Image/UI/angle_r";
+        break;
+    }
+    case Image_manager::Color::Yellow:
+    {
+        UI_angle.Name ="Image/UI/angle_y";
+        break;
+    }
+    default:
+        break;
+    }
+
+    double cosval = cos(-angle*Radian);
+    double sinval = sin(-angle*Radian);
+    int max_x = static_cast<int>(length * cosval );
+    int max_y = static_cast<int>(length * sinval ); 
+
+
+    UI_angle.Location = {UI_ANGLE_CENTER_X+max_x,UI_ANGLE_CENTER_Y+max_y};
+    UI_angle.Length = {length*2,1};
+    UI_angle.Angle = static_cast<float>(angle);
+    UI_angle.Render();
+}
+
+void Image_manager::render_tank_hp(Tank const& tank)
+{
+    this->Tank_Hp_Bar.Length = Vector<2>(Tank_HP_Bar_W, Tank_HP_Bar_H);
+    this->Tank_Hp_Bar.Location = { tank.getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank.getpos().y-Tank_HP_Bar_Location_H };
+    this->Tank_Hp_Bar.Render();
+
+    unsigned const hp = tank.gethp();
+    if(hp<TANK_DANGER_HP)
+        Tank_Hp.Name = "Image/UI/red_bar";
+    else if(hp<700)
+        Tank_Hp.Name = "Image/UI/orange_bar";
+    else
+        Tank_Hp.Name = "Image/UI/blue_bar";
+    this->Tank_Hp.Length =  Vector<2>(hp*Tank_HP_Bar_Mul, Tank_HP_Bar_H);
+    this->Tank_Hp.Location = { tank.getpos().x+hp*Tank_HP_Bar_Mul/2 - MAPSIZE_W / 2-Tank_HP_Bar_Location_W ,MAPSIZE_H / 2 - tank.getpos().y-Tank_HP_Bar_Location_H };
+    this->Tank_Hp.Render();
+
+
+}
+
 
 void Image_manager::render_object(Object const& obj, Obj_Type const type)
 {
@@ -106,39 +184,6 @@ void Image_manager::render_object(Object const& obj, Obj_Type const type)
     p_image->Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
     p_image->Angle = -obj.getimage_angle()/Radian;
 }
-
-void Image_manager::ui_angle_line(int const angle, Color color)
-{
-    switch (color)
-    {
-    case Image_manager::Color::Red:
-    {
-        UI_angle.Name ="Image/UI/angle_r";
-        break;
-    }
-    case Image_manager::Color::Yellow:
-    {
-        UI_angle.Name ="Image/UI/angle_y";
-        break;
-    }
-    default:
-        break;
-    }
-
-    double cosval = cos(-angle*Radian);
-    double sinval = sin(-angle*Radian);
-    int max_x = static_cast<int>(UI_ANGLE_Length * cosval );
-    int max_y = static_cast<int>(UI_ANGLE_Length * sinval ); 
-
-
-    UI_angle.Location = {UI_ANGLE_CENTER_X+max_x,UI_ANGLE_CENTER_Y+max_y};
-    UI_angle.Length = {UI_ANGLE_Length*2,1};
-    UI_angle.Angle = static_cast<float>(angle);
-    UI_angle.Render();
-}
-
-
-
 void Image_manager::render_tank(std::vector<Tank> const& tank)
 {
     if (!tank.empty())

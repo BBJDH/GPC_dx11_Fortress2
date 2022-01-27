@@ -104,6 +104,9 @@ void Tank::take_damage(unsigned const damage)
 		ani_start();
 		return;
 	}
+	else if(hp-damage <TANK_DANGER_HP)
+		state = State::Danger;
+
 	this->hp -= damage;
 }
 
@@ -132,6 +135,31 @@ void Tank::setstate(State const state)
 	this->state = state;
 }
 
+void Tank::set_idle_state()
+{
+	if (hp < TANK_DANGER_HP)
+	{
+		setstate(State::Danger);
+		ani_set_danger();
+		ani_start();
+	}
+	else
+	{
+		if (rand() % 2)
+		{
+			setstate(State::Idle);
+			ani_set_idle();
+			ani_start();
+		}
+		else
+		{
+			setstate(State::Idle2);
+			ani_set_idle2();
+			ani_start();
+		}
+	}
+}
+
 void Tank::plus_angle(int angle)
 {
 	this->fire_angle += angle;
@@ -156,18 +184,7 @@ void Tank::check_state()
 	{
 		if (ani_playtime > ANI_Tank_Nomal)
 		{
-			if (rand() % 2)
-			{
-				setstate(State::Idle);
-				ani_set_idle();
-				ani_start();
-			}
-			else
-			{
-				setstate(State::Idle2);
-				ani_set_idle2();
-				ani_start();
-			}
+			set_idle_state();
 		}
 		else
 			ani_set_normal();
@@ -255,6 +272,18 @@ void Tank::check_state()
 		ani_set_dead();
 		break;
 	}
+	case Tank::State::Danger:
+	{
+		if (ani_playtime > ANI_Tank_Danger)
+		{
+			setstate(State::Nomal);
+			ani_set_normal();
+			ani_start();
+		}
+		else
+			ani_set_danger();
+		break;
+	}
 	default:
 		break;
 	}
@@ -314,6 +343,13 @@ void Tank::ani_set_fall()
 	this->animation.Name = "Animation/Canon/fall";
 	this->animation.Duration = ANI_Tank_Fall;
 	this->animation.Repeatable = true;
+}
+
+void Tank::ani_set_danger()
+{
+	this->animation.Name = "Animation/Canon/danger";
+	this->animation.Duration = ANI_Tank_Danger;
+	this->animation.Repeatable = false;
 }
 
 void Tank::ani_set_dead()

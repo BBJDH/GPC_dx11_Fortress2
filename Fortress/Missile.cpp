@@ -4,7 +4,7 @@
 
 Missile::Missile(Position const& pos, unsigned const width, unsigned const height):
 	Object(pos, width, height),bomb_range_w(100),bomb_range_h(80),
-	damage{250}, ani_playtime{ 0.0f }, state{ State::Throw }
+	damage{900}, ani_playtime{ 0.0f }, state{ State::Throw }
 {
 	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
 
@@ -63,6 +63,11 @@ Missile& Missile::operator=(Missile const& other_miss)
 int const Missile::get_range_w() const
 {
 	return bomb_range_w;
+}
+
+int const Missile::get_damage() const
+{
+	return damage;
 }
 
 Missile::State Missile::get_state() const

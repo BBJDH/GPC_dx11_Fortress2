@@ -124,9 +124,16 @@ struct Position
 #define Missile_Explosion_SIZE 300
 #define UI_Arrow_SIZE 100
 #define UI_Arrow_Location_H 60
+#define Tank_HP_Bar_W 60
+#define Tank_HP_Bar_H 10
+#define Tank_HP_Bar_Location_H 30
+#define Tank_HP_Bar_Location_W 30
+#define Tank_HP_Bar_Mul 0.06
 
-#define PLAYERS		 20
+
+#define PLAYERS		 2
 #define TANK_HP		 1000
+#define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
 #define FIRE_MUL		 1.5
@@ -139,7 +146,7 @@ struct Position
 
 
 //UI ¼¼ÆÃ
-#define UI_SCREEN_SCROLL	8
+#define UI_SCREEN_SCROLL	10
 #define UI_H				126 //1926
 #define UI_Bar_X			450
 #define UI_Bar_H			 20
@@ -165,6 +172,7 @@ struct Position
 #define ANI_Tank_Fire 0.25f
 #define ANI_Tank_Move 0.1f
 #define ANI_Tank_Fall 0.1f
+#define ANI_Tank_Danger 3.0f
 #define ANI_Tank_Dead 3.0f
 #define ANI_Tank_Stop 0.75f
 

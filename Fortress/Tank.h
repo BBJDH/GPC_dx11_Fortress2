@@ -7,7 +7,7 @@ class Tank : public Object
 public:
 	enum class State
 	{
-		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Dead, //...
+		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Danger, Dead, //...
 	};
 	enum class Side
 	{
@@ -39,7 +39,9 @@ private:
 	void ani_set_move();
 	void ani_set_stop();
 	void ani_set_fall();
+	void ani_set_danger();
 	void ani_set_dead();
+	void set_idle_state();
 
 public:
 

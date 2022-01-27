@@ -21,13 +21,10 @@ void S_Battle::Start()
 
 Scene * S_Battle::Update()
 {   
-    using namespace Engine;
-    
-    _CAM->move(_Mouse->getstate()); //마우스 위치에 따라 카메라 이동
-
+    _CAM->cam();
 
     _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
-    _Input_manager->input(tank,missile,Time::Get::Delta());
+    _Input_manager->input(tank,missile,Engine::Time::Get::Delta());
 
     _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());
     _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);
@@ -47,12 +44,10 @@ void S_Battle::rendering()
     _Image_manager->render_background();
     _Map_manager->render_map();
 
-
     _Anime->render(tank,missile);
 
+    _Image_manager->render_ui(tank);
 
-    _Image_manager->render_back_ui(tank[_Turn->whosturn()]);
-    _Image_manager->render_front_ui(tank[_Turn->whosturn()]);
     Camera.Location = { _CAM->pos.x,_CAM->pos.y };
     Camera.Set();
 

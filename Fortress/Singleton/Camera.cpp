@@ -3,13 +3,16 @@
 
 #include"stdafx.h"
 
-Camera::Camera() :pos{ 0.0f,0.0f }, pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 }, speed{ UI_SCREEN_SCROLL }, focus_w{ false }, focus_h{ false }, focus{false}
+Camera::Camera() :pos{ 0.0f,0.0f },
+pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 },
+speed{ UI_SCREEN_SCROLL }, focus_w{ false }, focus_h{ false },
+state{ State::Normal }, earthquake_time{0.0f}
 {}
 
-bool Camera::up()
+bool Camera::up(int const scroll)
 {
-	pos.y += speed;
-	pos_win.y -= speed;
+	pos.y += scroll;
+	pos_win.y -= scroll;
 
 	if (pos.y > MAPSIZE_H / 2 - CAM_SIZE_H / 2)
 	{
@@ -26,10 +29,10 @@ bool Camera::up()
 
 }
 
-bool Camera::down()
+bool Camera::down(int const scroll)
 {
-	pos.y -= speed;
-	pos_win.y += speed;
+	pos.y -= scroll;
+	pos_win.y += scroll;
 	//if (pos.y < -(MAPSIZE_H / 2 + UI_H) + CAM_SIZE_H / 2)
 	//{
 	//	//return false;
@@ -46,10 +49,10 @@ bool Camera::down()
 
 }
 
-bool Camera::left()
+bool Camera::left(int const scroll)
 {
-	pos.x -= speed;
-	pos_win.x -= speed;
+	pos.x -= scroll;
+	pos_win.x -= scroll;
 	//if (pos.x < -MAPSIZE_W / 2 + CAM_SIZE_W / 2)
 	//{
 	//	//return false;
@@ -66,10 +69,10 @@ bool Camera::left()
 
 }
 
-bool Camera::right()
+bool Camera::right(int const scroll)
 {
-	pos.x += speed;
-	pos_win.x += speed;
+	pos.x += scroll;
+	pos_win.x += scroll;
 
 	//if (pos.x > MAPSIZE_W / 2 - CAM_SIZE_W / 2)
 	//{
@@ -100,16 +103,16 @@ void Camera::focusing(Object const& obj)
 	if (focus_w)
 	{
 		if(pos.x>obj_x) //카메라가 오브젝트 오른쪽
-			focus_w = left();
+			focus_w = left(speed);
 		else//카메라가 오브젝트 왼쪽
-			focus_w = right();
+			focus_w = right(speed);
 	}
 	if (focus_h)
 	{
 		if(pos.y>obj_y)//카메라가 위
-			focus_h = down();
+			focus_h = down(speed);
 		else
-			focus_h = up();
+			focus_h = up(speed);
 	}
 
 }
@@ -127,48 +130,83 @@ void Camera::move(Mouse::POS_STATE state)
 	{
 	case Mouse::POS_STATE::Side_Up:        
 	{
-		up();
+		up(speed);
 		return;
 	}
 	case Mouse::POS_STATE::Side_Left:      
 	{
-		left();
+		left(speed);
 		return;
 	}
 	case Mouse::POS_STATE::Side_Right:     
 	{
-		right();
+		right(speed);
 		return;
 	}
 	case Mouse::POS_STATE::Side_Down:      
 	{
-		down();
+		down(speed);
 		return;
 	}
 	case Mouse::POS_STATE::Side_LeftUP:    
 	{
-		left();
-		up();
+		left(speed);
+		up(speed);
 		return; 
 	}
 	case Mouse::POS_STATE::Side_RightUP:   
 	{
-		right();
-		up();
+		right(speed);
+		up(speed);
 		return; 
 	}
 	case Mouse::POS_STATE::Side_LeftDown:  
 	{
-		left();
-		down();
+		left(speed);
+		down(speed);
 		return; 
 	}
 	case Mouse::POS_STATE::Side_RightDown: 
 	{
-		right();
-		down();
+		right(speed);
+		down(speed);
 		return; 
 	}
 	default: return;
+	}
+}
+
+void Camera::earthquake_start()
+{
+	this->state = State::Earthquake;
+	earthquake_time = 0.0f;
+}
+
+void Camera::earthquake()
+{
+	earthquake_time += Engine::Time::Get::Delta();
+	int const val_x = static_cast<int const>(65*sin(earthquake_time * 1000.0f) * pow(0.5f,earthquake_time));
+	int const val_y = static_cast<int const>(65*sin(earthquake_time * 1000.0f) * pow(0.5f,earthquake_time));
+	if (earthquake_time < 0.8f)
+	{
+		if(val_x>0)
+			right(val_x);
+		else
+			left(-val_x);
+		if(val_y>0)
+			up(val_y);
+		else
+			down(-val_y);
+	}
+	else
+		this->state = State::Normal;
+}
+
+void Camera::cam()
+{
+	_CAM->move(_Mouse->getstate()); //마우스 위치에 따라 카메라 이동
+	if (this->state == State::Earthquake)
+	{
+		earthquake();
 	}
 }

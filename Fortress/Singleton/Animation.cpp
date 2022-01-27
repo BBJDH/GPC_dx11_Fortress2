@@ -38,10 +38,9 @@ void Animation::render_missile(std::vector<Missile> & missile)
 
 void Animation::render_arrow(Tank const & tank)
 {
-       arrow.Length = Vector<2>(UI_Arrow_SIZE, UI_Arrow_SIZE);
+       this->arrow.Length = Vector<2>(UI_Arrow_SIZE, UI_Arrow_SIZE);
        this->arrow.Location = { tank.getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank.getpos().y+UI_Arrow_Location_H };
        this->arrow.Render();
-       arrow.Render();
 }
 
 void Animation::render(std::vector<Tank>& tank, std::vector<Missile>& missile)

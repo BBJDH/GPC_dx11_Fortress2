@@ -1,6 +1,14 @@
 #include "stdafx.h"
 #include "Physics_Manager.h"
 
+
+
+
+unsigned const Physics_Manager::length(Position start, Position dest)
+{
+	return static_cast<unsigned const>(sqrt(pow((dest.x - start.x),2) + pow((dest.y - start.y),2)));
+}
+
 bool Physics_Manager::Collide(HDC const hdc, int const x, int const y)
 {
 	//pipeline -> 스왑체인 텍스쳐2d를 gdi로 가져와서 getpixel
@@ -79,7 +87,8 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			if (tank[i].is_falling() and Collide_object(tank[i], hmapdc) and !tank[i].is_dead())
+			if (tank[i].is_falling() and Collide_object(tank[i], hmapdc) 
+				and !tank[i].is_dead() and !(tank[i].get_state() == Tank::State::Danger))
 			{
 				tank[i].setstate(Tank::State::Nomal);
 				tank[i].ani_start();
@@ -143,8 +152,19 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 			tank_rect.Length = {static_cast<float const>(tank[i].getwidth()),static_cast<float const>(tank[i].getheight())};
 			if (bomb_circle.Collide(tank_rect))
 			{
-				tank[i].take_damage(500);
+				int const range = missile.get_range_w();
+				int const length = this->length(tank[i].getpos(),missile.getpos());
+				unsigned   dmg_mul =0;
+				if((range - length) <=0)
+					dmg_mul =1;
+				else
+					dmg_mul = range - length;
+
+				unsigned const dmg = missile.get_damage() * dmg_mul / range;
+
+				tank[i].take_damage(dmg);
 				tank[i].ballistics_initialize(0,0);
+				_CAM->earthquake_start();
 			}
 		}
 	}
