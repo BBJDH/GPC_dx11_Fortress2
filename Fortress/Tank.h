@@ -62,6 +62,7 @@ public:
 	void setstate(State const state);
 	void plus_angle(int angle);
 	void plus_power();
+	void minus_fuel();
 	void turn_setting();
 	void ani_render(float const delta);
 	void ani_start();

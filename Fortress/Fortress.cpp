@@ -6,7 +6,7 @@ void Fortress::Start()
 {
     //_Image_manager->initialize();
 
-    Now = new S_Battle;
+    Now = new S_Start;
 
     Now->Start();
 }

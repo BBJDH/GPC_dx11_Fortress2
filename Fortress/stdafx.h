@@ -69,6 +69,7 @@ struct Position
 //Scene
 #include "./Scene/Scene.h"
 #include "./Scene/S_Battle.h"
+#include "./Scene/S_Start.h"
 
 
 
@@ -158,6 +159,7 @@ struct Position
 #define UI_FUEL_Y			695
 
 #define UI_POWER_MUL		 5
+#define UI_POWER_MAX		 128
 #define UI_HP_MUL			 0.64
 #define UI_Fuel_MUL			 6.4
 #define UI_ANGLE_CENTER_X		150

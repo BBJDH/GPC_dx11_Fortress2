@@ -6,11 +6,23 @@ Animation::Animation()
     initialize();
 }
 
+void Animation::render_loading()
+{
+    this->loading.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    this->loading.Location = { 0,0 };
+    this->loading.Render();
+
+}
+
 void Animation::initialize()
 {
     arrow.Name = "Animation/UI/arrow";
     arrow.Duration = 1.0f;
     arrow.Repeatable = true;
+
+    loading.Name = "Animation/Screen/loading";
+    loading.Duration = 1.0f;
+    loading.Repeatable = true;
 }
 
 

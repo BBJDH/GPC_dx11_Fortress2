@@ -23,6 +23,7 @@
     <ClInclude Include="Missile.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="Scene\S_Start.h" />
     <ClInclude Include="Singleton\Animation.h" />
     <ClInclude Include="Singleton\Camera.h" />
     <ClInclude Include="Engine\Circle.h" />
@@ -54,6 +55,7 @@
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Scene\S_Start.cpp" />
     <ClCompile Include="Singleton\Animation.cpp" />
     <ClCompile Include="Singleton\Camera.cpp" />
     <ClCompile Include="Fortress.cpp" />

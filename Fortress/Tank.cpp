@@ -74,7 +74,8 @@ bool Tank::is_dead() const
 
 void Tank::plus_power()
 {
-	fire_velocity++;
+	if(fire_velocity<UI_POWER_MAX)
+		fire_velocity++;
 }
 
 void Tank::turn_setting()
@@ -372,4 +373,11 @@ void Tank::ani_render(float const delta)
 void Tank::ani_start()
 {
 	this->animation.Playback =0;
+}
+
+void Tank::minus_fuel()
+{
+	if(this->fuel ==0);
+	else
+		this->fuel --;
 }

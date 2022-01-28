@@ -16,14 +16,19 @@ private:
     std::vector<Missile> missile;
     Engine::Rendering::Camera Camera;
 
+    float const waiting_time = 1.5f;
+    float playing_time;
 private:
+    void    initialize();
+    void    create_tanks();
+    void    dispose_tanks();
     void    rendering();
-
+    
 public:
     void     Start() final override;
     Scene * Update() final override;
     void       End() final override;
-    void    set_state(State const state);
+    void    update_scene();
 
 
 };
