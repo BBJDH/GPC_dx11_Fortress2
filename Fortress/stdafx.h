@@ -118,6 +118,19 @@ struct Position
 #define MAPSIZE_H	 1800//CAM_SIZE_H
 #define BackgroundSIZE_W	MAPSIZE_W//CAM_SIZE_W//1280*1.2
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
+
+
+//시작화면 세팅
+#define TEXT_W 600
+#define TEXT_H 50
+#define TEXT_Location_Y 300
+
+
+
+
+
+
+
 //#define R_Image_SIZE 100
 #define Tank_SIZE 50
 #define Tank_ANI_SIZE 250

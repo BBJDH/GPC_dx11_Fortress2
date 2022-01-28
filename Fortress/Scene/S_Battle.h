@@ -16,7 +16,7 @@ private:
     std::vector<Missile> missile;
     Engine::Rendering::Camera Camera;
 
-    float const waiting_time = 1.5f;
+    float const waiting_time = 2.0f;
     float playing_time;
 private:
     void    initialize();

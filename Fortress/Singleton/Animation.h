@@ -11,8 +11,10 @@ public:
 		Tank, Missile, Item
 	};
 private:
-	Engine::Rendering::Animation::Component loading;
+	Engine::Rendering::Animation::Component loading[9];
 	Engine::Rendering::Animation::Component arrow;
+
+	float loading_time;
 
 
 	void initialize();
@@ -20,7 +22,8 @@ private:
 
 public:
 	Animation();
-	void render_loading();
+	float const get_loading_time();
+	void render_loading(float const delta);
 	void render_tanks(std::vector<Tank> & tank);
 	void render_missile(std::vector<Missile> & missile);
 	void render_arrow(Tank const & tank);

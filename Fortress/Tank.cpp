@@ -105,8 +105,6 @@ void Tank::take_damage(unsigned const damage)
 		ani_start();
 		return;
 	}
-	else if(hp-damage <TANK_DANGER_HP)
-		state = State::Danger;
 
 	this->hp -= damage;
 }

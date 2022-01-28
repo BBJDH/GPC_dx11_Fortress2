@@ -6,23 +6,51 @@ Animation::Animation()
     initialize();
 }
 
-void Animation::render_loading()
+void Animation::render_loading(float const delta)
 {
-    this->loading.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    this->loading.Location = { 0,0 };
-    this->loading.Render();
+    loading_time += delta;
 
+    if(loading_time>4.5f)
+        loading_time =0.0f;
+    else
+    {
+        int const index = static_cast<int>(loading_time/0.5f);
+        loading[index].Render();
+    }
+
+
+}
+
+float const Animation::get_loading_time()
+{
+    return loading_time;
 }
 
 void Animation::initialize()
 {
+    loading_time =0.0f;
     arrow.Name = "Animation/UI/arrow";
     arrow.Duration = 1.0f;
     arrow.Repeatable = true;
 
-    loading.Name = "Animation/Screen/loading";
-    loading.Duration = 1.0f;
-    loading.Repeatable = true;
+
+    loading[0].Name = "Animation/Screen/loading_0";
+    loading[1].Name = "Animation/Screen/loading_1";
+    loading[2].Name = "Animation/Screen/loading_2";
+    loading[3].Name = "Animation/Screen/loading_3";
+    loading[4].Name = "Animation/Screen/loading_4";
+    loading[5].Name = "Animation/Screen/loading_5";
+    loading[6].Name = "Animation/Screen/loading_6";
+    loading[7].Name = "Animation/Screen/loading_7";
+    loading[8].Name = "Animation/Screen/loading_8";
+    for (size_t i = 0; i < 9; i++)
+    {
+        loading[i].Duration = 0.5f;
+        loading[i].Repeatable = false;
+        loading[i].Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+        loading[i].Location = { 0,0 };
+    }
+
 }
 
 

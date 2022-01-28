@@ -60,10 +60,10 @@ void S_Battle::update_scene()
         if (playing_time > waiting_time)
         {
             dispose_tanks();
-            if(!_Turn->check_tank_falling(tank))
+            if(!_Turn->check_tank_falling(tank) and _Anime->get_loading_time()<0.1f)
                 this->state = State::Playing;
         }
-        _Anime->render_loading();
+        _Anime->render_loading(Engine::Time::Get::Delta());
 
         break;
     }

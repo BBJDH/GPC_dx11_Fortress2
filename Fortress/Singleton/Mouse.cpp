@@ -1,7 +1,7 @@
 #include "Mouse.h"
 #include "stdafx.h"
 
-Mouse::Mouse() :x{ 0 }, y{ 0 }, coordinate_x{0},coordinate_y{0}
+Mouse::Mouse() :x{ CAM_SIZE_W/2 }, y{ CAM_SIZE_H/2 }, coordinate_x{0},coordinate_y{0}
 {
 }
 

@@ -5,10 +5,15 @@ private:
     Engine::Rendering::Image::UI fortress;
     Engine::Rendering::Image::UI text;
 
+    float text_width;
+    float text_height;
     float       time =0.0f;
+	
+    
+    bool     Enter();
     void init_image();
-	bool     Enter();
-    void render();
+    void render_text();
+    void    render();
 
 public:
     void     Start() final override;
