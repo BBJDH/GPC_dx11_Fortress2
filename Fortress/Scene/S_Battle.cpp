@@ -8,8 +8,8 @@ void S_Battle::Start()
 {
     //_Map_manager->initialize();
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-
-    srand(static_cast<unsigned>(time(NULL)));
+    //랜덤 초기화 함수(시간테이블)
+    srand(static_cast<unsigned>(time(NULL)));//안하면 랜덤 순서가 항상 똑같음
     Random r(10,MAPSIZE_W-10,PLAYERS);
     for (unsigned i = 0; i < PLAYERS; i++)
     {
@@ -41,15 +41,17 @@ void S_Battle::End()
 
 void S_Battle::rendering()
 {
+    Camera.Location = { _CAM->pos.x,_CAM->pos.y };
+    Camera.Set();
+
     _Image_manager->render_background();
     _Map_manager->render_map();
 
-    _Anime->render(tank,missile);
 
+    _Anime->render(tank,missile);
     _Image_manager->render_ui(tank);
 
-    Camera.Location = { _CAM->pos.x,_CAM->pos.y };
-    Camera.Set();
+
 
     _Debug_manager->set_delta(Engine::Time::Get::Delta());
     _Debug_manager->rendering();
