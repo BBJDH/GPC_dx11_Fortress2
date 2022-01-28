@@ -4,7 +4,6 @@
 
 class Camera :public SingletonT<Camera>
 {
-	// TODO : sin(t * 10.0f) * pow(0.5f,t) 지진효과가 되는지 테스트
 public:
 	enum class State 
 	{

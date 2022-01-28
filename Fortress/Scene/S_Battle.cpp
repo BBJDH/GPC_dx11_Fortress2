@@ -6,6 +6,7 @@
 
 void S_Battle::Start()
 {
+    state = State::Loading;
     //_Map_manager->initialize();
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
     //랜덤 초기화 함수(시간테이블)
@@ -21,6 +22,9 @@ void S_Battle::Start()
 
 Scene * S_Battle::Update()
 {   
+    if(!_Turn->check_tank_falling(tank) and this->state == State::Loading)
+        this->state = State::Playing;
+
     _CAM->cam();
 
     _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
@@ -37,6 +41,11 @@ Scene * S_Battle::Update()
 void S_Battle::End()
 {
 
+}
+
+void S_Battle::set_state(State const state)
+{
+    this->state = state;
 }
 
 void S_Battle::rendering()

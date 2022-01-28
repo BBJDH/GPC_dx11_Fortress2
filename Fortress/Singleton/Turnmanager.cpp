@@ -72,6 +72,8 @@ bool Turnmanager::check_tank_falling(std::vector<Tank>& tank)
 			}
 		}
 	}
+	
+
 	return false;
 }
 

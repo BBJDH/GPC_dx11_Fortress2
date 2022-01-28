@@ -137,7 +137,7 @@ struct Position
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
 #define FIRE_MUL		 1.5
-#define Earthquake_POWER		 60
+#define Earthquake_POWER		 40
 #define Earthquake_Cycle		 1000.0f
 
 //충돌관련
