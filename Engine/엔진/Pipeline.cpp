@@ -40,7 +40,7 @@ namespace Engine::Rendering::Pipeline
             HDC hdc = GetDC(hWindow);
             hmemdc = CreateCompatibleDC(hdc);
             magenta_hbit = CreateCompatibleBitmap
-            (hdc, 3000,1926);           //맵 사이즈 지정 필요, 렌더링 세팅이 우선실행으로
+            (hdc, 3000,1930);           //맵 사이즈 지정 필요, 렌더링 세팅이 우선실행으로
             //아니면 if문 걸고 app에서 한번만 생성토록 
             SelectObject(hmemdc, magenta_hbit);
             ReleaseDC(hWindow, hdc);

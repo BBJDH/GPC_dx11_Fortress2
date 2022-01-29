@@ -163,7 +163,7 @@ struct Position
 
 //UI ¼¼ÆÃ
 #define UI_SCREEN_SCROLL	10
-#define UI_H				126 //1926
+#define UI_H				130 //1930
 #define UI_Bar_X			450
 #define UI_Bar_H			 20
 

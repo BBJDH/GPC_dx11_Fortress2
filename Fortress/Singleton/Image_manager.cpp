@@ -141,6 +141,9 @@ void Image_manager::render_tank_hp(Tank const& tank)
 {
     this->Tank_Hp_Bar.Length = Vector<2>(Tank_HP_Bar_W, Tank_HP_Bar_H);
     this->Tank_Hp_Bar.Location = { tank.getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank.getpos().y-Tank_HP_Bar_Location_H };
+    if (tank.gethp() == 0)
+        return;
+
     this->Tank_Hp_Bar.Render();
 
     unsigned const hp = tank.gethp();
