@@ -145,7 +145,7 @@ struct Position
 #define Tank_HP_Bar_Mul 0.06
 
 
-#define PLAYERS		 20
+#define PLAYERS		 2
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100

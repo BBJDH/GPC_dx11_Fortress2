@@ -38,6 +38,12 @@ private:
     void ui_angle_line( int const angle,Color color, int const length);
     void render_tank_hp(Tank const & tank);
 
+
+    //game over
+private:
+    Engine::Rendering::Image::UI Gameover;
+
+
 public:
     Image_manager();
     void initialize();
@@ -46,6 +52,8 @@ public:
     void render_front_ui(Tank const & tank);
     void render_tanks_hp(std::vector<Tank> const& tank);
     void render_ui(std::vector<Tank> const& tank);
+
+    void render_gameover();
 
     //애니메이션구현이후로 미사용, 테스트용
     void render_tank(std::vector<Tank> const& tank);

@@ -16,7 +16,7 @@ Turnmanager::State Turnmanager::get_state()const
 	return this->state;
 }
 
-void Turnmanager::is_gameover(std::vector<Tank>& tank)
+bool Turnmanager::is_gameover(std::vector<Tank>& tank)
 {
 	unsigned live_count =0;
 	if (!tank.empty())
@@ -28,9 +28,14 @@ void Turnmanager::is_gameover(std::vector<Tank>& tank)
 				live_count++;
 			}
 		}
-		if(live_count<2)
+		if (live_count < 2)
+		{
 			this->state = State::Over;
+			return true;
+		}
 	}
+	return false;
+
 }
 
 bool Turnmanager::is_obj_turn(Object const& obj)

@@ -1,7 +1,7 @@
 #pragma once
 template <typename T>
 class SingletonT
-{
+{//crtp
 protected:
 	//싱글톤 인스턴스 선언
 	//static으로 한번만 생성되도록 작성

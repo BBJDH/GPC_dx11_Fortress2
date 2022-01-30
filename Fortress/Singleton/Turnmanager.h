@@ -26,7 +26,7 @@ public:
 	unsigned const whosturn()const;
 	State get_state()const;
 	bool check_tank_falling(std::vector<Tank>& tank);
-	void is_gameover(std::vector<Tank>& tank);
+	bool is_gameover(std::vector<Tank>& tank);
 	void tankturn_start(std::vector<Tank>& tank);
 	void checkturn(std::vector<Tank> & tank, std::vector<Missile> & missile);
 

@@ -30,10 +30,13 @@ void Image_manager::initialize()
 
     iTank.Name = "Image/Tank/Canon_R";
     iTank.Length = Vector<2>(Tank_SIZE, Tank_SIZE);
-    //iTank.Location = Vector<2>(Tank_SIZE / 2, Tank_SIZE / 2);
     iMissile.Name = "Image/Bomb/bomb";
     iMissile.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
-    //iMissile.Location = Vector<2>(Missile_SIZE / 2, Missile_SIZE / 2);
+
+    Gameover.Name = "Image/Screen/gameover";
+    Gameover.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    Gameover.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
+
 }
 
 void Image_manager::render_background()
@@ -104,6 +107,11 @@ void Image_manager::render_ui(std::vector<Tank> const& tank)
     render_tanks_hp(tank);
     render_back_ui(tank[_Turn->whosturn()]);
     render_front_ui(tank[_Turn->whosturn()]);
+}
+
+void Image_manager::render_gameover()
+{
+    Gameover.Render();
 }
 
 

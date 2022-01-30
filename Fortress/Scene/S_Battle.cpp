@@ -7,7 +7,7 @@
 void S_Battle::Start()
 {
     initialize();
-    _Turn->tankturn_start(tank);
+
 }
 
 Scene * S_Battle::Update()
@@ -79,10 +79,16 @@ void S_Battle::update_scene()
         dispose_tanks();
 
         rendering();            //·»´õ¸µ
-
+        if (_Turn->is_gameover(tank))
+            this->state = State::GameOver;
         break;
     }
     case S_Battle::State::GameOver:
+    {
+        Camera.Location = { _CAM->pos.x,_CAM->pos.y };
+        Camera.Set();
+        _Image_manager->render_gameover();
+    }
         break;
     default:
         break;

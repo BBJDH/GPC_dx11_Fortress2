@@ -159,7 +159,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 					dmg_mul =1;
 				else
 					dmg_mul = range - length;
-
+				 
 				unsigned const dmg = missile.get_damage() * dmg_mul / range;
 
 				tank[i].take_damage(dmg);
@@ -168,4 +168,13 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 			}
 		}
 	}
+}
+
+bool Physics_Manager::collide_button(Engine::Physics::Component<Quadrangle> const& button)
+{
+	Engine::Physics::Component<Point> point;
+	point.x = static_cast<float>(_Mouse->x);
+	point.y = static_cast<float>(_Mouse->y);
+
+	return button.Collide(point);
 }
