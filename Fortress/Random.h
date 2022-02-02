@@ -15,7 +15,7 @@ private:
 	constexpr void Swap(int& a, int& b);
 	int* result;
 	unsigned int arr_size;
-
+	
 public:
 
 	Random() = default;

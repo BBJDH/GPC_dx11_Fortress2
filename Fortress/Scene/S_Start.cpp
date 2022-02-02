@@ -17,16 +17,18 @@ void S_Start::init_image()
 
 void S_Start::render_text()
 {
-    if (static_cast<int>(time) % 2)
-    {
-        text_width  = text_width +0.05f;
-        text_height = text_height+0.01f;
-    }
-    else
-    {
-        text_width  = text_width -0.05f;
-        text_height = text_height-0.01f;
-    }
+    //if (static_cast<int>(time) % 2)
+    //{
+    //    text_width  = text_width +0.05f;
+    //    text_height = text_height+0.01f;
+    //}
+    //else
+    //{
+    //    text_width  = text_width -0.05f;
+    //    text_height = text_height-0.01f;
+    //}
+    text_width  += speed_x *sin(time*PI);
+    text_height += speed_y *sin(time*PI);
     text.Length = Vector<2>(text_width, text_height);
     text.Render();
 }

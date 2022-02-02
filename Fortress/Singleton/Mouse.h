@@ -5,7 +5,7 @@
 class Mouse : public SingletonT<Mouse>
 {
 public:
-
+	
 	enum class POS_STATE 
 	{
 		Side_Left, Side_Right, Side_Up, Side_Down, 

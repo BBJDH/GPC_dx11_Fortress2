@@ -185,8 +185,8 @@ void Camera::earthquake_start()
 void Camera::earthquake()
 {
 	earthquake_time += Engine::Time::Get::Delta();
-	int const val_x = static_cast<int const>(Earthquake_POWER*sin(earthquake_time * Earthquake_Cycle) * sqrt(earthquake_time));
-	int const val_y = static_cast<int const>(Earthquake_POWER*sin(earthquake_time * Earthquake_Cycle) * sqrt(earthquake_time));
+	int const val_x = static_cast<int const>(Earthquake_POWER*sin(earthquake_time * Earthquake_Cycle) * sqrt(1/earthquake_time));
+	int const val_y = static_cast<int const>(Earthquake_POWER*sin(earthquake_time * Earthquake_Cycle) * sqrt(1/earthquake_time));
 	if (earthquake_time < 0.8f)
 	{
 		if(val_x>0)

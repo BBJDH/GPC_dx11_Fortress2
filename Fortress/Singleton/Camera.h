@@ -31,7 +31,7 @@ private:
 public:
 	Camera();
 	~Camera() {};
-
+	
 	void focusing(Object const& obj);
 	void focus_on();
 	void move(Mouse::POS_STATE state);

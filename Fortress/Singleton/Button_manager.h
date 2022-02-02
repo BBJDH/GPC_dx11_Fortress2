@@ -3,7 +3,7 @@
 class Button_manager
 {
 public:
-
 private:
+	
 
 };

@@ -25,7 +25,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Scene\S_Start.h" />
     <ClInclude Include="Singleton\Animation.h" />
-    <ClInclude Include="Singleton\Button.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Singleton\Button_manager.h" />
     <ClInclude Include="Singleton\Camera.h" />
     <ClInclude Include="Engine\Circle.h" />
@@ -59,7 +59,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene\S_Start.cpp" />
     <ClCompile Include="Singleton\Animation.cpp" />
-    <ClCompile Include="Singleton\Button.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Singleton\Camera.cpp" />
     <ClCompile Include="Fortress.cpp" />
     <ClCompile Include="Singleton\Debug_manager.cpp" />

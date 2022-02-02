@@ -111,7 +111,7 @@
     <ClInclude Include="Singleton\Button_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton\Button.h">
+    <ClInclude Include="Button.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -167,7 +167,7 @@
     <ClCompile Include="Scene\S_Start.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Singleton\Button.cpp">
+    <ClCompile Include="Button.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
