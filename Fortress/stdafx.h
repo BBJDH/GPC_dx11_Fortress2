@@ -112,7 +112,7 @@ struct Position
 //#endif // FULLSCREEN
 
 
-//게임 세팅
+//게임 해상도 세팅
 #define CAM_SIZE_W 1280  //1280   //창의 크기가 아닌 창안에 표시할 해상도
 #define CAM_SIZE_H 720  //720
 #define MAPSIZE_W	 3000//CAM_SIZE_W
@@ -121,7 +121,7 @@ struct Position
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 
 
-//시작화면 세팅
+//시작화면 텍스트 세팅
 #define TEXT_W 600
 #define TEXT_H 50
 #define TEXT_Location_Y 300
@@ -129,9 +129,7 @@ struct Position
 
 
 
-
-
-
+//이미지 애니메이션 크기
 //#define R_Image_SIZE 100
 #define Tank_SIZE 50
 #define Tank_ANI_SIZE 250
@@ -145,7 +143,7 @@ struct Position
 #define Tank_HP_Bar_Location_W 30
 #define Tank_HP_Bar_Mul 0.06
 
-
+//플레이어수, 게임플레이 세팅
 #define PLAYERS		 2
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
@@ -182,7 +180,7 @@ struct Position
 #define UI_ANGLE_Length		 35
 
 
-//애니매이션 세팅
+//애니매이션 재생시간 세팅
 
 #define ANI_Tank_Nomal 4.1f
 #define ANI_Tank_Idle 3.5f

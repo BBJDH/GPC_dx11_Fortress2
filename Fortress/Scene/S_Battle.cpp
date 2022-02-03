@@ -14,9 +14,9 @@ Scene * S_Battle::Update()
 {   
     playing_time += Engine::Time::Get::Delta();
 
-    update_scene();
 
-    return nullptr;
+
+    return update_scene();
 }
 
 void S_Battle::End()
@@ -25,6 +25,15 @@ void S_Battle::End()
     std::vector<Tank>().swap(tank);
     missile.clear();
     std::vector<Missile>().swap(missile);
+
+
+    _Anime->release_singleton();
+    _Input_manager->release_singleton();
+    _Turn->release_singleton();
+    _Map_manager->release_singleton();
+    _Physics_manager->release_singleton();
+    _Debug_manager->release_singleton();
+
 }
 
 
@@ -35,6 +44,17 @@ void S_Battle::initialize()
     playing_time = 0.0f;
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
     create_tanks();
+    exit_button.image.Name = "Image/Button/gameover_exit";
+    exit_button.image.Length =  Vector<2>(170, 30);
+    exit_button.image.Location = Vector<2>(1180, 697);
+
+    exit_button.collide_image.Name = "Image/Button/gameover_exit_collide";
+    exit_button.collide_image.Length =  Vector<2>(170, 30);
+    exit_button.collide_image.Location = Vector<2>(1180, 697);
+
+    exit_button.collide_box.Length = Point{170,30};
+    exit_button.collide_box.Center = Point{1180,697};
+
 }
 
 void S_Battle::create_tanks()
@@ -48,7 +68,7 @@ void S_Battle::create_tanks()
 }
 
 
-void S_Battle::update_scene()
+Scene * S_Battle::update_scene()
 {
     switch (this->state)
     {
@@ -78,7 +98,7 @@ void S_Battle::update_scene()
 
         dispose_tanks();
 
-        rendering();            //렌더링
+        render_playing();            //렌더링
         if (_Turn->is_gameover(tank))
             this->state = State::GameOver;
         break;
@@ -88,11 +108,17 @@ void S_Battle::update_scene()
         Camera.Location = { _CAM->pos.x,_CAM->pos.y };
         Camera.Set();
         _Image_manager->render_gameover();
+        exit_button.check_state();
+        exit_button.render();
+        //버튼을 누르면 시작화면으로
+        if(exit_button.collide())
+            return new S_Start;
     }
-        break;
+    break;
     default:
         break;
     }
+    return nullptr;
 }
 
 
@@ -103,7 +129,7 @@ void S_Battle::dispose_tanks()
 }
 
 
-void S_Battle::rendering()
+void S_Battle::render_playing()
 {
     _Image_manager->render_background();
     _Map_manager->render_map();
