@@ -10,9 +10,12 @@ namespace Shader
         {
             Resource.Load(int3(Input.TexCoord.x, Input.TexCoord.y, 0))
         };
-        if (Output.r == 1 && Output.g == 0 && Output.b == 1)
-            discard;
-            
+    
+    //float avr = (Output.r+Output.g+Output.b)/3.0f;
+	//if (Input.TexCoord.y > 100)
+ //       return float4(avr,avr,avr,1);
+
+            //콘스턴트 버퍼 사용
         return Output;
     }
 }

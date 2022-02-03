@@ -12,7 +12,6 @@ public:
 private:
 	State state;
 
-
 public:
 	Button();
 	Button(std::string const& name, std::string const& clicked_name,
