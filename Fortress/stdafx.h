@@ -62,6 +62,7 @@ struct Position
 #include"./Singleton/Turnmanager.h"
 #include"./Singleton/Input_manager.h"
 #include"./Singleton/Animation.h"
+#include"./Singleton/Button_manager.h"
 
 //#include"Turnmanager.h"
 
@@ -89,7 +90,7 @@ struct Position
 #define _Turn Turnmanager::get_singleton()
 #define _Input_manager Input_manager::get_singleton()
 #define _Anime Animation::get_singleton()
-
+#define _Button Button_manager::get_singleton()
 
 
 //=====================================
