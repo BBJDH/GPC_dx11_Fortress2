@@ -5,6 +5,7 @@
 #include<time.h>
 #include<chrono>
 #include<cassert>
+#include<functional>
 
 //STL
 #include<vector>
@@ -150,8 +151,8 @@ struct Position
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
 #define FIRE_MUL		 1.5
-#define Earthquake_POWER		 20
-#define Earthquake_Cycle		 1000.0f
+#define Earthquake_POWER		 10
+#define Earthquake_Cycle		 500.0f
 
 //충돌관련
 #define Tank_Step_H		 10  //탱크가 올라갈수 있는 높이

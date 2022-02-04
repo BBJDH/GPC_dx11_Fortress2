@@ -33,7 +33,7 @@ void S_Battle::End()
     _Map_manager->release_singleton();
     _Physics_manager->release_singleton();
     _Debug_manager->release_singleton();
-
+    _CAM->release_singleton();
 }
 
 

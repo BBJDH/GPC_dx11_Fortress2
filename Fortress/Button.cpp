@@ -5,8 +5,9 @@
 //이미지경로, 사이즈, 위치
 
 
-Button::Button():state(State::Normal), collide_box{ Point{0,0},Point{0,0} }
+Button::Button() :state(State::Normal), collide_box{ Point{0,0},Point{0,0} }, on_click{}
 {
+	
 }
 
 Button::Button(std::string const& name, std::string const& clicked_name, float const location_x, float const location_y, float const length_x, float const length_y)
@@ -64,4 +65,9 @@ bool Button::collide() const
 {
 	return this->state==State::Collide and
 		Engine::Input::Get::Key::Up(VK_LBUTTON);
+}
+
+auto Button::click() const
+{
+	return on_click();
 }

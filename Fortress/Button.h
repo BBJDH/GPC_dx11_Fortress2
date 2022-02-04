@@ -11,7 +11,8 @@ public:
 	Engine::Rendering::Image::UI collide_image;
 private:
 	State state;
-
+	std::function<void(void)> on_click;
+	
 public:
 	Button();
 	Button(std::string const& name, std::string const& clicked_name,
@@ -20,6 +21,7 @@ public:
 	void check_state();
 	void render();
 	bool collide()const;
+	auto click() const;
 
 
 };
