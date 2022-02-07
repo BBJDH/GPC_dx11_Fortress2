@@ -19,3 +19,4 @@ namespace Shader
         return Output;
     }
 }
+//float4 자료형 {x,y,z,alpha} 버퍼로 받아서 

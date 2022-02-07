@@ -24,8 +24,10 @@ namespace Engine::Rendering::Pipeline
         //Buffer
         namespace Buffer
         {
-            ID3D11Buffer * Vertex;
-            ID3D11Buffer * Constant[3];
+            ID3D11Buffer * Vertex; //버택스 버퍼
+            ID3D11Buffer * Constant[3]; //콘스탄트 버퍼
+            //새로운 콘스탄트 버퍼 작성계획
+            //{x,y,z,alpha} float4
         }
 
         ID3D11RenderTargetView * RenderTargetView;
@@ -61,8 +63,6 @@ namespace Engine::Rendering::Pipeline
             drawbitmp(hmemdc, 0, 0, mapbit.bmWidth, mapbit.bmHeight, 0,0, hbitmap);	
         }
 
-
-
         HDC getdc()
         {
             return hmemdc;
@@ -88,6 +88,10 @@ namespace Engine::Rendering::Pipeline
             DeviceContext->OMSetRenderTargets(1, &RenderTargetView, nullptr);
 
         }
+    }
+    namespace Effect
+    {
+        
     }
 
     namespace String
@@ -418,7 +422,9 @@ namespace Engine::Rendering::Pipeline
                     for (UINT u = 0; u < 3; ++u)
                         MUST(Device->CreateBuffer(&Descriptor, nullptr, &Buffer::Constant[u]));
 
-                    DeviceContext->VSSetConstantBuffers(0, 3, Buffer::Constant);// ps로 나중에 생성해서 쓴다 (3,4)
+                    DeviceContext->VSSetConstantBuffers(0, 3, Buffer::Constant);
+                    // 픽셀 출력 제어 -> PSSetConstantBuffers로 나중에 생성해서 쓴다 (3,4)
+                    // 크기는 16
                 }
 #pragma endregion
 
