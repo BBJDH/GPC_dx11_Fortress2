@@ -1,25 +1,16 @@
-#include "Layout.hlsli"
+ï»¿#include "Layout.hlsli"
 
 namespace Shader
 {
-//t ? SRV(¼ÎÀÌ´õ ¸®¼Ò½º ºä)
-//s ? »ùÇÃ·¯
-//u ? UAV(¼ø¼­°¡ ÁöÁ¤µÇÁö ¾ÊÀº ¾×¼¼½º ºä)
-//b ? CBV(»ó¼ö ¹öÆÛ º¸±â)
+//t â€“ SRV(ì…°ì´ë” ë¦¬ì†ŒìŠ¤ ë·°)
+//s â€“ ìƒ˜í”ŒëŸ¬
+//u â€“ UAV(ìˆœì„œê°€ ì§€ì •ë˜ì§€ ì•Šì€ ì•¡ì„¸ìŠ¤ ë·°)
+//b â€“ CBV(ìƒìˆ˜ ë²„í¼ ë³´ê¸°)
     namespace Resource
     {
-        cbuffer Transform : register(B0)
-        {
-            matrix World;
-        };
-        cbuffer Transform : register(B1)
-        {
-            matrix View;
-        };
-        cbuffer Transform : register(B2)
-        {
-            matrix Projection;
-        };
+        cbuffer Transform : register(B0) { matrix World; };
+        cbuffer Transform : register(B1) { matrix View; };
+        cbuffer Transform : register(B2) { matrix Projection; };
     }
 
     Layout::Pixel Vertex(const Layout::Vertex Input)

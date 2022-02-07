@@ -6,7 +6,7 @@ private:
 public:
 	enum class Func
 	{
-		Shop,Exit,
+		Shop,Exit, //상점의 버튼들, 플레이어선택, 맵선택 버튼 등
 	};
 	//함수 포인터 바인딩하는 함수
 	template<typename T>
@@ -15,6 +15,8 @@ public:
 	
 	//버튼의 기능들을 여기에 나열
 	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
+	
+	
 	class Scene * exit();  //시작화면으로 돌아감
 
 

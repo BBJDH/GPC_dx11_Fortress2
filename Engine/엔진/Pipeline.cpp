@@ -26,10 +26,16 @@ namespace Engine::Rendering::Pipeline
         {
             ID3D11Buffer * Vertex; //버택스 버퍼
             ID3D11Buffer * Constant[3]; //콘스탄트 버퍼
+            
             //새로운 콘스탄트 버퍼 작성계획
-            //{x,y,z,alpha} float4
+            ID3D11Buffer * Effect; //콘스탄트 버퍼
+            //{x,y,1,alpha} float4 구조체
+            // 픽셀 출력 제어 -> PSSetConstantBuffers로 나중에 생성해서 쓴다 (3,4)
+            // 상수 버퍼크기는 16바이트 단위로 해야한다
+            //그래픽 카드의 주 연산시 4by4 열우선행렬 연산을위함
+            //SIMD 참고
         }
-
+        //미니맵 그리기 
         ID3D11RenderTargetView * RenderTargetView;
     }
     namespace HmemDC
@@ -91,6 +97,45 @@ namespace Engine::Rendering::Pipeline
     }
     namespace Effect
     {
+        struct Value
+        {
+            float x;
+            float y;
+            float z;
+            float alpha;
+        };
+        Value buffer_value;
+
+
+        void init_buffer()
+        {
+            buffer_value = {0.0f,0.0f,0.0f,1.0f};
+        }
+        void create_buffer()
+        {//Effect 상수버퍼 생성
+            D3D11_BUFFER_DESC const Descriptor
+            {
+                sizeof(float[4]),
+                D3D11_USAGE_DYNAMIC,
+                D3D11_BIND_CONSTANT_BUFFER,
+                D3D11_CPU_ACCESS_WRITE
+            };
+            MUST(Device->CreateBuffer(&Descriptor, nullptr, &Pipeline::Buffer::Effect));
+            DeviceContext->PSSetConstantBuffers(0, 1, &Pipeline::Buffer::Effect);
+        }
+        void Update()
+        {
+
+                D3D11_MAPPED_SUBRESOURCE Subresource = D3D11_MAPPED_SUBRESOURCE();
+
+                MUST(DeviceContext->Map(Buffer::Vertex, 0, D3D11_MAP_WRITE_DISCARD, 0, &Subresource));
+                {
+                    memcpy_s(Subresource.pData, Subresource.RowPitch, &buffer_value, sizeof(buffer_value));
+                }
+                DeviceContext->Unmap(Buffer::Vertex, 0);
+           
+          //  DeviceContext->Draw(4, 0);
+        }
         
     }
 
@@ -247,6 +292,8 @@ namespace Engine::Rendering::Pipeline
             {
                 Engine::Rendering::Pipeline::HmemDC::Create_hmemdc(hWindow);
                 //hmamdc 생성
+                Engine::Rendering::Pipeline::Effect::init_buffer();
+                //effect 상수 버퍼 초기화
 
 #pragma region Swap Chain 생성
                 {
@@ -409,7 +456,7 @@ namespace Engine::Rendering::Pipeline
                 }
 #pragma endregion
 
-#pragma region Constant Buffer 생성(world, view, proj 행렬)
+#pragma region Constant Buffer 생성(world, view, proj 행렬, 추가 effect 버퍼)
                 {
                     D3D11_BUFFER_DESC const Descriptor
                     {
@@ -423,9 +470,10 @@ namespace Engine::Rendering::Pipeline
                         MUST(Device->CreateBuffer(&Descriptor, nullptr, &Buffer::Constant[u]));
 
                     DeviceContext->VSSetConstantBuffers(0, 3, Buffer::Constant);
-                    // 픽셀 출력 제어 -> PSSetConstantBuffers로 나중에 생성해서 쓴다 (3,4)
-                    // 크기는 16
+
+                    Effect::create_buffer(); //Effect 버퍼 생성
                 }
+
 #pragma endregion
 
 #pragma region Blend State 생성및 결합
@@ -471,10 +519,12 @@ namespace Engine::Rendering::Pipeline
 
                 RenderTargetView->Release();
 
+
+                Buffer::Effect->Release();
                 for(UINT u = 0; u < 3; ++u)
                     Buffer::Constant[u]->Release();
-
                 Buffer::Vertex->Release();
+
 
                 SwapChain->Release();
 
