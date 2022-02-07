@@ -418,7 +418,7 @@ namespace Engine::Rendering::Pipeline
                     for (UINT u = 0; u < 3; ++u)
                         MUST(Device->CreateBuffer(&Descriptor, nullptr, &Buffer::Constant[u]));
 
-                    DeviceContext->VSSetConstantBuffers(0, 3, Buffer::Constant);
+                    DeviceContext->VSSetConstantBuffers(0, 3, Buffer::Constant);// ps로 나중에 생성해서 쓴다 (3,4)
                 }
 #pragma endregion
 
