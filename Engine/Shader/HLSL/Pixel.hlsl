@@ -5,10 +5,7 @@ namespace Shader
     const Texture2D Resource : register(T0);
     cbuffer Value : register(b0)
     {
-        float x;
-        float y;
-        float z;
-        float alpha;
+        float4 cbuffer_value;
     }
     
     Layout::Color Pixel(
@@ -20,7 +17,7 @@ namespace Shader
         };
         if (Output.a <0.1f)
             discard;
-        Output.a = alpha;
+        Output.a = cbuffer_value.a;
         return Output;
     //float avr = (Output.r+Output.g+Output.b)/3.0f;
 	//if (Input.TexCoord.y > 100)

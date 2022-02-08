@@ -10,6 +10,7 @@ public:
 	Map_manager();
 	void initialize();
 	void render_map();
+	void render_minimap();
 	void make_crater(POINT const& center, SIZE const & size);
 
 };

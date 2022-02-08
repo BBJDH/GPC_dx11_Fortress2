@@ -75,7 +75,7 @@ namespace Engine::Rendering::Pipeline
         }
 
         void Transparents_Color(HDC const & hdc_mem, COLORREF const & transparents_color, SIZE const& size, POINT const& start)
-        {
+        {//
             IDXGISurface1 * Surface = nullptr;
 
             MUST(SwapChain->GetBuffer(0, IID_PPV_ARGS(&Surface)));
@@ -85,14 +85,39 @@ namespace Engine::Rendering::Pipeline
                 MUST(Surface->GetDC(false, &hDC));
 
                 TransparentBlt(hDC, 0,0,size.cx,size.cy,
-                    hmemdc,start.x, start.y,size.cx,size.cy,transparents_color);
+                    hdc_mem,start.x, start.y,size.cx,size.cy,transparents_color);
 
                 MUST(Surface->ReleaseDC(nullptr));
             }
             Surface->Release();
 
             DeviceContext->OMSetRenderTargets(1, &RenderTargetView, nullptr);
+            //텍스쳐 2d를 생성해서 렌더타겟을 따로 생성하고 텍스쳐
+        }
+        void Alpha_Blend(HDC const & hdc_mem, SIZE const& size, POINT const& start)
+        {
+            IDXGISurface1 * Surface = nullptr;
 
+            MUST(SwapChain->GetBuffer(0, IID_PPV_ARGS(&Surface)));
+            {
+                HDC hDC = HDC();
+
+                MUST(Surface->GetDC(false, &hDC));
+
+                BLENDFUNCTION bf;
+
+                bf.AlphaFormat = 0; // 비트맵 종류로 일반 비트맵의 경우 0, 32비트 비트맵의 경우 AC_SRC_ALPHA
+                bf.BlendFlags = 0; // 무조건 0이어야 한다
+                bf.BlendOp = AC_SRC_OVER; // 무조건 AC_SRC_OVER이어야 하고 원본과 대상 이미지를 합친다는 의미
+                bf.SourceConstantAlpha = 127; // 투명도(투명 0 - 불투명 255)
+
+                AlphaBlend(hDC,start.x,start.y,size.cx,size.cy,hdc_mem,0,0,3000,1930,bf);
+
+                MUST(Surface->ReleaseDC(nullptr));
+            }
+            Surface->Release();
+
+            DeviceContext->OMSetRenderTargets(1, &RenderTargetView, nullptr);
         }
     }
     namespace Effect

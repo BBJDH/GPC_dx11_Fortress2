@@ -41,6 +41,22 @@ void Map_manager::render_map()
     //Map.Render();
 }
 
+void Map_manager::render_minimap()
+{
+    Engine::Rendering::Pipeline::HmemDC::Alpha_Blend
+    (
+        hmapdc,
+        {
+            300,180
+        },
+        //좌상단을 고정좌표로 윈도우좌표계 카메라 좌상단점부터 카메라 사이즈만큼 가져옴
+        {
+            900/*static_cast<long>(-MAPSIZE_W/2)*/,
+            0/*static_cast<long>(-MAPSIZE_H/2)*/
+        }
+        );
+}
+
 void Map_manager::make_crater(POINT const& center, SIZE const& size)
 {
     HBRUSH hNewBrush = CreateSolidBrush(RGB(255,0,255));

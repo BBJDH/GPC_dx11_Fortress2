@@ -8,6 +8,7 @@ namespace Engine::Rendering::Pipeline
         void Create_hmemdc(HWND const& hWindow);
         void draw_map(HBITMAP const &hbitmap);
         void Transparents_Color(HDC const & hdc_mem, COLORREF const & transparents_color, SIZE const& size, POINT const& start);
+        void Alpha_Blend(HDC const & hdc_mem, SIZE const& size, POINT const& start);
     }
     namespace Effect
     {

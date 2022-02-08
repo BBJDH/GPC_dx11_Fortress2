@@ -54,7 +54,7 @@ void S_Start::Start()
 
 Scene* S_Start::Update()
 {
-    Engine::Rendering::Pipeline::Effect::set_alhpa(abs(sin(time)));
+    //Engine::Rendering::Pipeline::Effect::set_alhpa(abs(sin(time)));
 
     render();
     if(Enter())
