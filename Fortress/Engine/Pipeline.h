@@ -7,8 +7,10 @@ namespace Engine::Rendering::Pipeline
         HDC getdc();
         void Create_hmemdc(HWND const& hWindow);
         void draw_map(HBITMAP const &hbitmap);
-        void Transparents_Color(HDC const & hdc_mem, COLORREF const & transparents_color, SIZE const& size, POINT const& start);
-        void Alpha_Blend(HDC const & hdc_mem, SIZE const& size, POINT const& start);
+        void Render_map(HDC const & hdc_mem, COLORREF const & transparents_color,
+            POINT const& dest,  POINT const& bring_start, SIZE const& size);
+        void Render_minimap(HDC const & hdc_mem, COLORREF const & transparents_color,
+            POINT const& dest, SIZE const& size, unsigned const alpha);
 
     }
     namespace Effect

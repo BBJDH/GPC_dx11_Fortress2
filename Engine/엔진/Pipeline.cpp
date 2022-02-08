@@ -40,17 +40,33 @@ namespace Engine::Rendering::Pipeline
     }
     namespace HmemDC
     {
-        HDC hmemdc;
-        HBITMAP magenta_hbit;
-        SIZE  bit_size;
+        HDC hmemdc, minimap_hdc;
+        HBITMAP magenta_hbit, minimap_hbit;
+        LONG  ui_size = 130;
+        SIZE  map_size = { 3000,1800+ui_size };//맵 사이즈 지정 필요, 렌더링 세팅이 우선실행으로
+        SIZE  minimap_size = {300,180};
+        BLENDFUNCTION bf;  //alphabl
+
+
         void Create_hmemdc(HWND const& hWindow)
         {
             HDC hdc = GetDC(hWindow);
             hmemdc = CreateCompatibleDC(hdc);
             magenta_hbit = CreateCompatibleBitmap
-            (hdc, 3000,1930);           //맵 사이즈 지정 필요, 렌더링 세팅이 우선실행으로
+            (hdc, map_size.cx,map_size.cy);           
             //아니면 if문 걸고 app에서 한번만 생성토록 
             SelectObject(hmemdc, magenta_hbit);
+
+            minimap_hdc = CreateCompatibleDC(hdc);
+            minimap_hbit = CreateCompatibleBitmap(hdc, minimap_size.cx, minimap_size.cy);
+            SelectObject(minimap_hdc, minimap_hbit);
+
+            //alpha blend 설정
+            bf.AlphaFormat = 0; // 비트맵 종류로 일반 비트맵의 경우 0, 32비트 비트맵의 경우 AC_SRC_ALPHA
+            bf.BlendFlags = 0; // 사용되지 않음
+            bf.BlendOp = AC_SRC_OVER; // 무조건 AC_SRC_OVER이어야 하고 원본과 대상 이미지를 합친다는 의미
+
+
             ReleaseDC(hWindow, hdc);
         }
         void drawbitmp(HDC const& hdc_dest, int const win_x, int const win_y, int const width, int const height, int const image_x, int const image_y, HBITMAP const& hbitmap)
@@ -74,7 +90,8 @@ namespace Engine::Rendering::Pipeline
             return hmemdc;
         }
 
-        void Transparents_Color(HDC const & hdc_mem, COLORREF const & transparents_color, SIZE const& size, POINT const& start)
+        void Render_map(HDC const & hdc_mem, COLORREF const & transparents_color,
+            POINT const& dest,  POINT const& bring_start, SIZE const& size)
         {//
             IDXGISurface1 * Surface = nullptr;
 
@@ -84,9 +101,10 @@ namespace Engine::Rendering::Pipeline
 
                 MUST(Surface->GetDC(false, &hDC));
 
-                TransparentBlt(hDC, 0,0,size.cx,size.cy,
-                    hdc_mem,start.x, start.y,size.cx,size.cy,transparents_color);
+                TransparentBlt(hDC, dest.x,dest.y,size.cx,size.cy,
+                    hdc_mem,bring_start.x, bring_start.y,size.cx,size.cy,transparents_color);
 
+               
                 MUST(Surface->ReleaseDC(nullptr));
             }
             Surface->Release();
@@ -94,8 +112,13 @@ namespace Engine::Rendering::Pipeline
             DeviceContext->OMSetRenderTargets(1, &RenderTargetView, nullptr);
             //텍스쳐 2d를 생성해서 렌더타겟을 따로 생성하고 텍스쳐
         }
-        void Alpha_Blend(HDC const & hdc_mem, SIZE const& size, POINT const& start)
+        void Render_minimap(HDC const & hdc_mem, COLORREF const & transparents_color,
+            POINT const& dest, SIZE const& size, unsigned const alpha)
         {
+
+            assert(alpha>=0 and alpha<=255);
+            bf.SourceConstantAlpha = alpha; // 투명도(투명 0 - 불투명 255)
+
             IDXGISurface1 * Surface = nullptr;
 
             MUST(SwapChain->GetBuffer(0, IID_PPV_ARGS(&Surface)));
@@ -103,15 +126,19 @@ namespace Engine::Rendering::Pipeline
                 HDC hDC = HDC();
 
                 MUST(Surface->GetDC(false, &hDC));
+        
+                HBRUSH brush = CreateSolidBrush(RGB(0,0,0));
+                HBITMAP hOldBmp = static_cast<HBITMAP>(SelectObject(minimap_hdc, brush));
+                PatBlt(minimap_hdc, 0, 0, minimap_size.cx,minimap_size.cy, PATCOPY);
+                DeleteObject(brush);
+                DeleteObject(hOldBmp);
+                //미니맵 초기화
 
-                BLENDFUNCTION bf;
+                TransparentBlt(minimap_hdc, 0,0,minimap_size.cx,minimap_size.cy,
+                    hdc_mem,0, 0,map_size.cx,map_size.cy-ui_size,transparents_color);
+                AlphaBlend(hDC, dest.x,dest.y,size.cx,size.cy,
+                    minimap_hdc,0, 0,minimap_size.cx,minimap_size.cy,bf);
 
-                bf.AlphaFormat = 0; // 비트맵 종류로 일반 비트맵의 경우 0, 32비트 비트맵의 경우 AC_SRC_ALPHA
-                bf.BlendFlags = 0; // 무조건 0이어야 한다
-                bf.BlendOp = AC_SRC_OVER; // 무조건 AC_SRC_OVER이어야 하고 원본과 대상 이미지를 합친다는 의미
-                bf.SourceConstantAlpha = 127; // 투명도(투명 0 - 불투명 255)
-
-                AlphaBlend(hDC,start.x,start.y,size.cx,size.cy,hdc_mem,0,0,3000,1930,bf);
 
                 MUST(Surface->ReleaseDC(nullptr));
             }

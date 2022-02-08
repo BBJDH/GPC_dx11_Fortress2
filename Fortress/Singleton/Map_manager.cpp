@@ -26,35 +26,28 @@ void Map_manager::initialize()
 
 void Map_manager::render_map()
 {
-    Engine::Rendering::Pipeline::HmemDC::Transparents_Color(hmapdc, Transparent_Color,
-        {
-            static_cast<int>(CAM_SIZE_W), 
-            static_cast<int>(CAM_SIZE_H)
-
-        },
+    Engine::Rendering::Pipeline::HmemDC::Render_map
+    (
+        hmapdc,
+        Transparent_Color,
+        {0,0},
+        { static_cast<long>(_CAM->pos_win.x), static_cast<long>(_CAM->pos_win.y) },
+        { static_cast<int>(CAM_SIZE_W), static_cast<int>(CAM_SIZE_H) }
         //좌상단을 고정좌표로 윈도우좌표계 카메라 좌상단점부터 카메라 사이즈만큼 가져옴
-        {
-            static_cast<long>(_CAM->pos_win.x)/*static_cast<long>(-MAPSIZE_W/2)*/,
-            static_cast<long>(_CAM->pos_win.y)/*static_cast<long>(-MAPSIZE_H/2)*/
-        }
-        );
+    );
     //Map.Render();
 }
 
 void Map_manager::render_minimap()
 {
-    Engine::Rendering::Pipeline::HmemDC::Alpha_Blend
+    Engine::Rendering::Pipeline::HmemDC::Render_minimap
     (
         hmapdc,
-        {
-            300,180
-        },
-        //좌상단을 고정좌표로 윈도우좌표계 카메라 좌상단점부터 카메라 사이즈만큼 가져옴
-        {
-            900/*static_cast<long>(-MAPSIZE_W/2)*/,
-            0/*static_cast<long>(-MAPSIZE_H/2)*/
-        }
-        );
+        Transparent_Color,
+        { CAM_SIZE_W-MINIMAP_SIZE_W, 0 },
+        { MINIMAP_SIZE_W, MINIMAP_MAPSIZE_H},
+        127
+    );
 }
 
 void Map_manager::make_crater(POINT const& center, SIZE const& size)

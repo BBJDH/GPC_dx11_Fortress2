@@ -156,9 +156,12 @@ void S_Battle::render_playing()
 
     _Image_manager->render_background();
     _Map_manager->render_map();
+
     _Anime->render(tank,missile);
     _Image_manager->render_ui(tank);
     _Map_manager->render_minimap();
+    _Image_manager->render_minimap_tank(tank);
+
 
     _Debug_manager->set_delta(Engine::Time::Get::Delta());
     _Debug_manager->rendering();

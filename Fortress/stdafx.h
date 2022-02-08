@@ -119,6 +119,8 @@ struct Position
 #define CAM_SIZE_H 720  //720
 #define MAPSIZE_W	 3000//CAM_SIZE_W
 #define MAPSIZE_H	 1800//CAM_SIZE_H
+#define MINIMAP_SIZE_W	 300
+#define MINIMAP_MAPSIZE_H	 180
 #define BackgroundSIZE_W	MAPSIZE_W//CAM_SIZE_W//1280*1.2
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 
@@ -146,7 +148,7 @@ struct Position
 #define Tank_HP_Bar_Mul 0.06
 
 //플레이어수, 게임플레이 세팅
-#define PLAYERS		 20
+#define PLAYERS		 2
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100

@@ -31,13 +31,12 @@ private:
     Engine::Rendering::Image::Component Tank_Hp;
     Engine::Rendering::Image::Component Tank_Hp_Bar;
 
-    Engine::Rendering::Image::Component iTank;
-    Engine::Rendering::Image::Component iMissile;
+    Engine::Rendering::Image::Component Red;
+    Engine::Rendering::Image::Component Green;
 
-    void render_object(Object const& obj, Obj_Type const type);
     void ui_angle_line( int const angle,Color color, int const length);
     void render_tank_hp(Tank const & tank);
-
+    void render_minimap_object(Object const& obj, bool is_turn);
 
     //game over
 private:
@@ -52,11 +51,12 @@ public:
     void render_front_ui(Tank const & tank);
     void render_tanks_hp(std::vector<Tank> const& tank);
     void render_ui(std::vector<Tank> const& tank);
+    
+    void render_minimap_tank(std::vector<Tank> const& tank);
 
     void render_gameover();
 
     //애니메이션구현이후로 미사용, 테스트용
-    void render_tank(std::vector<Tank> const& tank);
-    void render_missile(std::vector<Missile> const& missile);
+    //void render_missile(std::vector<Missile> const& missile);
 
 };

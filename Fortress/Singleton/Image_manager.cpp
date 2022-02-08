@@ -28,10 +28,10 @@ void Image_manager::initialize()
     Tank_Hp.Name ="Image/UI/blue_bar";
     Tank_Hp_Bar.Name ="Image/UI/base_bar";
 
-    iTank.Name = "Image/Tank/Canon_R";
-    iTank.Length = Vector<2>(Tank_SIZE, Tank_SIZE);
-    iMissile.Name = "Image/Bomb/bomb";
-    iMissile.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
+    Red.Name = "Image/UI/Red";
+    Red.Length = Vector<2>(10, 10);
+    Green.Name = "Image/UI/Green";
+    Green.Length = Vector<2>(10, 10);
 
     Gameover.Name = "Image/Screen/gameover";
     Gameover.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
@@ -168,61 +168,48 @@ void Image_manager::render_tank_hp(Tank const& tank)
 
 }
 
-
-void Image_manager::render_object(Object const& obj, Obj_Type const type)
+void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 {
-    Engine::Rendering::Image::Component* p_image = nullptr;
-    switch (type)
+    if (is_turn)
     {
-    case Obj_Type::Tank:
-    {
-        p_image = &iTank;
-        break;
-    }
-    case Obj_Type::Missile:
-    {
-        p_image = &iMissile;
-        break;
-    }
-    case Obj_Type::Item:
-    {
-        p_image = &iTank; //¹Ì±¸Çö
-        break;
-    }
-    default:
+        Green.Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
+        Green.Angle = -obj.getimage_angle()/Radian;
+        Green.Render();
         return;
     }
-    p_image->Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
-    p_image->Angle = -obj.getimage_angle()/Radian;
+    Red.Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
+    Red.Angle = -obj.getimage_angle()/Radian;
+    Red.Render();
+    return ;
 }
-void Image_manager::render_tank(std::vector<Tank> const& tank)
+
+void Image_manager::render_minimap_tank(std::vector<Tank> const& tank)
 {
     if (!tank.empty())
     {
         for (size_t i = 0; i < tank.size(); i++)
         {
-            render_object(tank[i], Image_manager::Obj_Type::Tank);
-
-            if(tank[i].get_state()==Tank::State::Nomal and tank[i].get_side()==Tank::Side::Left)
-                iTank.Name = "Image/Tank/Canon_L";
-
-            if(tank[i].get_state()==Tank::State::Nomal and tank[i].get_side()==Tank::Side::Right)
-                iTank.Name = "Image/Tank/Canon_R";
-
-            iTank.Render();
-        }
-    }
-}
-
-void Image_manager::render_missile(std::vector<Missile> const& missile)
-{
-    if (!missile.empty())
-    {
-        for (size_t i = 0; i < missile.size(); i++)
-        {
-            render_object(missile[i], Image_manager::Obj_Type::Missile);
-            iMissile.Render();
+            if(i == _Turn->whosturn())
+                render_minimap_object(tank[i],true);
+            else
+                render_minimap_object(tank[i],false);
 
         }
     }
 }
+
+
+
+
+//void Image_manager::render_missile(std::vector<Missile> const& missile)
+//{
+//    if (!missile.empty())
+//    {
+//        for (size_t i = 0; i < missile.size(); i++)
+//        {
+//            render_object(missile[i], Image_manager::Obj_Type::Missile);
+//            iMissile.Render();
+//
+//        }
+//    }
+//}
