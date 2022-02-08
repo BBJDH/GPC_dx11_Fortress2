@@ -150,6 +150,10 @@ void S_Battle::dispose_tanks()
 
 void S_Battle::render_playing()
 {
+
+    Engine::Rendering::Pipeline::Effect::set_alhpa(abs(sin(playing_time)));
+    //Engine::Rendering::Pipeline::Effect::set_alhpa(1.0f);
+
     _Image_manager->render_background();
     _Map_manager->render_map();
 

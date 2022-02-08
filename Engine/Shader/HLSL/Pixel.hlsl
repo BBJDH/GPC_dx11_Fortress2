@@ -3,14 +3,24 @@
 namespace Shader
 {
     const Texture2D Resource : register(T0);
+    cbuffer Value : register(b0)
+    {
+        float x;
+        float y;
+        float z;
+        float alpha;
+    }
     
-    Layout::Color Pixel(const Layout::Pixel Input) : SV_TARGET
+    Layout::Color Pixel(
+        const Layout::Pixel Input) : SV_TARGET
     {
         Layout::Color Output =
         {
             Resource.Load(int3(Input.TexCoord.x, Input.TexCoord.y, 0))
         };
-        
+        if (Output.a <0.1f)
+            discard;
+        Output.a = alpha;
         return Output;
     //float avr = (Output.r+Output.g+Output.b)/3.0f;
 	//if (Input.TexCoord.y > 100)

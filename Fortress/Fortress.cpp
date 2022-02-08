@@ -18,7 +18,6 @@ void Fortress::Update()
     _Mouse->x = Engine::Input::Get::Cursor::X();
     _Mouse->y = Engine::Input::Get::Cursor::Y();
     _Mouse->convert_coodinate();
-    
     if(Next != nullptr)
     {
         Now->End();

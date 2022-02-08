@@ -26,7 +26,6 @@ void Map_manager::initialize()
 
 void Map_manager::render_map()
 {
-
     Engine::Rendering::Pipeline::HmemDC::Transparents_Color(hmapdc, Transparent_Color,
         {
             static_cast<int>(CAM_SIZE_W), 

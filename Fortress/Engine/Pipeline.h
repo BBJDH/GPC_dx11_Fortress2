@@ -9,6 +9,13 @@ namespace Engine::Rendering::Pipeline
         void draw_map(HBITMAP const &hbitmap);
         void Transparents_Color(HDC const & hdc_mem, COLORREF const & transparents_color, SIZE const& size, POINT const& start);
     }
+    namespace Effect
+    {
+        void init_buffer();
+        void create_buffer();
+        void Update();
+        void set_alhpa(float alpha);
+    }
 
     namespace String
     {

@@ -122,19 +122,29 @@ namespace Engine::Rendering::Pipeline
             };
             MUST(Device->CreateBuffer(&Descriptor, nullptr, &Pipeline::Buffer::Effect));
             DeviceContext->PSSetConstantBuffers(0, 1, &Pipeline::Buffer::Effect);
+            //각 셰이더마다의 슬롯 설정
         }
         void Update()
-        {
+        { //app
 
                 D3D11_MAPPED_SUBRESOURCE Subresource = D3D11_MAPPED_SUBRESOURCE();
 
-                MUST(DeviceContext->Map(Buffer::Vertex, 0, D3D11_MAP_WRITE_DISCARD, 0, &Subresource));
+                MUST(DeviceContext->Map(Pipeline::Buffer::Effect, 0, D3D11_MAP_WRITE_DISCARD, 0, &Subresource));
                 {
                     memcpy_s(Subresource.pData, Subresource.RowPitch, &buffer_value, sizeof(buffer_value));
                 }
-                DeviceContext->Unmap(Buffer::Vertex, 0);
-           
-          //  DeviceContext->Draw(4, 0);
+                DeviceContext->Unmap(Pipeline::Buffer::Effect, 0);
+                
+        }
+        void set_alhpa(float alpha)
+        {
+            buffer_value.alpha = alpha;
+
+            int i =0;
+        }
+        void set_y(float y)
+        {
+            buffer_value.y = y;
         }
         
     }
@@ -505,6 +515,7 @@ namespace Engine::Rendering::Pipeline
             }
             case WM_APP:
             {
+                Effect::Update();
                 MUST(SwapChain->Present(0, 0)); //수직동기화 켜기 1
 
                 float const Color[4] { 0.0f, 0.0f, 0.0f, 1.0f };
