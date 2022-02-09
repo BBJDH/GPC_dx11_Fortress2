@@ -12,6 +12,7 @@ Tank::Tank(Position const& pos, unsigned const width, unsigned const height)
 	ani_playtime{0.0f}
 {
 	ani_set_normal();
+	init_text();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
 }
 Tank& Tank::operator=(Tank const& other_tank)
@@ -105,6 +106,7 @@ void Tank::take_damage(unsigned const damage)
 		ani_start();
 		return;
 	}
+	state = State::Hit;
 
 	this->hp -= damage;
 }
@@ -157,6 +159,15 @@ void Tank::set_idle_state()
 			ani_start();
 		}
 	}
+}
+
+void Tank::init_text()
+{
+	Damage.Font.Name = "Kostar";
+	Damage.Font.Bold = false;
+	Damage.Font.Italic = false;
+	Damage.Font.Underlined = false;
+	Damage.Font.StructOut = false;
 }
 
 void Tank::plus_angle(int angle)
@@ -264,6 +275,18 @@ void Tank::check_state()
 		}
 		else
 			ani_set_fall();
+		break;
+	}
+	case Tank::State::Hit:
+	{
+		if (true)
+		{
+			setstate(State::Nomal);
+			ani_set_normal();
+			ani_start();
+		}
+		else
+			//ani_set_fall();
 		break;
 	}
 	case Tank::State::Dead:

@@ -21,7 +21,6 @@ void Map_manager::initialize()
     Engine::Rendering::Pipeline::HmemDC::draw_map(hmapbit);
     hmapdc = Engine::Rendering::Pipeline::HmemDC::getdc();
     DeleteObject(hmapbit);
-
 }
 
 void Map_manager::render_map()
@@ -49,9 +48,11 @@ void Map_manager::render_minimap()
         hmapdc,
         Transparent_Color,
         { minimap_loc.x, minimap_loc.y },
-        { MINIMAP_SIZE_W, MINIMAP_SIZE_H},
+        { MINIMAP_SIZE_W, MINIMAP_SIZE_H+ MINI_UI_SIZE },
         127
     );
+    _Image_manager->render_minimap_cambox();
+
 }
 
 void Map_manager::make_crater(POINT const& center, SIZE const& size)

@@ -63,6 +63,7 @@ struct Position
 #include"./Singleton/Input_manager.h"
 #include"./Singleton/Animation.h"
 #include"./Singleton/Button_manager.h"
+#include"./Singleton/Text_manager.h"
 
 //#include"Turnmanager.h"
 
@@ -91,6 +92,8 @@ struct Position
 #define _Input_manager Input_manager::get_singleton()
 #define _Anime Animation::get_singleton()
 #define _Button Button_manager::get_singleton()
+#define _Text_manager Text_manager::get_singleton()
+
 
 
 //=====================================
@@ -148,7 +151,7 @@ struct Position
 #define Tank_HP_Bar_Mul 0.06
 
 //플레이어수, 게임플레이 세팅
-#define PLAYERS		 100
+#define PLAYERS		 8
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100

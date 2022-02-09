@@ -7,7 +7,7 @@ class Tank : public Object
 public:
 	enum class State
 	{
-		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Danger, Dead, //...
+		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Hit, Danger, Dead, //...
 	};
 	enum class Side
 	{
@@ -17,6 +17,8 @@ public:
 private:
 
 	Engine::Rendering::Animation::Component animation;
+	Engine::Rendering::Text::Component Damage;
+
 	float ani_playtime;
 
 	State		    state;
@@ -42,6 +44,7 @@ private:
 	void ani_set_danger();
 	void ani_set_dead();
 	void set_idle_state();
+	void init_text();
 
 public:
 

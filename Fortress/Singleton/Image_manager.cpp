@@ -26,7 +26,7 @@ void Image_manager::initialize()
     UI_Hp.Name = "Image/UI/Green";
     UI_Power.Name = "Image/UI/Red";
     UI_Fuel.Name = "Image/UI/Yellow";
-    UI_angle.Name ="Image/UI/angle_r";
+    UI_Line.Name ="Image/UI/angle_r";
 
     Tank_Hp.Name ="Image/UI/blue_bar";
     Tank_Hp_Bar.Name ="Image/UI/base_bar";
@@ -68,11 +68,13 @@ void Image_manager::render_back_ui(Tank const & tank)
         max_angle *= -1;
     }
 
-    ui_angle_line(img_angle + min_angle, Color::Yellow,UI_ANGLE_Length);
-    ui_angle_line(img_angle + max_angle, Color::Yellow,UI_ANGLE_Length);
-    ui_angle_line(img_angle + min_angle + fire_angle ,Color::Red,UI_ANGLE_Length);
+    ui_angle_line(UI_ANGLE_Length, img_angle + min_angle, 1, Color::Yellow);
+    ui_angle_line(UI_ANGLE_Length, img_angle + max_angle, 1, Color::Yellow);
+    ui_angle_line(UI_ANGLE_Length, img_angle + min_angle + fire_angle , 1, Color::Red);
 
-    UI_angle.Render();
+    ui_angle_line(UI_ANGLE_Length+5, img_angle, 2,  Color::White);
+    ui_angle_line(UI_ANGLE_Length+5, img_angle+180, 2,  Color::White);
+
 }
 
 void Image_manager::render_front_ui(Tank const & tank)
@@ -140,34 +142,51 @@ void Image_manager::set_minimap_background()
     Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
 }
 
-void Image_manager::ui_angle_line(int const angle, Color color, int const length)
+void Image_manager::render_line(POINT const& location, size_t const length, size_t const thickness, float const angle, Color color)
 {
     switch (color)
     {
     case Image_manager::Color::Red:
     {
-        UI_angle.Name ="Image/UI/angle_r";
+        UI_Line.Name = "Image/UI/angle_r";
         break;
     }
     case Image_manager::Color::Yellow:
     {
-        UI_angle.Name ="Image/UI/angle_y";
+        UI_Line.Name = "Image/UI/angle_y";
+        break;
+    }
+    case Image_manager::Color::White:
+    {
+        UI_Line.Name = "Image/UI/angle_w";
         break;
     }
     default:
         break;
     }
+    UI_Line.Location = { location.x,location.y };
+    UI_Line.Length = { length ,thickness };
+    UI_Line.Angle = angle;
+    UI_Line.Render();
+}
+
+void Image_manager::ui_angle_line(int const length, int const angle, int const thickness, Color color)
+{
 
     double cosval = cos(-angle*Radian);
     double sinval = sin(-angle*Radian);
     int max_x = static_cast<int>(length * cosval );
     int max_y = static_cast<int>(length * sinval ); 
 
+    render_line
+    (
+        { UI_ANGLE_CENTER_X + max_x,UI_ANGLE_CENTER_Y + max_y },
+        length*2,
+        thickness,
+        static_cast<float>(angle),
+        color
+    );
 
-    UI_angle.Location = {UI_ANGLE_CENTER_X+max_x,UI_ANGLE_CENTER_Y+max_y};
-    UI_angle.Length = {length*2,1};
-    UI_angle.Angle = static_cast<float>(angle);
-    UI_angle.Render();
 }
 
 void Image_manager::render_tank_hp(Tank const& tank)
@@ -204,12 +223,12 @@ void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 {
     if (is_turn)
     {
-        Green.Location = { _Map_manager->minimap_loc.x+obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 };
+        Green.Location = { _Map_manager->minimap_loc.x+obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 + _Map_manager->MINI_UI_SIZE };
         Green.Angle = -obj.getimage_angle()/Radian;
         Green.Render();
         return;
     }
-    Red.Location = {_Map_manager->minimap_loc.x+ obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 };
+    Red.Location = {_Map_manager->minimap_loc.x+ obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 +_Map_manager->MINI_UI_SIZE };
     Red.Angle = -obj.getimage_angle()/Radian;
     Red.Render();
     return ;
@@ -228,6 +247,59 @@ void Image_manager::render_minimap_tank(std::vector<Tank> const& tank)
         if(tank[_Turn->whosturn()].get_state() != Tank::State::Dead)
             render_minimap_object(tank[_Turn->whosturn()], true);
     }
+}
+
+void Image_manager::render_minimap_cambox()
+{
+    LONG const cam_minimap_location_x = static_cast<LONG>(_CAM->pos_win.x/10.0f);
+    LONG const cam_minimap_location_y = static_cast<LONG>(_CAM->pos_win.y/10.0f);
+    LONG const mini_cam_size_w = CAM_SIZE_W / 10;
+    LONG const mini_cam_size_h = CAM_SIZE_H / 10;
+
+    render_line
+    (
+        {
+            _Map_manager->minimap_loc.x + cam_minimap_location_x ,
+            _Map_manager->minimap_loc.y + cam_minimap_location_y + mini_cam_size_h / 2
+        },
+        mini_cam_size_h,
+        1,
+        90,
+        Color::White
+    );
+    render_line
+    (
+        {
+            _Map_manager->minimap_loc.x + cam_minimap_location_x + mini_cam_size_w,
+            _Map_manager->minimap_loc.y + cam_minimap_location_y + mini_cam_size_h / 2
+        },
+        mini_cam_size_h,
+        1,
+        90,
+        Color::White
+    );
+    render_line
+    (
+        { 
+            _Map_manager->minimap_loc.x+ cam_minimap_location_x + mini_cam_size_w /2,
+            _Map_manager->minimap_loc.y+ cam_minimap_location_y
+        },
+        mini_cam_size_w,
+        1,
+        0,
+        Color::White
+    );
+    render_line
+    (
+        { 
+            _Map_manager->minimap_loc.x + cam_minimap_location_x + mini_cam_size_w / 2,
+            _Map_manager->minimap_loc.y + cam_minimap_location_y+ mini_cam_size_h
+        },
+        mini_cam_size_w,
+        1,
+        0,
+        Color::White
+    );
 }
 
 

@@ -108,7 +108,7 @@ Scene * S_Battle::update_scene()
                 _Anime->render_change_loading(Engine::Time::Get::Delta());
                 if(_Anime->get_loading_time() < 0.1f and playing_time > min_loading_time+ 0.5f)
                 {
-                    Engine::Rendering::Pipeline::Effect::set_y(CAM_SIZE_H);
+                    Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H);
                     this->state = State::Playing;
                     break;
                 }
@@ -171,13 +171,13 @@ void S_Battle::render_playing()
     _Anime->render(tank,missile);
 
     _Image_manager->render_ui(tank);
+    _Text_manager->render(tank);
 
     _Map_manager->render_minimap();   //0.5
-
     _Image_manager->render_minimap_tank(tank);
 
-    _Debug_manager->set_delta(Engine::Time::Get::Delta());
-    _Debug_manager->rendering();
+    //_Debug_manager->set_delta(Engine::Time::Get::Delta());
+    //_Debug_manager->rendering();
 
     //타겟을 다 결합하고 한번에 다 그리는 방식
 }

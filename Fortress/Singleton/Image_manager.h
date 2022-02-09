@@ -13,7 +13,7 @@ public:
     };
     enum class Color
     {
-        Red, Yellow
+        Red, Yellow,White
     };
 
 private:
@@ -26,7 +26,7 @@ private:
     Engine::Rendering::Image::UI UI_Hp;
     Engine::Rendering::Image::UI UI_Power;
     Engine::Rendering::Image::UI UI_Fuel;
-    Engine::Rendering::Image::UI UI_angle;
+    Engine::Rendering::Image::UI UI_Line;
 
 
     Engine::Rendering::Image::Component Tank_Hp;
@@ -36,11 +36,14 @@ private:
     Engine::Rendering::Image::UI Green;
     void set_background();
     void set_minimap_background();
-    void ui_angle_line( int const angle,Color color, int const length);
+    void render_line(POINT const & location,size_t const length,
+        size_t const thickness, float const angle, Color color);
+    void ui_angle_line(int const length, int const angle,
+        int const thickness, Color color);
     void render_tank_hp(Tank const & tank);
 
     void render_minimap_object(Object const& obj, bool is_turn);
-
+    
     //game over
 private:
     Engine::Rendering::Image::UI Gameover;
@@ -58,6 +61,7 @@ public:
     void render_ui(std::vector<Tank> const& tank);
     
     void render_minimap_tank(std::vector<Tank> const& tank);
+    void render_minimap_cambox();
 
     void render_gameover();
 
