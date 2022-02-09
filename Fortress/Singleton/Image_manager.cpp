@@ -225,7 +225,8 @@ void Image_manager::render_minimap_tank(std::vector<Tank> const& tank)
                 render_minimap_object(tank[i],false);
 
         }
-        render_minimap_object(tank[_Turn->whosturn()], true);
+        if(tank[_Turn->whosturn()].get_state() != Tank::State::Dead)
+            render_minimap_object(tank[_Turn->whosturn()], true);
     }
 }
 
