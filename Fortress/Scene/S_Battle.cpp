@@ -140,19 +140,17 @@ Scene * S_Battle::update_scene()
     return nullptr;
 }
 
-
 void S_Battle::dispose_tanks()
 {
     _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());
     _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);
 }
 
-
 void S_Battle::render_playing()
 {
 
     //Engine::Rendering::Pipeline::Effect::set_alhpa(abs(sin(playing_time)));
-    //Engine::Rendering::Pipeline::Effect::set_alhpa(1.0f);
+    //Engine::Rendering::Pipeline::Effect::set_alhpa(0.5f);
 
     _Map_manager->render_map();
 
@@ -164,10 +162,8 @@ void S_Battle::render_playing()
 
     _Image_manager->render_minimap_tank(tank);
 
-
     _Debug_manager->set_delta(Engine::Time::Get::Delta());
     _Debug_manager->rendering();
-
 
     //타겟을 다 결합하고 한번에 다 그리는 방식
 }

@@ -15,9 +15,9 @@ namespace Shader
         {
             Resource.Load(int3(Input.TexCoord.x, Input.TexCoord.y, 0))
         };
-        if (Output.a <0.1f)
-            discard;
-        Output.a = cbuffer_value.a;
+        //if (Output.a <0.1f)
+        //    discard;
+        //Output.a = cbuffer_value.a;
         return Output;
     //float avr = (Output.r+Output.g+Output.b)/3.0f;
 	//if (Input.TexCoord.y > 100)

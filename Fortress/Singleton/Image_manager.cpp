@@ -10,7 +10,6 @@ Image_manager::Image_manager()
 
 void Image_manager::initialize()
 {
-    Background.Name = "Image/Background/background";
     set_background();
    
     UI_Back.Name = "Image/UI/UI_Back";
@@ -117,12 +116,17 @@ void Image_manager::render_gameover()
 
 void Image_manager::set_background()
 {
+    Background.Name = "Image/Background/background";
+
     Background.Location = {0,0};
     Background.Length = Vector<2>(BackgroundSIZE_W, BackgroundSIZE_H);
 }
 
 void Image_manager::set_minimap_background()
 {
+    Background.Name = "Image/Background/background_alpha";
+    //Background.Name = "Image/Background/start";
+
     Background.Location = {_Map_manager->minimap_loc.x+MINIMAP_SIZE_W/2,_Map_manager->minimap_loc.y-MINIMAP_SIZE_H/2};
     Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
 }
