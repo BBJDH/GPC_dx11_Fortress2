@@ -50,6 +50,8 @@ void S_Start::render()
 void S_Start::Start()
 {
     init_image();
+    Engine::Rendering::Pipeline::Effect::set_y(CAM_SIZE_H);
+
 }
 
 Scene* S_Start::Update()

@@ -12,6 +12,10 @@ void Image_manager::initialize()
 {
     set_background();
    
+    Loading.Name = "Image/Screen/loading";
+    Loading.Location = { 0,0 };
+    Loading.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+
     UI_Back.Name = "Image/UI/UI_Back";
     UI_Back.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
     UI_Back.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
@@ -41,6 +45,11 @@ void Image_manager::initialize()
 void Image_manager::render_background()
 {
     Background.Render();
+}
+
+void Image_manager::render_loading()
+{
+    Loading.Render();
 }
 
 
@@ -212,12 +221,11 @@ void Image_manager::render_minimap_tank(std::vector<Tank> const& tank)
     {
         for (size_t i = 0; i < tank.size(); i++)
         {
-            if(i == _Turn->whosturn())
-                render_minimap_object(tank[i],true);
-            else
+            if(i != _Turn->whosturn() and tank[i].get_state() != Tank::State::Dead)
                 render_minimap_object(tank[i],false);
 
         }
+        render_minimap_object(tank[_Turn->whosturn()], true);
     }
 }
 

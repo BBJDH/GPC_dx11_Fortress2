@@ -17,6 +17,10 @@ private:
     Engine::Rendering::Camera Camera;
     Button<Scene*> * exit_button;
 
+    //로딩 설정
+    float const min_loading_time = 4.0f;
+    float const waiting_time = 2.0f; //기본 초기화 대기시간
+    float playing_time;
 
 private:
     //버튼설정
@@ -31,8 +35,7 @@ private:
     float const gameover_exit_h = 30;
 
 
-    float const waiting_time = 2.0f;
-    float playing_time;
+
 private:
     void    initialize();
     void    set_playing_exit_button();

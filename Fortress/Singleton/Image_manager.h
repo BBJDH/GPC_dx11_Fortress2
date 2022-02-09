@@ -19,6 +19,7 @@ public:
 private:
 
     Engine::Rendering::Image::Component Background;
+    Engine::Rendering::Image::Component Loading;
 
     Engine::Rendering::Image::UI UI_Back;
     Engine::Rendering::Image::UI UI_Front;
@@ -49,6 +50,7 @@ public:
     Image_manager();
     void initialize();
     void render_background();
+    void render_loading();
     void render_minimap_background();
     void render_back_ui(Tank const & tank);
     void render_front_ui(Tank const & tank);

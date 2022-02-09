@@ -19,6 +19,7 @@ namespace Engine::Rendering::Pipeline
         void create_buffer();
         void Update();
         void set_alhpa(float alpha);
+        void set_y(float y);
     }
 
     namespace String

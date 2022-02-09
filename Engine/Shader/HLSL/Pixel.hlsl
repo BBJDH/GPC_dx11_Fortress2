@@ -18,10 +18,11 @@ namespace Shader
         //if (Output.a <0.1f)
         //    discard;
         //Output.a = cbuffer_value.a;
+        float avr = (Output.r+Output.g+Output.b)/3.0f;
+    	if (Input.TexCoord.y > cbuffer_value.y)
+            return float4(avr,avr,avr, Output.a);
+
         return Output;
-    //float avr = (Output.r+Output.g+Output.b)/3.0f;
-	//if (Input.TexCoord.y > 100)
- //       return float4(avr,avr,avr,1);
     }
 //float4 자료형 {x,y,z,alpha} 버퍼로 받아서 (이 상수버퍼는 매 프레임마다 갱신)
 //x,y,z,는 Input의 좌표요소와 비교하여 픽셀값을 계산하고

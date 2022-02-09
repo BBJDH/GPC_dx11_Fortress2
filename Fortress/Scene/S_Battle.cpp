@@ -92,14 +92,28 @@ Scene * S_Battle::update_scene()
     {
         Camera.Location = { 0,0 };
         Camera.Set();
+        
+        //셰이더로 로딩씬 그리기
+        Engine::Rendering::Pipeline::Effect::set_y((playing_time/ min_loading_time)* CAM_SIZE_H);
+        _Image_manager->render_loading();
+        
 
+        //애니메이션으로 로딩씬 그리기
+        //_Anime->render_loading(Engine::Time::Get::Delta());
         if (playing_time > waiting_time)
         {
             dispose_tanks();
-            if(!_Turn->check_tank_falling(tank) and _Anime->get_loading_time()<0.1f)
-                this->state = State::Playing;
+            if (!_Turn->check_tank_falling(tank) and playing_time > min_loading_time)
+            {
+                _Anime->render_change_loading(Engine::Time::Get::Delta());
+                if(_Anime->get_loading_time() < 0.1f and playing_time > min_loading_time+ 0.5f)
+                {
+                    Engine::Rendering::Pipeline::Effect::set_y(CAM_SIZE_H);
+                    this->state = State::Playing;
+                    break;
+                }
+            }
         }
-        _Anime->render_loading(Engine::Time::Get::Delta());
 
         break;
     }

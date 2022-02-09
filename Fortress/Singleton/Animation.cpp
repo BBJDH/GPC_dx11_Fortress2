@@ -21,6 +21,17 @@ void Animation::render_loading(float const delta)
 
 }
 
+void Animation::render_change_loading(float const delta)
+{
+    loading_time += delta;
+    if (loading_time > 0.5f)
+        loading_time = 0.0f;
+    else
+    {
+        change_loding.Render();
+    }
+}
+
 float const Animation::get_loading_time()
 {
     return loading_time;
@@ -42,14 +53,20 @@ void Animation::initialize()
     loading[5].Name = "Animation/Screen/loading_5";
     loading[6].Name = "Animation/Screen/loading_6";
     loading[7].Name = "Animation/Screen/loading_7";
-    loading[8].Name = "Animation/Screen/loading_8";
-    for (size_t i = 0; i < 9; i++)
+
+    //loading[8].Name = "Animation/Screen/loading_8";
+    for (size_t i = 0; i < 8; i++)
     {
         loading[i].Duration = 0.5f;
         loading[i].Repeatable = false;
         loading[i].Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
         loading[i].Location = { 0,0 };
     }
+    change_loding.Name = "Animation/Screen/loading_8";
+    change_loding.Duration = 0.5f;
+    change_loding.Repeatable = false;
+    change_loding.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    change_loding.Location = { 0,0 };
 
 }
 
@@ -60,8 +77,10 @@ void Animation::render_tanks(std::vector<Tank> & tank)
     {
         for (size_t i = 0; i < tank.size(); i++)
         {
+            if (i != _Turn->whosturn())
             tank[i].ani_render(Engine::Time::Get::Delta());
         }
+        tank[_Turn->whosturn()].ani_render(Engine::Time::Get::Delta());
     }
 }
 
