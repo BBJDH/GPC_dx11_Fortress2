@@ -31,11 +31,13 @@ private:
     Engine::Rendering::Image::Component Tank_Hp;
     Engine::Rendering::Image::Component Tank_Hp_Bar;
 
-    Engine::Rendering::Image::Component Red;
-    Engine::Rendering::Image::Component Green;
-
+    Engine::Rendering::Image::UI Red;
+    Engine::Rendering::Image::UI Green;
+    void set_background();
+    void set_minimap_background();
     void ui_angle_line( int const angle,Color color, int const length);
     void render_tank_hp(Tank const & tank);
+
     void render_minimap_object(Object const& obj, bool is_turn);
 
     //game over
@@ -47,6 +49,7 @@ public:
     Image_manager();
     void initialize();
     void render_background();
+    void render_minimap_background();
     void render_back_ui(Tank const & tank);
     void render_front_ui(Tank const & tank);
     void render_tanks_hp(std::vector<Tank> const& tank);

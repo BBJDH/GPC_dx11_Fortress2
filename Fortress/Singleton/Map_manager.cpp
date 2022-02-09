@@ -2,7 +2,7 @@
 #include "Map_manager.h"
 
 
-Map_manager::Map_manager()
+Map_manager::Map_manager() :minimap_loc{CAM_SIZE_W-MINIMAP_SIZE_W,0}
 {
     initialize();
 }
@@ -26,6 +26,7 @@ void Map_manager::initialize()
 
 void Map_manager::render_map()
 {
+    _Image_manager->render_background();
     Engine::Rendering::Pipeline::HmemDC::Render_map
     (
         hmapdc,
@@ -38,14 +39,17 @@ void Map_manager::render_map()
     //Map.Render();
 }
 
+
+
 void Map_manager::render_minimap()
 {
+    _Image_manager->render_minimap_background();
     Engine::Rendering::Pipeline::HmemDC::Render_minimap
     (
         hmapdc,
         Transparent_Color,
-        { CAM_SIZE_W-MINIMAP_SIZE_W, 0 },
-        { MINIMAP_SIZE_W, MINIMAP_MAPSIZE_H},
+        { minimap_loc.x, minimap_loc.y },
+        { MINIMAP_SIZE_W, MINIMAP_SIZE_H},
         127
     );
 }

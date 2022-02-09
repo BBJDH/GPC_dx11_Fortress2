@@ -11,7 +11,7 @@ Image_manager::Image_manager()
 void Image_manager::initialize()
 {
     Background.Name = "Image/Background/background";
-    Background.Length = Vector<2>(BackgroundSIZE_W, BackgroundSIZE_H);
+    set_background();
    
     UI_Back.Name = "Image/UI/UI_Back";
     UI_Back.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
@@ -29,9 +29,9 @@ void Image_manager::initialize()
     Tank_Hp_Bar.Name ="Image/UI/base_bar";
 
     Red.Name = "Image/UI/Red";
-    Red.Length = Vector<2>(10, 10);
+    Red.Length = Vector<2>(5, 5);
     Green.Name = "Image/UI/Green";
-    Green.Length = Vector<2>(10, 10);
+    Green.Length = Vector<2>(5, 5);
 
     Gameover.Name = "Image/Screen/gameover";
     Gameover.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
@@ -115,6 +115,18 @@ void Image_manager::render_gameover()
 }
 
 
+void Image_manager::set_background()
+{
+    Background.Location = {0,0};
+    Background.Length = Vector<2>(BackgroundSIZE_W, BackgroundSIZE_H);
+}
+
+void Image_manager::set_minimap_background()
+{
+    Background.Location = {_Map_manager->minimap_loc.x+MINIMAP_SIZE_W/2,_Map_manager->minimap_loc.y-MINIMAP_SIZE_H/2};
+    Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
+}
+
 void Image_manager::ui_angle_line(int const angle, Color color, int const length)
 {
     switch (color)
@@ -168,16 +180,23 @@ void Image_manager::render_tank_hp(Tank const& tank)
 
 }
 
+void Image_manager::render_minimap_background()
+{
+    set_minimap_background();
+    render_background();
+    set_background();
+}
+
 void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 {
     if (is_turn)
     {
-        Green.Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
+        Green.Location = { _Map_manager->minimap_loc.x+obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 };
         Green.Angle = -obj.getimage_angle()/Radian;
         Green.Render();
         return;
     }
-    Red.Location = { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y };
+    Red.Location = {_Map_manager->minimap_loc.x+ obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 };
     Red.Angle = -obj.getimage_angle()/Radian;
     Red.Render();
     return ;

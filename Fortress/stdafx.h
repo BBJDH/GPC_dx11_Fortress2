@@ -120,7 +120,7 @@ struct Position
 #define MAPSIZE_W	 3000//CAM_SIZE_W
 #define MAPSIZE_H	 1800//CAM_SIZE_H
 #define MINIMAP_SIZE_W	 300
-#define MINIMAP_MAPSIZE_H	 180
+#define MINIMAP_SIZE_H	 180
 #define BackgroundSIZE_W	MAPSIZE_W//CAM_SIZE_W//1280*1.2
 #define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
 
