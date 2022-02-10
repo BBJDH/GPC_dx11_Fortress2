@@ -31,7 +31,6 @@ private:
 	float		    fire_angle_left_value;
 	float		    fire_velocity;
 
-	void check_state();
 	void ani_set_flip();
 	void ani_set_normal();
 	void ani_set_idle();
@@ -41,6 +40,7 @@ private:
 	void ani_set_move();
 	void ani_set_stop();
 	void ani_set_fall();
+	void ani_set_hit();
 	void ani_set_danger();
 	void ani_set_dead();
 	void set_idle_state();
@@ -50,6 +50,8 @@ public:
 
 	Tank(Position const& pos, unsigned const width, unsigned const height);
 	Tank & operator=(Tank const & other_tank);
+	Tank::State get_state()const;
+	Tank::Side get_side()const;
 	unsigned const gethp() const;
 	int const getpower()const;
 	int const getfuel()const;
@@ -58,8 +60,8 @@ public:
 	int const getangle_min()const;
 	int const getangle_max()const;
 	bool is_dead()const;
-	Tank::State get_state()const;
-	Tank::Side get_side()const;
+	void ballistics_initialize(float const moving_angle, float const velocity, State state);
+	void check_state();
 	void take_damage(unsigned const damage);
 	void set_side(Side const side);
 	void setstate(State const state);

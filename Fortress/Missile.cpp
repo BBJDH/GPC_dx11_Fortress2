@@ -4,7 +4,7 @@
 
 Missile::Missile(Position const& pos, unsigned const width, unsigned const height):
 	Object(pos, width, height),bomb_range_w(100),bomb_range_h(80),
-	damage{1500}, ani_playtime{ 0.0f }, state{ State::Throw }
+	damage{450}, ani_playtime{ 0.0f }, state{ State::Throw }
 {
 	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
 
@@ -48,7 +48,8 @@ void Missile::ani_set_throw()
 void Missile::ani_set_boom()
 {
 	animation.Name = "Animation/Bomb/explosion";
-	animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
+	//animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
+	animation.Length = Vector<2>(10, 10);
 	animation.Duration = ANI_Bomb_Boom;
 	animation.Repeatable = false;
 }

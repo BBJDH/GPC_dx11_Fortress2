@@ -87,12 +87,7 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			if (tank[i].is_falling() and Collide_object(tank[i], hmapdc) 
-				and !tank[i].is_dead() and !(tank[i].get_state() == Tank::State::Danger))
-			{
-				tank[i].setstate(Tank::State::Nomal);
-				tank[i].ani_start();
-			}
+			tank[i].check_state();
 		}
 	}
 	if (!missile.empty())
@@ -163,7 +158,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 				unsigned const dmg = missile.get_damage() * dmg_mul / range;
 
 				tank[i].take_damage(dmg);
-				tank[i].ballistics_initialize(0,0);
+				tank[i].ballistics_initialize(0,0,Tank::State::Hit);
 				_CAM->earthquake_start();
 			}
 		}

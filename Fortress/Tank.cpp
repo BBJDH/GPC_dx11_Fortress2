@@ -107,6 +107,7 @@ void Tank::take_damage(unsigned const damage)
 		return;
 	}
 	state = State::Hit;
+	ani_start();
 
 	this->hp -= damage;
 }
@@ -176,6 +177,12 @@ void Tank::plus_angle(int angle)
 	if(fire_angle >fire_angle_max-fire_angle_min or fire_angle<0)
 		this->fire_angle -= angle;
 
+}
+
+void Tank::ballistics_initialize(float const moving_angle, float const velocity, State state)
+{
+	Object::ballistics_initialize(moving_angle, velocity);
+	this->state = state;
 }
 
 void Tank::ani_set_flip()
@@ -267,7 +274,7 @@ void Tank::check_state()
 	}
 	case Tank::State::Fall:
 	{
-		if (!falling and !hp==0)
+		if (_Physics_manager->Collide_object(*this,_Map_manager->hmapdc) and !hp==0)
 		{
 			setstate(State::Nomal);
 			ani_set_normal();
@@ -279,15 +286,18 @@ void Tank::check_state()
 	}
 	case Tank::State::Hit:
 	{
-		if (true)
+		_Physics_manager->Collide_object(*this, _Map_manager->hmapdc);
+		
+		if (ani_playtime> ANI_Tank_Hit)
 		{
 			setstate(State::Nomal);
 			ani_set_normal();
 			ani_start();
 		}
 		else
-			//ani_set_fall();
+			ani_set_hit();
 		break;
+		
 	}
 	case Tank::State::Dead:
 	{
@@ -367,6 +377,13 @@ void Tank::ani_set_fall()
 	this->animation.Repeatable = true;
 }
 
+void Tank::ani_set_hit()
+{
+	this->animation.Name = "Animation/Canon/hit";
+	this->animation.Duration = ANI_Tank_Hit;
+	this->animation.Repeatable = false;
+}
+
 void Tank::ani_set_danger()
 {
 	this->animation.Name = "Animation/Canon/danger";
@@ -384,7 +401,7 @@ void Tank::ani_set_dead()
 void Tank::ani_render(float const delta)
 {
 	ani_playtime += delta;
-	check_state();
+	//check_state();
 	ani_set_flip();
 	this->animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
 	this->animation.Angle = -this->image_angle / Radian;

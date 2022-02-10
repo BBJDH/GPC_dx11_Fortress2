@@ -79,7 +79,7 @@ void S_Battle::create_tanks()
     for (unsigned i = 0; i < PLAYERS; i++)
     {
         tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE));
-        tank.back().ballistics_initialize(0, 0);
+        tank.back().ballistics_initialize(0, 0, Tank::State::Fall);
     }
 }
 
@@ -162,10 +162,6 @@ void S_Battle::dispose_tanks()
 
 void S_Battle::render_playing()
 {
-
-    //Engine::Rendering::Pipeline::Effect::set_alhpa(abs(sin(playing_time)));
-    //Engine::Rendering::Pipeline::Effect::set_alhpa(0.5f);
-
     _Map_manager->render_map();
 
     _Anime->render(tank,missile);

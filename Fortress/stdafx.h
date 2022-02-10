@@ -151,7 +151,7 @@ struct Position
 #define Tank_HP_Bar_Mul 0.06
 
 //플레이어수, 게임플레이 세팅
-#define PLAYERS		 8
+#define PLAYERS		 2
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100
@@ -195,6 +195,7 @@ struct Position
 #define ANI_Tank_Fire 0.25f
 #define ANI_Tank_Move 0.1f
 #define ANI_Tank_Fall 0.1f
+#define ANI_Tank_Hit 2.5f
 #define ANI_Tank_Danger 3.0f
 #define ANI_Tank_Dead 3.0f
 #define ANI_Tank_Stop 0.75f

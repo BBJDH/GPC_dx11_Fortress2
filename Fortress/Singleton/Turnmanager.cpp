@@ -66,7 +66,7 @@ bool Turnmanager::check_tank_falling(std::vector<Tank>& tank)
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			if (tank[i].is_falling())
+			if (tank[i].get_state() == Tank::State::Fall)
 			{
 				_CAM->focus_on();
 
