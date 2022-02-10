@@ -13,7 +13,6 @@ public:
 	Position pos;
 	Position pos_win;
 
-
 private:
 	State state;
 	unsigned const speed;

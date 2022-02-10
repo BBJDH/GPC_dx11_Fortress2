@@ -106,8 +106,8 @@ void Tank::take_damage(unsigned const damage)
 		ani_start();
 		return;
 	}
-	//state = State::Hit;
-	//ani_start();
+	state = State::Hit;
+	ani_start();
 
 	this->hp -= damage;
 }
@@ -164,11 +164,11 @@ void Tank::set_idle_state()
 
 void Tank::init_text()
 {
-	Damage.Font.Name = "Kostar";
-	Damage.Font.Bold = false;
-	Damage.Font.Italic = false;
-	Damage.Font.Underlined = false;
-	Damage.Font.StructOut = false;
+	text.Font.Name = "Kostar";
+	text.Font.Bold = false;
+	text.Font.Italic = false;
+	text.Font.Underlined = false;
+	text.Font.StructOut = false;
 }
 
 void Tank::plus_angle(int angle)
@@ -287,9 +287,9 @@ void Tank::check_state()
 	}
 	case Tank::State::Hit:
 	{
-		_Physics_manager->Collide_object(*this, _Map_manager->hmapdc);
-		
-		if (ani_playtime> ANI_Tank_Hit)
+		;
+		if (_Physics_manager->Collide_object(*this, _Map_manager->hmapdc)
+			and ani_playtime> ANI_Tank_Hit)
 		{
 			setstate(State::Nomal);
 			ani_set_normal();
@@ -302,6 +302,7 @@ void Tank::check_state()
 	}
 	case Tank::State::Dead:
 	{
+		_Physics_manager->Collide_object(*this, _Map_manager->hmapdc);
 		ani_set_dead();
 		break;
 	}
@@ -412,6 +413,7 @@ void Tank::ani_render(float const delta)
 void Tank::ani_start()
 {
 	this->animation.Playback =0;
+	this->ani_playtime = 0;
 }
 
 void Tank::minus_fuel()

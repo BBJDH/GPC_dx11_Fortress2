@@ -48,8 +48,7 @@ void Missile::ani_set_throw()
 void Missile::ani_set_boom()
 {
 	animation.Name = "Animation/Bomb/explosion";
-	//animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
-	animation.Length = Vector<2>(10, 10);
+	animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
 	animation.Duration = ANI_Bomb_Boom;
 	animation.Repeatable = false;
 }

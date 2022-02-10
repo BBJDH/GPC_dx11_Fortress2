@@ -17,7 +17,8 @@ public:
 private:
 
 	Engine::Rendering::Animation::Component animation;
-	Engine::Rendering::Text::Component Damage;
+	Engine::Rendering::Text::Component name;
+	Engine::Rendering::Text::Component damage;
 
 	float ani_playtime;
 

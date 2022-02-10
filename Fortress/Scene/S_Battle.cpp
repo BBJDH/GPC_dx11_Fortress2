@@ -109,6 +109,7 @@ Scene * S_Battle::update_scene()
                 if(_Anime->get_loading_time() < 0.1f and playing_time > min_loading_time+ 0.5f)
                 {
                     Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H);
+                    _Turn->tankturn_start(tank);
                     this->state = State::Playing;
                     break;
                 }
