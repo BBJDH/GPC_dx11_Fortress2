@@ -73,7 +73,7 @@ bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 		{
 			obj.moveto({obj.getpos().x, static_cast<float>(j- obj.getheight()/2)});
 			obj.stop_move(calc_landing_angle(start_x,j,hmapdc));
-
+			
 			return true;
 		}
 
@@ -105,7 +105,7 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 		}
 	}
 }
-
+// ÅºµµÇÐ °è»ê 
 void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& missile,float const delta)
 {
 	if (!tank.empty())
@@ -159,6 +159,8 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 
 				tank[i].take_damage(dmg);
 				tank[i].ballistics_initialize(0,0,Tank::State::Hit);
+				tank[i].ani_start();
+
 				_CAM->earthquake_start();
 			}
 		}

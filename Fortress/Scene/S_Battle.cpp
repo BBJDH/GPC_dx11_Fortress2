@@ -156,8 +156,8 @@ Scene * S_Battle::update_scene()
 
 void S_Battle::dispose_tanks()
 {
-    _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());
-    _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);
+    _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());//이동계산과 낙하, 맵밖 삭제
+    _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
 }
 
 void S_Battle::render_playing()

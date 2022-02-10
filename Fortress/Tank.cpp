@@ -106,8 +106,8 @@ void Tank::take_damage(unsigned const damage)
 		ani_start();
 		return;
 	}
-	state = State::Hit;
-	ani_start();
+	//state = State::Hit;
+	//ani_start();
 
 	this->hp -= damage;
 }
@@ -183,6 +183,7 @@ void Tank::ballistics_initialize(float const moving_angle, float const velocity,
 {
 	Object::ballistics_initialize(moving_angle, velocity);
 	this->state = state;
+	this->ani_start();
 }
 
 void Tank::ani_set_flip()
