@@ -24,7 +24,6 @@ private:
 	Engine::Rendering::Text::Component text;
 	//Engine::Rendering::Text::Component damage;
 
-	float ani_playtime;
 
 	State		    state;
 	Side		    side;
@@ -37,6 +36,7 @@ private:
 	float		    fire_angle;
 	float		    fire_angle_left_value;
 	float		    fire_velocity;
+	float			ani_playtime;
 
 	void ani_set_flip();
 	void ani_set_normal();
@@ -62,6 +62,7 @@ public:
 	std::string get_name()const;
 	std::string get_damage()const;
 
+	float const get_ani_playtime()const;
 	unsigned const gethp() const;
 	int const getpower()const;
 	int const getfuel()const;

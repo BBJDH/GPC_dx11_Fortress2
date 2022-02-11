@@ -25,6 +25,10 @@ Tank& Tank::operator=(Tank const& other_tank)
 	this->fire_velocity  = other_tank.fire_velocity;
 	return *this;
 }
+float const Tank::get_ani_playtime() const
+{
+	return ani_playtime;
+}
 //namespace Physics
 //{
 //	bool Collide(HDC const hdc, int const x, int const y)

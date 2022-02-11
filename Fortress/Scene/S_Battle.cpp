@@ -78,7 +78,7 @@ void S_Battle::create_tanks()
     Random r(10,MAPSIZE_W-10,PLAYERS);
     for (unsigned i = 0; i < PLAYERS; i++)
     {
-        tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE , "PLAYER "+std::to_string(i+1)));
+        tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE , "player "+std::to_string(i+1)));
         tank.back().ballistics_initialize(0, 0, Tank::State::Fall);
     }
 }
@@ -94,6 +94,7 @@ Scene * S_Battle::update_scene()
         Camera.Set();
         
         //셰이더로 로딩씬 그리기
+        //포스트 이펙트 블러
         Engine::Rendering::Pipeline::Effect::set_y((playing_time/ min_loading_time)* CAM_SIZE_H);
         _Image_manager->render_loading();
 

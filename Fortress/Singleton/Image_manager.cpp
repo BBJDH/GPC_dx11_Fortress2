@@ -149,7 +149,8 @@ void Image_manager::set_minimap_background()
     Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
 }
 
-void Image_manager::render_line(POINT const& location, unsigned const length, unsigned const thickness, float const angle, Color color)
+void Image_manager::render_line(POINT const& location, unsigned const length,
+    unsigned const thickness, float const angle, Color color)
 {
     switch (color)
     {
