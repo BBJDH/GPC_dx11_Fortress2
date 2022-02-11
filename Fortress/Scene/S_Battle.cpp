@@ -78,7 +78,7 @@ void S_Battle::create_tanks()
     Random r(10,MAPSIZE_W-10,PLAYERS);
     for (unsigned i = 0; i < PLAYERS; i++)
     {
-        tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE));
+        tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE , "PLAYER "+std::to_string(i+1)));
         tank.back().ballistics_initialize(0, 0, Tank::State::Fall);
     }
 }
@@ -96,13 +96,12 @@ Scene * S_Battle::update_scene()
         //셰이더로 로딩씬 그리기
         Engine::Rendering::Pipeline::Effect::set_y((playing_time/ min_loading_time)* CAM_SIZE_H);
         _Image_manager->render_loading();
-        
 
         //애니메이션으로 로딩씬 그리기
         //_Anime->render_loading(Engine::Time::Get::Delta());
         if (playing_time > waiting_time)
         {
-            dispose_tanks();
+            dispose_objects();
             if (!_Turn->check_tank_falling(tank) and playing_time > min_loading_time)
             {
                 _Anime->render_change_loading(Engine::Time::Get::Delta());
@@ -127,7 +126,7 @@ Scene * S_Battle::update_scene()
         _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
         _Input_manager->input(tank,missile,Engine::Time::Get::Delta());
 
-        dispose_tanks();
+        dispose_objects();            //이동계산 및 충돌검사
 
         render_playing();            //렌더링
 
@@ -155,26 +154,25 @@ Scene * S_Battle::update_scene()
     return nullptr;
 }
 
-void S_Battle::dispose_tanks()
+void S_Battle::dispose_objects()
 {
     _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());//이동계산과 낙하, 맵밖 삭제
     _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
 }
 
-void S_Battle::render_playing()
+void S_Battle::render_playing() //Update
 {
     _Map_manager->render_map();
 
     _Anime->render(tank,missile);
-
-    _Image_manager->render_ui(tank);
     _Text_manager->render(tank);
 
-    _Map_manager->render_minimap();   //0.5
-    _Image_manager->render_minimap_tank(tank);
+    _Image_manager->render_ui(tank);
 
-    //_Debug_manager->set_delta(Engine::Time::Get::Delta());
-    //_Debug_manager->rendering();
+    _Map_manager->render_minimap(tank);   
+
+    _Debug_manager->set_delta(Engine::Time::Get::Delta());
+    _Debug_manager->rendering();
 
     //타겟을 다 결합하고 한번에 다 그리는 방식
 }

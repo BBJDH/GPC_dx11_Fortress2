@@ -32,7 +32,8 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
                     static_cast<int>(_Mouse->y)+_CAM->pos_win.y
                 },
                 Tank_SIZE,
-                Tank_SIZE
+                Tank_SIZE,
+                "Temp"
             )
         );
         tank.back().ballistics_initialize(0, 0, Tank::State::Fall);

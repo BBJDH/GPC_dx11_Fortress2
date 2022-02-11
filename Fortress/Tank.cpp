@@ -4,12 +4,12 @@
 
 
 
-Tank::Tank(Position const& pos, unsigned const width, unsigned const height)
+Tank::Tank(Position const& pos, unsigned const width, unsigned const height, std::string const& name)
 	:Object(pos, width, height), hp{ TANK_HP }, fuel{100},
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
 	state{ State::Nomal }, side{ Side::Right },
-	ani_playtime{0.0f}
+	ani_playtime{ 0.0f }, name{ name }, damage{""}
 {
 	ani_set_normal();
 	init_text();
@@ -97,6 +97,16 @@ Tank::Side Tank::get_side() const
 	return side;
 }
 
+std::string Tank::get_name() const
+{
+	return name;
+}
+
+std::string Tank::get_damage() const
+{
+	return damage;
+}
+
 void Tank::take_damage(unsigned const damage)
 {
 	if (damage >= this->hp)
@@ -108,7 +118,7 @@ void Tank::take_damage(unsigned const damage)
 	}
 	state = State::Hit;
 	ani_start();
-
+	this->damage = "-" + std::to_string(damage);
 	this->hp -= damage;
 }
 
@@ -414,6 +424,35 @@ void Tank::ani_start()
 {
 	this->animation.Playback =0;
 	this->ani_playtime = 0;
+}
+
+void Tank::text_render()
+{
+	//_Text_manager->set_text
+	//(
+	//	text, 
+	//	//{800, 300},
+	//	{static_cast<LONG>( pos.x - _CAM->pos_win.x+width/2 + NAME_LOCATION_X), static_cast<LONG>( pos.y - _CAM->pos_win.y+ Tank_HP_Bar_Location_H + NAME_LOCATION_Y) },
+	//	{100,15},
+	//	name,
+	//	Text_manager::Color::Red
+	//);
+	//text.Render();
+	//if (state == State::Hit)
+	//{
+	//	_Text_manager->set_text
+	//	(
+	//		text,
+	//		//{800, 300},
+	//		{ static_cast<LONG>(pos.x - _CAM->pos_win.x + width / 2 + NAME_LOCATION_X), static_cast<LONG>(pos.y - _CAM->pos_win.y - Tank_HP_Bar_Location_H) },
+	//		{ 80,12 },
+	//		damage,
+	//		Text_manager::Color::Red
+	//	);
+	//	text.Render();
+
+	//}
+
 }
 
 void Tank::minus_fuel()

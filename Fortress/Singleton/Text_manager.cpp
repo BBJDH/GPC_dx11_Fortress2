@@ -1,6 +1,35 @@
 #include "stdafx.h"
 #include "Text_manager.h"
 
+void Text_manager::render_tank_text(Tank const& tank)
+{
+	set_text
+	(
+		text,
+		{
+			static_cast<LONG>(tank.getpos().x - _CAM->pos_win.x + tank.getwidth() / 2 - 8),
+			static_cast<LONG>(tank.getpos().y - _CAM->pos_win.y + Tank_HP_Bar_Location_H + 15)
+		},
+		{ 100,15 },
+		tank.get_name(),
+		Color::Red
+	);
+
+	//set_text
+	//(
+	//	text,
+	//	{
+	//		100,
+	//		100
+	//	},
+	//	{ 100,15 },
+	//	"¤±¤¸¤§¤©",
+	//	Color::Red
+	//);
+
+	text.Render();
+}
+
 void Text_manager::set_text(Engine::Rendering::Text::Component& text, POINT const& location,
 	SIZE const& font_size, std::string const& str_value, Color color)
 {
@@ -69,9 +98,21 @@ void Text_manager::render_tank_angle(Tank const& tank)
 	);
 }
 
-void Text_manager::render(std::vector<Tank> const& tank)
+void Text_manager::render(std::vector<Tank> & tank)
 {
-	render_tank_angle(tank[_Turn->whosturn()]);
+	if (!tank.empty())
+	{
+		for (size_t i = 0; i < tank.size(); i++)
+		{
+			if (i != _Turn->whosturn())
+			{
+				render_tank_text(tank[i]);
+			}
+			//	tank[i].text_render();
+		}
+		//render_tank_text(tank[_Turn->whosturn()]);
+		//tank[_Turn->whosturn()].text_render();
+	}
 }
 
 Text_manager::Text_manager()
@@ -81,4 +122,10 @@ Text_manager::Text_manager()
 	Ui_angle.Font.Italic = false;
 	Ui_angle.Font.Underlined = false;
 	Ui_angle.Font.StructOut = false;
+
+	text.Font.Name = "Kostar";
+	text.Font.Bold = false;
+	text.Font.Italic = false;
+	text.Font.Underlined = false;
+	text.Font.StructOut = false;
 }

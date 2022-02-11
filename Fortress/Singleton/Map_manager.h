@@ -11,6 +11,6 @@ public:
 	Map_manager();
 	void initialize();
 	void render_map();
-	void render_minimap();
+	void render_minimap(std::vector<Tank> const& tank);
 	void make_crater(POINT const& center, SIZE const & size);
 };

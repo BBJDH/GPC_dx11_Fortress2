@@ -36,8 +36,8 @@ private:
     Engine::Rendering::Image::UI Green;
     void set_background();
     void set_minimap_background();
-    void render_line(POINT const & location,size_t const length,
-        size_t const thickness, float const angle, Color color);
+    void render_line(POINT const & location,unsigned const length,
+        unsigned const thickness, float const angle, Color color);
     void ui_angle_line(int const length, int const angle,
         int const thickness, Color color);
     void render_tank_hp(Tank const & tank);

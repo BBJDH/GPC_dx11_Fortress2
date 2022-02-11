@@ -40,7 +40,7 @@ void Map_manager::render_map()
 
 
 
-void Map_manager::render_minimap()
+void Map_manager::render_minimap(std::vector<Tank> const& tank)
 {
     _Image_manager->render_minimap_background();
     Engine::Rendering::Pipeline::HmemDC::Render_minimap
@@ -51,6 +51,7 @@ void Map_manager::render_minimap()
         { MINIMAP_SIZE_W, MINIMAP_SIZE_H+ MINI_UI_SIZE },
         127
     );
+    _Image_manager->render_minimap_tank(tank);
     _Image_manager->render_minimap_cambox();
 
 }

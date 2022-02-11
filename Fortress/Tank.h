@@ -13,17 +13,23 @@ public:
 	{
 		Left, Right //...
 	};
+private:
+	//상수 세팅
+	int const NAME_LOCATION_X = -8;
+	int const NAME_LOCATION_Y = 15;
 
 private:
 
 	Engine::Rendering::Animation::Component animation;
-	Engine::Rendering::Text::Component name;
-	Engine::Rendering::Text::Component damage;
+	Engine::Rendering::Text::Component text;
+	//Engine::Rendering::Text::Component damage;
 
 	float ani_playtime;
 
 	State		    state;
 	Side		    side;
+	std::string		name;
+	std::string		damage;				//받은 데미지 기록
 	unsigned	    hp;
 	unsigned	    fuel;
 	float const		fire_angle_min;
@@ -49,10 +55,13 @@ private:
 
 public:
 
-	Tank(Position const& pos, unsigned const width, unsigned const height);
+	Tank(Position const& pos, unsigned const width, unsigned const height, std::string const & name);
 	Tank & operator=(Tank const & other_tank);
 	Tank::State get_state()const;
 	Tank::Side get_side()const;
+	std::string get_name()const;
+	std::string get_damage()const;
+
 	unsigned const gethp() const;
 	int const getpower()const;
 	int const getfuel()const;
@@ -72,7 +81,8 @@ public:
 	void turn_setting();
 	void ani_render(float const delta);
 	void ani_start();
-
+	void text_render();
+	
 
 	
 };

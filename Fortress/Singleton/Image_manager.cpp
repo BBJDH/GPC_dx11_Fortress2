@@ -56,24 +56,30 @@ void Image_manager::render_loading()
 void Image_manager::render_back_ui(Tank const & tank)
 {
     UI_Back.Render();
-    int  img_angle = -static_cast<int>(tank.getimage_angle()/Radian);
-    int  fire_angle = tank.getangle();
+    int  img_angle = -static_cast<int>(tank.getimage_angle()/Radian); //탱크 입장에서 지평선 기준으로 바라보는 각도
+    int  support_angle = img_angle;             //계산에 반영할 각도, 오른쪽을 본다면 0도 왼쪽을 본다면 180도
+    int  barrel_angle = tank.getangle();
     int  min_angle = tank.getangle_min();
     int  max_angle = tank.getangle_max();
+    int  white_line_addtional_length = 0;
     if (tank.get_side() == Tank::Side::Left)
     {
-        img_angle += 180;
-        fire_angle *= -1;
+        support_angle += 180;
+        barrel_angle *= -1;
         min_angle *= -1;
         max_angle *= -1;
     }
 
-    ui_angle_line(UI_ANGLE_Length, img_angle + min_angle, 1, Color::Yellow);
-    ui_angle_line(UI_ANGLE_Length, img_angle + max_angle, 1, Color::Yellow);
-    ui_angle_line(UI_ANGLE_Length, img_angle + min_angle + fire_angle , 1, Color::Red);
+    ui_angle_line(UI_ANGLE_Length, support_angle + min_angle, 1, Color::Yellow);
+    ui_angle_line(UI_ANGLE_Length, support_angle + max_angle, 1, Color::Yellow);
+    ui_angle_line(UI_ANGLE_Length, support_angle + min_angle + barrel_angle, 1, Color::Red);
 
-    ui_angle_line(UI_ANGLE_Length+5, img_angle, 2,  Color::White);
-    ui_angle_line(UI_ANGLE_Length+5, img_angle+180, 2,  Color::White);
+    if (abs(img_angle) <= 40) //40도 이하는 흰선 길이가 짧아보여서 보정
+        white_line_addtional_length = 10;
+    else
+        white_line_addtional_length = 5;
+    ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle, 2,  Color::White);
+    ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle+180, 2,  Color::White);
 
 }
 
@@ -117,6 +123,7 @@ void Image_manager::render_ui(std::vector<Tank> const& tank)
     render_tanks_hp(tank);
     render_back_ui(tank[_Turn->whosturn()]);
     render_front_ui(tank[_Turn->whosturn()]);
+    _Text_manager->render_tank_angle(tank[_Turn->whosturn()]);
 }
 
 void Image_manager::render_gameover()
@@ -142,7 +149,7 @@ void Image_manager::set_minimap_background()
     Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
 }
 
-void Image_manager::render_line(POINT const& location, size_t const length, size_t const thickness, float const angle, Color color)
+void Image_manager::render_line(POINT const& location, unsigned const length, unsigned const thickness, float const angle, Color color)
 {
     switch (color)
     {

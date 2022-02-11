@@ -41,7 +41,7 @@ private:
     void    set_playing_exit_button();
     void    set_gameover_exit_button();
     void    create_tanks();
-    void    dispose_tanks();
+    void    dispose_objects();
     void    render_playing();
     
 public:
