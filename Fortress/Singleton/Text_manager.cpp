@@ -100,7 +100,7 @@ void Text_manager::render_tank_angle(Tank const& tank)
 
 void Text_manager::render_damage(Tank const& tank)
 {
-	if (tank.get_state() == Tank::State::Hit)
+	if (!tank.get_damage().empty())
 	{
 		//render_tank_text(tank[i]);
 		LONG const location_x = static_cast<long>(tank.getpos().x) - MAPSIZE_W / 2 - 30 /*+ static_cast<long>(5*sin(tank.get_ani_playtime() * 10))*/;

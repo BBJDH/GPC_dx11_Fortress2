@@ -113,17 +113,21 @@ std::string Tank::get_damage() const
 
 void Tank::take_damage(unsigned const damage)
 {
-	if (damage >= this->hp)
+	if (state != State::Dead)
 	{
-		this->hp =0;
-		state = State::Dead;
+		if (damage >= this->hp)
+		{
+			this->hp =0;
+			state = State::Dead;
+			this->damage = "-" + std::to_string(damage);
+			ani_start();
+			return;
+		}
+		state = State::Hit;
 		ani_start();
-		return;
+		this->damage = "-" + std::to_string(damage);
+		this->hp -= damage;
 	}
-	state = State::Hit;
-	ani_start();
-	this->damage = "-" + std::to_string(damage);
-	this->hp -= damage;
 }
 
 void Tank::set_side(Side const side)
@@ -305,6 +309,7 @@ void Tank::check_state()
 		if (_Physics_manager->Collide_object(*this, _Map_manager->hmapdc)
 			and ani_playtime> ANI_Tank_Hit)
 		{
+			this->damage.clear();
 			setstate(State::Nomal);
 			ani_set_normal();
 			ani_start();
@@ -317,6 +322,8 @@ void Tank::check_state()
 	case Tank::State::Dead:
 	{
 		_Physics_manager->Collide_object(*this, _Map_manager->hmapdc);
+		if(ani_playtime > ANI_Tank_Dead)
+			this->damage.clear();
 		ani_set_dead();
 		break;
 	}
