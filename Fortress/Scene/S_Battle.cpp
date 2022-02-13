@@ -4,6 +4,8 @@
 
 
 
+
+
 void S_Battle::Start()
 {
     initialize();
@@ -44,16 +46,18 @@ void S_Battle::initialize()
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
     create_tanks();
 
-
-    exit_button = new Button(_Button->bind_function<Scene*>(Button_manager::Func::Exit));
+    exit_button = new Button(_Button->bind_function<Scene*>(Button_manager::Func::Lobby));
     set_playing_exit_button();
 }
 
 void S_Battle::set_playing_exit_button()
 {
-    exit_button->image.Name = "Image/Button/playing_exit";
-    exit_button->image.Length =  Vector<2>(playing_exit_w, playing_exit_h);
-    exit_button->image.Location = Vector<2>(playing_exit_x, playing_exit_y);
+    exit_button->deactivated_image.Name = "Image/Button/playing_exit";
+    exit_button->deactivated_image.Length = Vector<2>(playing_exit_w, playing_exit_h);
+    exit_button->deactivated_image.Location = Vector<2>(playing_exit_x, playing_exit_y);
+    exit_button->activated_image.Name = "Image/Button/playing_exit";
+    exit_button->activated_image.Length =  Vector<2>(playing_exit_w, playing_exit_h);
+    exit_button->activated_image.Location = Vector<2>(playing_exit_x, playing_exit_y);
     exit_button->collide_image.Name = "Image/Button/playing_exit_collide";
     exit_button->collide_image.Length =  Vector<2>(playing_exit_w, playing_exit_h);
     exit_button->collide_image.Location = Vector<2>(playing_exit_x, playing_exit_y);
@@ -63,9 +67,12 @@ void S_Battle::set_playing_exit_button()
 
 void S_Battle::set_gameover_exit_button()
 {
-    exit_button->image.Name = "Image/Button/gameover_exit";
-    exit_button->image.Length =  Vector<2>(gameover_exit_w, gameover_exit_h);
-    exit_button->image.Location = Vector<2>(gameover_exit_x, gameover_exit_y);
+    exit_button->deactivated_image.Name = "Image/Button/gameover_exit";
+    exit_button->deactivated_image.Length = Vector<2>(gameover_exit_w, gameover_exit_h);
+    exit_button->deactivated_image.Location = Vector<2>(gameover_exit_x, gameover_exit_y);
+    exit_button->activated_image.Name = "Image/Button/gameover_exit";
+    exit_button->activated_image.Length =  Vector<2>(gameover_exit_w, gameover_exit_h);
+    exit_button->activated_image.Location = Vector<2>(gameover_exit_x, gameover_exit_y);
     exit_button->collide_image.Name = "Image/Button/gameover_exit_collide";
     exit_button->collide_image.Length =  Vector<2>(gameover_exit_w, gameover_exit_h);
     exit_button->collide_image.Location = Vector<2>(gameover_exit_x, gameover_exit_y);
@@ -75,10 +82,14 @@ void S_Battle::set_gameover_exit_button()
 
 void S_Battle::create_tanks()
 {
-    Random r(10,MAPSIZE_W-10,PLAYERS);
+    //Random r(10, MAPSIZE_W - 10, PLAYERS);
+    int const rand_mul = MAPSIZE_W / PLAYERS; //플레이어수만큼 구역을 나누고 좌우 10픽셀 만큼 좁힌다
+    Random r(0, PLAYERS-1,PLAYERS);
     for (unsigned i = 0; i < PLAYERS; i++)
     {
-        tank.push_back(Tank({ static_cast<float>(r.GetResult(i)),0 }, Tank_SIZE, Tank_SIZE , "player "+std::to_string(i+1)));
+        //float const loc_x = static_cast<float>(r.GetResult(i));
+        float const loc_x = (static_cast<float>(r.GetResult(i) * rand_mul + (rand() % rand_mul)+10) );
+        tank.push_back(Tank({loc_x, 0}, Tank_SIZE, Tank_SIZE, "player " + std::to_string(i + 1)));
         tank.back().ballistics_initialize(0, 0, Tank::State::Fall);
     }
 }
@@ -172,8 +183,8 @@ void S_Battle::render_playing() //Update
 
     _Map_manager->render_minimap(tank);   
 
-    _Debug_manager->set_delta(Engine::Time::Get::Delta());
-    _Debug_manager->rendering();
+    //_Debug_manager->set_delta(Engine::Time::Get::Delta());
+    //_Debug_manager->rendering();
 
     //타겟을 다 결합하고 한번에 다 그리는 방식
 }

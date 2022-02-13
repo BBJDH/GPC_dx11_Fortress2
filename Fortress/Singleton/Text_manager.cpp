@@ -82,7 +82,7 @@ void Text_manager::render_tank_angle(Tank const& tank)
 	}
 	set_text
 	(
-		Ui_angle,
+		text,
 		{ tilt_angle_text_location_x,angle_text_location_y },
 		angle_text_size,
 		std::to_string(img_angle),
@@ -90,7 +90,7 @@ void Text_manager::render_tank_angle(Tank const& tank)
 	);
 	set_text
 	(
-		Ui_angle,
+		text,
 		{ launch_angle_text_location_x,angle_text_location_y },
 		angle_text_size,
 		std::to_string(img_angle + min_angle + barrel_angle),
@@ -133,6 +133,23 @@ void Text_manager::render_tank_name(Tank const& tank)
 		Font::Red
 	);
 }
+void Text_manager::render_fps()
+{
+	float const delta = Engine::Time::Get::Delta();
+	std::string const value = std::to_string(static_cast<int>(1 / delta));
+	text.Font.Bold = true;
+
+	set_text
+	(
+		text,
+		{ fps_loc_x, fps_loc_y },
+		{ fps_width, fps_heght },
+		value,
+		Color::Red
+	);
+	text.Font.Bold = false;
+
+}
 void Text_manager::render(std::vector<Tank>& tank)
 {
 	if (!tank.empty())
@@ -152,13 +169,7 @@ void Text_manager::render(std::vector<Tank>& tank)
 void Text_manager::render_single_text(POINT const& location, SIZE const& font_size, char const & value, Font font)
 {
 	if (value == ' ')
-	{
-		//text_img.Name = "Image/Text/Normal/blank";
-		//text_img.Location = Vector<2>(location.x, location.y);
-		//text_img.Length = Vector<2>(font_size.cx/2, font_size.cy);
-		//text_img.Render();
 		return;
-	}
 	std::string temp = "";
 	switch (font)
 	{
@@ -201,14 +212,12 @@ void Text_manager::render_text(POINT const& location, int const& font_size,
 	}
 }
 
-
-
 Text_manager::Text_manager()
 {
-	Ui_angle.Font.Name = "Kostar";
-	Ui_angle.Font.Bold = false;
-	Ui_angle.Font.Italic = false;
-	Ui_angle.Font.Underlined = false;
-	Ui_angle.Font.StructOut = false;
-
+	text.Font.Name = "Kostar";
+	text.Font.Bold = false;
+	text.Font.Italic = false;
+	text.Font.Underlined = false;
+	text.Font.StructOut = false;
+	//text
 }

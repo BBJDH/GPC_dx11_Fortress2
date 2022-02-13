@@ -60,7 +60,7 @@ Scene* S_Start::Update()
 
     render();
     if(Enter())
-        return new S_Battle;
+        return new S_Lobby;
 
     return nullptr;
 }

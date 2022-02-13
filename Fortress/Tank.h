@@ -5,6 +5,14 @@
 class Tank : public Object
 {
 public:
+/*
+주황색 (255 127 0)
+노란색 (255 255 0)
+초록색 (0    128 0)
+파란색 (0    0    255)
+분홍색 (255 192 203)
+보라색 (139 0    255)
+*/
 	enum class State
 	{
 		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Hit, Danger, Dead, //...

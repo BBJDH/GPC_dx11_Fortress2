@@ -25,7 +25,7 @@ void Fortress::Update()
         Now = Next;
         Now->Start();
     }
-
+    _Text_manager->render_fps();
 
 }
 
