@@ -8,8 +8,8 @@ Tank::Tank(Position const& pos, unsigned const width, unsigned const height, std
 	:Object(pos, width, height), hp{ TANK_HP }, fuel{100},
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
-	state{ State::Nomal }, side{ Side::Right },
-	ani_playtime{ 0.0f }, name{ name }, damage{""}
+	state{ State::Fall }, side{ Side::Right },
+	ani_playtime{ 0.0f }, name{ name }, damage{ "" }, key_input{false}
 {
 	ani_set_normal();
 	init_text();
@@ -197,12 +197,13 @@ void Tank::plus_angle(int angle)
 
 }
 
-void Tank::ballistics_initialize(float const moving_angle, float const velocity, State state)
-{
-	Object::ballistics_initialize(moving_angle, velocity);
-	this->state = state;
-	this->ani_start();
-}
+//void Tank::ballistics_initialize(float const moving_angle, float const velocity, State state)
+//{
+//	Object::ballistics_initialize(moving_angle, velocity);
+//	this->state = state;
+//	this->ani_start();
+//}
+
 
 void Tank::ani_set_flip()
 {
@@ -305,7 +306,7 @@ void Tank::check_state()
 	}
 	case Tank::State::Hit:
 	{
-		;
+		
 		if (_Physics_manager->Collide_object(*this, _Map_manager->hmapdc)
 			and ani_playtime> ANI_Tank_Hit)
 		{

@@ -13,6 +13,19 @@ public:
 분홍색 (255 192 203)
 보라색 (139 0    255)
 */
+	//살아있다면
+	//falling 플래그 false 일때  입력받지 않을때
+	//nomal, idle, idle2, Danger
+	// 입력받을때
+	//  steady, fire, stop, move
+	//falling 플래그 true 일때
+	// 맞았는지 아닌지는 데미지로 구분
+	//Fall, Hit,
+	//
+	//죽었다면
+	// Dead
+
+
 	enum class State
 	{
 		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Hit, Danger, Dead, //...
@@ -45,6 +58,7 @@ private:
 	float		    fire_angle_left_value;
 	float		    fire_velocity;
 	float			ani_playtime;
+	bool			key_input;
 
 	void ani_set_flip();
 	void ani_set_normal();
@@ -79,7 +93,7 @@ public:
 	int const getangle_min()const;
 	int const getangle_max()const;
 	bool is_dead()const;
-	void ballistics_initialize(float const moving_angle, float const velocity, State state);
+	//void ballistics_initialize(float const moving_angle, float const velocity, State state);
 	void check_state();
 	void take_damage(unsigned const damage);
 	void set_side(Side const side);
@@ -91,8 +105,6 @@ public:
 	void ani_render(float const delta);
 	void ani_start();
 	void text_render();
-	
-
 	
 };
 

@@ -157,7 +157,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 				 
 				unsigned const dmg = missile.get_damage() * dmg_mul / range;
 
-				tank[i].ballistics_initialize(0,0,Tank::State::Fall);
+				tank[i].ballistics_initialize(0,0);
 				tank[i].take_damage(dmg);
 				tank[i].ani_start();
 

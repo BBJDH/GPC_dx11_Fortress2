@@ -90,7 +90,7 @@ void S_Battle::create_tanks()
         //float const loc_x = static_cast<float>(r.GetResult(i));
         float const loc_x = (static_cast<float>(r.GetResult(i) * rand_mul + (rand() % rand_mul)+10) );
         tank.push_back(Tank({loc_x, 0}, Tank_SIZE, Tank_SIZE, "player " + std::to_string(i + 1)));
-        tank.back().ballistics_initialize(0, 0, Tank::State::Fall);
+        tank.back().ballistics_initialize(0, 0);
     }
 }
 

@@ -36,7 +36,7 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
                 "Temp"
             )
         );
-        tank.back().ballistics_initialize(0, 0, Tank::State::Fall);
+        tank.back().ballistics_initialize(0, 0);
     }  
 }
 
@@ -140,7 +140,7 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
         tank.setstate(Tank::State::Fall); 
 
         tank.moveto({ static_cast<float>(stepx) ,tank.getpos().y }); //¶³¾îÁö¸é
-        tank.ballistics_initialize(0,0,Tank::State::Fall);
+        tank.ballistics_initialize(0,0);
         return;
     }
 }

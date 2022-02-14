@@ -20,13 +20,14 @@ private:
 
 private:
 	bool activated();
-
 public:
 	Button();
 	Button(std::function<T(void)> const & function);
 	//Button(std::string const& name, std::string const& clicked_name,
 	//	float const location_x, float const location_y,
 	//	float const length_x, float const length_y);
+	void init_image_size(float const button_w, float const button_h);
+	void init_image_location(float const button_x, float const button_y);
 	void check_state();
 	bool clicked();
 	T execute() const;
