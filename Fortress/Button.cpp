@@ -29,8 +29,7 @@ Button<T>::Button(std::function<T(void)> const& function) :
 
 template Button<Scene*>::Button(std::function<Scene*(void)> const& function);
 
-template<typename T>
-void Button<T>::init_image_size(float const button_w, float const button_h)
+void Button<Scene*>::init_image_size(float const button_w, float const button_h)
 {
 	deactivated_image.Length = { button_w ,button_h };
 	activated_image.Length = { button_w ,button_h };
@@ -38,8 +37,7 @@ void Button<T>::init_image_size(float const button_w, float const button_h)
 	collide_box.Length = { button_w ,button_h };
 }
 
-template<typename T>
-void Button<T>::init_image_location(float const button_x, float const button_y)
+void Button<Scene*>::init_image_location(float const button_x, float const button_y)
 {
 	deactivated_image.Location = { button_x ,button_y };
 	activated_image.Location = { button_x ,button_y };

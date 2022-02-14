@@ -119,8 +119,8 @@ void Tank::take_damage(unsigned const damage)
 		{
 			this->hp =0;
 			state = State::Dead;
-			this->damage = "-" + std::to_string(damage);
 			ani_start();
+			this->damage = "-" + std::to_string(damage);
 			return;
 		}
 		state = State::Hit;

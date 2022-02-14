@@ -24,8 +24,8 @@ void S_Lobby::set_start_button()
 {
     start_button = new Button(_Button->
         bind_function<Scene*>(Button_manager::Func::Battle));
-    exit_button->init_image_location(start_x, start_y);
-    exit_button->init_image_size(start_w, start_h);
+    start_button->init_image_location(start_x, start_y);
+    start_button->init_image_size(start_w, start_h);
     start_button->deactivated_image.Name = "Image/Button/Lobby/start";
     start_button->activated_image.Name = "Image/Button/Lobby/start_active";
     start_button->collide_image.Name = "Image/Button/Lobby/start_collide";
