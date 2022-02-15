@@ -28,6 +28,9 @@ Button<T>::Button(std::function<T(void)> const& function) :
 //}
 
 template Button<Scene*>::Button(std::function<Scene*(void)> const& function);
+template Button<std::string>::Button(std::function<std::string(void)> const& function);
+template Button<int>::Button(std::function<int(void)> const& function);
+template Button<bool>::Button(std::function<bool(void)> const& function);
 
 void Button<Scene*>::init_image_size(float const button_w, float const button_h)
 {

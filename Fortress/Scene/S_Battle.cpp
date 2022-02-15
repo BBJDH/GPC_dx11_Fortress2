@@ -21,7 +21,7 @@ Scene * S_Battle::Update()
 
 void S_Battle::End()
 {
-    delete exit_button;
+    _Button->buttons.erase("exit");
     tank.clear();
     std::vector<Tank>().swap(tank);
     missile.clear();
@@ -46,42 +46,41 @@ void S_Battle::initialize()
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
     create_tanks();
 
-    exit_button = new Button(_Button->bind_function<Scene*>(Button_manager::Func::Lobby));
     set_playing_exit_button();
 }
 
 void S_Battle::set_playing_exit_button()
 {
-    exit_button->deactivated_image.Name = "Image/Button/playing_exit";
-    exit_button->activated_image.Name = "Image/Button/playing_exit";
-    exit_button->collide_image.Name = "Image/Button/playing_exit_collide";
-    exit_button->init_image_location(playing_exit_x, playing_exit_y);
-    exit_button->init_image_size(playing_exit_w, playing_exit_h);
-    //exit_button->deactivated_image.Length = Vector<2>(playing_exit_w, playing_exit_h);
-    //exit_button->deactivated_image.Location = Vector<2>(playing_exit_x, playing_exit_y);
-    //exit_button->activated_image.Length =  Vector<2>(playing_exit_w, playing_exit_h);
-    //exit_button->activated_image.Location = Vector<2>(playing_exit_x, playing_exit_y);
-    //exit_button->collide_image.Length =  Vector<2>(playing_exit_w, playing_exit_h);
-    //exit_button->collide_image.Location = Vector<2>(playing_exit_x, playing_exit_y);
-    //exit_button->collide_box.Length = Point{playing_exit_w,playing_exit_h};
-    //exit_button->collide_box.Center = Point{playing_exit_x,playing_exit_y};
+    _Button->buttons.insert
+    (
+        {
+            "exit",
+             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Lobby))
+        }
+    );
+
+    _Button->buttons.at("exit").deactivated_image.Name = "Image/Button/playing_exit";
+    _Button->buttons.at("exit").activated_image.Name = "Image/Button/playing_exit";
+    _Button->buttons.at("exit").collide_image.Name = "Image/Button/playing_exit_collide";
+    _Button->buttons.at("exit").init_image_location(playing_exit_x, playing_exit_y);
+    _Button->buttons.at("exit").init_image_size(playing_exit_w, playing_exit_h);
 }
 
 void S_Battle::set_gameover_exit_button()
 {
-    exit_button->deactivated_image.Name = "Image/Button/gameover_exit";
-    exit_button->activated_image.Name = "Image/Button/gameover_exit";
-    exit_button->collide_image.Name = "Image/Button/gameover_exit_collide";
-    exit_button->init_image_location(gameover_exit_x, gameover_exit_y);
-    exit_button->init_image_size(gameover_exit_w, gameover_exit_h);
-    //exit_button->deactivated_image.Length = Vector<2>(gameover_exit_w, gameover_exit_h);
-    //exit_button->deactivated_image.Location = Vector<2>(gameover_exit_x, gameover_exit_y);
-    //exit_button->activated_image.Length =  Vector<2>(gameover_exit_w, gameover_exit_h);
-    //exit_button->activated_image.Location = Vector<2>(gameover_exit_x, gameover_exit_y);
-    //exit_button->collide_image.Length =  Vector<2>(gameover_exit_w, gameover_exit_h);
-    //exit_button->collide_image.Location = Vector<2>(gameover_exit_x, gameover_exit_y);
-    //exit_button->collide_box.Length = Point{gameover_exit_w,gameover_exit_h};
-    //exit_button->collide_box.Center = Point{gameover_exit_x,gameover_exit_y};
+    _Button->buttons.insert
+    (
+        {
+            "exit",
+             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Lobby))
+        }
+    );
+    _Button->buttons.at("exit").deactivated_image.Name = "Image/Button/gameover_exit";
+    _Button->buttons.at("exit").activated_image.Name = "Image/Button/gameover_exit";
+    _Button->buttons.at("exit").collide_image.Name = "Image/Button/gameover_exit_collide";
+    _Button->buttons.at("exit").init_image_location(gameover_exit_x, gameover_exit_y);
+    _Button->buttons.at("exit").init_image_size(gameover_exit_w, gameover_exit_h);
+
 }
 
 void S_Battle::create_tanks()
@@ -146,10 +145,13 @@ Scene * S_Battle::update_scene()
 
         render_playing();            //렌더링
 
-        if(exit_button->clicked())
-            return exit_button->execute();
+        if(_Button->buttons.at("exit").clicked())
+            return _Button->buttons.at("exit").execute();
         if (_Turn->is_gameover(tank))
+        {
+            _Button->buttons.erase("exit");
             this->state = State::GameOver;
+        }
         break;
     }
     case S_Battle::State::GameOver:
@@ -160,8 +162,8 @@ Scene * S_Battle::update_scene()
         _Image_manager->render_gameover();
 
         //버튼을 누르면 시작화면으로
-        if(exit_button->clicked())
-            return exit_button->execute();
+        if (_Button->buttons.at("exit").clicked())
+            return _Button->buttons.at("exit").execute();
     }
     break;
     default:

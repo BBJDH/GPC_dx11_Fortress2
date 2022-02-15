@@ -10,7 +10,6 @@ public:
 
 private:
     class Scene * Now = nullptr;
-
 };
 
 // TODO:  버튼기능 초기화 함수 재작성, 앞으로 생길버튼을 모아둘 stl 설계

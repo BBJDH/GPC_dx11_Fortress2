@@ -15,7 +15,6 @@ private:
     std::vector<Tank> tank;
     std::vector<Missile> missile;
     Engine::Rendering::Camera Camera;
-    Button<Scene*> * exit_button;
 
     //로딩 설정
     float const min_loading_time = 4.0f;

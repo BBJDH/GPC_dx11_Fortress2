@@ -7,10 +7,11 @@
 #include<cassert>
 #include<functional>
 
+
 //STL
 #include<vector>
 #include<string>
-
+#include<map>
 
 //=====================================
 //	## 내가 만든 구조체 이곳에 추가 ##
@@ -52,6 +53,17 @@ struct Position
 //랜덤추출함수
 #include"Random.h"
 
+
+//메인 게임 클래스
+#include "Fortress.h"
+
+
+//Scene
+#include "./Scene/Scene.h"
+#include "./Scene/S_Battle.h"
+#include "./Scene/S_Start.h"
+#include "./Scene//S_Lobby.h"
+
 //싱글톤 생성
 #include"./Singleton/Mouse.h"
 #include"./Singleton/Camera.h"
@@ -62,19 +74,10 @@ struct Position
 #include"./Singleton/Turnmanager.h"
 #include"./Singleton/Input_manager.h"
 #include"./Singleton/Animation.h"
-#include"./Singleton/Button_manager.h"
 #include"./Singleton/Text_manager.h"
+#include"./Singleton/Button_manager.h"
 
 //#include"Turnmanager.h"
-
-//메인 게임 클래스
-#include "Fortress.h"
-
-//Scene
-#include "./Scene/Scene.h"
-#include "./Scene/S_Battle.h"
-#include "./Scene/S_Start.h"
-#include "./Scene//S_Lobby.h"
 
 
 

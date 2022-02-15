@@ -8,6 +8,10 @@ public:
 	{
 		Main_Title,Shop,Lobby,Battle //상점의 버튼들, 플레이어선택, 맵선택 버튼 등
 	};
+	std::map < std::string, Button < Scene* >> buttons;
+
+
+public:
 	//함수 포인터 바인딩하는 함수
 	template<typename T>
 	std::function<T(void)> bind_function(Func const state);

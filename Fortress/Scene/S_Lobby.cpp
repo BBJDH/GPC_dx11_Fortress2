@@ -3,24 +3,34 @@
 
 void S_Lobby::set_exit_button()
 {
-    exit_button = new Button(_Button->
-        bind_function<Scene*>(Button_manager::Func::Main_Title));
-    exit_button->init_image_location(exit_x, exit_y);
-    exit_button->init_image_size(exit_w, exit_h);
-    exit_button->deactivated_image.Name = "Image/Button/Lobby/exit";
-    exit_button->activated_image.Name = "Image/Button/Lobby/exit";
-    exit_button->collide_image.Name = "Image/Button/Lobby/exit_collide";
+    _Button->buttons.insert
+    (
+        { 
+            "exit",
+             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Main_Title))
+        }
+    );
+    _Button->buttons.at("exit").init_image_location(exit_x, exit_y);
+    _Button->buttons.at("exit").init_image_size(exit_w, exit_h);
+    _Button->buttons.at("exit").deactivated_image.Name = "Image/Button/Lobby/exit";
+    _Button->buttons.at("exit").activated_image.Name = "Image/Button/Lobby/exit";
+    _Button->buttons.at("exit").collide_image.Name = "Image/Button/Lobby/exit_collide";
 }
 
 void S_Lobby::set_start_button()
 {
-    start_button = new Button(_Button->
-        bind_function<Scene*>(Button_manager::Func::Battle));
-    start_button->init_image_location(start_x, start_y);
-    start_button->init_image_size(start_w, start_h);
-    start_button->deactivated_image.Name = "Image/Button/Lobby/start";
-    start_button->activated_image.Name = "Image/Button/Lobby/start_active";
-    start_button->collide_image.Name = "Image/Button/Lobby/start_collide";
+    _Button->buttons.insert
+    (
+        {
+            "start",
+             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Battle))
+        }
+    );
+    _Button->buttons.at("start").init_image_location(start_x, start_y);
+    _Button->buttons.at("start").init_image_size(start_w, start_h);
+    _Button->buttons.at("start").deactivated_image.Name = "Image/Button/Lobby/start";
+    _Button->buttons.at("start").activated_image.Name = "Image/Button/Lobby/start_active";
+    _Button->buttons.at("start").collide_image.Name = "Image/Button/Lobby/start_collide";
 }
 
 void S_Lobby::init_image()
@@ -45,15 +55,20 @@ void S_Lobby::Start()
 Scene* S_Lobby::Update()
 {
     render();
-    if (start_button->clicked())
-        return start_button->execute();
-    if (exit_button->clicked())
-        return exit_button->execute();
+    for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+    {
+        if (iter->second.clicked())
+            return iter->second.execute();
+    }
+    //if (_Button->buttons["start"].clicked())
+    //    return start_button->execute();
+    //if (exit_button->clicked())
+    //    return exit_button->execute();
     return nullptr;
 }
 
 void S_Lobby::End()
 {
-    delete exit_button;
-    delete start_button;
+    _Button->buttons.erase("exit");
+    _Button->buttons.erase("start");
 }

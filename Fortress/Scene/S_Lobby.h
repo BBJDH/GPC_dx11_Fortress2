@@ -3,8 +3,7 @@ class S_Lobby final : public Scene
 {
 private:
     Engine::Rendering::Image::UI lobby;
-    Button<Scene*>* exit_button;
-    Button<Scene*>* start_button;
+
 
 
 private:
@@ -30,3 +29,6 @@ public:
     Scene* Update() final override;
     void       End() final override;
 };
+
+//슬롯 버튼을 누르고 캐릭터버튼을 누르면 슬롯에 캐릭터가 올라옴
+//슬롯의 캐릭터를 누르면 해당 슬롯 해제

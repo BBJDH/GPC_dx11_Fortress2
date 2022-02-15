@@ -225,7 +225,6 @@ void Tank::ani_set_flip()
 void Tank::check_state()
 {
 	check_render_damage();
-
 	switch (this->state)
 	{
 	case Tank::State::Nomal:
@@ -318,7 +317,7 @@ void Tank::check_state()
 	case Tank::State::Hit:
 	{
 
-		if (_Physics_manager->Collide_object(*this, _Map_manager->hmapdc)
+		if (_Physics_manager->Collide_object(*this, _Map_manager->hmapdc) //¹Ù´ÚÃ¼Å©
 			and ani_playtime> ANI_Tank_Hit)
 		{
 			setstate(State::Nomal);
