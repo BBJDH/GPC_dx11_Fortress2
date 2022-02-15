@@ -1,20 +1,25 @@
 #include "stdafx.h"
 #include "S_Lobby.h"
 
+bool S_Lobby::check_start_button()
+{
+    return true;
+}
+
 void S_Lobby::set_exit_button()
 {
     _Button->buttons.insert
     (
         { 
             "exit",
-             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Main_Title))
+             Button<Scene*>(std::bind(&Button_manager::quit,_Button),"Lobby/exit")
         }
     );
+    _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+
     _Button->buttons.at("exit").init_image_location(exit_x, exit_y);
     _Button->buttons.at("exit").init_image_size(exit_w, exit_h);
-    _Button->buttons.at("exit").deactivated_image.Name = "Image/Button/Lobby/exit";
-    _Button->buttons.at("exit").activated_image.Name = "Image/Button/Lobby/exit";
-    _Button->buttons.at("exit").collide_image.Name = "Image/Button/Lobby/exit_collide";
+
 }
 
 void S_Lobby::set_start_button()
@@ -23,15 +28,51 @@ void S_Lobby::set_start_button()
     (
         {
             "start",
-             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Battle))
+             Button<Scene*>(std::bind(&Button_manager::to_battle,_Button),"Lobby/start")
         }
     );
+    _Button->buttons.at("start").bind_activated_func(std::bind(&Button_manager::bool_func_default,_Button));
+
     _Button->buttons.at("start").init_image_location(start_x, start_y);
     _Button->buttons.at("start").init_image_size(start_w, start_h);
-    _Button->buttons.at("start").deactivated_image.Name = "Image/Button/Lobby/start";
-    _Button->buttons.at("start").activated_image.Name = "Image/Button/Lobby/start_active";
-    _Button->buttons.at("start").collide_image.Name = "Image/Button/Lobby/start_collide";
+
 }
+
+void S_Lobby::set_slot_button(std::string const& button_name,
+    float const start_x, float const start_y, float const start_w, float const start_h )
+{
+    _Button->buttons.insert
+    (
+        {
+             button_name,
+             Button<Scene*>(nullptr,"Lobby/slot")
+        }
+    );
+    _Button->buttons.at(button_name).init_image_location(start_x, start_y);
+    _Button->buttons.at(button_name).init_image_size(start_w, start_h);
+    //_Button->buttons.at(button_name).deactivated_image.Name = "Image/Button/Lobby/slot";
+    //_Button->buttons.at(button_name).activated_image.Name = "Image/Button/Lobby/slot_pressed";
+    //_Button->buttons.at(button_name).collide_image.Name = "Image/Button/Lobby/slot";
+    //_Button->buttons.at(button_name).bind_activated_func(std::bind());
+    
+}
+
+void S_Lobby::set_slot_buttons()
+{
+    float const location_x = 270;
+    float const location_y = 140;
+    float const width = 190;
+    float const heght = 42;
+
+    float const offset = 44;
+
+    for (int i = 0; i < 8; i++)
+    {
+        set_slot_button("slot_button_" + std::to_string(i),
+            location_x , location_y + offset * i, width, heght);
+    }
+}
+
 
 void S_Lobby::init_image()
 {
@@ -45,11 +86,13 @@ void S_Lobby::render()
     lobby.Render();
 }
 
+
 void S_Lobby::Start()
 {
     init_image();
     set_exit_button();
     set_start_button();
+    set_slot_buttons();
 }
 
 Scene* S_Lobby::Update()
@@ -60,10 +103,7 @@ Scene* S_Lobby::Update()
         if (iter->second.clicked())
             return iter->second.execute();
     }
-    //if (_Button->buttons["start"].clicked())
-    //    return start_button->execute();
-    //if (exit_button->clicked())
-    //    return exit_button->execute();
+
     return nullptr;
 }
 
@@ -71,4 +111,7 @@ void S_Lobby::End()
 {
     _Button->buttons.erase("exit");
     _Button->buttons.erase("start");
+
+    for (int i = 0; i < 8; ++i)
+        _Button->buttons.erase("slot_button_" + std::to_string(i));
 }

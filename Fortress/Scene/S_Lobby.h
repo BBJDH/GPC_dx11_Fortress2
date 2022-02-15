@@ -19,12 +19,18 @@ private:
     float const start_h = 30;
 
 private:
+    bool    toggle_slot_button();
     void    set_exit_button();
     void    set_start_button();
+    void    set_slot_button(std::string const& button_name,
+        float const start_x, float const start_y, float const start_w, float const start_h);
+    void    set_slot_buttons();
     void    init_image();
     void    render();
+    
 
 public:
+    bool    check_start_button();
     void     Start() final override;
     Scene* Update() final override;
     void       End() final override;

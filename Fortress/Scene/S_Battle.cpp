@@ -55,13 +55,14 @@ void S_Battle::set_playing_exit_button()
     (
         {
             "exit",
-             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Lobby))
+             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"playing_exit")
         }
     );
+    _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
-    _Button->buttons.at("exit").deactivated_image.Name = "Image/Button/playing_exit";
-    _Button->buttons.at("exit").activated_image.Name = "Image/Button/playing_exit";
-    _Button->buttons.at("exit").collide_image.Name = "Image/Button/playing_exit_collide";
+    //_Button->buttons.at("exit").deactivated_image.Name = "Image/Button/playing_exit";
+    //_Button->buttons.at("exit").activated_image.Name = "Image/Button/playing_exit";
+    //_Button->buttons.at("exit").collide_image.Name = "Image/Button/playing_exit_collide";
     _Button->buttons.at("exit").init_image_location(playing_exit_x, playing_exit_y);
     _Button->buttons.at("exit").init_image_size(playing_exit_w, playing_exit_h);
 }
@@ -72,12 +73,14 @@ void S_Battle::set_gameover_exit_button()
     (
         {
             "exit",
-             Button<Scene*>(_Button->bind_function<Scene*>(Button_manager::Func::Lobby))
+             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"gameover_exit")
         }
     );
-    _Button->buttons.at("exit").deactivated_image.Name = "Image/Button/gameover_exit";
-    _Button->buttons.at("exit").activated_image.Name = "Image/Button/gameover_exit";
-    _Button->buttons.at("exit").collide_image.Name = "Image/Button/gameover_exit_collide";
+    _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+
+    //_Button->buttons.at("exit").deactivated_image.Name = "Image/Button/gameover_exit";
+    //_Button->buttons.at("exit").activated_image.Name = "Image/Button/gameover_exit";
+    //_Button->buttons.at("exit").collide_image.Name = "Image/Button/gameover_exit_collide";
     _Button->buttons.at("exit").init_image_location(gameover_exit_x, gameover_exit_y);
     _Button->buttons.at("exit").init_image_size(gameover_exit_w, gameover_exit_h);
 
