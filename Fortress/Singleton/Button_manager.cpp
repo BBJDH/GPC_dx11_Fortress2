@@ -3,6 +3,7 @@
 
 Scene* Button_manager::to_main_title()
 {
+	PostQuitMessage(0);
     return new S_Start;
 }
 Scene* Button_manager::to_lobby()

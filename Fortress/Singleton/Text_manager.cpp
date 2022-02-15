@@ -104,7 +104,7 @@ void Text_manager::render_damage(Tank const& tank)
 	{
 		//render_tank_text(tank[i]);
 		LONG const location_x = static_cast<long>(tank.getpos().x) - MAPSIZE_W / 2 - 30 /*+ static_cast<long>(5*sin(tank.get_ani_playtime() * 10))*/;
-		LONG const location_y = MAPSIZE_H / 2 - static_cast<long>(tank.getpos().y) + 30 + static_cast<long>(30*sqrt(tank.get_ani_playtime()));
+		LONG const location_y = MAPSIZE_H / 2 - static_cast<long>(tank.getpos().y) + 30 + static_cast<long>(30*sqrt(tank.get_damage_showtime()));
 		//LONG const location_y = MAPSIZE_H / 2 - static_cast<long>(tank.getpos().y) + 30 + static_cast<long>(30*log10(tank.get_ani_playtime()*10+1));
 		render_text
 		(

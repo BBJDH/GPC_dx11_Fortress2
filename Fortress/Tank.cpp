@@ -9,10 +9,9 @@ Tank::Tank(Position const& pos, unsigned const width, unsigned const height, std
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
 	state{ State::Fall }, side{ Side::Right },
-	ani_playtime{ 0.0f }, name{ name }, damage{ "" }, key_input{false}
+	ani_playtime{ 0.0f }, name{ name }, damage{ "" }
 {
 	ani_set_normal();
-	init_text();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
 }
 Tank& Tank::operator=(Tank const& other_tank)
@@ -28,6 +27,10 @@ Tank& Tank::operator=(Tank const& other_tank)
 float const Tank::get_ani_playtime() const
 {
 	return ani_playtime;
+}
+float const Tank::get_damage_showtime() const
+{
+	return damage_showtime;
 }
 //namespace Physics
 //{
@@ -120,12 +123,12 @@ void Tank::take_damage(unsigned const damage)
 			this->hp =0;
 			state = State::Dead;
 			ani_start();
-			this->damage = "-" + std::to_string(damage);
+			set_text_damage(damage);
 			return;
 		}
 		state = State::Hit;
 		ani_start();
-		this->damage = "-" + std::to_string(damage);
+		set_text_damage(damage);
 		this->hp -= damage;
 	}
 }
@@ -180,13 +183,19 @@ void Tank::set_idle_state()
 	}
 }
 
-void Tank::init_text()
+void Tank::set_text_damage(unsigned const damage)
 {
-	text.Font.Name = "Kostar";
-	text.Font.Bold = false;
-	text.Font.Italic = false;
-	text.Font.Underlined = false;
-	text.Font.StructOut = false;
+	this->damage = "-" + std::to_string(damage);
+	damage_showtime = 0;
+}
+
+void Tank::check_render_damage()
+{
+	if (!this->damage.empty() and damage_showtime > Text_Damage_Show)
+	{
+		this->damage.clear();
+		damage_showtime = 0;
+	}
 }
 
 void Tank::plus_angle(int angle)
@@ -215,6 +224,8 @@ void Tank::ani_set_flip()
 
 void Tank::check_state()
 {
+	check_render_damage();
+
 	switch (this->state)
 	{
 	case Tank::State::Nomal:
@@ -306,11 +317,10 @@ void Tank::check_state()
 	}
 	case Tank::State::Hit:
 	{
-		
+
 		if (_Physics_manager->Collide_object(*this, _Map_manager->hmapdc)
 			and ani_playtime> ANI_Tank_Hit)
 		{
-			this->damage.clear();
 			setstate(State::Nomal);
 			ani_set_normal();
 			ani_start();
@@ -322,9 +332,8 @@ void Tank::check_state()
 	}
 	case Tank::State::Dead:
 	{
+
 		_Physics_manager->Collide_object(*this, _Map_manager->hmapdc);
-		if(ani_playtime > ANI_Tank_Dead)
-			this->damage.clear();
 		ani_set_dead();
 		break;
 	}
@@ -347,77 +356,77 @@ void Tank::check_state()
 
 void Tank::ani_set_normal()
 {
-	this->animation.Name = "Animation/Canon/nomal";
+	this->animation.Name = "Animation/Tank/Canon/nomal";
 	this->animation.Duration = ANI_Tank_Nomal;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_set_idle()
 {
-	this->animation.Name = "Animation/Canon/idle";
+	this->animation.Name = "Animation/Tank/Canon/idle";
 	this->animation.Duration = ANI_Tank_Idle;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_set_steady()
 {
-	this->animation.Name = "Animation/Canon/steady";
+	this->animation.Name = "Animation/Tank/Canon/steady";
 	this->animation.Duration = ANI_Tank_Fire;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_set_idle2()
 {
-	this->animation.Name = "Animation/Canon/idle2";
+	this->animation.Name = "Animation/Tank/Canon/idle2";
 	this->animation.Duration = ANI_Tank_Idle2;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_set_fire()
 {
-	this->animation.Name = "Animation/Canon/fire";
+	this->animation.Name = "Animation/Tank/Canon/fire";
 	this->animation.Duration = ANI_Tank_Fire;
 	this->animation.Repeatable = false;
 }
 
 void Tank::ani_set_move()
 {
-	this->animation.Name = "Animation/Canon/move";
+	this->animation.Name = "Animation/Tank/Canon/move";
 	this->animation.Duration = ANI_Tank_Move;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_set_stop()
 {
-	this->animation.Name = "Animation/Canon/stop";
+	this->animation.Name = "Animation/Tank/Canon/stop";
 	this->animation.Duration = ANI_Tank_Stop;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_set_fall()
 {
-	this->animation.Name = "Animation/Canon/fall";
+	this->animation.Name = "Animation/Tank/Canon/fall";
 	this->animation.Duration = ANI_Tank_Fall;
 	this->animation.Repeatable = true;
 }
 
 void Tank::ani_set_hit()
 {
-	this->animation.Name = "Animation/Canon/hit";
+	this->animation.Name = "Animation/Tank/Canon/hit";
 	this->animation.Duration = ANI_Tank_Hit;
 	this->animation.Repeatable = false;
 }
 
 void Tank::ani_set_danger()
 {
-	this->animation.Name = "Animation/Canon/danger";
+	this->animation.Name = "Animation/Tank/Canon/danger";
 	this->animation.Duration = ANI_Tank_Danger;
 	this->animation.Repeatable = false;
 }
 
 void Tank::ani_set_dead()
 {
-	this->animation.Name = "Animation/Canon/dead";
+	this->animation.Name = "Animation/Tank/Canon/dead";
 	this->animation.Duration = ANI_Tank_Dead;
 	this->animation.Repeatable = true;
 }
@@ -425,7 +434,7 @@ void Tank::ani_set_dead()
 void Tank::ani_render(float const delta)
 {
 	ani_playtime += delta;
-	//check_state();
+	damage_showtime += delta;
 	ani_set_flip();
 	this->animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
 	this->animation.Angle = -this->image_angle / Radian;

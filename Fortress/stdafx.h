@@ -151,7 +151,7 @@ struct Position
 #define Tank_HP_Bar_Mul 0.06
 
 //플레이어수, 게임플레이 세팅
-#define PLAYERS		 100
+#define PLAYERS		 2
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100
@@ -202,6 +202,9 @@ struct Position
 
 #define ANI_Bomb_Throw 0.5f
 #define ANI_Bomb_Boom 1.25f
+
+//데미지 재생시간
+#define Text_Damage_Show 3.0f
 
 //물리, 수학관련
 #define grav_accerl 9.8f //Gravialional accerleration

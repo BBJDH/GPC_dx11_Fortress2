@@ -42,7 +42,6 @@ private:
 private:
 
 	Engine::Rendering::Animation::Component animation;
-	Engine::Rendering::Text::Component text;
 	//Engine::Rendering::Text::Component damage;
 
 
@@ -58,8 +57,10 @@ private:
 	float		    fire_angle_left_value;
 	float		    fire_velocity;
 	float			ani_playtime;
-	bool			key_input;
+	float			damage_showtime;
 
+	void set_text_damage(unsigned const damage);
+	void check_render_damage();
 	void ani_set_flip();
 	void ani_set_normal();
 	void ani_set_idle();
@@ -73,7 +74,6 @@ private:
 	void ani_set_danger();
 	void ani_set_dead();
 	void set_idle_state();
-	void init_text();
 
 public:
 
@@ -85,6 +85,7 @@ public:
 	std::string get_damage()const;
 
 	float const get_ani_playtime()const;
+	float const get_damage_showtime()const;
 	unsigned const gethp() const;
 	int const getpower()const;
 	int const getfuel()const;
