@@ -3,6 +3,16 @@
 
 
 
+
+
+void Button_manager::check_buttons()
+{
+	for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+		iter->second.check_state();
+	for (auto iter = _Button->slot_button.begin(); iter != _Button->slot_button.end(); ++iter)
+		iter->second.check_state();
+}
+
 Scene* Button_manager::quit()
 {
 	PostQuitMessage(0);
@@ -19,6 +29,23 @@ Scene* Button_manager::to_battle()
 bool Button_manager::bool_func_default()
 {
 	return true;
+}
+void Button_manager::slot_toggle()
+{
+	auto onbutton = slot_button.begin();
+	for (auto iter = slot_button.begin(); iter != slot_button.end(); ++iter)
+	{
+		if (iter->second.get_on())
+			onbutton = iter;
+	}
+	for (auto iter = slot_button.begin(); iter != slot_button.end(); ++iter)
+	{
+		if (iter->second.clicked() and !iter->second.get_on())
+		{
+			onbutton->second.set_on(false);
+			iter->second.set_on(true);
+		}
+	}
 }
 //template<typename T>
 //std::function<T(void)> Button_manager::bind_function(Scene_Func const scene_func)

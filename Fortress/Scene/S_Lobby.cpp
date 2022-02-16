@@ -41,15 +41,16 @@ void S_Lobby::set_start_button()
 void S_Lobby::set_slot_button(std::string const& button_name,
     float const start_x, float const start_y, float const start_w, float const start_h )
 {
-    _Button->buttons.insert
+    _Button->slot_button.insert
     (
         {
              button_name,
-             Button<Scene*>(nullptr,"Lobby/slot")
+             Button<bool>(std::bind(&Button_manager::bool_func_default,_Button),"Lobby/slot")
         }
     );
-    _Button->buttons.at(button_name).init_image_location(start_x, start_y);
-    _Button->buttons.at(button_name).init_image_size(start_w, start_h);
+    _Button->slot_button.at(button_name).bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+    _Button->slot_button.at(button_name).init_image_location(start_x, start_y);
+    _Button->slot_button.at(button_name).init_image_size(start_w, start_h);
     //_Button->buttons.at(button_name).deactivated_image.Name = "Image/Button/Lobby/slot";
     //_Button->buttons.at(button_name).activated_image.Name = "Image/Button/Lobby/slot_pressed";
     //_Button->buttons.at(button_name).collide_image.Name = "Image/Button/Lobby/slot";
@@ -98,11 +99,14 @@ void S_Lobby::Start()
 Scene* S_Lobby::Update()
 {
     render();
+
+    _Button->check_buttons();
     for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
     {
         if (iter->second.clicked())
             return iter->second.execute();
     }
+    _Button->slot_toggle();
 
     return nullptr;
 }
@@ -113,5 +117,5 @@ void S_Lobby::End()
     _Button->buttons.erase("start");
 
     for (int i = 0; i < 8; ++i)
-        _Button->buttons.erase("slot_button_" + std::to_string(i));
+        _Button->slot_button.erase("slot_button_" + std::to_string(i));
 }

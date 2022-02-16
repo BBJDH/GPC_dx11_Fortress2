@@ -11,15 +11,10 @@ public:
 	std::map < std::string, Button < Scene* >> buttons;
 	std::map < std::string, Button < bool >> slot_button;
 
+
 public:
-	//함수 포인터 바인딩하는 함수
-	//template<typename T>
-	//std::function<T(void)> bind_function(Scene_Func const scene_func);
-	//
 
-	//template<typename T>
-	//std::function<T(void)> bind_function(std::function<T(void)> const func);
-
+	void check_buttons();
 	
 	//버튼의 기능들을 여기에 나열
 	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
@@ -30,6 +25,10 @@ public:
 	class Scene * to_lobby();
 	class Scene * to_battle();
 	bool  bool_func_default();
+	void  slot_toggle();
+	//클릭되면 슬롯이 토글됨
+	//기존 켜져있던 슬롯 key(std::string)를 기억하고
+	//새로운 버튼이 클릭되면 해당을롯 토글 온 기존 것 off
 
 
 	//함수 포인터는 코드영역, 컴파일타임에 정해짐
