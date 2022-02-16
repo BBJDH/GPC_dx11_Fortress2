@@ -42,6 +42,6 @@ public:
 	void set_on(bool value);
 	void bind_click_func(std::function<T(void)> const & function);
 	void bind_activated_func(std::function<bool(void)> const & function);
-	void bind_toggled_func(std::function<bool(void)> const & function);
+	//void bind_toggled_func(std::function<bool(void)> const & function);
 };
 

@@ -2,7 +2,7 @@
 
 #include "Missile.h"
 
-Missile::Missile(Position const& pos, unsigned const width, unsigned const height):
+Missile::Missile(_float2 const& pos, unsigned const width, unsigned const height):
 	Object(pos, width, height),bomb_range_w(100),bomb_range_h(80),
 	damage{100}, ani_playtime{ 0.0f }, state{ State::Throw }
 {

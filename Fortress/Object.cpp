@@ -10,7 +10,7 @@ out{false},/*test*/ support_point{ 0.0f,0.0f }
 {
 }
 
-Object::Object(Position const & pos, unsigned const width, unsigned const height) : pos{ pos }, pos0{ 0.0f,0.0f }, velocity0{ 0.0f,0.0f }, width{ width }, height{ height },
+Object::Object(_float2 const & pos, unsigned const width, unsigned const height) : pos{ pos }, pos0{ 0.0f,0.0f }, velocity0{ 0.0f,0.0f }, width{ width }, height{ height },
 velocity{ 0.0f }, moving_time{ 0.0f }, moving_angle{ 0.0f }, image_angle{ 0.0f }, falling{ true },myturn{false},
 out{false},/*test*/ support_point{ 0.0f,0.0f }
 {
@@ -44,7 +44,7 @@ Object& Object::operator=(Object const& other_obj)
 	return *this;
 }
 
-void Object::moveto(Position const & pos)
+void Object::moveto(_float2 const & pos)
 {
 	this->pos.x = pos.x;
 	this->pos.y = pos.y;
@@ -61,7 +61,7 @@ void Object::ballistics_initialize(float const moving_angle, float const velocit
 	this->falling = true;
 }
 //OOP
-Position const Object::getpos() const
+_float2 const Object::getpos() const
 {
 	return this->pos;
 }
@@ -114,12 +114,12 @@ void Object::setmyturn(bool myturn)
 	this->myturn = myturn;
 }
 
-Position const Object::getsup_pos() const
+_float2 const Object::getsup_pos() const
 {
 	return support_point;
 }
 
-void Object::setsup_pos(Position const& pos)
+void Object::setsup_pos(_float2 const& pos)
 {
 	this->support_point = pos;
 }

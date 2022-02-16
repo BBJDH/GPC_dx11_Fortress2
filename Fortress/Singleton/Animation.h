@@ -17,7 +17,6 @@ private:
 
 	float loading_time;
 
-
 	void initialize();
 
 

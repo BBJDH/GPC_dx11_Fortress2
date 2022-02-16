@@ -215,13 +215,13 @@ template void Button<Scene*>::bind_activated_func(std::function<bool(void)> cons
 //{
 //	this->function_button_on = function;
 //}
-template<typename T>
-void Button<T>::bind_toggled_func(std::function<bool(void)> const& function)
-{
-	this->function_button_toggle = function;
-}
-template void Button<bool>::bind_toggled_func(std::function<bool(void)> const& function);
-template void Button<Scene*>::bind_toggled_func(std::function<bool(void)> const& function);
+//template<typename T>
+//void Button<T>::bind_toggled_func(std::function<bool(void)> const& function)
+//{
+//	this->function_button_toggle = function;
+//}
+//template void Button<bool>::bind_toggled_func(std::function<bool(void)> const& function);
+//template void Button<Scene*>::bind_toggled_func(std::function<bool(void)> const& function);
 
 //template<>
 //void Button<Scene*>::bind_toggled_func(std::function<bool(void)> const& function)

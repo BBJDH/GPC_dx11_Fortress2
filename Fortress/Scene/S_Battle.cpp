@@ -60,9 +60,7 @@ void S_Battle::set_playing_exit_button()
     );
     _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
-    //_Button->buttons.at("exit").deactivated_image.Name = "Image/Button/playing_exit";
-    //_Button->buttons.at("exit").activated_image.Name = "Image/Button/playing_exit";
-    //_Button->buttons.at("exit").collide_image.Name = "Image/Button/playing_exit_collide";
+
     _Button->buttons.at("exit").init_image_location(playing_exit_x, playing_exit_y);
     _Button->buttons.at("exit").init_image_size(playing_exit_w, playing_exit_h);
 }
@@ -78,9 +76,7 @@ void S_Battle::set_gameover_exit_button()
     );
     _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
-    //_Button->buttons.at("exit").deactivated_image.Name = "Image/Button/gameover_exit";
-    //_Button->buttons.at("exit").activated_image.Name = "Image/Button/gameover_exit";
-    //_Button->buttons.at("exit").collide_image.Name = "Image/Button/gameover_exit_collide";
+
     _Button->buttons.at("exit").init_image_location(gameover_exit_x, gameover_exit_y);
     _Button->buttons.at("exit").init_image_size(gameover_exit_w, gameover_exit_h);
 
@@ -148,14 +144,13 @@ Scene * S_Battle::update_scene()
 
         render_playing();            //렌더링
 
-        if(_Button->buttons.at("exit").clicked())
-            return _Button->buttons.at("exit").execute();
+       
         if (_Turn->is_gameover(tank))
         {
             _Button->buttons.erase("exit");
             this->state = State::GameOver;
         }
-        break;
+        return _Button->click_buttons();
     }
     case S_Battle::State::GameOver:
     {
@@ -165,8 +160,8 @@ Scene * S_Battle::update_scene()
         _Image_manager->render_gameover();
 
         //버튼을 누르면 시작화면으로
-        if (_Button->buttons.at("exit").clicked())
-            return _Button->buttons.at("exit").execute();
+        return _Button->click_buttons();
+
     }
     break;
     default:

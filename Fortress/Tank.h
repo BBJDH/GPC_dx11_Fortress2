@@ -77,7 +77,7 @@ private:
 
 public:
 
-	Tank(Position const& pos, unsigned const width, unsigned const height, std::string const & name);
+	Tank(_float2 const& pos, unsigned const width, unsigned const height, std::string const & name);
 	Tank & operator=(Tank const & other_tank);
 	Tank::State get_state()const;
 	Tank::Side get_side()const;

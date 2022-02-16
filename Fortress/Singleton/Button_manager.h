@@ -4,17 +4,27 @@ class Button_manager :public SingletonT<Button_manager>
 {
 private:
 public:
-	enum class Scene_Func
+	enum class Color
 	{
-		Quit,Shop,Lobby,Battle,Bool_default //상점의 버튼들, 플레이어선택, 맵선택 버튼 등
-	};
+		Red, Blue, Green, Purple, Orange, Yellow ,Pink
+	};//Brown
 	std::map < std::string, Button < Scene* >> buttons;
 	std::map < std::string, Button < bool >> slot_button;
+	std::map < std::string, Button < bool >> tank_button;
 
+	std::map<int, std::pair<std::string, Color> > player_set;
 
 public:
+	//상수 
+	//구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
+	std::string const tank_name[2] = { "canon","super", };
 
+private:
 	void check_buttons();
+	
+public:
+	Scene* click_buttons();
+	void  slot_toggle(std::map<std::string, Button < bool >>  & slot_button);
 	
 	//버튼의 기능들을 여기에 나열
 	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
@@ -25,7 +35,6 @@ public:
 	class Scene * to_lobby();
 	class Scene * to_battle();
 	bool  bool_func_default();
-	void  slot_toggle();
 	//클릭되면 슬롯이 토글됨
 	//기존 켜져있던 슬롯 key(std::string)를 기억하고
 	//새로운 버튼이 클릭되면 해당을롯 토글 온 기존 것 off

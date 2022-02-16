@@ -8,25 +8,43 @@ Image_manager::Image_manager()
     initialize();
 }
 
+void Image_manager::set_image(Engine::Rendering::Image::Component & image, _float2 const& position, _float2 const& length, float angle)
+{
+    image.Location = { position.x, position .y};
+    image.Length = { length.x,length.y };
+    image.Angle = angle;
+}
+
+void Image_manager::set_image(Engine::Rendering::Image::UI & image, _float2 const& position, _float2 const& length, float angle)
+{
+    image.Location = { position.x, position.y };
+    image.Length = { length.x,length.y };
+    image.Angle = angle;
+}
+
 void Image_manager::initialize()
 {
     set_background();
    
-    Loading.Name = "Image/Screen/loading";
-    Loading.Location = { 0,0 };
-    Loading.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+
+    //Loading.Location = { 0,0 };
+    //Loading.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
 
     UI_Back.Name = "Image/UI/UI_Back";
-    UI_Back.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    UI_Back.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
+    set_image(UI_Back, { CAM_SIZE_W/2, CAM_SIZE_H/2 }, { CAM_SIZE_W, CAM_SIZE_H });
+
+    //UI_Back.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    //UI_Back.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
     UI_Front.Name = "Image/UI/UI_Front";
-    UI_Front.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    UI_Front.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
+    set_image(UI_Front, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
+
+    //UI_Front.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    //UI_Front.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
 
     UI_Hp.Name = "Image/UI/Green";
     UI_Power.Name = "Image/UI/Red";
     UI_Fuel.Name = "Image/UI/Yellow";
-    UI_Line.Name ="Image/UI/angle_r";
+    //UI_Line.Name ="Image/UI/angle_r";
 
     Tank_Hp.Name ="Image/UI/blue_bar";
     Tank_Hp_Bar.Name ="Image/UI/base_bar";
@@ -36,20 +54,22 @@ void Image_manager::initialize()
     Green.Name = "Image/UI/Green";
     Green.Length = Vector<2>(5, 5);
 
-    Gameover.Name = "Image/Screen/gameover";
-    Gameover.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    Gameover.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
+    //Gameover.Name = "Image/Screen/gameover";
+    //Gameover.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    //Gameover.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
 
-}
-
-void Image_manager::render_background()
-{
-    Background.Render();
 }
 
 void Image_manager::render_loading()
 {
-    Loading.Render();
+    world_image.Name = "Image/Screen/loading";
+    set_image(world_image, { 0,0 }, { CAM_SIZE_W, CAM_SIZE_H });
+    world_image.Render();
+}
+
+void Image_manager::render_background()
+{
+    world_image.Render();
 }
 
 
@@ -95,13 +115,13 @@ void Image_manager::render_front_ui(Tank const & tank)
 
     UI_Hp.Location = {UI_Bar_X + tank.gethp()*UI_HP_MUL/2,UI_HP_Y};
     UI_Hp.Length = {tank.gethp()*UI_HP_MUL,UI_Bar_H};
+    UI_Hp.Render();
 
     UI_Power.Location = {UI_Bar_X + tank.getpower() * UI_POWER_MUL/2 , UI_POWER_Y};
     UI_Power.Length = {tank.getpower() * UI_POWER_MUL , UI_Bar_H};
 
     UI_Fuel.Location = {UI_Bar_X + tank.getfuel()*UI_Fuel_MUL/2 , UI_FUEL_Y};
     UI_Fuel.Length = {tank.getfuel()*UI_Fuel_MUL , UI_Bar_H};
-    UI_Hp.Render();
     UI_Power.Render();
     UI_Fuel.Render();
 
@@ -128,25 +148,50 @@ void Image_manager::render_ui(std::vector<Tank> const& tank)
 
 void Image_manager::render_gameover()
 {
-    Gameover.Render();
+    world_image.Name = "Image/Screen/gameover";
+    set_image(world_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
+    world_image.Render();
 }
 
 
+void Image_manager::render_main_text(_float2 test_location, _float2 test_length)
+{
+    view_image.Name = "Image/Text/start_text2";
+    set_image(view_image, test_location, test_length );
+    view_image.Render();
+}
+
+void Image_manager::render_main(_float2 test_location, _float2 test_length)
+{
+    view_image.Name = "Image/Screen/start";
+    set_image(view_image,  test_location, test_length);
+    view_image.Render();
+}
+
 void Image_manager::set_background()
 {
-    Background.Name = "Image/Background/background";
+    world_image.Name = "Image/Background/background";
+    set_image(world_image, { 0,0 }, { BackgroundSIZE_W,BackgroundSIZE_H });
 
-    Background.Location = {0,0};
-    Background.Length = Vector<2>(BackgroundSIZE_W, BackgroundSIZE_H);
 }
 
 void Image_manager::set_minimap_background()
 {
-    Background.Name = "Image/Background/background_alpha";
-    //Background.Name = "Image/Background/start";
+    //Background.Name = "Image/Background/background_alpha";
 
-    Background.Location = {_Map_manager->minimap_loc.x+MINIMAP_SIZE_W/2,_Map_manager->minimap_loc.y-MINIMAP_SIZE_H/2};
-    Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
+    //Background.Location = {_Map_manager->minimap_loc.x+MINIMAP_SIZE_W/2,_Map_manager->minimap_loc.y-MINIMAP_SIZE_H/2};
+    //Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
+    world_image.Name = "Image/Background/background_alpha";
+    set_image
+    (
+        world_image,
+        { 
+            static_cast<float>(_Map_manager->minimap_loc.x + MINIMAP_SIZE_W / 2),
+            static_cast<float>(_Map_manager->minimap_loc.y - MINIMAP_SIZE_H / 2)
+        },
+        { MINIMAP_SIZE_W,MINIMAP_SIZE_H }
+    );
+
 }
 
 void Image_manager::render_line(POINT const& location, unsigned const length,
@@ -156,26 +201,39 @@ void Image_manager::render_line(POINT const& location, unsigned const length,
     {
     case Image_manager::Color::Red:
     {
-        UI_Line.Name = "Image/UI/angle_r";
+        view_image.Name = "Image/UI/angle_r";
         break;
     }
     case Image_manager::Color::Yellow:
     {
-        UI_Line.Name = "Image/UI/angle_y";
+        view_image.Name = "Image/UI/angle_y";
         break;
     }
     case Image_manager::Color::White:
     {
-        UI_Line.Name = "Image/UI/angle_w";
+        view_image.Name = "Image/UI/angle_w";
         break;
     }
     default:
         break;
     }
-    UI_Line.Location = { location.x,location.y };
-    UI_Line.Length = { length ,thickness };
-    UI_Line.Angle = angle;
-    UI_Line.Render();
+    set_image
+    (
+        view_image,
+        { 
+            static_cast<float>(location.x),
+            static_cast<float>(location.y)
+        },
+        { 
+            static_cast<float>(length   ),
+            static_cast<float>(thickness)
+        },
+        angle
+    );
+    //view_image.Location = { location.x,location.y };
+    //view_image.Length = { length ,thickness };
+    //view_image.Angle = angle;
+    view_image.Render();
 }
 
 void Image_manager::ui_angle_line(int const length, int const angle, int const thickness, Color color)

@@ -4,7 +4,7 @@
 
 
 
-unsigned const Physics_Manager::length(Position start, Position dest)
+unsigned const Physics_Manager::length(_float2 start, _float2 dest)
 {
 	return static_cast<unsigned const>(sqrt(pow((dest.x - start.x),2) + pow((dest.y - start.y),2)));
 }

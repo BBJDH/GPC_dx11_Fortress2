@@ -4,7 +4,7 @@
 
 
 
-Tank::Tank(Position const& pos, unsigned const width, unsigned const height, std::string const& name)
+Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height, std::string const& name)
 	:Object(pos, width, height), hp{ TANK_HP }, fuel{100},
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},

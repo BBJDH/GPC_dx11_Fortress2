@@ -10,8 +10,8 @@ public:
 		Earthquake, Following, Normal
 	};
 
-	Position pos;
-	Position pos_win;
+	_float2 pos;
+	_float2 pos_win;
 
 private:
 	State state;

@@ -24,6 +24,7 @@ namespace Shader
 
         return Output;
     }
+        //샘플러 스테이트로 외곽선을 처리가능하다 (샘플링)
 //float4 자료형 {x,y,z,alpha} 버퍼로 받아서 (이 상수버퍼는 매 프레임마다 갱신)
 //x,y,z,는 Input의 좌표요소와 비교하여 픽셀값을 계산하고
 //alpha값은 output의 a에 대입(평시에는 1 미니맵 그릴때는 0.5)

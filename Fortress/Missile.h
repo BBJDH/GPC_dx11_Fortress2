@@ -26,7 +26,7 @@ private:
 	void ani_set_boom();
 
 public:
-	Missile(Position const& pos, unsigned const width, unsigned const height);
+	Missile(_float2 const& pos, unsigned const width, unsigned const height);
 	Missile & operator=(Missile const& other_miss);
 	int const get_range_w()const;
 	int const get_damage()const;
