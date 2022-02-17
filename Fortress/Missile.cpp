@@ -4,10 +4,9 @@
 
 Missile::Missile(_float2 const& pos, unsigned const width, unsigned const height):
 	Object(pos, width, height),bomb_range_w(100),bomb_range_h(80),
-	damage{100}, ani_playtime{ 0.0f }, state{ State::Throw }
+	damage{2000}, ani_playtime{ 0.0f }, state{ State::Throw }
 {
 	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
-
 }
 
 

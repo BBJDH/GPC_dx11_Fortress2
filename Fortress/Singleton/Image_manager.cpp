@@ -5,7 +5,7 @@
 
 Image_manager::Image_manager()
 {
-    initialize();
+
 }
 
 void Image_manager::set_image(Engine::Rendering::Image::Component & image, _float2 const& position, _float2 const& length, float angle)
@@ -22,44 +22,6 @@ void Image_manager::set_image(Engine::Rendering::Image::UI & image, _float2 cons
     image.Angle = angle;
 }
 
-void Image_manager::initialize()
-{
-    set_background();
-   
-
-    //Loading.Location = { 0,0 };
-    //Loading.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-
-    UI_Back.Name = "Image/UI/UI_Back";
-    set_image(UI_Back, { CAM_SIZE_W/2, CAM_SIZE_H/2 }, { CAM_SIZE_W, CAM_SIZE_H });
-
-    //UI_Back.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    //UI_Back.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
-    UI_Front.Name = "Image/UI/UI_Front";
-    set_image(UI_Front, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
-
-    //UI_Front.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    //UI_Front.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
-
-    UI_Hp.Name = "Image/UI/Green";
-    UI_Power.Name = "Image/UI/Red";
-    UI_Fuel.Name = "Image/UI/Yellow";
-    //UI_Line.Name ="Image/UI/angle_r";
-
-    Tank_Hp.Name ="Image/UI/blue_bar";
-    Tank_Hp_Bar.Name ="Image/UI/base_bar";
-
-    Red.Name = "Image/UI/Red";
-    Red.Length = Vector<2>(5, 5);
-    Green.Name = "Image/UI/Green";
-    Green.Length = Vector<2>(5, 5);
-
-    //Gameover.Name = "Image/Screen/gameover";
-    //Gameover.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    //Gameover.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2); //윈도우 좌표계 좌측상단 0,0 기준
-
-}
-
 void Image_manager::render_loading()
 {
     world_image.Name = "Image/Screen/loading";
@@ -69,13 +31,15 @@ void Image_manager::render_loading()
 
 void Image_manager::render_background()
 {
+    set_background();
     world_image.Render();
 }
 
 
 void Image_manager::render_back_ui(Tank const & tank)
 {
-    UI_Back.Render();
+    render_back_pannel();
+
     int  img_angle = -static_cast<int>(tank.getimage_angle()/Radian); //탱크 입장에서 지평선 기준으로 바라보는 각도
     int  support_angle = img_angle;             //계산에 반영할 각도, 오른쪽을 본다면 0도 왼쪽을 본다면 180도
     int  barrel_angle = tank.getangle();
@@ -89,7 +53,7 @@ void Image_manager::render_back_ui(Tank const & tank)
         min_angle *= -1;
         max_angle *= -1;
     }
-
+    //탱크 포신이 움직일 수 있는 최소각 최대각 현재 포신의 각도
     ui_angle_line(UI_ANGLE_Length, support_angle + min_angle, 1, Color::Yellow);
     ui_angle_line(UI_ANGLE_Length, support_angle + max_angle, 1, Color::Yellow);
     ui_angle_line(UI_ANGLE_Length, support_angle + min_angle + barrel_angle, 1, Color::Red);
@@ -98,33 +62,20 @@ void Image_manager::render_back_ui(Tank const & tank)
         white_line_addtional_length = 10;
     else
         white_line_addtional_length = 5;
+    //탱크가 서있는 지표면의 각도
     ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle, 2,  Color::White);
     ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle+180, 2,  Color::White);
-
 }
 
 void Image_manager::render_front_ui(Tank const & tank)
 {
-    UI_Front.Render();
+    render_front_pannel();
 
-    if(tank.gethp()<400)
-        UI_Hp.Name = "Image/UI/Red";
-    else
-        UI_Hp.Name = "Image/UI/Green";
+    render_pannel_hp(tank.gethp());
 
+    render_pannel_power(tank.getpower());
 
-    UI_Hp.Location = {UI_Bar_X + tank.gethp()*UI_HP_MUL/2,UI_HP_Y};
-    UI_Hp.Length = {tank.gethp()*UI_HP_MUL,UI_Bar_H};
-    UI_Hp.Render();
-
-    UI_Power.Location = {UI_Bar_X + tank.getpower() * UI_POWER_MUL/2 , UI_POWER_Y};
-    UI_Power.Length = {tank.getpower() * UI_POWER_MUL , UI_Bar_H};
-
-    UI_Fuel.Location = {UI_Bar_X + tank.getfuel()*UI_Fuel_MUL/2 , UI_FUEL_Y};
-    UI_Fuel.Length = {tank.getfuel()*UI_Fuel_MUL , UI_Bar_H};
-    UI_Power.Render();
-    UI_Fuel.Render();
-
+    render_pannel_fuel(tank.getfuel());
 }
 
 void Image_manager::render_tanks_hp(std::vector<Tank> const& tank)
@@ -148,9 +99,9 @@ void Image_manager::render_ui(std::vector<Tank> const& tank)
 
 void Image_manager::render_gameover()
 {
-    world_image.Name = "Image/Screen/gameover";
-    set_image(world_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
-    world_image.Render();
+    view_image.Name = "Image/Screen/gameover";
+    set_image(view_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
+    view_image.Render();
 }
 
 
@@ -168,6 +119,16 @@ void Image_manager::render_main(_float2 test_location, _float2 test_length)
     view_image.Render();
 }
 
+void Image_manager::render_tank_image(std::string const& name, _float2 const& position, _float2 const& length)
+{
+    if (name.empty())
+        return;
+
+    std::string const location = "Image/Tank/" + name;
+    view_image.Name = location.c_str();
+    set_image(view_image, position, length);
+}
+
 void Image_manager::set_background()
 {
     world_image.Name = "Image/Background/background";
@@ -177,10 +138,7 @@ void Image_manager::set_background()
 
 void Image_manager::set_minimap_background()
 {
-    //Background.Name = "Image/Background/background_alpha";
 
-    //Background.Location = {_Map_manager->minimap_loc.x+MINIMAP_SIZE_W/2,_Map_manager->minimap_loc.y-MINIMAP_SIZE_H/2};
-    //Background.Length = {MINIMAP_SIZE_W,MINIMAP_SIZE_H};
     world_image.Name = "Image/Background/background_alpha";
     set_image
     (
@@ -192,6 +150,78 @@ void Image_manager::set_minimap_background()
         { MINIMAP_SIZE_W,MINIMAP_SIZE_H }
     );
 
+}
+
+void Image_manager::render_back_pannel()
+{
+    view_image.Name = "Image/UI/UI_Back";
+    set_image(view_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
+    view_image.Render();
+}
+
+void Image_manager::render_front_pannel()
+{
+    view_image.Name = "Image/UI/UI_Front";
+    set_image(view_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
+    view_image.Render();
+}
+
+void Image_manager::render_pannel_hp(int const hp)
+{
+    if (hp < 400)
+        view_image.Name = "Image/UI/Red";
+    else
+        view_image.Name = "Image/UI/Green";
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(UI_Bar_X + hp * UI_HP_MUL / 2),
+            UI_HP_Y
+        },
+        {
+            static_cast<float>(hp * UI_HP_MUL),
+            UI_Bar_H
+        }
+        );
+    view_image.Render();
+}
+
+void Image_manager::render_pannel_power(int const power)
+{
+    view_image.Name = "Image/UI/Red";
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(UI_Bar_X + power * UI_POWER_MUL / 2),
+            UI_POWER_Y
+        },
+        {
+            static_cast<float>(power * UI_POWER_MUL),
+            UI_Bar_H
+        }
+        );
+    view_image.Render();
+}
+
+void Image_manager::render_pannel_fuel(int const fuel)
+{
+    view_image.Name = "Image/UI/Yellow";
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(UI_Bar_X + fuel * UI_Fuel_MUL / 2),
+            UI_FUEL_Y
+        },
+        {
+            static_cast<float>(fuel * UI_Fuel_MUL),
+            UI_Bar_H
+        }
+        );
+
+    view_image.Render();
 }
 
 void Image_manager::render_line(POINT const& location, unsigned const length,
@@ -230,9 +260,7 @@ void Image_manager::render_line(POINT const& location, unsigned const length,
         },
         angle
     );
-    //view_image.Location = { location.x,location.y };
-    //view_image.Length = { length ,thickness };
-    //view_image.Angle = angle;
+
     view_image.Render();
 }
 
@@ -255,49 +283,106 @@ void Image_manager::ui_angle_line(int const length, int const angle, int const t
 
 }
 
+void Image_manager::render_tank_hp_base(_float2 const& position)
+{
+
+    world_image.Name = "Image/UI/base_bar";
+    set_image
+    (
+        world_image,
+        {
+            position.x - MAPSIZE_W / 2,
+            MAPSIZE_H / 2 - position.y - Tank_HP_Bar_Location_H
+        },
+        {
+            Tank_HP_Bar_W,
+            Tank_HP_Bar_H
+        }
+        );
+    world_image.Render();
+}
+
+void Image_manager::render_tank_hp_bar(_float2 const& position, int const hp)
+{
+   
+    if (hp < TANK_DANGER_HP)
+        world_image.Name = "Image/UI/red_bar";
+    else if (hp < 700)
+        world_image.Name = "Image/UI/orange_bar";
+    else
+        world_image.Name = "Image/UI/blue_bar";
+    set_image
+    (
+        world_image,
+        { 
+            static_cast<float>(position.x + hp * Tank_HP_Bar_Mul / 2 - MAPSIZE_W / 2 - Tank_HP_Bar_Location_W) ,
+            static_cast<float>(MAPSIZE_H / 2 - position.y - Tank_HP_Bar_Location_H)
+        },
+        { 
+            static_cast<float>(hp * Tank_HP_Bar_Mul),
+            Tank_HP_Bar_H
+        }
+    );
+    this->world_image.Render();
+}
+
 void Image_manager::render_tank_hp(Tank const& tank)
 {
-    this->Tank_Hp_Bar.Length = Vector<2>(Tank_HP_Bar_W, Tank_HP_Bar_H);
-    this->Tank_Hp_Bar.Location = { tank.getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank.getpos().y-Tank_HP_Bar_Location_H };
     if (tank.gethp() == 0)
         return;
-
-    this->Tank_Hp_Bar.Render();
-
-    unsigned const hp = tank.gethp();
-    if(hp<TANK_DANGER_HP)
-        Tank_Hp.Name = "Image/UI/red_bar";
-    else if(hp<700)
-        Tank_Hp.Name = "Image/UI/orange_bar";
-    else
-        Tank_Hp.Name = "Image/UI/blue_bar";
-    this->Tank_Hp.Length =  Vector<2>(hp*Tank_HP_Bar_Mul, Tank_HP_Bar_H);
-    this->Tank_Hp.Location = { tank.getpos().x+hp*Tank_HP_Bar_Mul/2 - MAPSIZE_W / 2-Tank_HP_Bar_Location_W ,MAPSIZE_H / 2 - tank.getpos().y-Tank_HP_Bar_Location_H };
-    this->Tank_Hp.Render();
-
-
+    render_tank_hp_base(tank.getpos());
+    render_tank_hp_bar(tank.getpos(), tank.gethp());
 }
 
 void Image_manager::render_minimap_background()
 {
     set_minimap_background();
-    render_background();
-    set_background();
+    world_image.Render();
 }
 
 void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 {
     if (is_turn)
     {
-        Green.Location = { _Map_manager->minimap_loc.x+obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 + _Map_manager->MINI_UI_SIZE };
-        Green.Angle = -obj.getimage_angle()/Radian;
-        Green.Render();
+        render_minimap_enemy(obj.getpos(),obj.getimage_angle());
         return;
     }
-    Red.Location = {_Map_manager->minimap_loc.x+ obj.getpos().x/10, _Map_manager->minimap_loc.y+obj.getpos().y/10 +_Map_manager->MINI_UI_SIZE };
-    Red.Angle = -obj.getimage_angle()/Radian;
-    Red.Render();
+    render_minimap_ally(obj.getpos(), obj.getimage_angle());
     return ;
+}
+
+void Image_manager::render_minimap_enemy(_float2 const& position, float const angle)
+{
+    view_image.Name = "Image/UI/Red";
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(_Map_manager->minimap_loc.x + position.x / 10),
+            static_cast<float>(_Map_manager->minimap_loc.y + position.y / 10 + _Map_manager->MINI_UI_SIZE)
+        },
+        {5,5},
+        angle / Radian
+    );
+
+    view_image.Render();
+}
+
+void Image_manager::render_minimap_ally(_float2 const& position, float const angle)
+{
+    view_image.Name = "Image/UI/Red";
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(_Map_manager->minimap_loc.x + position.x / 10),
+            static_cast<float>(_Map_manager->minimap_loc.y + position.y / 10 + _Map_manager->MINI_UI_SIZE)
+        },
+        { 5,5 },
+        angle / Radian
+    );
+
+    view_image.Render();
 }
 
 void Image_manager::render_minimap_tank(std::vector<Tank> const& tank)
@@ -368,18 +453,3 @@ void Image_manager::render_minimap_cambox()
     );
 }
 
-
-
-
-//void Image_manager::render_missile(std::vector<Missile> const& missile)
-//{
-//    if (!missile.empty())
-//    {
-//        for (size_t i = 0; i < missile.size(); i++)
-//        {
-//            render_object(missile[i], Image_manager::Obj_Type::Missile);
-//            iMissile.Render();
-//
-//        }
-//    }
-//}

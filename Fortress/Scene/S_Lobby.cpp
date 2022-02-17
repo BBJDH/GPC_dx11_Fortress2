@@ -49,8 +49,6 @@ void S_Lobby::set_slot_button(std::map<std::string,Button<bool>>  & slot_button,
     slot_button.at(button_name).bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
     slot_button.at(button_name).init_image_location(start_x, start_y);
     slot_button.at(button_name).init_image_size(start_w, start_h);
-
-    
 }
 
 
@@ -86,11 +84,29 @@ void S_Lobby::set_tank_buttons()
         {
             set_slot_button(_Button->tank_button,"tank_" + std::to_string(i), "Lobby/tank",
                 location_x + offset_x * i, location_y , width, heght);
+            _Image_manager->render_tank_image
+            (
+                _Button->tank_name[i],
+                {
+                    location_x + offset_x * i,
+                    location_y
+                },
+                { width, heght }
+            );
         }
         else
         {
             set_slot_button(_Button->tank_button, "tank_" + std::to_string(i), "Lobby/tank",
                 location_x + offset_x * (i-6), location_y+ offset_y, width, heght);
+            _Image_manager->render_tank_image
+            (
+                _Button->tank_name[i],
+                {
+                    location_x + offset_x * i,
+                    location_y
+                },
+                { width, heght }
+            );
         }
     }
 }

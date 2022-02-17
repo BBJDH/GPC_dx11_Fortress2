@@ -4,8 +4,6 @@
 
 
 
-
-
 void S_Battle::Start()
 {
     initialize();

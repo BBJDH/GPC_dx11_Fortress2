@@ -17,7 +17,7 @@ public:
 public:
 	//상수 
 	//구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
-	std::string const tank_name[2] = { "canon","super", };
+	std::string const tank_name[12] = { "canon","super", };
 
 private:
 	void check_buttons();
