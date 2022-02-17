@@ -19,6 +19,13 @@ private:
     float const start_w = 170;
     float const start_h = 30;
 
+    float const tank_button_location_x = 70;
+    float const tank_button_location_y = 552;
+    float const tank_button_width = 80;
+    float const tank_button_heght = 50;
+    float const tank_button_offset_x = tank_button_width + 18;
+    float const tank_button_offset_y = tank_button_heght + 18;
+
 private:
     void    set_exit_button();
     void    set_start_button();
@@ -28,6 +35,11 @@ private:
 
     void    set_slot_buttons();
     void    set_tank_buttons();
+    void    render_tank_button_image();
+    void    render_tank_selected();
+    void    render_slot_color();
+    void    render_slot_text();
+    void    render_button_images();
     void    init_image();
     void    render();
     

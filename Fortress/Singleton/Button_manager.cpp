@@ -2,6 +2,13 @@
 #include "Button_manager.h"
 
 
+void Button_manager::init_player_set()
+{
+	for (int i = 0; i < 8; i++)
+	{
+		player_set.insert(std::make_pair(i, std::make_pair(tank_name[1], static_cast<Color>(i))));
+	}
+}
 
 void Button_manager::check_buttons()
 {
@@ -13,19 +20,12 @@ void Button_manager::check_buttons()
 		iter->second.check_state();
 }
 
-Scene* Button_manager::click_buttons()
+
+void Button_manager::render_buttons()
 {
 	check_buttons();		//각 버튼들의 상태를 업데이트
-
-	for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
-	{
-		if (iter->second.clicked())	//상태에 따라 이벤트 처리
-			return iter->second.execute();
-	}
 	slot_toggle(slot_button); 	//상태에 따라 이벤트 처리
 	slot_toggle(tank_button); 	//상태에 따라 이벤트 처리
-	return nullptr;
-
 }
 
 Scene* Button_manager::quit()
@@ -47,7 +47,6 @@ bool Button_manager::bool_func_default()
 }
 void Button_manager::slot_toggle(std::map<std::string, Button < bool >> & slot)
 {
-
 	bool toggled = false;
 	bool new_target = false;
 	auto onbutton = slot.begin();

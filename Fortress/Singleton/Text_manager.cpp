@@ -35,14 +35,14 @@ void Text_manager::set_text(Engine::Rendering::Text::Component& text, POINT cons
 {
 	switch (color)
 	{
-	case Text_manager::Color::Green:
+	case Color::Green:
 	{
 		text.Color.Red = 0;
 		text.Color.Blue = 0;
 		text.Color.Green = 255;
 		break;
 	}
-	case Text_manager::Color::Red:
+	case Color::Red:
 	{
 		text.Color.Red = 255;
 		text.Color.Blue = 0;
@@ -133,6 +133,29 @@ void Text_manager::render_tank_name(Tank const& tank)
 		Font::Red
 	);
 }
+void Text_manager::render_text_ui(POINT const& location, int const& font_size, std::string const& str_value, Font font)
+{
+	LONG location_x = location.x;		//텍스트 출력위치 누적
+	std::string value;
+	if (str_value.empty())
+		value = "Empty";
+	else
+		value = str_value;
+	for (int i = 0; i < str_value.size(); i++)
+	{
+		if (str_value.at(i) == ' ')
+			location_x += font_size / 2;
+		else
+			location_x += font_size;
+		render_single_text_ui
+		(
+			{ location_x, location.y },
+			{ font_size ,font_size },
+			str_value.at(i),
+			font
+		);
+	}
+}
 void Text_manager::render_fps()
 {
 	float const delta = Engine::Time::Get::Delta();
@@ -183,8 +206,41 @@ void Text_manager::render_single_text(POINT const& location, SIZE const& font_si
 		temp = "Image/Text/Normal/Red/";
 		break;
 	}
-	default:
+	case Text_manager::Font::Blue:
+	{
+		temp = "Image/Text/Normal/Blue/";
 		break;
+	}
+	case Text_manager::Font::Green:
+	{
+		temp = "Image/Text/Normal/Green/";
+		break;
+	}
+	case Text_manager::Font::Purple:
+	{
+		temp = "Image/Text/Normal/Purple/";
+		break;
+	}
+	case Text_manager::Font::Orange:
+	{
+		temp = "Image/Text/Normal/Orange/";
+		break;
+	}
+	case Text_manager::Font::Yellow:
+	{
+		temp = "Image/Text/Normal/Yellow/";
+		break;
+	}
+	case Text_manager::Font::Brown:
+	{
+		temp = "Image/Text/Normal/Brown/";
+		break;
+	}
+	case Text_manager::Font::Pink:
+	{
+		temp = "Image/Text/Normal/Pink/";
+		break;
+	}
 	}
 	temp += value;
 	text_img.Name = temp.c_str();
@@ -195,7 +251,12 @@ void Text_manager::render_single_text(POINT const& location, SIZE const& font_si
 void Text_manager::render_text(POINT const& location, int const& font_size,
 	std::string const& str_value, Font font)
 {
-	LONG location_x = location.x;
+	LONG location_x = location.x;		//텍스트 출력위치 누적
+	std::string value;
+	if (str_value.empty())
+		value = "Empty";
+	else
+		value = str_value;
 	for (int i = 0; i < str_value.size(); i++)
 	{
 		if (str_value.at(i) == ' ')
@@ -220,4 +281,64 @@ Text_manager::Text_manager()
 	text.Font.Underlined = false;
 	text.Font.StructOut = false;
 	//text
+}
+
+void Text_manager::render_single_text_ui(POINT const& location, SIZE const& font_size, char const& value, Font font)
+{
+	if (value == ' ')
+		return;
+	std::string temp = "";
+	switch (font)
+	{
+	case Text_manager::Font::Damage:
+	{
+		temp = "Image/Text/Damage/";
+		break;
+	}
+	case Text_manager::Font::Red:
+	{
+		temp = "Image/Text/Normal/Red/";
+		break;
+	}
+	case Text_manager::Font::Blue:
+	{
+		temp = "Image/Text/Normal/Blue/";
+		break;
+	}
+	case Text_manager::Font::Green:
+	{
+		temp = "Image/Text/Normal/Green/";
+		break;
+	}
+	case Text_manager::Font::Purple:
+	{
+		temp = "Image/Text/Normal/Purple/";
+		break;
+	}
+	case Text_manager::Font::Orange:
+	{
+		temp = "Image/Text/Normal/Orange/";
+		break;
+	}
+	case Text_manager::Font::Yellow:
+	{
+		temp = "Image/Text/Normal/Yellow/";
+		break;
+	}
+	case Text_manager::Font::Brown:
+	{
+		temp = "Image/Text/Normal/Brown/";
+		break;
+	}
+	case Text_manager::Font::Pink:
+	{
+		temp = "Image/Text/Normal/Pink/";
+		break;
+	}
+	}
+	temp += value;
+	ui_text_img.Name = temp.c_str();
+	ui_text_img.Location = Vector<2>(location.x, location.y);
+	ui_text_img.Length = Vector<2>(font_size.cx, font_size.cy);
+	ui_text_img.Render();
 }

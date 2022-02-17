@@ -4,10 +4,7 @@ class Button_manager :public SingletonT<Button_manager>
 {
 private:
 public:
-	enum class Color
-	{
-		Red, Blue, Green, Purple, Orange, Yellow ,Pink
-	};//Brown
+
 	std::map < std::string, Button < Scene* >> buttons;
 	std::map < std::string, Button < bool >> slot_button;
 	std::map < std::string, Button < bool >> tank_button;
@@ -16,14 +13,15 @@ public:
 
 public:
 	//상수 
-	//구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
+	//버튼 구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
 	std::string const tank_name[12] = { "canon","super", };
 
 private:
 	void check_buttons();
 	
 public:
-	Scene* click_buttons();
+	void init_player_set();
+	void render_buttons();
 	void  slot_toggle(std::map<std::string, Button < bool >>  & slot_button);
 	
 	//버튼의 기능들을 여기에 나열

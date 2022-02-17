@@ -84,31 +84,137 @@ void S_Lobby::set_tank_buttons()
         {
             set_slot_button(_Button->tank_button,"tank_" + std::to_string(i), "Lobby/tank",
                 location_x + offset_x * i, location_y , width, heght);
-            _Image_manager->render_tank_image
-            (
-                _Button->tank_name[i],
-                {
-                    location_x + offset_x * i,
-                    location_y
-                },
-                { width, heght }
-            );
         }
         else
         {
             set_slot_button(_Button->tank_button, "tank_" + std::to_string(i), "Lobby/tank",
                 location_x + offset_x * (i-6), location_y+ offset_y, width, heght);
+        }
+    }
+}
+
+void S_Lobby::render_tank_selected()
+{
+    float const tank_button_location_x = 38;
+    float const tank_button_location_y = 140;
+    float const tank_button_width = 30;
+    float const tank_button_heght = 30;
+    float const tank_button_offset_y = tank_button_heght + 14;
+
+    int i = 0;
+    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++i)
+    {
+        _Image_manager->render_tank_image
+        (
+            iter->second.first,
+            {
+                tank_button_location_x ,
+                tank_button_location_y + tank_button_offset_y *i
+            },
+            { tank_button_width, tank_button_heght }
+        );
+    }
+}
+
+void S_Lobby::render_slot_color()
+{
+    float const tank_button_location_x = 135;
+    float const tank_button_location_y = 140;
+    float const tank_button_width = 35;
+    float const tank_button_heght = 22;
+    float const tank_button_offset_y = 44;
+    int i = 0;
+    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++i)
+    {
+        _Image_manager->render_color
+        (
+            iter->second.second,
+            {
+                tank_button_location_x ,
+                tank_button_location_y + tank_button_offset_y * i
+            },
+            { tank_button_width, tank_button_heght }
+        );
+    }
+}
+
+void S_Lobby::render_slot_text()
+{
+    int const tank_button_location_x = 180;
+    int const tank_button_location_y = 140;
+    int const tank_button_width = 100;
+    int const tank_button_heght = 22;
+    int const tank_button_offset_y = 44;
+    int i = 0;
+    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++i)
+    {
+        if (iter->second.first.empty())
+        {
+            _Text_manager->render_text_ui
+            (
+                { 
+                    tank_button_location_x ,
+                    tank_button_location_y + tank_button_offset_y * i
+                },
+                tank_button_heght,
+                "",
+                static_cast<Text_manager::Font>(iter->second.second)
+            );
+        }
+        else
+        {
+            _Text_manager->render_text_ui
+            (
+                {
+                    tank_button_location_x ,
+                    tank_button_location_y + tank_button_offset_y * i
+                },
+                tank_button_heght,
+                "player " + std::to_string(i+1),
+                static_cast<Text_manager::Font>(iter->second.second)
+            );
+        }
+    }
+    
+}
+
+void S_Lobby::render_tank_button_image()
+{
+    for (int i = 0; i < 12; i++)
+    {
+        if (i < 6)
+        {
             _Image_manager->render_tank_image
             (
                 _Button->tank_name[i],
                 {
-                    location_x + offset_x * i,
-                    location_y
+                    tank_button_location_x + tank_button_offset_x * i,
+                    tank_button_location_y
                 },
-                { width, heght }
+                { tank_button_width, tank_button_heght }
+            );
+        }
+        else
+        {
+            _Image_manager->render_tank_image
+            (
+                _Button->tank_name[i],
+                {
+                    tank_button_location_x + tank_button_offset_x * i,
+                    tank_button_location_y
+                },
+                { tank_button_width, tank_button_heght }
             );
         }
     }
+}
+
+void S_Lobby::render_button_images()
+{
+    render_tank_button_image();
+    render_tank_selected();
+    render_slot_color();
+    render_slot_text();
 }
 
 
@@ -122,11 +228,14 @@ void S_Lobby::init_image()
 void S_Lobby::render()
 {
     lobby.Render();
+    _Button->render_buttons();
+    render_button_images();
 }
 
 
 void S_Lobby::Start()
 {
+    _Button->init_player_set();
     init_image();
     set_exit_button();
     set_start_button();
@@ -138,7 +247,13 @@ Scene* S_Lobby::Update()
 {
     render();
 
-    return _Button->click_buttons();
+    for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+    {
+        if (iter->second.clicked())	//상태에 따라 이벤트 처리
+            return iter->second.execute();
+    }
+
+    return nullptr;
 
 }
 

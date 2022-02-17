@@ -5,17 +5,18 @@
 class Text_manager : public SingletonT<Text_manager>
 {
 public:
-    enum class Color
-    {
-        Green, Red
-    };
+    //enum class Color
+    //{
+    //    Green, Red
+    //};
     enum class Font
     {
-        Damage, Red
+        Red, Blue, Green, Purple, Orange, Yellow, Brown, Pink, Damage,
     };
 private:
     Engine::Rendering::Text::Component text;
     Engine::Rendering::Image::Component text_img;
+    Engine::Rendering::Image::UI ui_text_img;
 
     //각도 UI 상수 설정
     SIZE const angle_text_size = { 30,15 };
@@ -32,12 +33,16 @@ private:
     //void render_tank_text(Tank const & tank);
     void render_single_text(POINT const& location, SIZE const& font_size,
         char const & value, Font font);
+    void render_single_text_ui(POINT const& location, SIZE const& font_size,
+        char const& value, Font font);
 public:
     Text_manager();
     void set_text(Engine::Rendering::Text::Component& text, POINT const& location,
         SIZE const& font_size, std::string const& str_value, Color color);
     void render_tank_angle(Tank const& tank);
     void render_text(POINT const& location, int const& font_size,
+        std::string const& str_value, Font font);
+    void render_text_ui(POINT const& location, int const& font_size,
         std::string const& str_value, Font font);
     void render_damage(Tank const & tank );
     void render_tank_name(Tank const& tank);

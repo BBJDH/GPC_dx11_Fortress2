@@ -6,17 +6,11 @@
 class Image_manager : public SingletonT<Image_manager>
 {
 
-public:
-
-    enum class Color  //라인 색상
-    {
-        Red, Yellow,White
-    };
 
 private:
     Engine::Rendering::Image::Component world_image;
     Engine::Rendering::Image::UI view_image;
-
+    std::string const str_color[9] = { "Red", "Blue", "Green", "Purple", "Orange", "Yellow", "Brown", "Pink", "White" };
 
 private:
     //선을 그리는 함수
@@ -24,7 +18,7 @@ private:
         unsigned const thickness, float const angle, Color color);
     
     //  ==================== Lobby ==================
-
+    
     //  ==================== Battle ==================
     //map render
     void set_background();
@@ -76,7 +70,7 @@ public:
 
     //  ==================== Lobby ===================
     void render_tank_image(std::string const& name, _float2 const& position, _float2 const& length);
-
+    void render_color(Color color, _float2 const& position, _float2 const& length);
     //  ==================== Battle ==================
     
     //Battle(loading)

@@ -127,6 +127,18 @@ void Image_manager::render_tank_image(std::string const& name, _float2 const& po
     std::string const location = "Image/Tank/" + name;
     view_image.Name = location.c_str();
     set_image(view_image, position, length);
+    view_image.Render();
+}
+
+void Image_manager::render_color(Color color, _float2 const& position, _float2 const& length)
+{
+
+    assert(color >= Color::Red and color <= Color::Pink);
+
+    std::string const location = "Image/Color/" + str_color[static_cast<int>(color)];
+    view_image.Name = location.c_str();
+    set_image(view_image, position, length);
+    view_image.Render();
 }
 
 void Image_manager::set_background()
@@ -183,7 +195,7 @@ void Image_manager::render_pannel_hp(int const hp)
             static_cast<float>(hp * UI_HP_MUL),
             UI_Bar_H
         }
-        );
+    );
     view_image.Render();
 }
 
@@ -201,7 +213,7 @@ void Image_manager::render_pannel_power(int const power)
             static_cast<float>(power * UI_POWER_MUL),
             UI_Bar_H
         }
-        );
+    );
     view_image.Render();
 }
 
@@ -219,7 +231,7 @@ void Image_manager::render_pannel_fuel(int const fuel)
             static_cast<float>(fuel * UI_Fuel_MUL),
             UI_Bar_H
         }
-        );
+    );
 
     view_image.Render();
 }
@@ -229,17 +241,17 @@ void Image_manager::render_line(POINT const& location, unsigned const length,
 {
     switch (color)
     {
-    case Image_manager::Color::Red:
+    case Color::Red:
     {
         view_image.Name = "Image/UI/angle_r";
         break;
     }
-    case Image_manager::Color::Yellow:
+    case Color::Yellow:
     {
         view_image.Name = "Image/UI/angle_y";
         break;
     }
-    case Image_manager::Color::White:
+    case Color::White:
     {
         view_image.Name = "Image/UI/angle_w";
         break;

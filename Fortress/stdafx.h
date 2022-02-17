@@ -17,7 +17,7 @@
 //	## 내가 만든 구조체 이곳에 추가 ##
 //=====================================
 
-//구조체
+//구조체, enum
 struct _float2
 {
 	float x; 
@@ -27,7 +27,10 @@ struct _float2
 	float value1() { return x; }
 	float value2() { return y; }
 };
-
+enum class Color
+{
+	Red=0, Blue, Green, Purple, Orange, Yellow, Brown, Pink, White
+};
 
 //=====================================
 //	## 엔진 헤더 파일 ##
@@ -158,7 +161,7 @@ struct _float2
 #define Tank_HP_Bar_Mul 0.06
 
 //플레이어수, 게임플레이 세팅
-#define PLAYERS		 100
+#define PLAYERS		 8
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100

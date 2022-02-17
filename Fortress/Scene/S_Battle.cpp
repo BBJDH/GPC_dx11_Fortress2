@@ -7,7 +7,6 @@
 void S_Battle::Start()
 {
     initialize();
-
 }
 
 Scene * S_Battle::Update()
@@ -148,7 +147,13 @@ Scene * S_Battle::update_scene()
             _Button->buttons.erase("exit");
             this->state = State::GameOver;
         }
-        return _Button->click_buttons();
+        _Button->render_buttons();
+        for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+        {
+            if (iter->second.clicked())	//상태에 따라 이벤트 처리
+                return iter->second.execute();
+        }
+        return nullptr;
     }
     case S_Battle::State::GameOver:
     {
@@ -158,7 +163,13 @@ Scene * S_Battle::update_scene()
         _Image_manager->render_gameover();
 
         //버튼을 누르면 시작화면으로
-        return _Button->click_buttons();
+        _Button->render_buttons();
+        for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+        {
+            if (iter->second.clicked())	//상태에 따라 이벤트 처리
+                return iter->second.execute();
+        }
+        return nullptr;
 
     }
     break;
