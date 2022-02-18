@@ -30,8 +30,8 @@ public:
 	Button();
 	Button(std::function<T(void)> const & function, std::string const& name);
 
-	void init_image_size(float const button_w, float const button_h);
-	void init_image_location(float const button_x, float const button_y);
+	void init_image_size(_float2 const& size);
+	void init_image_location(_float2 const & postion);
 	void check_state();
 	//비활성화 상태라면 어떤 동작도 하지않음,
 	//토글상태인지 아닌지는 활성화(activated )상태에서 나누어서 출력

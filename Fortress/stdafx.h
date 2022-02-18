@@ -22,6 +22,7 @@ struct _float2
 {
 	float x; 
 	float y;
+public:
 	float width()  { return x; }
 	float height() { return y; }
 	float value1() { return x; }

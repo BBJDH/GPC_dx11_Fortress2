@@ -58,8 +58,8 @@ void S_Battle::set_playing_exit_button()
     _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
 
-    _Button->buttons.at("exit").init_image_location(playing_exit_x, playing_exit_y);
-    _Button->buttons.at("exit").init_image_size(playing_exit_w, playing_exit_h);
+    _Button->buttons.at("exit").init_image_location({ playing_exit_x, playing_exit_y });
+    _Button->buttons.at("exit").init_image_size({playing_exit_w, playing_exit_h});
 }
 
 void S_Battle::set_gameover_exit_button()
@@ -74,17 +74,19 @@ void S_Battle::set_gameover_exit_button()
     _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
 
-    _Button->buttons.at("exit").init_image_location(gameover_exit_x, gameover_exit_y);
-    _Button->buttons.at("exit").init_image_size(gameover_exit_w, gameover_exit_h);
+    _Button->buttons.at("exit").init_image_location({ gameover_exit_x, gameover_exit_y });
+    _Button->buttons.at("exit").init_image_size({ gameover_exit_w, gameover_exit_h });
 
 }
 
 void S_Battle::create_tanks()
 {
+    //unsigned player = PLAYERS;
+    unsigned player = static_cast<unsigned>(_Button->player_set.size());
     //Random r(10, MAPSIZE_W - 10, PLAYERS);
-    int const rand_mul = MAPSIZE_W / PLAYERS; //플레이어수만큼 구역을 나누고 좌우 10픽셀 만큼 좁힌다
-    Random r(0, PLAYERS-1,PLAYERS);
-    for (unsigned i = 0; i < PLAYERS; i++)
+    int const rand_mul = MAPSIZE_W / player; //플레이어수만큼 구역을 나누고 좌우 10픽셀 만큼 좁힌다
+    Random r(0, player -1, player);
+    for (unsigned i = 0; i < player; i++)
     {
         //float const loc_x = static_cast<float>(r.GetResult(i));
         float const loc_x = (static_cast<float>(r.GetResult(i) * rand_mul + (rand() % rand_mul)+10) );

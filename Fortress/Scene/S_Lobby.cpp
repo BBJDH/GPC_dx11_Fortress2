@@ -3,96 +3,6 @@
 
 
 
-void S_Lobby::set_exit_button()
-{
-    _Button->buttons.insert
-    (
-        { 
-            "exit",
-             Button<Scene*>(std::bind(&Button_manager::quit,_Button),"Lobby/exit")
-        }
-    );
-    _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
-
-    _Button->buttons.at("exit").init_image_location(exit_x, exit_y);
-    _Button->buttons.at("exit").init_image_size(exit_w, exit_h);
-
-}
-
-void S_Lobby::set_start_button()
-{
-    _Button->buttons.insert
-    (
-        {
-            "start",
-             Button<Scene*>(std::bind(&Button_manager::to_battle,_Button),"Lobby/start")
-        }
-    );
-    _Button->buttons.at("start").bind_activated_func(std::bind(&Button_manager::bool_func_default,_Button));
-
-    _Button->buttons.at("start").init_image_location(start_x, start_y);
-    _Button->buttons.at("start").init_image_size(start_w, start_h);
-
-}
-
-void S_Lobby::set_slot_button(std::map<std::string,Button<bool>>  & slot_button,
-    std::string const& button_name, std::string const& location,
-    float const start_x, float const start_y, float const start_w, float const start_h )
-{
-    slot_button.insert
-    (
-        {
-             button_name,
-             Button<bool>(std::bind(&Button_manager::bool_func_default,_Button),location)
-        }
-    );
-    slot_button.at(button_name).bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
-    slot_button.at(button_name).init_image_location(start_x, start_y);
-    slot_button.at(button_name).init_image_size(start_w, start_h);
-}
-
-
-void S_Lobby::set_slot_buttons()
-{
-    float const location_x = 270;
-    float const location_y = 140;
-    float const width = 190;
-    float const heght = 42;
-
-    float const offset = 44;
-
-    for (int i = 0; i < 8; i++)
-    {
-        set_slot_button(_Button->slot_button,"slot_" + std::to_string(i), "Lobby/slot",
-            location_x , location_y + offset * i, width, heght);
-    }
-}
-
-void S_Lobby::set_tank_buttons()
-{
-    float const location_x = 70;
-    float const location_y = 552;
-    float const width = 90;
-    float const heght = 60;
-    float const offset_x = width+8;
-    float const offset_y = heght +8;
-
-
-    for (int i = 0; i < 12; i++)
-    {
-        if (i < 6)
-        {
-            set_slot_button(_Button->tank_button,"tank_" + std::to_string(i), "Lobby/tank",
-                location_x + offset_x * i, location_y , width, heght);
-        }
-        else
-        {
-            set_slot_button(_Button->tank_button, "tank_" + std::to_string(i), "Lobby/tank",
-                location_x + offset_x * (i-6), location_y+ offset_y, width, heght);
-        }
-    }
-}
-
 void S_Lobby::render_tank_selected()
 {
     float const tank_button_location_x = 38;
@@ -101,18 +11,23 @@ void S_Lobby::render_tank_selected()
     float const tank_button_heght = 30;
     float const tank_button_offset_y = tank_button_heght + 14;
 
-    int i = 0;
-    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++i)
+    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter)
     {
-        _Image_manager->render_tank_image
-        (
-            std::get<1>(iter->second),
+        for (int i = 0; i < 8; i++)
+        {
+            if ("slot_" + std::to_string(i) == std::get<0>(*iter)) //벡터의 해당슬롯을 검색
             {
-                tank_button_location_x ,
-                tank_button_location_y + tank_button_offset_y *i
-            },
-            { tank_button_width, tank_button_heght }
-        );
+                _Image_manager->render_tank_image
+                (
+                    std::get<1>(*iter),
+                    {
+                        tank_button_location_x ,
+                        tank_button_location_y + tank_button_offset_y *i
+                    },
+                    { tank_button_width, tank_button_heght }
+                );
+            }
+        }
     }
 }
 
@@ -144,11 +59,12 @@ void S_Lobby::render_slot_text()
     int const tank_button_width = 100;
     int const tank_button_heght = 22;
     int const tank_button_offset_y = 44;
-    int i = 0;
-    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++i)
+    int player_num = 1;
+    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter,++player_num)
     {
-        if (std::get<0>(iter->second).empty())
+        for (int i = 0; i < 8; ++i)
         {
+            if(std::get<0>(*iter) == "slot_"+std::to_string(i)) //해당 슬롯을 검색
             _Text_manager->render_text_ui
             (
                 { 
@@ -156,21 +72,8 @@ void S_Lobby::render_slot_text()
                     tank_button_location_y + tank_button_offset_y * i
                 },
                 tank_button_heght,
-                "",
-                static_cast<Text_manager::Font>(std::get<2>(iter->second))
-            );
-        }
-        else
-        {
-            _Text_manager->render_text_ui
-            (
-                {
-                    tank_button_location_x ,
-                    tank_button_location_y + tank_button_offset_y * i
-                },
-                tank_button_heght,
-                std::get<0>( iter->second),
-                static_cast<Text_manager::Font>(std::get<2>(iter->second))
+                "player "+std::to_string(player_num),
+                static_cast<Text_manager::Font>(std::get<2>(*iter))
             );
         }
     }
@@ -179,6 +82,13 @@ void S_Lobby::render_slot_text()
 
 void S_Lobby::render_tank_button_image()
 {
+    float const tank_button_location_x = 70;
+    float const tank_button_location_y = 552;
+    float const tank_button_width = 80;
+    float const tank_button_heght = 50;
+    float const tank_button_offset_x = tank_button_width + 18;
+    float const tank_button_offset_y = tank_button_heght + 18;
+
     for (int i = 0; i < 12; i++)
     {
         if (i < 6)
@@ -230,8 +140,8 @@ void S_Lobby::render_slot_base()
 
 void S_Lobby::render_button_images()
 {
-    render_tank_button_image();
-    render_slot_base();
+    render_tank_button_image(); //탱크버튼 위에 그릴 이미지
+    render_slot_base();         //슬롯 베이스 출력
     render_tank_selected();
     render_slot_color();
     render_slot_text();
@@ -248,12 +158,13 @@ void S_Lobby::render()
 
 void S_Lobby::Start()
 {
+    _Button->player_set.clear();
     _Button->init_player_set();
     //init_image();
-    set_exit_button();
-    set_start_button();
-    set_slot_buttons();
-    set_tank_buttons();
+    _Button->set_exit_button();
+    _Button->set_start_button();
+    _Button->set_slot_buttons();
+    _Button->set_tank_buttons();
 }
 
 Scene* S_Lobby::Update()

@@ -20,27 +20,27 @@ template Button<bool>::Button(std::function<bool(void)> const& function, std::st
 
 
 template<typename T>
-void Button<T>::init_image_size(float const button_w, float const button_h)
+void Button<T>::init_image_size(_float2 const& size)
 {
 
-	image.Length = { button_w ,button_h };
-	collide_box.Length = { button_w ,button_h };
+	image.Length = { size.x ,size.y };
+	collide_box.Length = { size.x ,size.y };
 }
-template void Button<bool>::init_image_size(float const button_w, float const button_h);
-template void Button<Scene*>::init_image_size(float const button_w, float const button_h);
+template void Button<bool>::init_image_size(_float2 const& size);
+template void Button<Scene*>::init_image_size(_float2 const& size);
 
 
 
 
 template<typename T>
-void Button<T>::init_image_location(float const button_x, float const button_y)
+void Button<T>::init_image_location(_float2 const& postion)
 {
 
-	image.Location = { button_x ,button_y };
-	collide_box.Center = { button_x ,button_y };
+	image.Location = { postion.x ,postion.y };
+	collide_box.Center = { postion.x ,postion.y };
 }
-template void Button<bool>::init_image_location(float const button_x, float const button_y);
-template void Button<Scene*>::init_image_location(float const button_x, float const button_y);
+template void Button<bool>::init_image_location(_float2 const& postion);
+template void Button<Scene*>::init_image_location(_float2 const& postion);
 
 
 
