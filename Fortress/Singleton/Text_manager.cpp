@@ -147,8 +147,9 @@ void Text_manager::render_text_ui(POINT const& location, int const& font_size, s
 			location_x += font_size / 2;
 		else
 			location_x += font_size;
-		render_single_text_ui
+		render_single_text
 		(
+			ui_text_img,
 			{ location_x, location.y },
 			{ font_size ,font_size },
 			str_value.at(i),
@@ -189,7 +190,8 @@ void Text_manager::render(std::vector<Tank>& tank)
 		}
 	}
 }
-void Text_manager::render_single_text(POINT const& location, SIZE const& font_size, char const & value, Font font)
+void Text_manager::render_single_text(Engine::Rendering::Image::Component text_img,
+	POINT const& location, SIZE const& font_size, char const& value, Font font)
 {
 	if (value == ' ')
 		return;
@@ -265,6 +267,7 @@ void Text_manager::render_text(POINT const& location, int const& font_size,
 			location_x += font_size;
 		render_single_text
 		(
+			text_img,
 			{ location_x, location.y },
 			{ font_size ,font_size },
 			str_value.at(i),
@@ -283,7 +286,8 @@ Text_manager::Text_manager()
 	//text
 }
 
-void Text_manager::render_single_text_ui(POINT const& location, SIZE const& font_size, char const& value, Font font)
+void Text_manager::render_single_text(Engine::Rendering::Image::UI ui_text_img,
+	POINT const& location, SIZE const& font_size, char const& value, Font font)
 {
 	if (value == ' ')
 		return;

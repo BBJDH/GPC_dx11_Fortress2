@@ -106,7 +106,7 @@ void S_Lobby::render_tank_selected()
     {
         _Image_manager->render_tank_image
         (
-            iter->second.first,
+            std::get<1>(iter->second),
             {
                 tank_button_location_x ,
                 tank_button_location_y + tank_button_offset_y *i
@@ -123,12 +123,11 @@ void S_Lobby::render_slot_color()
     float const tank_button_width = 35;
     float const tank_button_heght = 22;
     float const tank_button_offset_y = 44;
-    int i = 0;
-    for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++i)
+    for (int i =0; i < 8; ++i)
     {
         _Image_manager->render_color
         (
-            iter->second.second,
+            static_cast<Color>(i),
             {
                 tank_button_location_x ,
                 tank_button_location_y + tank_button_offset_y * i
@@ -148,7 +147,7 @@ void S_Lobby::render_slot_text()
     int i = 0;
     for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++i)
     {
-        if (iter->second.first.empty())
+        if (std::get<0>(iter->second).empty())
         {
             _Text_manager->render_text_ui
             (
@@ -158,7 +157,7 @@ void S_Lobby::render_slot_text()
                 },
                 tank_button_heght,
                 "",
-                static_cast<Text_manager::Font>(iter->second.second)
+                static_cast<Text_manager::Font>(std::get<2>(iter->second))
             );
         }
         else
@@ -170,8 +169,8 @@ void S_Lobby::render_slot_text()
                     tank_button_location_y + tank_button_offset_y * i
                 },
                 tank_button_heght,
-                "player " + std::to_string(i+1),
-                static_cast<Text_manager::Font>(iter->second.second)
+                std::get<0>( iter->second),
+                static_cast<Text_manager::Font>(std::get<2>(iter->second))
             );
         }
     }
@@ -209,25 +208,39 @@ void S_Lobby::render_tank_button_image()
     }
 }
 
+void S_Lobby::render_slot_base()
+{
+    float const tank_button_location_x = 88;
+    float const tank_button_location_y = 140;
+    float const tank_button_width = 153;
+    float const tank_button_heght = 40;
+    float const tank_button_offset_y = 44;
+    for (int i = 0; i < 8; ++i)
+    {
+        _Image_manager->render_selected_slot
+        (
+            {
+                tank_button_location_x ,
+                tank_button_location_y + tank_button_offset_y * i
+            },
+            { tank_button_width, tank_button_heght }
+        );
+    }
+}
+
 void S_Lobby::render_button_images()
 {
     render_tank_button_image();
+    render_slot_base();
     render_tank_selected();
     render_slot_color();
     render_slot_text();
 }
 
 
-void S_Lobby::init_image()
-{
-    lobby.Name = "Image/Screen/lobby";
-    lobby.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    lobby.Location = Vector<2>(CAM_SIZE_W / 2, CAM_SIZE_H / 2);
-}
-
 void S_Lobby::render()
 {
-    lobby.Render();
+    _Image_manager->render_lobby_back();
     _Button->render_buttons();
     render_button_images();
 }
@@ -236,7 +249,7 @@ void S_Lobby::render()
 void S_Lobby::Start()
 {
     _Button->init_player_set();
-    init_image();
+    //init_image();
     set_exit_button();
     set_start_button();
     set_slot_buttons();

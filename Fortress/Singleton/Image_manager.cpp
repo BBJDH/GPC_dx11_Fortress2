@@ -119,6 +119,19 @@ void Image_manager::render_main(_float2 test_location, _float2 test_length)
     view_image.Render();
 }
 
+void Image_manager::render_lobby_back()
+{
+    view_image.Name = "Image/Screen/lobby";
+    set_image
+    (
+        view_image,
+        { CAM_SIZE_W / 2, CAM_SIZE_H / 2 },
+        { CAM_SIZE_W, CAM_SIZE_H }
+    );
+    view_image.Render();
+
+}
+
 void Image_manager::render_tank_image(std::string const& name, _float2 const& position, _float2 const& length)
 {
     if (name.empty())
@@ -137,6 +150,13 @@ void Image_manager::render_color(Color color, _float2 const& position, _float2 c
 
     std::string const location = "Image/Color/" + str_color[static_cast<int>(color)];
     view_image.Name = location.c_str();
+    set_image(view_image, position, length);
+    view_image.Render();
+}
+
+void Image_manager::render_selected_slot(_float2 const& position, _float2 const& length)
+{
+    view_image.Name = "Image/Button/Lobby/selected_slot";
     set_image(view_image, position, length);
     view_image.Render();
 }

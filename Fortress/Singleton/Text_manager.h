@@ -31,10 +31,10 @@ private:
     int const fps_heght = 25;
 
     //void render_tank_text(Tank const & tank);
-    void render_single_text(POINT const& location, SIZE const& font_size,
-        char const & value, Font font);
-    void render_single_text_ui(POINT const& location, SIZE const& font_size,
-        char const& value, Font font);
+    void render_single_text(Engine::Rendering::Image::Component text,
+        POINT const& location, SIZE const& font_size,char const & value, Font font);
+    void render_single_text(Engine::Rendering::Image::UI ui_text_img,
+        POINT const& location, SIZE const& font_size, char const& value, Font font);
 public:
     Text_manager();
     void set_text(Engine::Rendering::Text::Component& text, POINT const& location,

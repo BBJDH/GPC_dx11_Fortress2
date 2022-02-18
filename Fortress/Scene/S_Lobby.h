@@ -2,7 +2,6 @@
 class S_Lobby final : public Scene
 {
 private:
-    Engine::Rendering::Image::UI lobby;
 
 
 private:
@@ -36,11 +35,11 @@ private:
     void    set_slot_buttons();
     void    set_tank_buttons();
     void    render_tank_button_image();
+    void    render_slot_base();
     void    render_tank_selected();
     void    render_slot_color();
     void    render_slot_text();
     void    render_button_images();
-    void    init_image();
     void    render();
     
 

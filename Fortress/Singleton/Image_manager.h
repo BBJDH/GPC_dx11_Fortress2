@@ -13,6 +13,10 @@ private:
     std::string const str_color[9] = { "Red", "Blue", "Green", "Purple", "Orange", "Yellow", "Brown", "Pink", "White" };
 
 private:
+    void set_image(Engine::Rendering::Image::Component& image,
+        _float2 const& position, _float2 const& length, float angle = 0);
+    void set_image(Engine::Rendering::Image::UI& image,
+        _float2 const& position, _float2 const& length, float angle = 0);
     //선을 그리는 함수
     void render_line(POINT const& location, unsigned const length,
         unsigned const thickness, float const angle, Color color);
@@ -59,18 +63,16 @@ private:
 
 public:
     Image_manager();
-    void set_image(Engine::Rendering::Image::Component & image,
-         _float2 const &position, _float2 const& length, float angle =0);
-    void set_image(Engine::Rendering::Image::UI & image,
-         _float2 const& position, _float2 const& length, float angle = 0);
 
     //==================== Main Title ================
     void render_main_text(_float2 test_location, _float2 test_length);
     void render_main(_float2 test_location, _float2 test_length);
 
     //  ==================== Lobby ===================
+    void render_lobby_back();
     void render_tank_image(std::string const& name, _float2 const& position, _float2 const& length);
     void render_color(Color color, _float2 const& position, _float2 const& length);
+    void render_selected_slot(_float2 const& position, _float2 const& length);
     //  ==================== Battle ==================
     
     //Battle(loading)

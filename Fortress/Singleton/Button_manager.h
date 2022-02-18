@@ -9,7 +9,8 @@ public:
 	std::map < std::string, Button < bool >> slot_button;
 	std::map < std::string, Button < bool >> tank_button;
 
-	std::map<int, std::pair<std::string, Color> > player_set;
+	//이름, 탱크, 색상
+	std::map<int, std::tuple<std::string, std::string, Color> > player_set;
 
 public:
 	//상수 
@@ -18,11 +19,12 @@ public:
 
 private:
 	void check_buttons();
+	void update_player_set();
 	
 public:
 	void init_player_set();
 	void render_buttons();
-	void  slot_toggle(std::map<std::string, Button < bool >>  & slot_button);
+	std::string  slot_toggle(std::map<std::string, Button < bool >>  & slot_button);
 	
 	//버튼의 기능들을 여기에 나열
 	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
