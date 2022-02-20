@@ -2,8 +2,11 @@
 #include "Turnmanager.h"
 
 
-Turnmanager::Turnmanager():rand(Random(0,PLAYERS-1,PLAYERS)),index{0},state{State::Tank_Turn}
+Turnmanager::Turnmanager() : 
+index{ 0 }, state{ State::Tank_Turn },
+players{ static_cast<unsigned>(_Button->player_set.size()) }
 {
+	rand = Random(0, players - 1, players);
 }
 
 unsigned const Turnmanager::whosturn()const
@@ -113,7 +116,7 @@ void Turnmanager::checkturn(std::vector<Tank>& tank, std::vector<Missile>& missi
 	}
 
 	index++;		
-	if(index>=PLAYERS)
+	if(index>= players)
 		rerand();
 	tankturn_start(tank);
 }
@@ -128,6 +131,6 @@ void Turnmanager::tankturn_start(std::vector<Tank>& tank)
 
 void Turnmanager::rerand()
 {
-    rand = Random(0,PLAYERS-1,PLAYERS);
+    rand = Random(0, players -1, players);
 	index =0;
 }

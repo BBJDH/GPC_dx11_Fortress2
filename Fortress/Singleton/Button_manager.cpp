@@ -53,12 +53,15 @@ void Button_manager::init_player_set()
 
 void Button_manager::check_buttons()
 {
-	for (auto iter = buttons.begin(); iter !=buttons.end(); ++iter)
+	for (auto iter = scene_buttons.begin(); iter != scene_buttons.end(); ++iter)
 		iter->second.check_state();
+	for (auto iter = nomal_buttons.begin(); iter != nomal_buttons.end(); ++iter)
+		iter->check_state();
 	for (auto iter = slot_button.begin(); iter != slot_button.end(); ++iter)
 		iter->check_state();
-	for (auto iter = _Button->tank_button.begin(); iter != _Button->tank_button.end(); ++iter)
+	for (auto iter = tank_button.begin(); iter != tank_button.end(); ++iter)
 		iter->check_state();
+
 }
 
 Button_manager::result Button_manager::slot_toggle(std::vector<Button<bool>>& slot)
@@ -165,16 +168,16 @@ void Button_manager::set_start_button()
 	float const start_y = 690;
 	float const start_w = 170;
 	float const start_h = 30;
-	buttons.insert
+	scene_buttons.insert
 	(
 		{
 			"start",
 			 Button<Scene*>(std::bind(&Button_manager::to_battle,_Button),"Lobby/start")
 		}
 	);
-	buttons.at("start").bind_activated_func(std::bind(&Button_manager::check_ready, _Button));
-	buttons.at("start").init_image_location({ start_x, start_y });
-	buttons.at("start").init_image_size({ start_w, start_h });
+	scene_buttons.at("start").bind_activated_func(std::bind(&Button_manager::check_ready, _Button));
+	scene_buttons.at("start").init_image_location({ start_x, start_y });
+	scene_buttons.at("start").init_image_size({ start_w, start_h });
 }
 
 void Button_manager::set_exit_button()
@@ -184,17 +187,34 @@ void Button_manager::set_exit_button()
 	float const exit_w = 170;
 	float const exit_h = 30;
 
-	buttons.insert
+	scene_buttons.insert
 	(
 		{
 			"exit",
 			 Button<Scene*>(std::bind(&Button_manager::quit,_Button),"Lobby/exit")
 		}
 	);
-	buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+	scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
-	buttons.at("exit").init_image_location({ exit_x, exit_y });
-	buttons.at("exit").init_image_size({ exit_w, exit_h });
+	scene_buttons.at("exit").init_image_location({ exit_x, exit_y });
+	scene_buttons.at("exit").init_image_size({ exit_w, exit_h });
+
+}
+
+void Button_manager::set_map_button()
+{
+	float const exit_x = 1100;
+	float const exit_y = 540;
+	float const exit_w = 45;
+	float const exit_h = 20;
+
+	nomal_buttons.push_back
+	(
+		Button<bool>(std::bind(&Button_manager::bool_func_default,_Button),"Lobby/sky")
+	);
+	nomal_buttons.back().bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+	nomal_buttons.back().init_image_location({ exit_x, exit_y });
+	nomal_buttons.back().init_image_size({ exit_w, exit_h });
 
 }
 

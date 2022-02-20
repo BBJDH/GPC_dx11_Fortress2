@@ -18,7 +18,7 @@ Scene * S_Battle::Update()
 
 void S_Battle::End()
 {
-    _Button->buttons.erase("exit");
+    _Button->scene_buttons.erase("exit");
     tank.clear();
     std::vector<Tank>().swap(tank);
     missile.clear();
@@ -48,34 +48,34 @@ void S_Battle::initialize()
 
 void S_Battle::set_playing_exit_button()
 {
-    _Button->buttons.insert
+    _Button->scene_buttons.insert
     (
         {
             "exit",
              Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"playing_exit")
         }
     );
-    _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+    _Button->scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
 
-    _Button->buttons.at("exit").init_image_location({ playing_exit_x, playing_exit_y });
-    _Button->buttons.at("exit").init_image_size({playing_exit_w, playing_exit_h});
+    _Button->scene_buttons.at("exit").init_image_location({ playing_exit_x, playing_exit_y });
+    _Button->scene_buttons.at("exit").init_image_size({playing_exit_w, playing_exit_h});
 }
 
 void S_Battle::set_gameover_exit_button()
 {
-    _Button->buttons.insert
+    _Button->scene_buttons.insert
     (
         {
             "exit",
              Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"gameover_exit")
         }
     );
-    _Button->buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+    _Button->scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
 
-    _Button->buttons.at("exit").init_image_location({ gameover_exit_x, gameover_exit_y });
-    _Button->buttons.at("exit").init_image_size({ gameover_exit_w, gameover_exit_h });
+    _Button->scene_buttons.at("exit").init_image_location({ gameover_exit_x, gameover_exit_y });
+    _Button->scene_buttons.at("exit").init_image_size({ gameover_exit_w, gameover_exit_h });
 
 }
 
@@ -90,7 +90,17 @@ void S_Battle::create_tanks()
     {
         //float const loc_x = static_cast<float>(r.GetResult(i));
         float const loc_x = (static_cast<float>(r.GetResult(i) * rand_mul + (rand() % rand_mul)+10) );
-        tank.push_back(Tank({loc_x, 0}, Tank_SIZE, Tank_SIZE, "player " + std::to_string(i + 1)));
+        tank.push_back
+        (
+            Tank
+            (
+                {loc_x, 0},
+                Tank_SIZE,
+                Tank_SIZE,
+                "player " + std::to_string(i + 1),
+                std::get<2>(_Button->player_set[i])
+            )
+        );
         tank.back().ballistics_initialize(0, 0);
     }
 }
@@ -146,11 +156,11 @@ Scene * S_Battle::update_scene()
        
         if (_Turn->is_gameover(tank))
         {
-            _Button->buttons.erase("exit");
+            _Button->scene_buttons.erase("exit");
             this->state = State::GameOver;
         }
         _Button->render_buttons();
-        for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+        for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
         {
             if (iter->second.clicked())	//상태에 따라 이벤트 처리
                 return iter->second.execute();
@@ -166,7 +176,7 @@ Scene * S_Battle::update_scene()
 
         //버튼을 누르면 시작화면으로
         _Button->render_buttons();
-        for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+        for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
         {
             if (iter->second.clicked())	//상태에 따라 이벤트 처리
                 return iter->second.execute();

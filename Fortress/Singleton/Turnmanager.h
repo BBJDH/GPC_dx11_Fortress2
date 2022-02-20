@@ -11,6 +11,7 @@ public:
 private:
 	Random rand;
 	State state;
+	unsigned players;
 	unsigned index;
 
 	bool is_obj_turn(Object const & obj);

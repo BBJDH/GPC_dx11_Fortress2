@@ -2,18 +2,20 @@
 #include "Map_manager.h"
 
 
-Map_manager::Map_manager() :minimap_loc{CAM_SIZE_W-MINIMAP_SIZE_W,0}
+Map_manager::Map_manager() :minimap_loc{CAM_SIZE_W-MINIMAP_SIZE_W,0},
+name{"Sky"}
 {
     initialize();
 }
 
 void Map_manager::initialize()
 {
+    std::string const location = "Asset/Image/Map/"+ name +"_M30001800.bmp";
     HBITMAP hmapbit = static_cast<HBITMAP>(LoadImage
     (
         NULL,
-        //TEXT("Asset/Image/Map/Sky_M30001800.bmp"),
-        TEXT("Asset/Image/Map/Friends_M30001800.bmp"),
+        TEXT(location.c_str()),
+        //TEXT("Asset/Image/Map/Friends_M30001800.bmp"),
         IMAGE_BITMAP,
         0,
         0,

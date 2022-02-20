@@ -130,7 +130,7 @@ void Text_manager::render_tank_name(Tank const& tank)
 		},
 		12,
 		tank.get_name(),
-		Font::Red
+		static_cast<Text_manager::Font>(tank.get_color())
 	);
 }
 void Text_manager::render_text_ui(POINT const& location, int const& font_size, std::string const& str_value, Font font)

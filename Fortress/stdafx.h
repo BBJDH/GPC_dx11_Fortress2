@@ -33,79 +33,6 @@ enum class Color
 	Red=0, Blue, Green, Purple, Orange, Yellow, Brown, Pink, White
 };
 
-//=====================================
-//	## 엔진 헤더 파일 ##
-//=====================================
-
-#include "Engine/Physics.h"
-#include "Engine/Rendering.h"
-#include "Engine/Input.h"
-#include "Engine/Game.h"
-#include "Engine/Circle.h"
-#include "Engine/Quadrangle.h"
-#include "Engine/Time.h"
-#include "Engine/Pipeline.h"
-
-
-
-//=====================================
-//	## 내가 만든 헤더파일 이곳에 추가 ##
-//=====================================
-
-//게임안 보여질 객체들
-//#include"Object.h"
-#include"Tank.h"
-#include"Missile.h"
-#include"Button.h"
-
-//랜덤추출함수
-#include"Random.h"
-
-
-//메인 게임 클래스
-#include "Fortress.h"
-
-
-//Scene
-#include "./Scene/Scene.h"
-#include "./Scene/S_Battle.h"
-#include "./Scene/S_Start.h"
-#include "./Scene//S_Lobby.h"
-
-//싱글톤 생성
-#include"./Singleton/Mouse.h"
-#include"./Singleton/Camera.h"
-#include"./Singleton/Debug_manager.h"
-#include"./Singleton/Image_manager.h"
-#include"./Singleton/Physics_Manager.h"
-#include"./Singleton/Map_manager.h"
-#include"./Singleton/Turnmanager.h"
-#include"./Singleton/Input_manager.h"
-#include"./Singleton/Animation.h"
-#include"./Singleton/Text_manager.h"
-#include"./Singleton/Button_manager.h"
-
-//#include"Turnmanager.h"
-
-
-
-
-//=====================================
-//	## 싱글톤 추가 ##
-//=====================================
-#define _Mouse Mouse::get_singleton()
-#define _CAM Camera::get_singleton()
-#define _Debug_manager Debug_manager::get_singleton()
-#define _Image_manager Image_manager::get_singleton()
-#define _Physics_manager Physics_Manager::get_singleton()
-#define _Map_manager Map_manager::get_singleton()
-#define _Turn Turnmanager::get_singleton()
-#define _Input_manager Input_manager::get_singleton()
-#define _Anime Animation::get_singleton()
-#define _Button Button_manager::get_singleton()
-#define _Text_manager Text_manager::get_singleton()
-
-
 
 //=====================================
 //	## 디파인문 ## (윈도우 초기화 셋팅)
@@ -237,3 +164,77 @@ enum class Color
 // 나중에 사용해 보자
 //extern HINSTANCE _hInstance;
 //extern HWND _hWnd;
+
+//=====================================
+//	## 엔진 헤더 파일 ##
+//=====================================
+
+#include "Engine/Physics.h"
+#include "Engine/Rendering.h"
+#include "Engine/Input.h"
+#include "Engine/Game.h"
+#include "Engine/Circle.h"
+#include "Engine/Quadrangle.h"
+#include "Engine/Time.h"
+#include "Engine/Pipeline.h"
+
+
+
+//=====================================
+//	## 내가 만든 헤더파일 이곳에 추가 ##
+//=====================================
+
+//게임안 보여질 객체들
+//#include"Object.h"
+#include"Tank.h"
+#include"Missile.h"
+#include"Button.h"
+
+//랜덤추출함수
+#include"Random.h"
+
+
+//메인 게임 클래스
+#include "Fortress.h"
+
+
+//Scene
+#include "./Scene/Scene.h"
+#include "./Scene/S_Battle.h"
+#include "./Scene/S_Start.h"
+#include "./Scene//S_Lobby.h"
+
+//싱글톤 생성
+#include"./Singleton/Mouse.h"
+#include"./Singleton/Camera.h"
+#include"./Singleton/Debug_manager.h"
+#include"./Singleton/Image_manager.h"
+#include"./Singleton/Physics_Manager.h"
+#include"./Singleton/Map_manager.h"
+#include"./Singleton/Turnmanager.h"
+#include"./Singleton/Input_manager.h"
+#include"./Singleton/Animation.h"
+#include"./Singleton/Text_manager.h"
+#include"./Singleton/Button_manager.h"
+
+//#include"Turnmanager.h"
+
+
+
+
+//=====================================
+//	## 싱글톤 추가 ##
+//=====================================
+#define _Mouse Mouse::get_singleton()
+#define _CAM Camera::get_singleton()
+#define _Debug_manager Debug_manager::get_singleton()
+#define _Image_manager Image_manager::get_singleton()
+#define _Physics_manager Physics_Manager::get_singleton()
+#define _Map_manager Map_manager::get_singleton()
+#define _Turn Turnmanager::get_singleton()
+#define _Input_manager Input_manager::get_singleton()
+#define _Anime Animation::get_singleton()
+#define _Button Button_manager::get_singleton()
+#define _Text_manager Text_manager::get_singleton()
+
+

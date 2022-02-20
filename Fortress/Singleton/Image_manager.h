@@ -25,7 +25,8 @@ private:
     
     //  ==================== Battle ==================
     //map render
-    void set_background();
+    void set_background(_float2 const& position = { 0,0 },
+        _float2 const& length = { BackgroundSIZE_W,BackgroundSIZE_H });
 
     //minimap render
     void set_minimap_background();
@@ -79,7 +80,8 @@ public:
     void render_loading();
 
     //Battle(playing)
-    void render_background();
+    void render_background(_float2 const& position = { 0,0 },
+        _float2 const& length = { BackgroundSIZE_W,BackgroundSIZE_H });
     void render_minimap_background();
     void render_ui(std::vector<Tank> const& tank);
     void render_minimap_tank(std::vector<Tank> const& tank);

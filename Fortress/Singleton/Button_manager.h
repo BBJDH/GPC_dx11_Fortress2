@@ -10,12 +10,13 @@ private:
 	}typedef result;
 public:
 
-	std::map < std::string, Button < Scene* >> buttons;
+	std::map < std::string, Button < Scene* >> scene_buttons;
+	std::vector < Button < bool >> nomal_buttons;
 	std::vector < Button < bool >> slot_button;
 	std::vector < Button < bool >> tank_button;
-
+	
 	//플레이어가 설정된 슬롯, 탱크, 색상
-	std::vector<std::tuple<std::string,std::string, Color>> player_set;
+	std::vector<std::tuple< std::string, std::string, Color>> player_set;
 
 public:
 	//상수 
@@ -42,6 +43,7 @@ public:
 
 	void    set_start_button();
 	void    set_exit_button();
+	void	set_map_button();
 	void    set_slot_buttons();
 	void    set_tank_buttons();
 

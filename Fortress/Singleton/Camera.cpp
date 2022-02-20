@@ -91,28 +91,62 @@ bool Camera::right(int const scroll)
 
 void Camera::focusing(Object const& obj)
 {
-	// { obj.getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-obj.getpos().y }
+	//TODO: state 패턴으로 개선 필요,
+	//포커싱시 시간에따른 속도로 변경 (프레임이 다르더라도 스크롤속도가 같도록)
 	float const obj_x = obj.getpos().x-MAPSIZE_W/2;
 	float const obj_y = MAPSIZE_H/2-obj.getpos().y;
-	if (abs(obj_x - pos.x) < speed )
-		focus_w = false;
-
-	if( abs(obj_y - pos.y) < speed)
-		focus_h = false;
+	unsigned const next_step_x = static_cast<unsigned>(abs(obj_x - pos.x));
+	unsigned const next_step_y = static_cast<unsigned>(abs(obj_y - pos.y));
 
 	if (focus_w)
 	{
-		if(pos.x>obj_x) //카메라가 오브젝트 오른쪽
-			focus_w = left(speed);
+		if (pos.x > obj_x) //카메라가 오브젝트 오른쪽
+		{
+			if (next_step_x < speed)
+			{
+				left(next_step_x);
+				focus_w = false;
+			}
+
+			else
+				focus_w = left(speed);
+		}
 		else//카메라가 오브젝트 왼쪽
-			focus_w = right(speed);
+		{
+			if (next_step_x < speed)
+			{
+				focus_w = right(next_step_x);
+				focus_w = false;
+			}
+
+			else
+				focus_w = right(speed);
+		}
 	}
 	if (focus_h)
 	{
-		if(pos.y>obj_y)//카메라가 위
-			focus_h = down(speed);
+		if (pos.y > obj_y)//카메라가 위
+		{
+			if (next_step_y < speed)
+			{
+				focus_h = down(next_step_y);
+				focus_h = false;
+			}
+
+			else
+				focus_h = down(speed);
+		}
 		else
-			focus_h = up(speed);
+		{
+			if (next_step_y < speed)
+			{
+				focus_h = up(next_step_y);
+				focus_h = false;
+			}
+
+			else
+				focus_h = up(speed);
+		}
 	}
 
 }

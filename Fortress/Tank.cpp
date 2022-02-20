@@ -4,12 +4,13 @@
 
 
 
-Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height, std::string const& name)
-	:Object(pos, width, height), hp{ TANK_HP }, fuel{100},
+Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height,
+	std::string const& name, Color const color)
+	: Object(pos, width, height), hp{ TANK_HP }, fuel{ 100 },
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
 	state{ State::Fall }, side{ Side::Right },
-	ani_playtime{ 0.0f }, name{ name }, damage{ "" }
+	ani_playtime{ 0.0f }, name{ name }, damage{ "" }, color{ color }
 {
 	ani_set_normal();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
@@ -78,6 +79,11 @@ bool Tank::is_dead() const
 		return true;
 	}
 	return false;
+}
+
+Color Tank::get_color() const
+{
+	return this->color;
 }
 
 void Tank::plus_power()

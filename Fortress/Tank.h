@@ -47,6 +47,7 @@ private:
 
 	State		    state;
 	Side		    side;
+	Color			color;
 	std::string		name;
 	std::string		damage;				//받은 데미지 기록
 	unsigned	    hp;
@@ -77,7 +78,8 @@ private:
 
 public:
 
-	Tank(_float2 const& pos, unsigned const width, unsigned const height, std::string const & name);
+	Tank(_float2 const& pos, unsigned const width, unsigned const height, 
+		std::string const& name, Color const color);
 	Tank & operator=(Tank const & other_tank);
 	Tank::State get_state()const;
 	Tank::Side get_side()const;
@@ -94,7 +96,7 @@ public:
 	int const getangle_min()const;
 	int const getangle_max()const;
 	bool is_dead()const;
-	//void ballistics_initialize(float const moving_angle, float const velocity, State state);
+	Color get_color()const;
 	void check_state();
 	void take_damage(unsigned const damage);
 	void set_side(Side const side);

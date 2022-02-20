@@ -29,9 +29,9 @@ void Image_manager::render_loading()
     world_image.Render();
 }
 
-void Image_manager::render_background()
+void Image_manager::render_background(_float2 const& position, _float2 const& length)
 {
-    set_background();
+    set_background(position, length);
     world_image.Render();
 }
 
@@ -161,10 +161,10 @@ void Image_manager::render_selected_slot(_float2 const& position, _float2 const&
     view_image.Render();
 }
 
-void Image_manager::set_background()
+void Image_manager::set_background(_float2 const& position ,_float2 const& length)
 {
     world_image.Name = "Image/Background/background";
-    set_image(world_image, { 0,0 }, { BackgroundSIZE_W,BackgroundSIZE_H });
+    set_image(world_image, position, length);
 
 }
 
@@ -298,18 +298,20 @@ void Image_manager::render_line(POINT const& location, unsigned const length,
 
 void Image_manager::ui_angle_line(int const length, int const angle, int const thickness, Color color)
 {
-
-    double cosval = cos(-angle*Radian);
-    double sinval = sin(-angle*Radian);
+    //중점으로부터 선의 반길이만큼 떨어진곳에 각도만큼 회전된 출력위치를 구하고 그곳에
+    // 선을 각도만큼 기울여서 출력, 선이 각도만큼 회전하는것처럼 보이게 함
+    //임의의 점으로부터 length 만큼 떨어진곳에 이미지를출력
+    double cosval = cos(-angle*Radian); //윈도우 좌표계 기준이므로  각도를 거꾸로
+    double sinval = sin(-angle*Radian); 
     int max_x = static_cast<int>(length * cosval );
     int max_y = static_cast<int>(length * sinval ); 
 
-    render_line
-    (
+    render_line //이미지 출력(각도를 나타내는 선)
+    (//UI_ANGLE_CENTER_X,UI_ANGLE_CENTER_Y 는 각도UI의 중점 위치 필요하면 이동가능
         { UI_ANGLE_CENTER_X + max_x,UI_ANGLE_CENTER_Y + max_y },
-        length*2,
+        length*2,//length는 선 길이의 반
         thickness,
-        static_cast<float>(angle),
+        static_cast<float>(angle),//선을 그려서 각도만큼 기울여서 출력
         color
     );
 

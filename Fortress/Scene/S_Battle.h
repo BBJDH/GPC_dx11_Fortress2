@@ -11,7 +11,7 @@ public:
 private:
 
     //std::vector<Object> obj;
-    State state;
+    State state=State::Loading;
     std::vector<Tank> tank;
     std::vector<Missile> missile;
     Engine::Rendering::Camera Camera;
@@ -19,7 +19,7 @@ private:
     //로딩 설정
     float const min_loading_time = 4.0f;
     float const waiting_time = 2.0f; //기본 초기화 대기시간
-    float playing_time;
+    float playing_time=0.0f;
 
 private:
     //버튼설정

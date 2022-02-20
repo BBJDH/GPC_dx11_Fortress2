@@ -150,6 +150,7 @@ void S_Lobby::render_button_images()
 
 void S_Lobby::render()
 {
+    _Image_manager->render_background({ 835,-580 }, {250,250});
     _Image_manager->render_lobby_back();
     _Button->render_buttons();
     render_button_images();
@@ -163,6 +164,7 @@ void S_Lobby::Start()
     //init_image();
     _Button->set_exit_button();
     _Button->set_start_button();
+    _Button->set_map_button();
     _Button->set_slot_buttons();
     _Button->set_tank_buttons();
 }
@@ -171,7 +173,7 @@ Scene* S_Lobby::Update()
 {
     render();
 
-    for (auto iter = _Button->buttons.begin(); iter != _Button->buttons.end(); ++iter)
+    for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
     {
         if (iter->second.clicked())	//상태에 따라 이벤트 처리
             return iter->second.execute();
@@ -183,9 +185,9 @@ Scene* S_Lobby::Update()
 
 void S_Lobby::End()
 {
-    _Button->buttons.erase("exit");
-    _Button->buttons.erase("start");
-
+    _Button->scene_buttons.erase("exit");
+    _Button->scene_buttons.erase("start");
+    _Button->nomal_buttons.clear();
     _Button->slot_button.clear();
     _Button->tank_button.clear();
     //for (int i = 0; i < 8; ++i)

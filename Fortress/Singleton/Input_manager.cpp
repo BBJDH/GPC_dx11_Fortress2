@@ -33,7 +33,8 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
                 },
                 Tank_SIZE,
                 Tank_SIZE,
-                "Temp"
+                "Temp",
+                Color::Red
             )
         );
         tank.back().ballistics_initialize(0, 0);

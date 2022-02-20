@@ -4,6 +4,7 @@
 class Map_manager : public SingletonT<Map_manager>
 {
 public:
+	std::string name;
 	HDC hmapdc;
 	POINT minimap_loc;
 	LONG const MINI_UI_SIZE = 13;
