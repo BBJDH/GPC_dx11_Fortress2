@@ -6,10 +6,10 @@
 
 Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height,
 	std::string const& name, Color const color)
-	: Object(pos, width, height), hp{ TANK_HP }, fuel{ 100 },
+	: Object(pos, width, height), hp{ TANK_HP }, max_fuel{200}, fuel{ max_fuel },
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
-	state{ State::Fall }, side{ Side::Right },
+	state{ State::Fall }, side{ static_cast<Side>(rand()%2) },
 	ani_playtime{ 0.0f }, name{ name }, damage{ "" }, color{ color }
 {
 	ani_set_normal();
@@ -50,6 +50,11 @@ int const Tank::getpower() const
 int const Tank::getfuel() const
 {
 	return this->fuel;
+}
+
+int const Tank::get_maxfuel() const
+{
+	return max_fuel;
 }
 
 int const Tank::get_left_angle() const
@@ -94,7 +99,7 @@ void Tank::plus_power()
 
 void Tank::turn_setting()
 {
-	this->fuel = 100;
+	this->fuel = max_fuel;
 	this->fire_velocity = 0;
 }
 

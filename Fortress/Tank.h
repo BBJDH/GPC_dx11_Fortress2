@@ -52,6 +52,7 @@ private:
 	std::string		damage;				//받은 데미지 기록
 	unsigned	    hp;
 	unsigned	    fuel;
+	unsigned const	max_fuel;
 	float const		fire_angle_min;
 	float const		fire_angle_max;
 	float		    fire_angle;
@@ -91,6 +92,7 @@ public:
 	unsigned const gethp() const;
 	int const getpower()const;
 	int const getfuel()const;
+	int const get_maxfuel()const;
 	int const get_left_angle()const;
 	int const getangle()const;
 	int const getangle_min()const;

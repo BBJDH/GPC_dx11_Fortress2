@@ -89,7 +89,7 @@ enum class Color
 #define Tank_HP_Bar_Mul 0.06
 
 //플레이어수, 게임플레이 세팅
-#define PLAYERS		 8
+#define PLAYERS		 100
 #define TANK_HP		 1000
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100
@@ -106,7 +106,7 @@ enum class Color
 
 
 //UI 세팅
-#define UI_SCREEN_SCROLL	10
+#define SCROLL_Per_Sec		1800
 #define UI_H				130 //1930
 #define UI_Bar_X			450
 #define UI_Bar_H			 20

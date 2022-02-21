@@ -41,7 +41,7 @@ private:
     //ui pannel bar
     void render_pannel_hp(int const hp);
     void render_pannel_power(int const power);
-    void render_pannel_fuel(int const fuel);
+    void render_pannel_fuel(Tank const & tank);
 
     //ui pannel angle line
     void ui_angle_line(int const length, int const angle,

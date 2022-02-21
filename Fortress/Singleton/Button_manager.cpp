@@ -51,6 +51,34 @@ void Button_manager::init_player_set()
 	}
 }
 
+void Button_manager::init_map_button_set()
+{
+	map_button_set.insert
+	(
+		std::make_pair
+		(
+			"sky",
+			std::make_pair
+			(
+				_float2{ 1100.0f,540.0f },
+				_float2{ 45.0f,20.0f }
+			)
+		)
+	);
+	map_button_set.insert
+	(
+		std::make_pair
+		(
+			"friends",
+			std::make_pair
+			(
+				_float2{ 1100.0f,540.0f },
+				_float2{ 45.0f,20.0f }
+			)
+		)
+	);
+}
+
 void Button_manager::check_buttons()
 {
 	for (auto iter = scene_buttons.begin(); iter != scene_buttons.end(); ++iter)
@@ -201,6 +229,44 @@ void Button_manager::set_exit_button()
 
 }
 
+void Button_manager::render_tank_button_image()
+{
+	float const tank_button_location_x = 70;
+	float const tank_button_location_y = 552;
+	float const tank_button_width = 80;
+	float const tank_button_heght = 50;
+	float const tank_button_offset_x = tank_button_width + 18;
+	float const tank_button_offset_y = tank_button_heght + 18;
+
+	for (int i = 0; i < 12; i++)
+	{
+		if (i < 6)
+		{
+			_Image_manager->render_tank_image
+			(
+				_Button->tank_name[i],
+				{
+					tank_button_location_x + tank_button_offset_x * i,
+					tank_button_location_y
+				},
+				{ tank_button_width, tank_button_heght }
+			);
+		}
+		else
+		{
+			_Image_manager->render_tank_image
+			(
+				_Button->tank_name[i],
+				{
+					tank_button_location_x + tank_button_offset_x * i,
+					tank_button_location_y
+				},
+				{ tank_button_width, tank_button_heght }
+			);
+		}
+	}
+}
+
 void Button_manager::set_map_button()
 {
 	float const exit_x = 1100;
@@ -215,7 +281,6 @@ void Button_manager::set_map_button()
 	nomal_buttons.back().bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 	nomal_buttons.back().init_image_location({ exit_x, exit_y });
 	nomal_buttons.back().init_image_size({ exit_w, exit_h });
-
 }
 
 

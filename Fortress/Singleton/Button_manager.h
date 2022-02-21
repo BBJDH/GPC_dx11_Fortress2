@@ -18,10 +18,13 @@ public:
 	//플레이어가 설정된 슬롯, 탱크, 색상
 	std::vector<std::tuple< std::string, std::string, Color>> player_set;
 
-public:
+private:
 	//상수 
 	//버튼 구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
 	std::string const tank_name[12] = { "canon","super", };
+	//맵 버튼 문자 이미지 위치, 크기 설정
+	std::string const map_name[2] = { "sky","friends" };
+	std::map <std::string, std::pair< _float2, _float2>> map_button_set;
 
 private:
 	//  ==================== Lobby ==================
@@ -35,11 +38,12 @@ private:
 
 
 public:
-	void init_player_set();
-	void render_buttons();
-	
 
 	//  ==================== Lobby ==================
+	void init_player_set();
+	void init_map_button_set();
+	void render_buttons();
+	void render_tank_button_image();
 
 	void    set_start_button();
 	void    set_exit_button();
@@ -72,3 +76,17 @@ public:
 //슬롯번호를 이름으로 가지는 슬롯 버튼
 //8개이며 하나가 눌리면 다른 버튼은 모두비활성화
 //슬롯 번호는 버튼이 눌렸다면 true를 반환, 활성화
+
+//활용
+//template <typename... Ts>
+//auto make_thing(Ts&&... xs)
+//{
+//	if constexpr (sizeof...(xs) == 2))
+//	{
+//	return std::make_pair(std::forward<Ts>(xs)...);
+//	}
+//	else
+//	{
+//		return std::make_tuple(std::forward<Ts>(xs)...);
+//	}
+//}

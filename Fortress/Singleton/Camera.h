@@ -16,12 +16,14 @@ public:
 private:
 	State state;
 	unsigned const speed;
+	unsigned speed_per_frame;
 	float earthquake_time;
 	bool focus_w;
 	bool focus_h;
 
 
 private:
+	void set_speed_per_frame(float const delta);
 	bool up(int const scroll);
 	bool down(int const scroll);
 	bool left(int const scroll);

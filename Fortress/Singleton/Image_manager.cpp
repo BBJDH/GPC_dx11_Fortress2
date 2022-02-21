@@ -75,7 +75,7 @@ void Image_manager::render_front_ui(Tank const & tank)
 
     render_pannel_power(tank.getpower());
 
-    render_pannel_fuel(tank.getfuel());
+    render_pannel_fuel(tank);
 }
 
 void Image_manager::render_tanks_hp(std::vector<Tank> const& tank)
@@ -237,18 +237,20 @@ void Image_manager::render_pannel_power(int const power)
     view_image.Render();
 }
 
-void Image_manager::render_pannel_fuel(int const fuel)
+void Image_manager::render_pannel_fuel(Tank const & tank)
 {
     view_image.Name = "Image/UI/Yellow";
+    float const fuel_mul = static_cast<float>((UI_Fuel_MUL / tank.get_maxfuel()) * 100);
+    float const fuel = static_cast<float const>(tank.getfuel());
     set_image
     (
         view_image,
         {
-            static_cast<float>(UI_Bar_X + fuel * UI_Fuel_MUL / 2),
+            static_cast<float>(UI_Bar_X + fuel * fuel_mul / 2),
             UI_FUEL_Y
         },
         {
-            static_cast<float>(fuel * UI_Fuel_MUL),
+            static_cast<float>(fuel * fuel_mul),
             UI_Bar_H
         }
     );

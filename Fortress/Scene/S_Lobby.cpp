@@ -80,43 +80,6 @@ void S_Lobby::render_slot_text()
     
 }
 
-void S_Lobby::render_tank_button_image()
-{
-    float const tank_button_location_x = 70;
-    float const tank_button_location_y = 552;
-    float const tank_button_width = 80;
-    float const tank_button_heght = 50;
-    float const tank_button_offset_x = tank_button_width + 18;
-    float const tank_button_offset_y = tank_button_heght + 18;
-
-    for (int i = 0; i < 12; i++)
-    {
-        if (i < 6)
-        {
-            _Image_manager->render_tank_image
-            (
-                _Button->tank_name[i],
-                {
-                    tank_button_location_x + tank_button_offset_x * i,
-                    tank_button_location_y
-                },
-                { tank_button_width, tank_button_heght }
-            );
-        }
-        else
-        {
-            _Image_manager->render_tank_image
-            (
-                _Button->tank_name[i],
-                {
-                    tank_button_location_x + tank_button_offset_x * i,
-                    tank_button_location_y
-                },
-                { tank_button_width, tank_button_heght }
-            );
-        }
-    }
-}
 
 void S_Lobby::render_slot_base()
 {
@@ -140,7 +103,7 @@ void S_Lobby::render_slot_base()
 
 void S_Lobby::render_button_images()
 {
-    render_tank_button_image(); //탱크버튼 위에 그릴 이미지
+    _Button->render_tank_button_image(); //탱크버튼 위에 그릴 이미지
     render_slot_base();         //슬롯 베이스 출력
     render_tank_selected();
     render_slot_color();

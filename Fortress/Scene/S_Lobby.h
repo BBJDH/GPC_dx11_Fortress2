@@ -3,7 +3,6 @@ class S_Lobby final : public Scene
 {
 private:
 
-    void    render_tank_button_image();
     void    render_slot_base();
     void    render_tank_selected();
     void    render_slot_color();

@@ -5,9 +5,15 @@
 
 Camera::Camera() :pos{ 0.0f,0.0f },
 pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 },
-speed{ UI_SCREEN_SCROLL }, focus_w{ false }, focus_h{ false },
+speed{ SCROLL_Per_Sec }, speed_per_frame{0},
+focus_w{ false }, focus_h{ false },
 state{ State::Normal }, earthquake_time{0.0f}
 {}
+
+void Camera::set_speed_per_frame(float const delta)
+{
+	speed_per_frame = static_cast<int>(speed * delta);
+}
 
 bool Camera::up(int const scroll)
 {
@@ -102,50 +108,50 @@ void Camera::focusing(Object const& obj)
 	{
 		if (pos.x > obj_x) //카메라가 오브젝트 오른쪽
 		{
-			if (next_step_x < speed)
+			if (next_step_x < speed_per_frame)
 			{
 				left(next_step_x);
 				focus_w = false;
 			}
 
 			else
-				focus_w = left(speed);
+				focus_w = left(speed_per_frame);
 		}
 		else//카메라가 오브젝트 왼쪽
 		{
-			if (next_step_x < speed)
+			if (next_step_x < speed_per_frame)
 			{
 				focus_w = right(next_step_x);
 				focus_w = false;
 			}
 
 			else
-				focus_w = right(speed);
+				focus_w = right(speed_per_frame);
 		}
 	}
 	if (focus_h)
 	{
 		if (pos.y > obj_y)//카메라가 위
 		{
-			if (next_step_y < speed)
+			if (next_step_y < speed_per_frame)
 			{
 				focus_h = down(next_step_y);
 				focus_h = false;
 			}
 
 			else
-				focus_h = down(speed);
+				focus_h = down(speed_per_frame);
 		}
 		else
 		{
-			if (next_step_y < speed)
+			if (next_step_y < speed_per_frame)
 			{
 				focus_h = up(next_step_y);
 				focus_h = false;
 			}
 
 			else
-				focus_h = up(speed);
+				focus_h = up(speed_per_frame);
 		}
 	}
 
@@ -164,46 +170,46 @@ void Camera::move(Mouse::POS_STATE state)
 	{
 	case Mouse::POS_STATE::Side_Up:        
 	{
-		up(speed);
+		up(speed_per_frame);
 		return;
 	}
 	case Mouse::POS_STATE::Side_Left:      
 	{
-		left(speed);
+		left(speed_per_frame);
 		return;
 	}
 	case Mouse::POS_STATE::Side_Right:     
 	{
-		right(speed);
+		right(speed_per_frame);
 		return;
 	}
 	case Mouse::POS_STATE::Side_Down:      
 	{
-		down(speed);
+		down(speed_per_frame);
 		return;
 	}
 	case Mouse::POS_STATE::Side_LeftUP:    
 	{
-		left(speed);
-		up(speed);
+		left(speed_per_frame);
+		up(speed_per_frame);
 		return; 
 	}
 	case Mouse::POS_STATE::Side_RightUP:   
 	{
-		right(speed);
-		up(speed);
+		right(speed_per_frame);
+		up(speed_per_frame);
 		return; 
 	}
 	case Mouse::POS_STATE::Side_LeftDown:  
 	{
-		left(speed);
-		down(speed);
+		left(speed_per_frame);
+		down(speed_per_frame);
 		return; 
 	}
 	case Mouse::POS_STATE::Side_RightDown: 
 	{
-		right(speed);
-		down(speed);
+		right(speed_per_frame);
+		down(speed_per_frame);
 		return; 
 	}
 	default: return;
@@ -238,6 +244,7 @@ void Camera::earthquake()
 
 void Camera::cam()
 {
+	set_speed_per_frame(Engine::Time::Get::Delta());
 	_CAM->move(_Mouse->getstate()); //마우스 위치에 따라 카메라 이동
 	if (this->state == State::Earthquake)
 	{
