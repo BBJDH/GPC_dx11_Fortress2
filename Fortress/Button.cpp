@@ -20,6 +20,14 @@ template Button<bool>::Button(std::function<bool(void)> const& function, std::st
 
 
 template<typename T>
+void Button<T>::set_name(std::string const& name)
+{
+	this->name = name;
+}
+template void Button<bool>::set_name(std::string const& name);
+template void Button<Scene*>::set_name(std::string const& name);
+
+template<typename T>
 void Button<T>::init_image_size(_float2 const& size)
 {
 

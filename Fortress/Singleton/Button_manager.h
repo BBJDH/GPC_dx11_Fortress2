@@ -11,7 +11,7 @@ private:
 public:
 
 	std::map < std::string, Button < Scene* >> scene_buttons;
-	std::vector < Button < bool >> nomal_buttons;
+	std::map < std::string, Button < bool >> nomal_buttons;
 	std::vector < Button < bool >> slot_button;
 	std::vector < Button < bool >> tank_button;
 	
@@ -19,11 +19,12 @@ public:
 	std::vector<std::tuple< std::string, std::string, Color>> player_set;
 
 private:
-	//상수 
+	//기본 설정
 	//버튼 구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
 	std::string const tank_name[12] = { "canon","super", };
 	//맵 버튼 문자 이미지 위치, 크기 설정
-	std::string const map_name[2] = { "sky","friends" };
+	std::string const map_name[3] = { "sky","friends","the artificial satellite"};
+	int map_index=0;
 	std::map <std::string, std::pair< _float2, _float2>> map_button_set;
 
 private:
@@ -34,23 +35,24 @@ private:
 	void set_slot_button(std::vector<Button<bool>>& slot,
 		std::string const& location, _float2 const& position, _float2 const& size);
 	void update_player_set();
-	
 
 
 public:
 
 	//  ==================== Lobby ==================
-	void init_player_set();
 	void init_map_button_set();
 	void render_buttons();
 	void render_tank_button_image();
 
-	void    set_start_button();
-	void    set_exit_button();
-	void	set_map_button();
-	void    set_slot_buttons();
-	void    set_tank_buttons();
-
+	void    init_start_button();
+	void    init_exit_button();
+	void	init_map_button();
+	void    init_slot_buttons();
+	void    init_tank_buttons();
+	void	update_map_button_text();
+	
+	//  ==================== Battle ==================
+	std::string get_map_name();
 
 	//버튼의 기능들을 여기에 나열
 	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
@@ -62,6 +64,7 @@ public:
 	class Scene * to_battle();
 	bool  bool_func_default();
 	bool  check_ready();
+	bool  switch_map();
 	//클릭되면 슬롯이 토글됨
 	//기존 켜져있던 슬롯 key(std::string)를 기억하고
 	//새로운 버튼이 클릭되면 해당을롯 토글 온 기존 것 off

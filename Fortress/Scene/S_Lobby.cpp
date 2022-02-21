@@ -123,13 +123,12 @@ void S_Lobby::render()
 void S_Lobby::Start()
 {
     _Button->player_set.clear();
-    _Button->init_player_set();
-    //init_image();
-    _Button->set_exit_button();
-    _Button->set_start_button();
-    _Button->set_map_button();
-    _Button->set_slot_buttons();
-    _Button->set_tank_buttons();
+    _Button->init_map_button_set();
+    _Button->init_exit_button();
+    _Button->init_start_button();
+    _Button->init_map_button();
+    _Button->init_slot_buttons();
+    _Button->init_tank_buttons();
 }
 
 Scene* S_Lobby::Update()
@@ -141,7 +140,11 @@ Scene* S_Lobby::Update()
         if (iter->second.clicked())	//상태에 따라 이벤트 처리
             return iter->second.execute();
     }
-
+    for (auto iter = _Button->nomal_buttons.begin(); iter != _Button->nomal_buttons.end(); ++iter)
+    {
+        if (iter->second.clicked())	//상태에 따라 이벤트 처리
+            iter->second.execute();
+    }
     return nullptr;
 
 }

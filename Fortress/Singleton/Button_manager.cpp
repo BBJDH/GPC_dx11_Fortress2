@@ -2,7 +2,7 @@
 #include "Button_manager.h"
 
 
-void Button_manager::set_slot_buttons()
+void Button_manager::init_slot_buttons()
 {
 	float const location_x = 270;
 	float const location_y = 140;
@@ -18,7 +18,7 @@ void Button_manager::set_slot_buttons()
 	}
 }
 
-void Button_manager::set_tank_buttons()
+void Button_manager::init_tank_buttons()
 {
 	float const location_x = 70;
 	float const location_y = 552;
@@ -43,16 +43,28 @@ void Button_manager::set_tank_buttons()
 	}
 }
 
-void Button_manager::init_player_set()
+void Button_manager::update_map_button_text()
 {
-	for (int i = 0; i < 8; i++)
+	if (!nomal_buttons.empty())
 	{
-		//player_set.push_back(std::make_tuple("slot_"+std::to_string(i), "", static_cast<Color>(i)));
+		_float2 const location = map_button_set.find(map_name[map_index])->second.first;
+		_float2 const length = map_button_set.find(map_name[map_index])->second.second;
+		nomal_buttons.find("map")->second.set_name( "Lobby/Map/" +map_name[map_index]);
+		nomal_buttons.find("map")->second.init_image_location(location);
+		nomal_buttons.find("map")->second.init_image_size(length);
 	}
 }
 
+std::string Button_manager::get_map_name()
+{
+	return map_name[map_index];
+}
+
+
+
 void Button_manager::init_map_button_set()
 {
+	map_button_set.clear();
 	map_button_set.insert
 	(
 		std::make_pair
@@ -77,6 +89,18 @@ void Button_manager::init_map_button_set()
 			)
 		)
 	);
+	map_button_set.insert
+	(
+		std::make_pair
+		(
+			"the artificial satellite",
+			std::make_pair
+			(
+				_float2{ 1100.0f,540.0f },
+				_float2{ 45.0f,20.0f }
+			)
+		)
+	);
 }
 
 void Button_manager::check_buttons()
@@ -84,12 +108,12 @@ void Button_manager::check_buttons()
 	for (auto iter = scene_buttons.begin(); iter != scene_buttons.end(); ++iter)
 		iter->second.check_state();
 	for (auto iter = nomal_buttons.begin(); iter != nomal_buttons.end(); ++iter)
-		iter->check_state();
+		iter->second.check_state();
 	for (auto iter = slot_button.begin(); iter != slot_button.end(); ++iter)
 		iter->check_state();
 	for (auto iter = tank_button.begin(); iter != tank_button.end(); ++iter)
 		iter->check_state();
-
+	update_map_button_text();
 }
 
 Button_manager::result Button_manager::slot_toggle(std::vector<Button<bool>>& slot)
@@ -190,7 +214,7 @@ void Button_manager::update_player_set()
 
 }
 
-void Button_manager::set_start_button()
+void Button_manager::init_start_button()
 {
 	float const start_x = 100;
 	float const start_y = 690;
@@ -208,7 +232,7 @@ void Button_manager::set_start_button()
 	scene_buttons.at("start").init_image_size({ start_w, start_h });
 }
 
-void Button_manager::set_exit_button()
+void Button_manager::init_exit_button()
 {
 	float const exit_x = 1150;
 	float const exit_y = 690;
@@ -267,20 +291,23 @@ void Button_manager::render_tank_button_image()
 	}
 }
 
-void Button_manager::set_map_button()
+void Button_manager::init_map_button()
 {
-	float const exit_x = 1100;
-	float const exit_y = 540;
-	float const exit_w = 45;
-	float const exit_h = 20;
+	//float const exit_x = 1100;
+	//float const exit_y = 540;
+	//float const exit_w = 45;
+	//float const exit_h = 20;
 
-	nomal_buttons.push_back
+	nomal_buttons.insert
 	(
-		Button<bool>(std::bind(&Button_manager::bool_func_default,_Button),"Lobby/sky")
+		std::make_pair
+		(
+			"map",
+			Button<bool>(std::bind(&Button_manager::switch_map,_Button),"Lobby/sky")
+		)
 	);
-	nomal_buttons.back().bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
-	nomal_buttons.back().init_image_location({ exit_x, exit_y });
-	nomal_buttons.back().init_image_size({ exit_w, exit_h });
+	nomal_buttons.find("map")->second.bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+	update_map_button_text();
 }
 
 
@@ -312,4 +339,13 @@ bool Button_manager::bool_func_default()
 bool Button_manager::check_ready()
 {
 	return player_set.size()>=2;
+}
+
+bool Button_manager::switch_map()
+{
+	size_t i = map_name->size();
+	map_index++;
+	if (map_index >= 3)
+		map_index = 0;
+	return true;
 }

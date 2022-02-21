@@ -17,8 +17,6 @@ void Animation::render_loading(float const delta)
         int const index = static_cast<int>(loading_time/0.5f);
         loading[index].Render();
     }
-
-
 }
 
 void Animation::render_change_loading(float const delta)
@@ -44,17 +42,16 @@ void Animation::initialize()
     arrow.Duration = 1.0f;
     arrow.Repeatable = true;
 
-
-    loading[0].Name = "Animation/Screen/loading_0";
-    loading[1].Name = "Animation/Screen/loading_1";
-    loading[2].Name = "Animation/Screen/loading_2";
-    loading[3].Name = "Animation/Screen/loading_3";
-    loading[4].Name = "Animation/Screen/loading_4";
-    loading[5].Name = "Animation/Screen/loading_5";
-    loading[6].Name = "Animation/Screen/loading_6";
-    loading[7].Name = "Animation/Screen/loading_7";
-
+    //loading[0].Name = "Animation/Screen/loading_0";
+    //loading[1].Name = "Animation/Screen/loading_1";
+    //loading[2].Name = "Animation/Screen/loading_2";
+    //loading[3].Name = "Animation/Screen/loading_3";
+    //loading[4].Name = "Animation/Screen/loading_4";
+    //loading[5].Name = "Animation/Screen/loading_5";
+    //loading[6].Name = "Animation/Screen/loading_6";
+    //loading[7].Name = "Animation/Screen/loading_7";
     //loading[8].Name = "Animation/Screen/loading_8";
+
     for (size_t i = 0; i < 8; i++)
     {
         loading[i].Duration = 0.5f;
@@ -62,7 +59,7 @@ void Animation::initialize()
         loading[i].Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
         loading[i].Location = { 0,0 };
     }
-    change_loding.Name = "Animation/Screen/loading_8";
+    change_loding.Name = "Animation/Screen/loading";
     change_loding.Duration = 0.5f;
     change_loding.Repeatable = false;
     change_loding.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);

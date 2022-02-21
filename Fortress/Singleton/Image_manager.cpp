@@ -170,16 +170,16 @@ void Image_manager::set_background(_float2 const& position ,_float2 const& lengt
 
 void Image_manager::set_minimap_background()
 {
-
+    float const minimap_height = static_cast<float>(MINIMAP_SIZE_H + _Map_manager->MINI_UI_SIZE);
     world_image.Name = "Image/Background/background_alpha";
     set_image
     (
         world_image,
         { 
             static_cast<float>(_Map_manager->minimap_loc.x + MINIMAP_SIZE_W / 2),
-            static_cast<float>(_Map_manager->minimap_loc.y - MINIMAP_SIZE_H / 2)
+            static_cast<float>(_Map_manager->minimap_loc.y - minimap_height / 2)
         },
-        { MINIMAP_SIZE_W,MINIMAP_SIZE_H }
+        { MINIMAP_SIZE_W,minimap_height }
     );
 
 }
@@ -380,22 +380,23 @@ void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 {
     if (is_turn)
     {
-        render_minimap_enemy(obj.getpos(),obj.getimage_angle());
+        render_minimap_ally(obj.getpos(),obj.getimage_angle());
         return;
     }
-    render_minimap_ally(obj.getpos(), obj.getimage_angle());
+    render_minimap_enemy(obj.getpos(), obj.getimage_angle());
     return ;
 }
 
 void Image_manager::render_minimap_enemy(_float2 const& position, float const angle)
 {
+    float const correct =0.0f; //TODO: ¹Ì´Ï¸Ê yÁÂÇ¥ º¸Á¤°ª Ãß°¡
     view_image.Name = "Image/UI/Red";
     set_image
     (
         view_image,
         {
             static_cast<float>(_Map_manager->minimap_loc.x + position.x / 10),
-            static_cast<float>(_Map_manager->minimap_loc.y + position.y / 10 + _Map_manager->MINI_UI_SIZE)
+            static_cast<float>(_Map_manager->minimap_loc.y + position.y / 10 + (_Map_manager->MINI_UI_SIZE))
         },
         {5,5},
         angle / Radian
@@ -406,7 +407,9 @@ void Image_manager::render_minimap_enemy(_float2 const& position, float const an
 
 void Image_manager::render_minimap_ally(_float2 const& position, float const angle)
 {
-    view_image.Name = "Image/UI/Red";
+    float const correct = 0.0f; //TODO: ¹Ì´Ï¸Ê yÁÂÇ¥ º¸Á¤°ª Ãß°¡
+
+    view_image.Name = "Image/UI/Green";
     set_image
     (
         view_image,

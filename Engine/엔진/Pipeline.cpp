@@ -134,8 +134,11 @@ namespace Engine::Rendering::Pipeline
                 DeleteObject(hOldBmp);
                 //미니맵 초기화
 
-                TransparentBlt(minimap_hdc, 0,0,minimap_size.cx,minimap_size.cy,
-                    hdc_mem,0, 0,map_size.cx,map_size.cy-ui_size,transparents_color);
+                //TransparentBlt(minimap_hdc, 0,0,minimap_size.cx,minimap_size.cy,
+                //    hdc_mem,0, 0,map_size.cx,map_size.cy-ui_size,transparents_color); //마젠타 없애고 그리기
+                //ui 사이즈 빼고 늘이기
+                TransparentBlt(minimap_hdc, 0, 0, minimap_size.cx, minimap_size.cy,
+                    hdc_mem, 0, 0, map_size.cx, map_size.cy- ui_size, transparents_color); //마젠타 없애고 그리기
                 AlphaBlend(hDC, dest.x,dest.y,size.cx,size.cy,
                     minimap_hdc,0, 0,minimap_size.cx,minimap_size.cy,bf);
 

@@ -3,14 +3,15 @@
 
 
 Map_manager::Map_manager() :minimap_loc{CAM_SIZE_W-MINIMAP_SIZE_W,0},
-name{"Sky"}
+name{"sky"}
 {
     initialize();
 }
 
 void Map_manager::initialize()
 {
-    std::string const location = "Asset/Image/Map/"+ name +"_M30001800.bmp";
+    name = _Button->get_map_name();
+    std::string const location = "Asset/Image/Map/"+ name +".bmp";
     HBITMAP hmapbit = static_cast<HBITMAP>(LoadImage
     (
         NULL,

@@ -30,6 +30,7 @@ public:
 	Button();
 	Button(std::function<T(void)> const & function, std::string const& name);
 
+	void set_name(std::string const& name);
 	void init_image_size(_float2 const& size);
 	void init_image_location(_float2 const & postion);
 	void check_state();

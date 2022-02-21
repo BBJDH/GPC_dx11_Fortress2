@@ -130,7 +130,7 @@ Scene * S_Battle::update_scene()
                 _Anime->render_change_loading(Engine::Time::Get::Delta());
                 if(_Anime->get_loading_time() < 0.1f and playing_time > min_loading_time+ 0.5f)
                 {
-                    Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H);
+                    Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H+200); //UI사이즈만큼 더함
                     _Turn->tankturn_start(tank);
                     this->state = State::Playing;
                     break;
