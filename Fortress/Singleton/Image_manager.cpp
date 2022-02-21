@@ -378,51 +378,28 @@ void Image_manager::render_minimap_background()
 
 void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 {
+    float const correct = obj.getpos().y / MAPSIZE_H; // ¹Ì´Ï¸Ê yÁÂÇ¥ º¸Á¤°ª
+
     if (is_turn)
-    {
-        render_minimap_ally(obj.getpos(),obj.getimage_angle());
-        return;
-    }
-    render_minimap_enemy(obj.getpos(), obj.getimage_angle());
+        view_image.Name = "Image/UI/Green";
+    else
+        view_image.Name = "Image/UI/Red";
+
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(_Map_manager->minimap_loc.x + obj.getpos().x / 10),
+            static_cast<float>(_Map_manager->minimap_loc.y + obj.getpos().y / 10 + (_Map_manager->MINI_UI_SIZE) * correct)
+        },
+        { 5,5 },
+        obj.getimage_angle() / Radian
+    );
+
+    view_image.Render();
     return ;
 }
 
-void Image_manager::render_minimap_enemy(_float2 const& position, float const angle)
-{
-    float const correct =0.0f; //TODO: ¹Ì´Ï¸Ê yÁÂÇ¥ º¸Á¤°ª Ãß°¡
-    view_image.Name = "Image/UI/Red";
-    set_image
-    (
-        view_image,
-        {
-            static_cast<float>(_Map_manager->minimap_loc.x + position.x / 10),
-            static_cast<float>(_Map_manager->minimap_loc.y + position.y / 10 + (_Map_manager->MINI_UI_SIZE))
-        },
-        {5,5},
-        angle / Radian
-    );
-
-    view_image.Render();
-}
-
-void Image_manager::render_minimap_ally(_float2 const& position, float const angle)
-{
-    float const correct = 0.0f; //TODO: ¹Ì´Ï¸Ê yÁÂÇ¥ º¸Á¤°ª Ãß°¡
-
-    view_image.Name = "Image/UI/Green";
-    set_image
-    (
-        view_image,
-        {
-            static_cast<float>(_Map_manager->minimap_loc.x + position.x / 10),
-            static_cast<float>(_Map_manager->minimap_loc.y + position.y / 10 + _Map_manager->MINI_UI_SIZE)
-        },
-        { 5,5 },
-        angle / Radian
-    );
-
-    view_image.Render();
-}
 
 void Image_manager::render_minimap_tank(std::vector<Tank> const& tank)
 {

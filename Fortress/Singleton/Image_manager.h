@@ -31,8 +31,6 @@ private:
     //minimap render
     void set_minimap_background();
     void render_minimap_object(Object const& obj, bool is_turn);
-    void render_minimap_enemy(_float2 const& position, float const angle);
-    void render_minimap_ally(_float2 const& position, float const angle);
 
     //ui pannel
     void render_back_pannel();
