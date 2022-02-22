@@ -5,7 +5,7 @@
 Map_manager::Map_manager() :minimap_loc{CAM_SIZE_W-MINIMAP_SIZE_W,0},
 name{"sky"}
 {
-    initialize();
+    //initialize();
 }
 
 void Map_manager::initialize()
@@ -29,7 +29,8 @@ void Map_manager::initialize()
 
 void Map_manager::render_map()
 {
-    _Image_manager->render_background();
+    //_Image_manager->render_background(); //TODO:
+    _Anime->render_background({ 0,0 }, { MAPSIZE_W,MAPSIZE_H }, Engine::Time::Get::Delta());
     Engine::Rendering::Pipeline::HmemDC::Render_map
     (
         hmapdc,

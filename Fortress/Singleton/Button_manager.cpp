@@ -52,6 +52,7 @@ void Button_manager::update_map_button_text()
 		nomal_buttons.find("map")->second.set_name( "Lobby/Map/" +map_name[map_index]);
 		nomal_buttons.find("map")->second.init_image_location(location);
 		nomal_buttons.find("map")->second.init_image_size(length);
+		_Map_manager->name = map_name[map_index];
 	}
 }
 
@@ -85,7 +86,7 @@ void Button_manager::init_map_button_set()
 			std::make_pair
 			(
 				_float2{ 1100.0f,540.0f },
-				_float2{ 45.0f,20.0f }
+				_float2{ 70.0f,20.0f }
 			)
 		)
 	);
@@ -97,7 +98,19 @@ void Button_manager::init_map_button_set()
 			std::make_pair
 			(
 				_float2{ 1100.0f,540.0f },
-				_float2{ 45.0f,20.0f }
+				_float2{ 170.0f,20.0f }
+			)
+		)
+	);
+	map_button_set.insert
+	(
+		std::make_pair
+		(
+			"the valley of city",
+			std::make_pair
+			(
+				_float2{ 1100.0f,540.0f },
+				_float2{ 170.0f,20.0f }
 			)
 		)
 	);
@@ -343,9 +356,8 @@ bool Button_manager::check_ready()
 
 bool Button_manager::switch_map()
 {
-	size_t i = map_name->size();
 	map_index++;
-	if (map_index >= 3)
+	if (map_index > map_name->size())
 		map_index = 0;
 	return true;
 }

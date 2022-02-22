@@ -11,20 +11,22 @@ public:
 		Tank, Missile, Item
 	};
 private:
-	Engine::Rendering::Animation::Component loading[8];
-	Engine::Rendering::Animation::Component change_loding;
-	Engine::Rendering::Animation::Component arrow;
+	//Engine::Rendering::Animation::Component loading[8];
+	//Engine::Rendering::Animation::Component change_loding;
+	Engine::Rendering::Animation::Component animation;
+	Engine::Rendering::Animation::Component map_animation;
 
 	float loading_time;
-
+	float background_time;
 	void initialize();
 
 
 public:
 	Animation();
 	float const get_loading_time();
-	void render_loading(float const delta);
-	void render_change_loading(float const delta);
+	//void render_loading(float const delta);
+	void render_loading_end(float const delta);
+	void render_background(_float2 const& position, _float2 const& length, float const delta);
 	void render_tanks(std::vector<Tank> & tank);
 	void render_missile(std::vector<Missile> & missile);
 	void render_arrow(Tank const & tank);

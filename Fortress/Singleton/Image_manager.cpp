@@ -29,11 +29,11 @@ void Image_manager::render_loading()
     world_image.Render();
 }
 
-void Image_manager::render_background(_float2 const& position, _float2 const& length)
-{
-    set_background(position, length);
-    world_image.Render();
-}
+//void Image_manager::render_background(_float2 const& position, _float2 const& length)
+//{
+//    set_background(position, length);
+//    world_image.Render();
+//}
 
 
 void Image_manager::render_back_ui(Tank const & tank)
@@ -161,17 +161,18 @@ void Image_manager::render_selected_slot(_float2 const& position, _float2 const&
     view_image.Render();
 }
 
-void Image_manager::set_background(_float2 const& position ,_float2 const& length)
-{
-    world_image.Name = "Image/Background/background";
-    set_image(world_image, position, length);
+//void Image_manager::set_background(_float2 const& position ,_float2 const& length)
+//{
+//    world_image.Name = "Image/Background/background";
+//    set_image(world_image, position, length);
+//
+//}
 
-}
-
-void Image_manager::set_minimap_background()
+void Image_manager::render_minimap_background()
 {
+    std::string const location = "Image/Minimap/" + _Map_manager->name;
     float const minimap_height = static_cast<float>(MINIMAP_SIZE_H + _Map_manager->MINI_UI_SIZE);
-    world_image.Name = "Image/Background/background_alpha";
+    world_image.Name = location.c_str();;
     set_image
     (
         world_image,
@@ -181,7 +182,7 @@ void Image_manager::set_minimap_background()
         },
         { MINIMAP_SIZE_W,minimap_height }
     );
-
+    world_image.Render();
 }
 
 void Image_manager::render_back_pannel()
@@ -370,11 +371,6 @@ void Image_manager::render_tank_hp(Tank const& tank)
     render_tank_hp_bar(tank.getpos(), tank.gethp());
 }
 
-void Image_manager::render_minimap_background()
-{
-    set_minimap_background();
-    world_image.Render();
-}
 
 void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 {
@@ -393,7 +389,7 @@ void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
             static_cast<float>(_Map_manager->minimap_loc.y + obj.getpos().y / 10 + (_Map_manager->MINI_UI_SIZE) * correct)
         },
         { 5,5 },
-        obj.getimage_angle() / Radian
+        -obj.getimage_angle() / Radian
     );
 
     view_image.Render();

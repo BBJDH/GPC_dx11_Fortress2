@@ -23,7 +23,7 @@ private:
 	//버튼 구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
 	std::string const tank_name[12] = { "canon","super", };
 	//맵 버튼 문자 이미지 위치, 크기 설정
-	std::string const map_name[3] = { "sky","friends","the artificial satellite"};
+	std::string const map_name[4] = { "sky","friends","the artificial satellite","the valley of city"};
 	int map_index=0;
 	std::map <std::string, std::pair< _float2, _float2>> map_button_set;
 

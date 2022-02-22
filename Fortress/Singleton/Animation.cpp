@@ -5,29 +5,50 @@ Animation::Animation()
 {
     initialize();
 }
+//
+//void Animation::render_loading(float const delta)
+//{
+//    loading_time += delta;
+//
+//    if(loading_time>4.5f)
+//        loading_time =0.0f;
+//    else
+//    {
+//        int const index = static_cast<int>(loading_time/0.5f);
+//        loading[index].Render();
+//    }
+//}
 
-void Animation::render_loading(float const delta)
+void Animation::render_loading_end(float const delta)
 {
     loading_time += delta;
 
-    if(loading_time>4.5f)
-        loading_time =0.0f;
-    else
-    {
-        int const index = static_cast<int>(loading_time/0.5f);
-        loading[index].Render();
-    }
-}
-
-void Animation::render_change_loading(float const delta)
-{
-    loading_time += delta;
+    animation.Name = "Animation/Screen/loading";
+    animation.Duration = 0.5f;
+    animation.Repeatable = false;
+    animation.Playback = loading_time;
+    animation.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    animation.Location = { 0,0 };
     if (loading_time > 0.5f)
         loading_time = 0.0f;
     else
     {
-        change_loding.Render();
+        animation.Render();
     }
+}
+
+void Animation::render_background(_float2 const & position, _float2 const& length, float const delta)
+{
+    //background_time += delta;
+    //int const index = fmod();
+    std::string const location = "Animation/Map/" + _Map_manager->name;
+    map_animation.Name = location.c_str();
+    map_animation.Duration = 3.0f;
+    map_animation.Repeatable = true;
+    //map_animation.Playback = background_time;
+    map_animation.Length = { length.x,length.y };
+    map_animation.Location = { position.x,position.y };
+    map_animation.Render();
 }
 
 float const Animation::get_loading_time()
@@ -38,9 +59,7 @@ float const Animation::get_loading_time()
 void Animation::initialize()
 {
     loading_time =0.0f;
-    arrow.Name = "Animation/UI/arrow";
-    arrow.Duration = 1.0f;
-    arrow.Repeatable = true;
+    background_time = 0.0f;
 
     //loading[0].Name = "Animation/Screen/loading_0";
     //loading[1].Name = "Animation/Screen/loading_1";
@@ -52,18 +71,14 @@ void Animation::initialize()
     //loading[7].Name = "Animation/Screen/loading_7";
     //loading[8].Name = "Animation/Screen/loading_8";
 
-    for (size_t i = 0; i < 8; i++)
-    {
-        loading[i].Duration = 0.5f;
-        loading[i].Repeatable = false;
-        loading[i].Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-        loading[i].Location = { 0,0 };
-    }
-    change_loding.Name = "Animation/Screen/loading";
-    change_loding.Duration = 0.5f;
-    change_loding.Repeatable = false;
-    change_loding.Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    change_loding.Location = { 0,0 };
+    //for (size_t i = 0; i < 8; i++)
+    //{
+    //    loading[i].Duration = 0.5f;
+    //    loading[i].Repeatable = false;
+    //    loading[i].Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    //    loading[i].Location = { 0,0 };
+    //}
+
 
 }
 
@@ -94,9 +109,12 @@ void Animation::render_missile(std::vector<Missile> & missile)
 
 void Animation::render_arrow(Tank const & tank)
 {
-       this->arrow.Length = Vector<2>(UI_Arrow_SIZE, UI_Arrow_SIZE);
-       this->arrow.Location = { tank.getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank.getpos().y+UI_Arrow_Location_H };
-       this->arrow.Render();
+    animation.Name = "Animation/UI/arrow";
+    animation.Duration = 1.0f;
+    animation.Repeatable = true;
+    animation.Length = Vector<2>(UI_Arrow_SIZE, UI_Arrow_SIZE);
+    animation.Location = { tank.getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank.getpos().y+UI_Arrow_Location_H };
+    animation.Render();
 }
 
 void Animation::render(std::vector<Tank>& tank, std::vector<Missile>& missile)

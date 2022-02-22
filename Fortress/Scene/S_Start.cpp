@@ -35,7 +35,7 @@ void S_Start::render()
 
 void S_Start::Start()
 {
-    Engine::Rendering::Pipeline::Effect::set_y(CAM_SIZE_H);
+    Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H + 200);
     text_width = TEXT_W;
     text_height = TEXT_H;
 }

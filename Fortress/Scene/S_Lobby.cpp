@@ -113,7 +113,8 @@ void S_Lobby::render_button_images()
 
 void S_Lobby::render()
 {
-    _Image_manager->render_background({ 835,-580 }, {250,250});
+    //_Image_manager->render_background({ 835,-580 }, {250,250}); //TODO:
+    _Anime->render_background({ 832,-576 }, { 220,205 }, Engine::Time::Get::Delta());
     _Image_manager->render_lobby_back();
     _Button->render_buttons();
     render_button_images();

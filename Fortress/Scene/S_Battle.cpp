@@ -41,8 +41,8 @@ void S_Battle::initialize()
     state = State::Loading;
     playing_time = 0.0f;
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    _Map_manager->initialize();
     create_tanks();
-
     set_playing_exit_button();
 }
 
@@ -114,7 +114,6 @@ Scene * S_Battle::update_scene()
     {
         Camera.Location = { 0,0 };
         Camera.Set();
-        
         //셰이더로 로딩씬 그리기
         //포스트 이펙트 블러
         Engine::Rendering::Pipeline::Effect::set_y((playing_time/ min_loading_time)* CAM_SIZE_H);
@@ -127,7 +126,7 @@ Scene * S_Battle::update_scene()
             dispose_objects();
             if (!_Turn->check_tank_falling(tank) and playing_time > min_loading_time)
             {
-                _Anime->render_change_loading(Engine::Time::Get::Delta());
+                _Anime->render_loading_end(Engine::Time::Get::Delta());
                 if(_Anime->get_loading_time() < 0.1f and playing_time > min_loading_time+ 0.5f)
                 {
                     Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H+200); //UI사이즈만큼 더함
