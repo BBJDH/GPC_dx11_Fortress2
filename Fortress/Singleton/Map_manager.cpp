@@ -29,8 +29,25 @@ void Map_manager::initialize()
 
 void Map_manager::render_map()
 {
-    //_Image_manager->render_background(); //TODO:
-    _Anime->render_background({ 0,0 }, { MAPSIZE_W,MAPSIZE_H }, Engine::Time::Get::Delta());
+
+    //x, y 좌표는 (전체 지형맵의 크기 - 캠사이즈)/2의 절대값 만큼 좌우로 이동
+    //지형 맵의 이동량 퍼센트를
+    //배경맵 이동 스칼라량으로 곱해서 (실제는 더 작은 배경맵이 캠을 따라다니며 움직임)
+    //배경맵은 (배경맵 크기 - 캠크기)/2 만큼 좌우로 움직인다
+    //원근감을 묘사
+    //TODO: 첫 카메라 무빙시 삐걱임 수정
+    float const max_x = (BackgroundSIZE_W- CAM_SIZE_W)/2; //xy 평면 중앙 0,0 좌하단 -860,-670 우하단 860 -670 우상단 860 540
+    float const max_y = (BackgroundSIZE_H - CAM_SIZE_H) / 2;
+    float  correct_x = _CAM->pos.x / ((MAPSIZE_W - CAM_SIZE_W) / 2);
+    float  correct_y = _CAM->pos.y / ((MAPSIZE_H - CAM_SIZE_H) / 2);
+
+    if (correct_y < -1.0f)
+        correct_y = -1.0f; //ui 구역까지는 배경맵을 출력하지 않음
+    if(_CAM->get_state() == Camera::State::Earthquake)
+        _Anime->render_background({ _CAM->pos0.x - max_x*correct_x,_CAM->pos0.y - max_y * correct_y }, { BackgroundSIZE_W,BackgroundSIZE_H }, Engine::Time::Get::Delta());
+    else
+        _Anime->render_background({ _CAM->pos.x - max_x * correct_x,_CAM->pos.y - max_y * correct_y }, { BackgroundSIZE_W,BackgroundSIZE_H }, Engine::Time::Get::Delta());
+
     Engine::Rendering::Pipeline::HmemDC::Render_map
     (
         hmapdc,

@@ -33,7 +33,7 @@ void S_Start::render()
     render_text();
 }
 
-void S_Start::Start()
+void S_Start::Start()   
 {
     Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H + 200);
     text_width = TEXT_W;
@@ -42,7 +42,6 @@ void S_Start::Start()
 
 Scene* S_Start::Update()
 {
-    //Engine::Rendering::Pipeline::Effect::set_alhpa(abs(sin(time)));
 
     render();
     if(Enter())

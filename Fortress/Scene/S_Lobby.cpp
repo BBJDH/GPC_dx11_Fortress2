@@ -113,8 +113,7 @@ void S_Lobby::render_button_images()
 
 void S_Lobby::render()
 {
-    //_Image_manager->render_background({ 835,-580 }, {250,250}); //TODO:
-    _Anime->render_background({ 832,-576 }, { 220,205 }, Engine::Time::Get::Delta());
+    _Anime->render_background({ 832,-576 }, { 220,205 }, Engine::Time::Get::Delta()); //로비 맵 배경 그리기
     _Image_manager->render_lobby_back();
     _Button->render_buttons();
     render_button_images();
@@ -157,8 +156,5 @@ void S_Lobby::End()
     _Button->nomal_buttons.clear();
     _Button->slot_button.clear();
     _Button->tank_button.clear();
-    //for (int i = 0; i < 8; ++i)
-    //    _Button->slot_button.erase("slot_" + std::to_string(i));
-    //for (int i = 0; i < 6; ++i)
-    //    _Button->tank_button.erase("tank_" + std::to_string(i));
+
 }

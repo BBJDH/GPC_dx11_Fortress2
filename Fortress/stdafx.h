@@ -62,8 +62,8 @@ enum class Color
 #define MAPSIZE_H	 1800//CAM_SIZE_H
 #define MINIMAP_SIZE_W	 300
 #define MINIMAP_SIZE_H	 180
-#define BackgroundSIZE_W	MAPSIZE_W//CAM_SIZE_W//1280*1.2
-#define BackgroundSIZE_H	MAPSIZE_H//CAM_SIZE_H//720*1.2
+#define BackgroundSIZE_W	CAM_SIZE_W*1.2//CAM_SIZE_W//1280*1.2
+#define BackgroundSIZE_H	CAM_SIZE_H*1.2//CAM_SIZE_H//720*1.2
 
 
 //시작화면 텍스트 세팅

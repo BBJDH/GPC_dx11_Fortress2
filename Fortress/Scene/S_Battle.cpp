@@ -115,7 +115,7 @@ Scene * S_Battle::update_scene()
         Camera.Location = { 0,0 };
         Camera.Set();
         //셰이더로 로딩씬 그리기
-        //포스트 이펙트 블러
+        //TODO: 포스트 이펙트 블러(화면넘길때 사용)
         Engine::Rendering::Pipeline::Effect::set_y((playing_time/ min_loading_time)* CAM_SIZE_H);
         _Image_manager->render_loading();
 
@@ -141,10 +141,9 @@ Scene * S_Battle::update_scene()
     }
     case S_Battle::State::Playing:
     {
+        _CAM->update();
         Camera.Location = { _CAM->pos.x,_CAM->pos.y };
         Camera.Set();
-        _CAM->cam();
-
         _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
         _Input_manager->input(tank,missile,Engine::Time::Get::Delta());
 

@@ -11,6 +11,7 @@ public:
 	};
 
 	_float2 pos;
+	_float2 pos0;
 	_float2 pos_win;
 
 private:
@@ -32,12 +33,12 @@ private:
 public:
 	Camera();
 	~Camera() {};
-	
+	State get_state() const;
 	void focusing(Object const& obj);
 	void focus_on();
 	void move(Mouse::POS_STATE state);
 	void earthquake_start();
 	void earthquake();
-	void cam();
+	void update();
 };
 

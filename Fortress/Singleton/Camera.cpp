@@ -7,7 +7,7 @@ Camera::Camera() :pos{ 0.0f,0.0f },
 pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 },
 speed{ SCROLL_Per_Sec }, speed_per_frame{0},
 focus_w{ false }, focus_h{ false },
-state{ State::Normal }, earthquake_time{0.0f}
+state{ State::Normal }, earthquake_time{ 0.0f }, pos0{ pos }
 {}
 
 void Camera::set_speed_per_frame(float const delta)
@@ -93,6 +93,11 @@ bool Camera::right(int const scroll)
 		return false;
 	}
 	return true;
+}
+
+Camera::State Camera::get_state() const
+{
+	return this->state;
 }
 
 void Camera::focusing(Object const& obj)
@@ -220,6 +225,8 @@ void Camera::earthquake_start()
 {
 	this->state = State::Earthquake;
 	earthquake_time = 0.0f;
+	pos0 = pos;
+
 }
 
 void Camera::earthquake()
@@ -239,10 +246,13 @@ void Camera::earthquake()
 			down(-val_y);
 	}
 	else
+	{
+		pos = pos0;
 		this->state = State::Normal;
+	}
 }
 
-void Camera::cam()
+void Camera::update()
 {
 	set_speed_per_frame(Engine::Time::Get::Delta());
 	_CAM->move(_Mouse->getstate()); //마우스 위치에 따라 카메라 이동
