@@ -141,9 +141,7 @@ Scene * S_Battle::update_scene()
     }
     case S_Battle::State::Playing:
     {
-        _CAM->update();
-        Camera.Location = { _CAM->pos.x,_CAM->pos.y };
-        Camera.Set();
+
 
         _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
         _Input_manager->input(tank,missile,Engine::Time::Get::Delta());
@@ -199,6 +197,10 @@ void S_Battle::dispose_objects()
 
 void S_Battle::render_playing() //Update
 {
+    _CAM->update();
+    Camera.Location = { _CAM->pos.x,_CAM->pos.y };
+    Camera.Set();
+
     _Map_manager->render_map();
 
     _Anime->render(tank,missile);
@@ -208,8 +210,8 @@ void S_Battle::render_playing() //Update
 
     _Map_manager->render_minimap(tank);   
 
-    _Debug_manager->set_delta(Engine::Time::Get::Delta());
-    _Debug_manager->rendering();
+    //_Debug_manager->set_delta(Engine::Time::Get::Delta());
+    //_Debug_manager->rendering();
 
     //타겟을 다 결합하고 한번에 다 그리는 방식
 }

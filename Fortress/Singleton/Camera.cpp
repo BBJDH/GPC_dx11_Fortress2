@@ -7,7 +7,7 @@ Camera::Camera() :pos{ 0.0f,0.0f },
 pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 },
 speed{ SCROLL_Per_Sec }, speed_per_frame{0},
 focus_w{ false }, focus_h{ false },
-state{ State::Normal }, earthquake_time{ 0.0f }, pos0{ pos }
+state{ State::Normal }, earthquake_time{ 0.0f }
 {}
 
 void Camera::set_speed_per_frame(float const delta)
@@ -225,7 +225,7 @@ void Camera::earthquake_start()
 {
 	this->state = State::Earthquake;
 	earthquake_time = 0.0f;
-	pos0 = pos;
+	//pos0 = pos;
 
 }
 
@@ -247,7 +247,7 @@ void Camera::earthquake()
 	}
 	else
 	{
-		pos = pos0;
+		//pos = pos0;
 		this->state = State::Normal;
 	}
 }

@@ -11,7 +11,7 @@ public:
 	};
 
 	_float2 pos;
-	_float2 pos0;
+	//_float2 pos0;
 	_float2 pos_win;
 
 private:

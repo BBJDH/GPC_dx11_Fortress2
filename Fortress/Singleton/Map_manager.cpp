@@ -36,30 +36,15 @@ void Map_manager::render_map()
     //배경맵은 (배경맵 크기 - 캠크기)/2 만큼 좌우로 움직인다
     //원근감을 묘사
     
-    
-    //지진 발생시
-    //배경맵은 카메라를 따라다니며 진동, 지형은 내비둠 지형만 흔들리는것으로 보이게
-    //_float2  pos;
-    //if (_CAM->get_state() == Camera::State::Earthquake)
-    //    pos = _CAM->pos0;
-    //else
-    //    pos = _CAM->pos;
-    //_float2 const move_max = { (BackgroundSIZE_W - CAM_SIZE_W) / 2 , (BackgroundSIZE_H - CAM_SIZE_H) / 2 };
-    ////xy 평면 중앙 0,0 좌하단 -860,-670 우하단 860 -670 우상단 860 540
-    //_float2 move_mul = { pos.x / ((MAPSIZE_W - CAM_SIZE_W) / 2) , pos.y / ((MAPSIZE_H - CAM_SIZE_H) / 2) };
+    _float2  pos = _CAM->pos;
+    _float2 const move_max = { (BackgroundSIZE_W - CAM_SIZE_W) / 2 , (BackgroundSIZE_H - CAM_SIZE_H) / 2 };
+    //xy 평면 중앙 0,0 좌하단 -860,-670 우하단 860 -670 우상단 860 540
+    _float2 move_mul = { pos.x / ((MAPSIZE_W - CAM_SIZE_W) / 2) , pos.y / ((MAPSIZE_H - CAM_SIZE_H) / 2) };
 
-    //if (_CAM->get_state() == Camera::State::Earthquake)
-    //{
-    //    _Anime->render_background({ pos.x + (_CAM->pos.x - _CAM->pos0.x), pos.y + (_CAM->pos.y - _CAM->pos0.y) }, { BackgroundSIZE_W,BackgroundSIZE_H }, Engine::Time::Get::Delta());
+    if (move_mul.y < -1.0f)
+        move_mul.y = -1.0f; //ui 구역까지는 배경맵을 출력하지 않음
 
-    //}
-    //else
-    //{
-    //    if (move_mul.y < -1.0f)
-    //        move_mul.y = -1.0f; //ui 구역까지는 배경맵을 출력하지 않음
-
-    //    _Anime->render_background({ pos.x - move_max.x* move_mul.x,pos.y - move_max.y * move_mul.y }, { BackgroundSIZE_W,BackgroundSIZE_H }, Engine::Time::Get::Delta());
-    //}
+    _Anime->render_background({ pos.x - move_max.x* move_mul.x,pos.y - move_max.y * move_mul.y }, { BackgroundSIZE_W,BackgroundSIZE_H }, Engine::Time::Get::Delta());
 
 
     Engine::Rendering::Pipeline::HmemDC::Render_map
