@@ -74,12 +74,8 @@ void Text_manager::render_tank_angle(Tank const& tank)
 	int  min_angle = tank.getangle_min();
 	int  max_angle = tank.getangle_max();
 	if (tank.get_side() == Tank::Side::Left)
-	{
-		img_angle += 180;
-		barrel_angle *= -1;
-		min_angle *= -1;
-		max_angle *= -1;
-	}
+		img_angle *= -1;
+
 	set_text
 	(
 		text,

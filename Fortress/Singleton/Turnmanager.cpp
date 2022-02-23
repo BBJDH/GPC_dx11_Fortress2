@@ -4,19 +4,26 @@
 
 Turnmanager::Turnmanager() : 
 index{ 0 }, state{ State::Tank_Turn },
-players{ static_cast<unsigned>(_Button->player_set.size()) }
+players{ static_cast<unsigned>(_Button->player_set.size()) },
+wind{0}
 {
-	rand = Random(0, players - 1, players);
+	rand_array = Random(0, players - 1, players);
+	set_wind();
 }
 
 unsigned const Turnmanager::whosturn()const
 {
-	return rand.GetResult(index);
+	return rand_array.GetResult(index);
 }
 
 Turnmanager::State Turnmanager::get_state()const
 {
 	return this->state;
+}
+
+float Turnmanager::get_wind() const
+{
+	return wind;
 }
 
 bool Turnmanager::is_gameover(std::vector<Tank>& tank)
@@ -115,10 +122,23 @@ void Turnmanager::checkturn(std::vector<Tank>& tank, std::vector<Missile>& missi
 		return ;
 	}
 
-	index++;		
+	index++;	
+	set_wind();
 	if(index>= players)
 		rerand();
 	tankturn_start(tank);
+}
+
+void Turnmanager::set_wind()
+{
+	int mul = 1;
+	int const max_delta = 5;
+	if (rand() % 2)
+		mul *= -1;
+	wind +=  (rand()% max_delta)* mul;
+	if(wind>18) wind = 18;
+	if(wind<-18) wind = -18;
+
 }
 
 void Turnmanager::tankturn_start(std::vector<Tank>& tank)
@@ -131,6 +151,6 @@ void Turnmanager::tankturn_start(std::vector<Tank>& tank)
 
 void Turnmanager::rerand()
 {
-    rand = Random(0, players -1, players);
+	rand_array = Random(0, players -1, players);
 	index =0;
 }

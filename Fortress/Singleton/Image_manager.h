@@ -36,6 +36,7 @@ private:
     void render_front_pannel();
 
     //ui pannel bar
+    void render_pannel_wind(int const wind);
     void render_pannel_hp(int const hp);
     void render_pannel_power(int const power);
     void render_pannel_fuel(Tank const & tank);

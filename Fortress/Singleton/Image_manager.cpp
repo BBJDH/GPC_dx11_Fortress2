@@ -65,6 +65,8 @@ void Image_manager::render_back_ui(Tank const & tank)
     //탱크가 서있는 지표면의 각도
     ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle, 2,  Color::White);
     ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle+180, 2,  Color::White);
+
+    render_pannel_wind(static_cast<int>(_Turn->get_wind()));
 }
 
 void Image_manager::render_front_ui(Tank const & tank)
@@ -196,6 +198,28 @@ void Image_manager::render_front_pannel()
 {
     view_image.Name = "Image/UI/UI_Front";
     set_image(view_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
+    view_image.Render();
+}
+
+void Image_manager::render_pannel_wind(int const wind)
+{
+    view_image.Name = "Image/UI/Green";
+    int const center_x = 149;
+    int const center_y = 710;
+    int const mul = 4;
+    int const bar_h = 10;
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(center_x + wind * mul / 2),
+            center_y
+        },
+        {
+            static_cast<float>(abs(wind) * mul),
+            bar_h
+        }
+        );
     view_image.Render();
 }
 

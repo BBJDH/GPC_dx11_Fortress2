@@ -47,6 +47,7 @@
     <ClInclude Include="Singleton\Map_manager.h" />
     <ClInclude Include="Singleton\Mouse.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Patterns.h" />
     <ClInclude Include="Singleton\Physics_Manager.h" />
     <ClInclude Include="Singleton\SingletonT.h" />
     <ClInclude Include="Scene\S_Battle.h" />
@@ -58,6 +59,7 @@
   <ItemGroup>
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Patterns.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene\S_Lobby.cpp" />
     <ClCompile Include="Scene\S_Start.cpp" />

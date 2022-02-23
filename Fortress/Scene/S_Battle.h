@@ -14,6 +14,7 @@ private:
     State state=State::Loading;
     std::vector<Tank> tank;
     std::vector<Missile> missile;
+    std::vector<Patterns> patterns;
     Engine::Rendering::Camera Camera;
 
     //로딩 설정

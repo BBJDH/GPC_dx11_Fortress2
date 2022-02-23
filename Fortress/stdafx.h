@@ -188,6 +188,7 @@ enum class Color
 //#include"Object.h"
 #include"Tank.h"
 #include"Missile.h"
+#include"Patterns.h"
 #include"Button.h"
 
 //랜덤추출함수

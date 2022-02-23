@@ -9,10 +9,11 @@ public:
 		Tank_Turn, Missile_Turn, Item_turn, Over,
 	};
 private:
-	Random rand;
+	Random rand_array;
 	State state;
 	unsigned players;
 	unsigned index;
+	float	 wind;
 
 	bool is_obj_turn(Object const & obj);
 	bool is_tank_turn(std::vector<Tank>& tank);
@@ -26,10 +27,11 @@ public:
 	Turnmanager();
 	unsigned const whosturn()const;
 	State get_state()const;
+	float get_wind()const;
 	bool check_tank_falling(std::vector<Tank>& tank);
 	bool is_gameover(std::vector<Tank>& tank);
 	void tankturn_start(std::vector<Tank>& tank);
 	void checkturn(std::vector<Tank> & tank, std::vector<Missile> & missile);
-
+	void set_wind();
 
 };

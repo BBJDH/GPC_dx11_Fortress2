@@ -106,7 +106,7 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 	}
 }
 // 탄도학 계산 
-void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& missile,float const delta)
+void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& missile, float const delta)
 {
 	if (!tank.empty())
 	{
@@ -124,12 +124,16 @@ void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& m
 	{
 		for (size_t i = 0; i < missile.size(); i++)
 		{
-			missile[i].ballistics_equation(delta);
+			missile[i].ballistics_equation(delta,_Turn->get_wind());
 			//화면밖으로 나가면 제거
 			if(missile[i].is_out() or missile[i].get_state() == Missile::State::Delete)
 				missile.erase(missile.begin()+i);
 		}
 	}
+	//for (auto i = 0; i < length; i++)
+	//{
+
+	//}
 }
 
 void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& tank)
