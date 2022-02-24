@@ -3,7 +3,7 @@
 #include "Missile.h"
 
 Missile::Missile(_float2 const& pos, unsigned const width, unsigned const height):
-	Object(pos, width, height,100),bomb_range_w(100),bomb_range_h(80),
+	Object(pos, width, height,10),bomb_range_w(100),bomb_range_h(80),
 	damage{100}, ani_playtime{ 0.0f }, state{ State::Throw }
 {//TODO: 스피드 수정
 	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);

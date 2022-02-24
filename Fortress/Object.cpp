@@ -24,7 +24,7 @@ out{ false }, speed{ speed }
 
 Object::Object(Object const& obj):pos{ obj.pos }, pos0{ obj.pos0 }, velocity0{ obj.velocity0 }, width{ obj.width }, height{ obj.height },
 velocity{ obj.velocity }, moving_time{ obj.moving_time }, moving_angle{ obj.moving_angle }, image_angle{ obj.image_angle }, falling{obj.falling},myturn{obj.myturn},
-out{obj.out}, speed{ SPEED }
+out{obj.out}, speed{ obj.speed }
 
 {
 }

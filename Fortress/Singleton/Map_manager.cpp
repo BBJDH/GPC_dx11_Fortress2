@@ -27,7 +27,7 @@ void Map_manager::initialize()
     DeleteObject(hmapbit);
 }
 
-void Map_manager::render_map()
+void Map_manager::render_map(std::vector<Patterns> & patterns)
 {
 
     //x, y 좌표는 (전체 지형맵의 크기 - 캠사이즈)/2의 절대값 만큼 좌우로 이동
@@ -45,7 +45,7 @@ void Map_manager::render_map()
         move_mul.y = -1.0f; //ui 구역까지는 배경맵을 출력하지 않음
 
     _Anime->render_background({ pos.x - move_max.x* move_mul.x,pos.y - move_max.y * move_mul.y }, { BackgroundSIZE_W,BackgroundSIZE_H }, Engine::Time::Get::Delta());
-
+    _Anime->render_patterns(patterns);
 
     Engine::Rendering::Pipeline::HmemDC::Render_map
     (

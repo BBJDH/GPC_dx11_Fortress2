@@ -107,6 +107,14 @@ void Animation::render_missile(std::vector<Missile> & missile)
     }
 }
 
+void Animation::render_patterns(std::vector<Patterns> &  patterns)
+{
+    for (auto iter = patterns.begin(); iter != patterns.end(); iter++)
+    {
+        iter->render();
+    }
+}
+
 void Animation::render_arrow(Tank const & tank)
 {
     animation.Name = "Animation/UI/arrow";

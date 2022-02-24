@@ -20,8 +20,10 @@ private:
     //로딩 설정
     float const min_loading_time = 4.0f;
     float const waiting_time = 2.0f; //기본 초기화 대기시간
+    float const pattern_gen_time = 0.5f;
     float playing_time=0.0f;
-
+    float interval=0.0;
+    
 private:
     //버튼설정
     float const playing_exit_x = 1200;

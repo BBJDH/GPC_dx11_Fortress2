@@ -94,7 +94,7 @@ enum class Color
 #define TANK_DANGER_HP		 400
 #define OUT_RANGE	 100
 #define FIRE_MIN_Length	 15
-#define FIRE_MUL		 1.5
+#define FIRE_MUL		 2
 #define Earthquake_POWER		 5
 #define Earthquake_Cycle		 500.0f
 

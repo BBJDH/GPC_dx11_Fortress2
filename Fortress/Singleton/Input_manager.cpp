@@ -40,6 +40,24 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
         tank.back().ballistics_initialize(0, 0);
     }  
 }
+void Input_manager::debug_left_button(std::vector<Patterns>& patterns)
+{
+    if (Engine::Input::Get::Key::Press(VK_LBUTTON))
+    {
+        patterns.push_back
+        (
+            Patterns
+            (
+                "pinwheel",
+                {
+                    static_cast<int>(_Mouse->x) + _CAM->pos_win.x,
+                    static_cast<int>(_Mouse->y) + _CAM->pos_win.y
+                }
+            )
+        );
+        patterns.back().ballistics_initialize(0, 0);
+    }
+}
 
 void Input_manager::key_left(Tank & tank)
 {
@@ -77,13 +95,14 @@ void Input_manager::key_space(Tank& tank,std::vector<Missile>& missile)
         fire(tank,missile,true);
 }
 
-void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile, float const deltha)
+void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile, std::vector<Patterns>& patterns, float const deltha)
 {
     interval += deltha;
     if (interval > speed)
     {
         interval = 0;
         //debug_left_button(tank);
+        debug_left_button(patterns);
         debug_right_button();
         if (!tank[_Turn->whosturn()].is_dead()&&!tank[_Turn->whosturn()].is_falling())
         {

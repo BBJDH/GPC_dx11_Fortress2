@@ -144,7 +144,7 @@ Scene * S_Battle::update_scene()
 
 
         _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
-        _Input_manager->input(tank,missile,Engine::Time::Get::Delta());
+        _Input_manager->input(tank,missile,patterns,Engine::Time::Get::Delta());
 
         dispose_objects();            //이동계산 및 충돌검사
 
@@ -190,7 +190,7 @@ Scene * S_Battle::update_scene()
 
 void S_Battle::dispose_objects()
 {
-    _Physics_manager->ballistics(tank,missile,Engine::Time::Get::Delta());//이동계산과 낙하, 맵밖 삭제
+    _Physics_manager->ballistics(tank,missile,patterns,Engine::Time::Get::Delta());//이동계산과 낙하, 맵밖 삭제
     _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
 }
 
@@ -199,7 +199,7 @@ void S_Battle::render_playing() //Update
     _CAM->update();
     Camera.Location = { _CAM->pos.x,_CAM->pos.y };
     Camera.Set();
-    _Map_manager->render_map();
+    _Map_manager->render_map(patterns);
 
     _Anime->render(tank,missile);
     _Text_manager->render(tank);
