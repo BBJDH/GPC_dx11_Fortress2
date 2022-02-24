@@ -45,7 +45,7 @@ void Button_manager::init_tank_buttons()
 
 void Button_manager::update_map_button_text()
 {
-	if (!nomal_buttons.empty())
+	if (nomal_buttons.find("map") != nomal_buttons.end())
 	{
 		_float2 const location = map_button_set.find(map_name[map_index])->second.first;
 		_float2 const length = map_button_set.find(map_name[map_index])->second.second;
@@ -121,7 +121,12 @@ void Button_manager::check_buttons()
 	for (auto iter = scene_buttons.begin(); iter != scene_buttons.end(); ++iter)
 		iter->second.check_state();
 	for (auto iter = nomal_buttons.begin(); iter != nomal_buttons.end(); ++iter)
+	{
 		iter->second.check_state();
+		if (iter->second.clicked())	//상태에 따라 이벤트 처리
+			iter->second.execute();
+
+	}
 	for (auto iter = slot_button.begin(); iter != slot_button.end(); ++iter)
 		iter->check_state();
 	for (auto iter = tank_button.begin(); iter != tank_button.end(); ++iter)
@@ -359,5 +364,12 @@ bool Button_manager::switch_map()
 	map_index++;
 	if (map_index > map_name->size())
 		map_index = 0;
+	return true;
+}
+
+bool Button_manager::set_power_guide()
+{//x좌표 450~1090
+	int const guide_power = static_cast<int const>((_Mouse->x - 450)/5);
+	_Tank->tanks[_Turn->whosturn()].set_power_guide(guide_power);
 	return true;
 }

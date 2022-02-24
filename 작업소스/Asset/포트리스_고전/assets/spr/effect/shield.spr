@@ -1,0 +1,7 @@
+QtSystem Sprite Tool
+800,1000,5,100,100
+\effect\object\shield_000.png,0,0,68,50
+\effect\object\shield_001.png,1,0,74,53
+\effect\object\shield_002.png,2,0,81,61
+\effect\object\shield_003.png,3,0,76,78
+\effect\object\shield_004.png,4,0,67,67

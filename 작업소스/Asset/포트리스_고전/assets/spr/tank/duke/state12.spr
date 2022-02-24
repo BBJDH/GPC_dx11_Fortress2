@@ -1,0 +1,10 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\duke\falling01.png,0,0,91,55
+\character\duke\falling02.png,0,0,136,66
+\character\duke\falling01.png,1,0,91,55
+\character\duke\falling03.png,1,0,137,46
+\character\duke\falling01.png,2,0,91,55
+\character\duke\falling04.png,2,0,140,39
+\character\duke\falling01.png,3,0,91,55
+\character\duke\falling05.png,3,0,147,31

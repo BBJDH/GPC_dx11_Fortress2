@@ -1,0 +1,27 @@
+QtSystem Sprite Tool
+800,350,9,100,100
+\character\ion_attacker\walking08.png,0,0,77,52
+\character\ion_attacker\walking04.png,0,0,89,78
+\character\ion_attacker\walking09.png,0,0,99,68
+\character\ion_attacker\fixing02.png,0,0,84,62
+\character\ion_attacker\fixing03.png,1,0,78,55
+\character\ion_attacker\fixing01.png,1,0,68,47
+\character\ion_attacker\fixing04.png,2,0,64,55
+\character\ion_attacker\fixing01.png,2,0,68,47
+\character\ion_attacker\fixing11.png,3,0,73,65
+\character\ion_attacker\fixing05.png,3,0,39,78
+\character\ion_attacker\fixing01.png,3,0,68,47
+\character\ion_attacker\fixing10.png,3,0,104,62
+\character\ion_attacker\fixing07.png,4,0,63,42
+\character\ion_attacker\fixing08.png,4,0,33,84
+\character\ion_attacker\fixing09.png,4,0,151,79
+\character\ion_attacker\fixing11.png,4,0,73,65
+\character\ion_attacker\fixing06.png,4,0,104,61
+\character\ion_attacker\fixing11.png,5,0,73,65
+\character\ion_attacker\fixing10.png,5,0,104,62
+\character\ion_attacker\fixing11.png,6,0,73,65
+\character\ion_attacker\fixing06.png,6,0,104,61
+\character\ion_attacker\fixing11.png,7,0,73,65
+\character\ion_attacker\fixing10.png,7,0,104,62
+\character\ion_attacker\fixing11.png,8,0,73,65
+\character\ion_attacker\fixing06.png,8,0,104,61

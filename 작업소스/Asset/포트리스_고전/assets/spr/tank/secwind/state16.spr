@@ -1,0 +1,23 @@
+QtSystem Sprite Tool
+800,350,7,100,100
+\character\secwind\losing01.png,0,0,67,65
+\character\secwind\losing02.png,0,0,32,62
+\character\secwind\losing04.png,0,0,15,71
+\character\secwind\losing01.png,1,0,67,65
+\character\secwind\losing02.png,1,0,32,62
+\character\secwind\losing05.png,1,0,15,71
+\character\secwind\losing01.png,2,0,67,65
+\character\secwind\losing03.png,2,0,32,62
+\character\secwind\losing04.png,2,0,15,71
+\character\secwind\losing01.png,3,0,67,65
+\character\secwind\losing03.png,3,0,32,62
+\character\secwind\losing05.png,3,0,15,71
+\character\secwind\losing01.png,4,0,67,65
+\character\secwind\losing03.png,4,0,32,62
+\character\secwind\losing05.png,4,0,15,71
+\character\secwind\losing01.png,5,0,67,65
+\character\secwind\losing03.png,5,0,32,62
+\character\secwind\losing06.png,5,0,12,68
+\character\secwind\losing01.png,6,0,67,65
+\character\secwind\losing03.png,6,0,32,62
+\character\secwind\losing06.png,6,0,12,68

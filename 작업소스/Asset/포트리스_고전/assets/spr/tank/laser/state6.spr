@@ -1,0 +1,26 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\laser\walking02.png,0,0,78,77
+\character\laser\walking01.png,0,0,81,58
+\character\laser\walking09.png,0,0,89,60
+\character\laser\walking02.png,1,0,78,76
+\character\laser\walking10.png,1,0,82,57
+\character\laser\walking03.png,1,0,122,89
+\character\laser\walking02.png,2,0,78,73
+\character\laser\walking10.png,2,0,82,54
+\character\laser\walking04.png,2,0,120,86
+\character\laser\walking02.png,3,0,78,71
+\character\laser\walking10.png,3,0,82,52
+\character\laser\walking05.png,3,0,120,85
+\character\laser\walking02.png,4,0,78,70
+\character\laser\walking10.png,4,0,82,51
+\character\laser\walking06.png,4,0,117,84
+\character\laser\walking02.png,5,0,78,71
+\character\laser\walking10.png,5,0,82,52
+\character\laser\walking07.png,5,0,120,81
+\character\laser\walking02.png,6,0,78,73
+\character\laser\walking10.png,6,0,82,54
+\character\laser\walking08.png,6,0,123,83
+\character\laser\walking02.png,7,0,78,75
+\character\laser\walking01.png,7,0,81,56
+\character\laser\walking09.png,7,0,89,58

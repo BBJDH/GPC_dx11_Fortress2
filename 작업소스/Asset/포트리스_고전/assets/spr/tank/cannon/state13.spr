@@ -1,0 +1,23 @@
+QtSystem Sprite Tool
+800,350,7,100,100
+\character\canon\moving01.png,0,0,88,77
+\character\canon\moving02.png,0,0,81,61
+\character\canon\moving03.png,0,0,91,80
+\character\canon\moving11.png,0,0,117,66
+\character\canon\shooting08.png,0,0,95,61
+\character\canon\hitting01.png,1,0,88,49
+\character\canon\hitting05.png,2,0,92,44
+\character\canon\hitting02.png,2,0,88,29
+\character\canon\hitting03.png,2,0,117,26
+\character\canon\hitting04.png,2,0,101,7
+\character\canon\hitting11.png,3,0,99,62
+\character\canon\hitting07.png,3,0,98,42
+\character\canon\hitting09.png,3,0,94,66
+\character\canon\hitting08.png,3,0,93,41
+\character\canon\hitting08.png,3,0,128,37
+\character\canon\hitting13.png,4,0,101,64
+\character\canon\hitting09.png,4,0,94,66
+\character\canon\hitting11.png,5,0,100,59
+\character\canon\hitting10.png,5,0,94,68
+\character\canon\hitting11.png,6,0,100,61
+\character\canon\hitting10.png,6,0,94,68

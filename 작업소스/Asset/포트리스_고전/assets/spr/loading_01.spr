@@ -1,0 +1,11 @@
+QtSystem Sprite Tool
+480,320,4,0,0
+\title\loading\loading_back.png,0,0,176,100
+\title\loading\loading_text.png,0,1,203,186
+\title\loading\complete_text.png,0,2,728,74
+\title\loading\complete_text.png,0,2,198,184
+\title\loading\loading_back.png,1,0,176,100
+\title\loading\loading_back.png,2,0,176,100
+\title\loading\loading_text.png,2,1,203,185
+\title\loading\complete_text.png,2,2,198,184
+\title\loading\loading_back.png,3,0,176,100

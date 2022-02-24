@@ -1,0 +1,10 @@
+QtSystem Sprite Tool
+800,1000,8,100,100
+\effect\object\here_004.png,0,0,72,49
+\effect\object\here_004.png,1,0,72,49
+\effect\object\here_005.png,2,0,72,47
+\effect\object\here_005.png,3,0,72,47
+\effect\object\here_006.png,4,0,72,49
+\effect\object\here_006.png,5,0,72,49
+\effect\object\here_007.png,6,0,72,47
+\effect\object\here_007.png,7,0,72,47

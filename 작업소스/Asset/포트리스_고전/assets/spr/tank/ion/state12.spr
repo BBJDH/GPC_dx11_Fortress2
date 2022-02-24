@@ -1,0 +1,15 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\ion_attacker\falling01.png,0,0,73,49
+\character\ion_attacker\falling08.png,0,0,84,76
+\character\ion_attacker\falling03.png,1,0,115,43
+\character\ion_attacker\falling02.png,1,0,86,45
+\character\ion_attacker\walking04.png,1,0,85,73
+\character\ion_attacker\falling04.png,1,0,77,57
+\character\ion_attacker\falling01.png,2,0,73,49
+\character\ion_attacker\walking04.png,2,0,85,78
+\character\ion_attacker\falling05.png,2,0,84,76
+\character\ion_attacker\falling02.png,3,0,86,45
+\character\ion_attacker\walking04.png,3,0,85,73
+\character\ion_attacker\falling04.png,3,0,77,57
+\character\ion_attacker\falling06.png,3,0,125,45

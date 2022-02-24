@@ -1,0 +1,13 @@
+QtSystem Sprite Tool
+800,350,6,100,100
+\character\mine_lander\walking02.png,0,0,91,59
+\character\mine_lander\walking01.png,0,0,79,68
+\character\mine_lander\item21.png,0,0,88,87
+\character\mine_lander\walking03.png,0,0,81,88
+\character\mine_lander\walking12.png,0,0,87,73
+\character\mine_lander\walking11.png,0,0,78,69
+\character\mine_lander\hitting01.png,1,0,75,65
+\character\mine_lander\hitting02.png,2,0,82,55
+\character\mine_lander\hitting03.png,3,0,82,54
+\character\mine_lander\hitting02.png,4,0,82,55
+\character\mine_lander\hitting03.png,5,0,82,54

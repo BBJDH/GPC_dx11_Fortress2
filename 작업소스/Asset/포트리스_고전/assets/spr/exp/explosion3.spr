@@ -1,0 +1,8 @@
+QtSystem Sprite Tool
+800,360,6,100,100
+\effect\explosion04_01.png,0,0,80,79
+\effect\explosion03_01.png,1,0,74,57
+\effect\explosion03_02.png,2,0,74,37
+\effect\explosion03_03.png,3,0,51,-21
+\effect\explosion03_04.png,4,0,48,-16
+\effect\explosion03_05.png,5,0,42,-6

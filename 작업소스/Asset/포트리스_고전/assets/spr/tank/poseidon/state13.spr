@@ -1,0 +1,24 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\poseidon\walking01.png,0,0,78,59
+\character\poseidon\hitting13.png,1,0,78,60
+\character\poseidon\hitting01.png,1,0,70,64
+\character\poseidon\hitting02.png,1,0,124,68
+\character\poseidon\hitting14.png,2,0,76,60
+\character\poseidon\hitting03.png,2,0,68,62
+\character\poseidon\hitting04.png,2,0,123,64
+\character\poseidon\hitting15.png,3,0,73,62
+\character\poseidon\hitting05.png,3,0,67,55
+\character\poseidon\hitting06.png,3,0,123,59
+\character\poseidon\hitting16.png,3,0,83,90
+\character\poseidon\hitting15.png,4,0,73,62
+\character\poseidon\hitting05.png,4,0,65,53
+\character\poseidon\hitting06.png,4,0,124,56
+\character\poseidon\hitting17.png,4,0,83,91
+\character\poseidon\hitting15.png,5,0,73,62
+\character\poseidon\hitting05.png,5,0,65,53
+\character\poseidon\hitting06.png,5,0,124,56
+\character\poseidon\hitting17.png,5,0,83,91
+\character\poseidon\hitting15.png,6,0,73,62
+\character\poseidon\hitting19.png,6,0,80,98
+\character\poseidon\hitting15.png,7,0,73,62

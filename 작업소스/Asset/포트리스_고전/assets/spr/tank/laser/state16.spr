@@ -1,0 +1,15 @@
+QtSystem Sprite Tool
+800,350,7,100,100
+\character\laser\losing01.png,0,0,79,70
+\character\laser\losing01.png,1,0,79,70
+\character\laser\losing02.png,1,0,110,78
+\character\laser\losing01.png,2,0,79,70
+\character\laser\losing03.png,2,0,110,72
+\character\laser\losing01.png,3,0,79,70
+\character\laser\losing04.png,3,0,111,66
+\character\laser\losing01.png,4,0,79,70
+\character\laser\losing05.png,4,0,113,58
+\character\laser\losing01.png,5,0,79,70
+\character\laser\losing06.png,5,0,122,57
+\character\laser\losing01.png,6,0,79,70
+\character\laser\losing02.png,6,0,129,58

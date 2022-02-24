@@ -1,0 +1,15 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\missile\losing01.png,0,0,57,44
+\character\missile\losing01.png,1,0,57,44
+\character\missile\losing01.png,2,0,57,44
+\character\missile\losing02.png,2,0,74,75
+\character\missile\losing01.png,3,0,57,44
+\character\missile\losing01.png,4,0,57,44
+\character\missile\losing03.png,4,0,78,89
+\character\missile\losing01.png,5,0,57,44
+\character\missile\losing04.png,5,0,74,89
+\character\missile\losing01.png,6,0,57,44
+\character\missile\losing05.png,6,0,74,88
+\character\missile\losing01.png,7,0,57,44
+\character\missile\losing06.png,7,0,69,89

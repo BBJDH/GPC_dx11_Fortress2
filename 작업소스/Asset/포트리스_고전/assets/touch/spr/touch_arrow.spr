@@ -1,0 +1,12 @@
+QtSystem Sprite Tool
+800,1000,10,100,100
+\touch\ui\touch_arrow\ar01.png,0,1,96,25
+\touch\ui\touch_arrow\ar02.png,1,1,92,24
+\touch\ui\touch_arrow\ar03.png,2,1,88,24
+\touch\ui\touch_arrow\ar04.png,3,1,80,24
+\touch\ui\touch_arrow\ar05.png,4,1,72,24
+\touch\ui\touch_arrow\ar06.png,5,1,64,27
+\touch\ui\touch_arrow\ar07.png,6,1,60,30
+\touch\ui\touch_arrow\ar08.png,7,1,54,33
+\touch\ui\touch_arrow\ar09.png,8,1,51,37
+\touch\ui\touch_arrow\ar10.png,9,1,45,42

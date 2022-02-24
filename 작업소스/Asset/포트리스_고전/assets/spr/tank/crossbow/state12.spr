@@ -1,0 +1,6 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\cross_bow\falling01.png,0,0,80,56
+\character\cross_bow\falling02.png,1,0,76,52
+\character\cross_bow\falling03.png,2,0,80,47
+\character\cross_bow\falling04.png,3,0,77,46

@@ -1,0 +1,23 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\multi_missile\losing01.png,0,0,67,33
+\character\multi_missile\losing02.png,0,0,67,69
+\character\multi_missile\losing02.png,0,0,114,78
+\character\multi_missile\losing03.png,0,0,100,69
+\character\multi_missile\losing01.png,1,0,67,33
+\character\multi_missile\losing04.png,1,0,65,74
+\character\multi_missile\losing03.png,1,0,70,75
+\character\multi_missile\losing02.png,1,0,80,96
+\character\multi_missile\losing02.png,1,0,101,72
+\character\multi_missile\losing03.png,1,0,113,77
+\character\multi_missile\losing05.png,1,0,124,72
+\character\multi_missile\losing01.png,2,0,67,33
+\character\multi_missile\losing05.png,2,0,128,72
+\character\multi_missile\losing04.png,2,0,61,74
+\character\multi_missile\losing03.png,2,0,78,96
+\character\multi_missile\losing02.png,2,0,75,86
+\character\multi_missile\losing02.png,2,0,76,71
+\character\multi_missile\losing03.png,2,0,97,69
+\character\multi_missile\losing01.png,3,0,67,33
+\character\multi_missile\losing03.png,3,0,74,69
+\character\multi_missile\losing03.png,3,0,71,85

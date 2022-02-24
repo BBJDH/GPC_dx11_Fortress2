@@ -1,0 +1,23 @@
+QtSystem Sprite Tool
+1000,360,6,100,100
+\character\carrot\moving_17.png,0,0,89,77
+\character\carrot\moving_18.png,0,0,93,75
+\character\carrot\moving_19.png,0,0,104,66
+\character\carrot\moving_17.png,1,0,89,77
+\character\carrot\moving_19.png,1,0,105,65
+\character\carrot\moving_18.png,1,0,94,74
+\character\carrot\moving_17.png,2,0,89,77
+\character\carrot\moving_18.png,2,0,93,75
+\character\carrot\moving_19.png,2,0,104,66
+\character\carrot\moving_20.png,2,0,148,76
+\character\carrot\moving_17.png,3,0,89,77
+\character\carrot\moving_18.png,3,0,94,74
+\character\carrot\moving_21.png,3,0,105,65
+\character\carrot\moving_22.png,3,0,159,81
+\character\carrot\moving_17.png,4,0,89,77
+\character\carrot\moving_18.png,4,0,93,75
+\character\carrot\moving_23.png,4,0,103,67
+\character\carrot\moving_08.png,4,0,162,83
+\character\carrot\moving_17.png,5,0,89,77
+\character\carrot\moving_18.png,5,0,94,74
+\character\carrot\moving_21.png,5,0,105,65

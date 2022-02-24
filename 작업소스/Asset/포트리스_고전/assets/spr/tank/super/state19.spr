@@ -1,0 +1,26 @@
+QtSystem Sprite Tool
+800,360,6,100,100
+\character\super\walking14.png,0,0,81,84
+\character\super\change05.png,0,0,72,64
+\character\super\change06.png,0,0,92,55
+\character\super\walking14.png,1,0,81,84
+\character\super\change05.png,1,0,72,64
+\character\super\change07.png,1,0,92,54
+\character\super\change01.png,1,0,82,52
+\character\super\change02.png,1,0,116,70
+\character\super\walking14.png,2,0,81,84
+\character\super\change05.png,2,0,72,64
+\character\super\change08.png,2,0,93,54
+\character\super\change03.png,2,0,79,49
+\character\super\change04.png,2,0,125,79
+\character\super\walking14.png,3,0,81,84
+\character\super\change05.png,3,0,72,64
+\character\super\change09.png,3,0,94,54
+\character\super\walking14.png,4,0,81,84
+\character\super\change05.png,4,0,72,64
+\character\super\change09.png,4,0,94,54
+\character\super\walking12.png,4,0,75,64
+\character\super\walking14.png,5,0,81,84
+\character\super\change05.png,5,0,72,64
+\character\super\change09.png,5,0,94,54
+\character\super\walking13.png,5,0,75,64

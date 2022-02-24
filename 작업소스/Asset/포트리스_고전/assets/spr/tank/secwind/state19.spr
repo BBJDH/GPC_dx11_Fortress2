@@ -1,0 +1,20 @@
+QtSystem Sprite Tool
+800,350,6,100,100
+\character\secwind\shooting12.png,0,0,78,76
+\character\secwind\shooting13.png,0,0,80,59
+\character\secwind\shooting01.png,0,0,90,51
+\character\secwind\shooting02.png,1,0,81,62
+\character\secwind\shooting01.png,1,0,91,53
+\character\secwind\walking05.png,1,0,78,78
+\character\secwind\shooting03.png,2,0,87,55
+\character\secwind\shooting01.png,2,0,95,55
+\character\secwind\shooting04.png,2,0,78,79
+\character\secwind\shooting14.png,3,0,78,79
+\character\secwind\shooting03.png,3,0,88,56
+\character\secwind\shooting01.png,3,0,96,56
+\character\secwind\shooting14.png,4,0,78,79
+\character\secwind\shooting03.png,4,0,88,56
+\character\secwind\shooting01.png,4,0,96,56
+\character\secwind\shooting14.png,5,0,78,79
+\character\secwind\shooting03.png,5,0,88,56
+\character\secwind\shooting01.png,5,0,96,56

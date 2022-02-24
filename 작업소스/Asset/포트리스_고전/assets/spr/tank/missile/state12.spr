@@ -1,0 +1,21 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\missile\falling01.png,0,0,76,47
+\character\missile\joking02.png,0,0,73,76
+\character\missile\falling06.png,0,0,73,76
+\character\missile\joking12.png,0,0,90,68
+\character\missile\falling01.png,1,0,80,48
+\character\missile\falling03.png,1,0,73,73
+\character\missile\falling01.png,2,0,80,48
+\character\missile\joking12.png,2,0,94,69
+\character\missile\falling07.png,2,0,72,76
+\character\missile\falling01.png,3,0,88,53
+\character\missile\falling08.png,3,0,76,74
+\character\missile\falling01.png,4,0,77,48
+\character\missile\falling09.png,4,0,63,68
+\character\missile\falling01.png,5,0,77,48
+\character\missile\falling09.png,5,0,64,74
+\character\missile\falling01.png,6,0,77,48
+\character\missile\falling09.png,6,0,63,68
+\character\missile\falling01.png,7,0,77,48
+\character\missile\falling09.png,7,0,64,74

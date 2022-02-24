@@ -1,0 +1,14 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\multi_missile\energy_warning01.png,0,0,64,58
+\character\multi_missile\energy_warning02.png,0,0,120,75
+\character\multi_missile\energy_warning03.png,0,0,126,60
+\character\multi_missile\energy_warning01.png,1,0,64,58
+\character\multi_missile\energy_warning02.png,1,0,120,75
+\character\multi_missile\energy_warning04.png,1,0,128,57
+\character\multi_missile\energy_warning01.png,2,0,64,58
+\character\multi_missile\energy_warning02.png,2,0,120,75
+\character\multi_missile\energy_warning05.png,2,0,133,57
+\character\multi_missile\energy_warning01.png,3,0,64,58
+\character\multi_missile\energy_warning02.png,3,0,120,75
+\character\multi_missile\energy_warning06.png,3,0,138,58

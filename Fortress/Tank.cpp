@@ -2,15 +2,14 @@
 #include "Object.h"
 
 
-
-
 Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height,
 	std::string const& name, Color const color)
 	: Object(pos, width, height), hp{ TANK_HP }, max_fuel{200}, fuel{ max_fuel },
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
 	state{ State::Fall }, side{ static_cast<Side>(rand()%2) },
-	ani_playtime{ 0.0f }, name{ name }, damage{ "" }, color{ color }
+	ani_playtime{ 0.0f }, name{ name }, damage{ "" }, color{ color },
+	power_record{0}, power_guide{ 0 }
 {
 	ani_set_normal();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
@@ -75,6 +74,16 @@ int const Tank::getangle_min() const
 int const Tank::getangle_max() const
 {
 	return static_cast<int const>(fire_angle_max);
+}
+
+int const Tank::get_power_guide() const
+{
+	return power_guide;
+}
+
+int const Tank::get_power_record() const
+{
+	return power_record;
 }
 
 bool Tank::is_dead() const
@@ -158,7 +167,6 @@ void Tank::set_side(Side const side)
 		this->fire_angle_left_value = 0.0f;
 		break;
 	}
-
 	}
 	this->side = side;
 }
@@ -167,6 +175,16 @@ void Tank::setstate(State const state)
 {
 	ani_playtime =0.0f;
 	this->state = state;
+}
+
+void Tank::set_power_guide(int const value)
+{
+	power_guide = value;
+}
+
+void Tank::set_power_record(int const value)
+{
+	power_record = value;
 }
 
 void Tank::set_idle_state()

@@ -1,0 +1,19 @@
+QtSystem Sprite Tool
+800,360,7,100,100
+\character\caterfild\moving01.png,0,0,80,56
+\character\caterfild\moving02.png,0,0,82,84
+\character\caterfild\moving02.png,1,0,82,84
+\character\caterfild\moving08.png,1,0,80,55
+\character\caterfild\moving01.png,2,0,80,56
+\character\caterfild\moving02.png,2,0,82,84
+\character\caterfild\moving02.png,3,0,82,84
+\character\caterfild\moving08.png,3,0,80,55
+\character\caterfild\change03.png,4,0,81,82
+\character\caterfild\moving02.png,4,0,82,84
+\character\caterfild\change01.png,4,0,80,54
+\character\caterfild\change03.png,5,0,81,82
+\character\caterfild\moving02.png,5,0,82,84
+\character\caterfild\change02.png,5,0,80,55
+\character\caterfild\change03.png,6,0,81,82
+\character\caterfild\moving02.png,6,0,82,84
+\character\caterfild\change01.png,6,0,80,54

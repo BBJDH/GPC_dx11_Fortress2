@@ -60,6 +60,8 @@ private:
 	float		    fire_velocity;
 	float			ani_playtime;
 	float			damage_showtime;
+	int			power_record;
+	int			power_guide;
 
 	void set_text_damage(unsigned const damage);
 	void check_render_damage();
@@ -97,12 +99,16 @@ public:
 	int const getangle()const;
 	int const getangle_min()const;
 	int const getangle_max()const;
+	int const get_power_guide()const;
+	int const get_power_record()const;
 	bool is_dead()const;
 	Color get_color()const;
 	void check_state();
 	void take_damage(unsigned const damage);
 	void set_side(Side const side);
 	void setstate(State const state);
+	void set_power_guide(int const value);
+	void set_power_record(int const value);
 	void plus_angle(int angle);
 	void plus_power();
 	void minus_fuel();

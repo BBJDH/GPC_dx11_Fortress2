@@ -43,7 +43,7 @@ void Animation::render_background(_float2 const & position, _float2 const& lengt
     //int const index = fmod();
     std::string const location = "Animation/Map/" + _Map_manager->name;
     map_animation.Name = location.c_str();
-    map_animation.Duration = 3.0f;
+    map_animation.Duration = 2.0f;
     map_animation.Repeatable = true;
     //map_animation.Playback = background_time;
     map_animation.Length = { length.x,length.y };

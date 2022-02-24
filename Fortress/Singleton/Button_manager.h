@@ -58,13 +58,17 @@ public:
 	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
 	
 	
-	//bool check_ready();
+	//  ==================== 버튼 기능 ==================
 	class Scene * quit();  //시작화면으로 돌아감
-	class Scene * to_lobby();
-	class Scene * to_battle();
-	bool  bool_func_default();
-	bool  check_ready();
-	bool  switch_map();
+	class Scene * to_lobby();//로비로 
+	class Scene * to_battle();//스타트버튼
+	bool  switch_map();//맵 스위칭
+	bool  set_power_guide();//파워 가이드라인기록
+
+	//버튼 활성화 함수
+	bool  bool_func_default();//버튼 기본셋
+	bool  check_ready();//플레이어 둘이상인지 확인
+
 	//클릭되면 슬롯이 토글됨
 	//기존 켜져있던 슬롯 key(std::string)를 기억하고
 	//새로운 버튼이 클릭되면 해당을롯 토글 온 기존 것 off

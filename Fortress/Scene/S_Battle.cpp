@@ -19,8 +19,7 @@ Scene * S_Battle::Update()
 void S_Battle::End()
 {
     _Button->scene_buttons.erase("exit");
-    tank.clear();
-    std::vector<Tank>().swap(tank);
+    _Tank->clear();
     missile.clear();
     std::vector<Missile>().swap(missile);
 
@@ -38,12 +37,15 @@ void S_Battle::End()
 void S_Battle::initialize()
 {
     srand(static_cast<unsigned>(time(NULL)));
+    pattern_name = pattern_name_list[rand()% list_size];
     state = State::Loading;
     playing_time = 0.0f;
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
     _Map_manager->initialize();
-    create_tanks();
+    _Tank->create_tanks();
     set_playing_exit_button();
+    set_power_collide_box();
+   
 }
 
 void S_Battle::set_playing_exit_button()
@@ -52,7 +54,7 @@ void S_Battle::set_playing_exit_button()
     (
         {
             "exit",
-             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"playing_exit")
+             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"Battle/playing_exit")
         }
     );
     _Button->scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
@@ -68,7 +70,7 @@ void S_Battle::set_gameover_exit_button()
     (
         {
             "exit",
-             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"gameover_exit")
+             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"Battle/gameover_exit")
         }
     );
     _Button->scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
@@ -79,30 +81,82 @@ void S_Battle::set_gameover_exit_button()
 
 }
 
-void S_Battle::create_tanks()
+void S_Battle::set_power_collide_box()
 {
-    //unsigned player = PLAYERS;
-    unsigned player = static_cast<unsigned>(_Button->player_set.size());
-    //Random r(10, MAPSIZE_W - 10, PLAYERS);
-    int const rand_mul = MAPSIZE_W / player; //플레이어수만큼 구역을 나누고 좌우 10픽셀 만큼 좁힌다
-    Random r(0, player -1, player);
-    for (unsigned i = 0; i < player; i++)
+    _float2 pos = { 770 ,668 };
+    _float2 length = { 650 ,20 };
+
+    _Button->nomal_buttons.insert
+    (
+        {
+            "guide",
+             Button<bool>(std::bind(&Button_manager::set_power_guide,_Button),"Battle/guide")
+        }
+    );
+    _Button->nomal_buttons.at("guide").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+
+    _Button->nomal_buttons.at("guide").init_image_location({ pos.x, pos.y });
+    _Button->nomal_buttons.at("guide").init_image_size({ length.x, length.y });
+
+}
+
+
+
+void S_Battle::create_pattern(std::string const& name)
+{
+    float const out_value = 50.0f;
+    switch (static_cast<Side>(rand()%3))
     {
-        //float const loc_x = static_cast<float>(r.GetResult(i));
-        float const loc_x = (static_cast<float>(r.GetResult(i) * rand_mul + (rand() % rand_mul)+10) );
-        tank.push_back
+    case S_Battle::Side::Up:
+    {
+        patterns.push_back
         (
-            Tank
+            Patterns
             (
-                {loc_x, 0},
-                Tank_SIZE,
-                Tank_SIZE,
-                "player " + std::to_string(i + 1),
-                std::get<2>(_Button->player_set[i])
+                name,
+                {
+                    static_cast<float>(rand() % MAPSIZE_W),
+                    -out_value
+                }
             )
         );
-        tank.back().ballistics_initialize(0, 0);
+        break;
     }
+    case S_Battle::Side::Left:
+    {
+        patterns.push_back
+        (
+            Patterns
+            (
+                name,
+                {
+                    -out_value,
+                    static_cast<float>(rand() % (MAPSIZE_H-100))
+                }
+            )
+        );
+        break;
+    }
+    case S_Battle::Side::Right:
+    {
+        patterns.push_back
+        (
+            Patterns
+            (
+                name,
+                {
+                    MAPSIZE_W + out_value,
+                    static_cast<float>(rand() % (MAPSIZE_H - 100))
+                }
+            )
+        );
+        break;
+    }
+    default:
+        break;
+    }
+
+    patterns.back().ballistics_initialize(0, 0);
 }
 
 
@@ -124,13 +178,13 @@ Scene * S_Battle::update_scene()
         if (playing_time > waiting_time)
         {
             dispose_objects();
-            if (!_Turn->check_tank_falling(tank) and playing_time > min_loading_time)
+            if (!_Turn->check_tank_falling(_Tank->tanks) and playing_time > min_loading_time)
             {
                 _Anime->render_loading_end(Engine::Time::Get::Delta());
                 if(_Anime->get_loading_time() < 0.1f and playing_time > min_loading_time+ 0.5f)
                 {
                     Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H+200); //UI사이즈만큼 더함
-                    _Turn->tankturn_start(tank);
+                    _Turn->tankturn_start(_Tank->tanks);
                     this->state = State::Playing;
                     break;
                 }
@@ -142,18 +196,18 @@ Scene * S_Battle::update_scene()
     case S_Battle::State::Playing:
     {
 
-
-        _Turn->checkturn(tank,missile);	//턴체크후 다음턴 부여
-        _Input_manager->input(tank,missile,patterns,Engine::Time::Get::Delta());
+        _Turn->checkturn(_Tank->tanks,missile);	//턴체크후 다음턴 부여
+        _Input_manager->input(_Tank->tanks,missile,patterns,Engine::Time::Get::Delta());
 
         dispose_objects();            //이동계산 및 충돌검사
 
         render_playing();            //렌더링
 
        
-        if (_Turn->is_gameover(tank))
+        if (_Turn->is_gameover(_Tank->tanks))
         {
             _Button->scene_buttons.erase("exit");
+            _Button->nomal_buttons.erase("guide");
             this->state = State::GameOver;
         }
         _Button->render_buttons();
@@ -190,8 +244,15 @@ Scene * S_Battle::update_scene()
 
 void S_Battle::dispose_objects()
 {
-    _Physics_manager->ballistics(tank,missile,patterns,Engine::Time::Get::Delta());//이동계산과 낙하, 맵밖 삭제
-    _Physics_manager->Collide_objects(tank,missile,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
+    float const delta = Engine::Time::Get::Delta();
+    interval += delta;
+    if (interval > pattern_gen_time)
+    {
+        create_pattern(pattern_name);
+        interval = 0;
+    }
+    _Physics_manager->ballistics(_Tank->tanks,missile,patterns, delta);//이동계산과 낙하, 맵밖 삭제
+    _Physics_manager->Collide_objects(_Tank->tanks,missile,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
 }
 
 void S_Battle::render_playing() //Update
@@ -201,12 +262,12 @@ void S_Battle::render_playing() //Update
     Camera.Set();
     _Map_manager->render_map(patterns);
 
-    _Anime->render(tank,missile);
-    _Text_manager->render(tank);
+    _Anime->render(_Tank->tanks,missile);
+    _Text_manager->render(_Tank->tanks);
 
-    _Image_manager->render_ui(tank);
+    _Image_manager->render_ui(_Tank->tanks);
 
-    _Map_manager->render_minimap(tank);   
+    _Map_manager->render_minimap(_Tank->tanks);
 
 
     //_Debug_manager->set_delta(Engine::Time::Get::Delta());

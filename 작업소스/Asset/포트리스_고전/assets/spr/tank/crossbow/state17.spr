@@ -1,0 +1,22 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\cross_bow\energy_warning01.png,0,0,65,71
+\character\cross_bow\energy_warning05.png,0,0,89,31
+\character\cross_bow\energy_warning01.png,1,0,65,71
+\character\cross_bow\energy_warning06.png,1,0,87,33
+\character\cross_bow\energy_warning10.png,2,0,70,60
+\character\cross_bow\energy_warning02.png,2,0,55,56
+\character\cross_bow\energy_warning08.png,2,0,89,34
+\character\cross_bow\energy_warning03.png,3,0,53,54
+\character\cross_bow\energy_warning09.png,3,0,77,57
+\character\cross_bow\energy_warning05.png,3,0,89,31
+\character\cross_bow\energy_warning10.png,4,0,70,60
+\character\cross_bow\energy_warning06.png,4,0,87,33
+\character\cross_bow\energy_warning01.png,5,0,65,71
+\character\cross_bow\energy_warning08.png,5,0,89,34
+\character\cross_bow\energy_warning01.png,6,0,65,71
+\character\cross_bow\walking07.png,6,0,107,72
+\character\cross_bow\energy_warning05.png,6,0,89,31
+\character\cross_bow\energy_warning01.png,7,0,65,71
+\character\cross_bow\walking07.png,7,0,107,72
+\character\cross_bow\energy_warning08.png,7,0,89,34

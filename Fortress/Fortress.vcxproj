@@ -51,6 +51,7 @@
     <ClInclude Include="Singleton\Physics_Manager.h" />
     <ClInclude Include="Singleton\SingletonT.h" />
     <ClInclude Include="Scene\S_Battle.h" />
+    <ClInclude Include="Singleton\Tank_manager.h" />
     <ClInclude Include="Singleton\Text_manager.h" />
     <ClInclude Include="Singleton\Turnmanager.h" />
     <ClInclude Include="stdafx.h" />
@@ -75,6 +76,7 @@
     <ClCompile Include="Singleton\Mouse.cpp" />
     <ClCompile Include="Scene\S_Battle.cpp" />
     <ClCompile Include="Singleton\Physics_Manager.cpp" />
+    <ClCompile Include="Singleton\Tank_manager.cpp" />
     <ClCompile Include="Singleton\Text_manager.cpp" />
     <ClCompile Include="Singleton\Turnmanager.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -140,11 +140,11 @@ Scene* S_Lobby::Update()
         if (iter->second.clicked())	//상태에 따라 이벤트 처리
             return iter->second.execute();
     }
-    for (auto iter = _Button->nomal_buttons.begin(); iter != _Button->nomal_buttons.end(); ++iter)
-    {
-        if (iter->second.clicked())	//상태에 따라 이벤트 처리
-            iter->second.execute();
-    }
+    //for (auto iter = _Button->nomal_buttons.begin(); iter != _Button->nomal_buttons.end(); ++iter)
+    //{
+    //    if (iter->second.clicked())	//상태에 따라 이벤트 처리
+    //        iter->second.execute();
+    //}
     return nullptr;
 
 }

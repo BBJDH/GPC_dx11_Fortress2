@@ -1,0 +1,17 @@
+QtSystem Sprite Tool
+800,350,5,100,100
+\character\laser\falling04.png,0,0,85,75
+\character\laser\falling01.png,0,0,91,61
+\character\laser\falling02.png,0,0,95,50
+\character\laser\falling04.png,1,0,85,75
+\character\laser\falling03.png,1,0,92,62
+\character\laser\falling05.png,1,0,94,50
+\character\laser\falling04.png,2,0,85,75
+\character\laser\falling02.png,2,0,89,57
+\character\laser\falling08.png,2,0,97,64
+\character\laser\falling04.png,3,0,85,75
+\character\laser\falling02.png,3,0,88,51
+\character\laser\falling09.png,3,0,97,64
+\character\laser\falling04.png,4,0,85,75
+\character\laser\falling08.png,4,0,97,64
+\character\laser\falling05.png,4,0,91,54

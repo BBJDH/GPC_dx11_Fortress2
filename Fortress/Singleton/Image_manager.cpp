@@ -78,6 +78,9 @@ void Image_manager::render_front_ui(Tank const & tank)
     render_pannel_power(tank.getpower());
 
     render_pannel_fuel(tank);
+
+    render_pannel_power_guide(tank);
+    render_pannel_power_record(tank);
 }
 
 void Image_manager::render_tanks_hp(std::vector<Tank> const& tank)
@@ -259,6 +262,46 @@ void Image_manager::render_pannel_power(int const power)
             UI_Bar_H
         }
     );
+    view_image.Render();
+}
+
+void Image_manager::render_pannel_power_guide(Tank const& tank)
+{
+    int const pos_y = 658;
+    view_image.Name = "Image/UI/power_guide";
+    int const power_record = tank.get_power_guide();
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(UI_Bar_X + power_record * UI_POWER_MUL),
+            pos_y
+        },
+        {
+            20,
+            10
+        }
+        );
+    view_image.Render();
+}
+
+void Image_manager::render_pannel_power_record(Tank const& tank)
+{
+    int const pos_y = 678;
+    view_image.Name = "Image/UI/power_record";
+    int const power_record = tank.get_power_record();
+    set_image
+    (
+        view_image,
+        {
+            static_cast<float>(UI_Bar_X + power_record * UI_POWER_MUL),
+            pos_y
+        },
+        {
+            20,
+            10
+        }
+        );
     view_image.Render();
 }
 

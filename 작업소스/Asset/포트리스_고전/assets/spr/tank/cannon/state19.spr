@@ -1,0 +1,15 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\canon\moving01.png,0,0,88,77
+\character\canon\moving02.png,0,0,81,61
+\character\canon\moving03.png,0,0,91,80
+\character\canon\change02.png,1,0,83,58
+\character\canon\moving01.png,1,0,88,77
+\character\canon\moving03.png,1,0,91,80
+\character\canon\change03.png,2,0,87,59
+\character\canon\moving01.png,2,0,88,77
+\character\canon\moving03.png,2,0,91,80
+\character\canon\change03.png,3,0,87,59
+\character\canon\moving01.png,3,0,88,77
+\character\canon\moving03.png,3,0,91,80
+\character\canon\change05.png,3,0,103,67

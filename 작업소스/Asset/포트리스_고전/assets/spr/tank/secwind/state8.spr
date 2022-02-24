@@ -1,0 +1,23 @@
+QtSystem Sprite Tool
+800,350,9,100,100
+\character\secwind\walking_45_02.png,0,0,87,75
+\character\secwind\walking_45_01.png,0,0,108,60
+\character\secwind\walking_45_02.png,1,0,87,75
+\character\secwind\walking_45_01.png,1,0,108,60
+\character\secwind\walking_45_03.png,1,0,115,65
+\character\secwind\walking_45_02.png,2,0,87,75
+\character\secwind\walking_45_01.png,2,0,108,60
+\character\secwind\walking_45_04.png,2,0,115,65
+\character\secwind\walking_45_02.png,3,0,87,75
+\character\secwind\walking_45_01.png,3,0,108,60
+\character\secwind\walking_45_03.png,3,0,115,65
+\character\secwind\walking_45_02.png,4,0,87,75
+\character\secwind\walking_45_01.png,4,0,108,60
+\character\secwind\walking_45_05.png,5,0,87,75
+\character\secwind\walking_45_01.png,5,0,108,62
+\character\secwind\walking_45_06.png,6,0,87,75
+\character\secwind\walking_45_01.png,6,0,106,62
+\character\secwind\walking_45_07.png,7,0,85,73
+\character\secwind\walking_45_01.png,7,0,105,60
+\character\secwind\walking_45_08.png,8,0,84,72
+\character\secwind\walking_45_01.png,8,0,103,58

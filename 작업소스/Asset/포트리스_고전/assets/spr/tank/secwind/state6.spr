@@ -1,0 +1,27 @@
+QtSystem Sprite Tool
+800,350,9,100,100
+\character\secwind\walking02.png,0,0,79,77
+\character\secwind\walking01.png,0,0,82,56
+\character\secwind\walking02.png,1,0,79,77
+\character\secwind\walking01.png,1,0,82,56
+\character\secwind\walking03.png,1,0,91,56
+\character\secwind\walking02.png,2,0,79,77
+\character\secwind\walking01.png,2,0,82,56
+\character\secwind\walking04.png,2,0,91,56
+\character\secwind\walking02.png,3,0,79,77
+\character\secwind\walking01.png,3,0,82,56
+\character\secwind\walking03.png,3,0,91,56
+\character\secwind\walking02.png,4,0,79,77
+\character\secwind\walking01.png,4,0,82,56
+\character\secwind\walking01.png,5,0,82,57
+\character\secwind\walking03.png,5,0,91,57
+\character\secwind\walking05.png,5,0,79,78
+\character\secwind\walking01.png,6,0,82,58
+\character\secwind\walking03.png,6,0,91,58
+\character\secwind\walking06.png,6,0,79,79
+\character\secwind\walking01.png,7,0,79,58
+\character\secwind\walking03.png,7,0,88,58
+\character\secwind\walking07.png,7,0,78,79
+\character\secwind\walking01.png,8,0,76,56
+\character\secwind\walking03.png,8,0,85,56
+\character\secwind\walking08.png,8,0,76,77

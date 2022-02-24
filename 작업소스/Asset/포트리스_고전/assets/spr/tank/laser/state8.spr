@@ -1,0 +1,25 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\laser\walking_45_01.png,0,0,108,62
+\character\laser\walking_45_02.png,0,0,94,73
+\character\laser\walking_45_07.png,0,0,115,65
+\character\laser\walking_45_01.png,1,0,109,61
+\character\laser\walking_45_02.png,1,0,95,72
+\character\laser\walking_45_07.png,1,0,116,64
+\character\laser\walking_45_02.png,2,0,96,71
+\character\laser\walking_45_08.png,2,0,111,60
+\character\laser\walking03.png,2,0,126,109
+\character\laser\walking_45_02.png,3,0,99,68
+\character\laser\walking_45_08.png,3,0,114,57
+\character\laser\walking04.png,3,0,130,106
+\character\laser\walking_45_02.png,4,0,102,65
+\character\laser\walking_45_08.png,4,0,117,54
+\character\laser\walking_45_03.png,4,0,131,106
+\character\laser\walking_45_02.png,5,0,104,63
+\character\laser\walking_45_08.png,5,0,119,52
+\character\laser\walking_45_06.png,5,0,132,106
+\character\laser\walking_45_02.png,6,0,102,65
+\character\laser\walking_45_08.png,6,0,117,54
+\character\laser\walking_45_05.png,6,0,132,109
+\character\laser\walking_45_02.png,7,0,100,67
+\character\laser\walking_45_08.png,7,0,115,56

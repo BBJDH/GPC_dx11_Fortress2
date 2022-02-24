@@ -1,0 +1,18 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\poseidon\walking01.png,0,0,78,59
+\character\poseidon\walking03.png,1,0,77,59
+\character\poseidon\walking05.png,1,0,101,91
+\character\poseidon\walking01.png,2,0,78,59
+\character\poseidon\walking08.png,2,0,79,72
+\character\poseidon\walking06.png,2,0,102,87
+\character\poseidon\walking03.png,3,0,77,59
+\character\poseidon\walking04.png,3,0,77,72
+\character\poseidon\walking07.png,3,0,102,83
+\character\poseidon\walking01.png,4,0,78,59
+\character\poseidon\walking03.png,5,0,77,59
+\character\poseidon\walking05.png,5,0,101,91
+\character\poseidon\walking01.png,6,0,78,59
+\character\poseidon\walking06.png,6,0,102,87
+\character\poseidon\walking03.png,7,0,77,59
+\character\poseidon\walking07.png,7,0,102,83

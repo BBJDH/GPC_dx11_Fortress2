@@ -1,0 +1,14 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\poseidon\change01.png,0,0,78,72
+\character\poseidon\change02.png,0,0,97,59
+\character\poseidon\walking09.png,0,0,79,72
+\character\poseidon\change01.png,1,0,78,72
+\character\poseidon\walking09.png,1,0,79,72
+\character\poseidon\change03.png,1,0,99,55
+\character\poseidon\change01.png,2,0,78,72
+\character\poseidon\walking09.png,2,0,79,72
+\character\poseidon\change04.png,2,0,104,52
+\character\poseidon\change01.png,3,0,78,72
+\character\poseidon\walking09.png,3,0,79,72
+\character\poseidon\change03.png,3,0,99,55

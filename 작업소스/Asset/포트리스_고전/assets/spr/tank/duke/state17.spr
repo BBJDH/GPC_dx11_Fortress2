@@ -1,0 +1,25 @@
+QtSystem Sprite Tool
+800,350,9,100,100
+\character\duke\energy_warning02.png,0,0,72,67
+\character\duke\energy_warning01.png,0,0,59,29
+\character\duke\energy_warning02.png,1,0,72,67
+\character\duke\energy_warning01.png,1,0,59,29
+\character\duke\energy_warning02.png,2,0,72,67
+\character\duke\energy_warning03.png,2,0,71,34
+\character\duke\energy_warning02.png,3,0,72,67
+\character\duke\energy_warning04.png,3,0,75,39
+\character\duke\energy_warning05.png,4,0,74,43
+\character\duke\energy_warning08.png,4,0,73,67
+\character\duke\walking01.png,4,0,78,82
+\character\duke\walking01.png,5,0,78,82
+\character\duke\energy_warning05.png,5,0,74,43
+\character\duke\energy_warning08.png,5,0,73,67
+\character\duke\walking01.png,6,0,78,82
+\character\duke\energy_warning06.png,6,0,75,36
+\character\duke\energy_warning02.png,6,0,72,67
+\character\duke\walking01.png,7,0,78,82
+\character\duke\energy_warning02.png,7,0,72,67
+\character\duke\energy_warning07.png,7,0,76,31
+\character\duke\energy_warning03.png,8,0,73,36
+\character\duke\walking01.png,8,0,78,82
+\character\duke\energy_warning08.png,8,0,73,67

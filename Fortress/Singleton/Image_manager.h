@@ -39,6 +39,8 @@ private:
     void render_pannel_wind(int const wind);
     void render_pannel_hp(int const hp);
     void render_pannel_power(int const power);
+    void render_pannel_power_guide(Tank const & tank);
+    void render_pannel_power_record(Tank const & tank);
     void render_pannel_fuel(Tank const & tank);
 
     //ui pannel angle line

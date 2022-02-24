@@ -1,0 +1,27 @@
+QtSystem Sprite Tool
+800,350,9,100,100
+\character\secwind\walking_30_02.png,0,0,82,75
+\character\secwind\walking_30_01.png,0,0,99,58
+\character\secwind\walking_30_02.png,1,0,82,75
+\character\secwind\walking_30_01.png,1,0,99,58
+\character\secwind\walking_30_03.png,1,0,107,59
+\character\secwind\walking_30_02.png,2,0,82,75
+\character\secwind\walking_30_01.png,2,0,99,58
+\character\secwind\walking_30_04.png,2,0,107,59
+\character\secwind\walking_30_02.png,3,0,82,75
+\character\secwind\walking_30_01.png,3,0,99,58
+\character\secwind\walking_30_03.png,3,0,107,59
+\character\secwind\walking_30_02.png,4,0,82,75
+\character\secwind\walking_30_01.png,4,0,99,58
+\character\secwind\walking_30_01.png,5,0,98,60
+\character\secwind\walking_30_03.png,5,0,106,61
+\character\secwind\walking_30_05.png,5,0,82,77
+\character\secwind\walking_30_01.png,6,0,97,61
+\character\secwind\walking_30_03.png,6,0,105,62
+\character\secwind\walking_30_06.png,6,0,82,78
+\character\secwind\walking_30_01.png,7,0,96,60
+\character\secwind\walking_30_03.png,7,0,104,61
+\character\secwind\walking_30_07.png,7,0,82,76
+\character\secwind\walking_30_01.png,8,0,92,55
+\character\secwind\walking_30_03.png,8,0,100,56
+\character\secwind\walking_30_08.png,8,0,81,74

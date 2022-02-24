@@ -1,0 +1,20 @@
+QtSystem Sprite Tool
+800,350,4,100,100
+\character\caterfild\moving_30_12.png,0,0,70,64
+\character\caterfild\moving_30_13.png,0,0,80,81
+\character\caterfild\moving_30_14.png,0,0,95,65
+\character\caterfild\moving_30_15.png,0,0,84,56
+\character\caterfild\moving_30_12.png,1,0,70,63
+\character\caterfild\moving_30_17.png,1,0,83,52
+\character\caterfild\moving_30_16.png,1,0,95,65
+\character\caterfild\moving_30_20.png,1,0,80,81
+\character\caterfild\moving_30_12.png,2,0,70,64
+\character\caterfild\moving_30_14.png,2,0,95,65
+\character\caterfild\moving_30_15.png,2,0,84,57
+\character\caterfild\moving_30_18.png,2,0,70,66
+\character\caterfild\moving_30_21.png,2,0,80,81
+\character\caterfild\moving_30_12.png,3,0,70,63
+\character\caterfild\moving_30_17.png,3,0,83,52
+\character\caterfild\moving_30_16.png,3,0,95,65
+\character\caterfild\moving_30_19.png,3,0,70,65
+\character\caterfild\moving_30_22.png,3,0,80,81

@@ -1,0 +1,26 @@
+QtSystem Sprite Tool
+800,350,8,100,100
+\character\laser\walking02.png,0,0,78,81
+\character\laser\walking01.png,0,0,81,62
+\character\laser\walking09.png,0,0,89,64
+\character\laser\hitting01.png,0,0,88,64
+\character\laser\walking02.png,1,0,78,81
+\character\laser\hitting02.png,1,0,68,55
+\character\laser\hitting04.png,2,0,78,81
+\character\laser\hitting03.png,2,0,66,43
+\character\laser\hitting12.png,2,0,88,58
+\character\laser\hitting05.png,3,0,85,75
+\character\laser\hitting07.png,3,0,105,57
+\character\laser\hitting06.png,3,0,70,38
+\character\laser\hitting05.png,4,0,85,75
+\character\laser\hitting07.png,4,0,105,57
+\character\laser\hitting08.png,4,0,85,27
+\character\laser\hitting05.png,5,0,85,75
+\character\laser\hitting07.png,5,0,105,57
+\character\laser\hitting09.png,5,0,100,21
+\character\laser\hitting05.png,6,0,85,75
+\character\laser\hitting07.png,6,0,105,57
+\character\laser\hitting10.png,6,0,97,21
+\character\laser\hitting12.png,7,0,92,59
+\character\laser\hitting04.png,7,0,78,80
+\character\laser\hitting11.png,7,0,96,24

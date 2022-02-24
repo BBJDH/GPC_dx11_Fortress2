@@ -1,0 +1,6 @@
+QtSystem Sprite Tool
+1000,360,2,100,100
+\character\carrot\falling_02.png,0,0,89,55
+\character\carrot\falling_01.png,0,0,75,64
+\character\carrot\falling_03.png,1,0,89,52
+\character\carrot\falling_04.png,1,0,76,62

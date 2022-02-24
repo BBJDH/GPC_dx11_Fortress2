@@ -1,0 +1,22 @@
+QtSystem Sprite Tool
+800,350,6,100,100
+\character\cross_bow\walking03.png,0,0,79,79
+\character\cross_bow\walking01.png,0,0,82,83
+\character\cross_bow\walking02.png,0,0,105,87
+\character\cross_bow\walking05.png,0,0,69,70
+\character\cross_bow\walking08.png,0,0,83,74
+\character\cross_bow\walking11.png,0,0,112,68
+\character\cross_bow\walking03.png,1,0,79,79
+\character\cross_bow\walking01.png,1,0,82,83
+\character\cross_bow\walking02.png,1,0,105,87
+\character\cross_bow\walking05.png,1,0,69,70
+\character\cross_bow\walking08.png,1,0,83,74
+\character\cross_bow\joking18.png,1,0,101,71
+\character\cross_bow\walking11.png,1,0,112,65
+\character\cross_bow\joking05.png,2,0,81,63
+\character\cross_bow\joking09.png,3,0,48,69
+\character\cross_bow\joking14.png,4,0,80,70
+\character\cross_bow\walking12.png,4,0,116,68
+\character\cross_bow\joking14.png,5,0,80,70
+\character\cross_bow\joking16.png,5,0,108,70
+\character\cross_bow\walking12.png,5,0,118,72

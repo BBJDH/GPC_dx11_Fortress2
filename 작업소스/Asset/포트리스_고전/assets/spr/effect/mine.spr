@@ -1,0 +1,6 @@
+QtSystem Sprite Tool
+800,1000,4,100,100
+\effect\object\mine_000.png,0,0,95,91
+\effect\object\mine_001.png,1,0,95,93
+\effect\object\mine_002.png,2,0,95,94
+\effect\object\mine_001.png,3,0,95,93

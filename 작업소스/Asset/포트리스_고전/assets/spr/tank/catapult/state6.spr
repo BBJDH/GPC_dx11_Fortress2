@@ -1,0 +1,10 @@
+QtSystem Sprite Tool
+800,360,4,100,100
+\character\caterfild\moving01.png,0,0,80,55
+\character\caterfild\moving02.png,0,0,82,84
+\character\caterfild\moving08.png,1,0,80,55
+\character\caterfild\moving04.png,1,0,82,84
+\character\caterfild\moving03.png,2,0,80,56
+\character\caterfild\moving06.png,2,0,82,84
+\character\caterfild\moving05.png,3,0,80,55
+\character\caterfild\moving07.png,3,0,82,84

@@ -1,0 +1,20 @@
+QtSystem Sprite Tool
+800,350,13,100,100
+\character\secwind\walking02.png,0,0,79,77
+\character\secwind\walking01.png,0,0,81,56
+\character\secwind\walking02.png,1,0,79,77
+\character\secwind\walking01.png,1,0,81,56
+\character\secwind\walking02.png,2,0,79,77
+\character\secwind\walking01.png,2,0,81,56
+\character\secwind\hitting01.png,3,0,85,49
+\character\secwind\hitting02.png,4,0,86,43
+\character\secwind\hitting03.png,5,0,75,43
+\character\secwind\hitting04.png,6,0,71,66
+\character\secwind\item02.png,6,0,81,87
+\character\secwind\hitting04.png,7,0,71,66
+\character\secwind\item02.png,7,0,81,87
+\character\secwind\hitting05.png,8,0,75,56
+\character\secwind\hitting06.png,9,0,68,56
+\character\secwind\hitting05.png,10,0,75,56
+\character\secwind\hitting06.png,11,0,68,56
+\character\secwind\hitting05.png,12,0,75,56
