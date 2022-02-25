@@ -18,14 +18,13 @@ private:
 
 	float loading_time;
 	float background_time;
-	void initialize();
 
 
 public:
 	Animation();
 	float const get_loading_time();
 	//void render_loading(float const delta);
-	void render_loading_end(float const delta);
+	void render_loading_fade_out(float const delta);
 	void render_background(_float2 const& position, _float2 const& length, float const delta);
 	void render_tanks(std::vector<Tank> & tank);
 	void render_missile(std::vector<Missile> & missile);

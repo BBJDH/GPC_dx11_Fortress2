@@ -19,6 +19,7 @@ private:
 	bool is_tank_turn(std::vector<Tank>& tank);
 	bool is_missile_turn(std::vector<Missile>& missile);
 	void rerand();
+	void set_wind();
 
 public:
 	//각 플레이어와 미사일의 턴이 꺼져있으면 
@@ -28,10 +29,10 @@ public:
 	unsigned const whosturn()const;
 	State get_state()const;
 	float get_wind()const;
+	bool next_turn();
 	bool check_tank_falling(std::vector<Tank>& tank);
 	bool is_gameover(std::vector<Tank>& tank);
-	void tankturn_start(std::vector<Tank>& tank);
+	void tankturn_start(Tank & tank);
 	void checkturn(std::vector<Tank> & tank, std::vector<Missile> & missile);
-	void set_wind();
 
 };

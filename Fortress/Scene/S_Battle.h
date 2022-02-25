@@ -15,17 +15,19 @@ public:
 private:
 
     //std::vector<Object> obj;
-    State state=State::Loading;
-    std::vector<Missile> missile;
+    State state;
     std::vector<Patterns> patterns;
-    Engine::Rendering::Camera Camera;
+    //Engine::Rendering::Camera Camera;
     std::string pattern_name;
+    float playing_time;
+    float interval;
+
     //로딩 설정
     float const min_loading_time = 4.0f;
     float const waiting_time = 1.0f; //기본 초기화 대기시간
+
+    //무늬 젠 간격
     float const pattern_gen_time = 0.3f;
-    float playing_time=0.0f;
-    float interval=0.0;
     
 private:
 

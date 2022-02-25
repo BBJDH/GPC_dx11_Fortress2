@@ -8,7 +8,9 @@ pos_win{ (MAPSIZE_W - CAM_SIZE_W) / 2,(MAPSIZE_H - CAM_SIZE_H) / 2 },
 speed{ SCROLL_Per_Sec }, speed_per_frame{0},
 focus_w{ false }, focus_h{ false },
 state{ State::Normal }, earthquake_time{ 0.0f }
-{}
+{
+	cam.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+}
 
 void Camera::set_speed_per_frame(float const delta)
 {
@@ -93,6 +95,12 @@ bool Camera::right(int const scroll)
 		return false;
 	}
 	return true;
+}
+
+void Camera::init_camera()
+{
+	cam.Location = { 0,0 };
+	cam.Set();
 }
 
 Camera::State Camera::get_state() const
@@ -260,6 +268,8 @@ void Camera::update()
 	{
 		earthquake();
 	}
+	cam.Location = { pos.x,pos.y };
+	cam.Set();
 }
 //
 //W = sin(2 * 3.14159f * (t * freq) + phase) * amp * (decaysec - t) / decaysec;

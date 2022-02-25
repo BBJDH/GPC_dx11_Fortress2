@@ -15,6 +15,8 @@ public:
 	_float2 pos_win;
 
 private:
+	Engine::Rendering::Camera cam;
+
 	State state;
 	unsigned const speed;
 	unsigned speed_per_frame;
@@ -33,6 +35,7 @@ private:
 public:
 	Camera();
 	~Camera() {};
+	void init_camera();
 	State get_state() const;
 	void focusing(Object const& obj);
 	void focus_on();

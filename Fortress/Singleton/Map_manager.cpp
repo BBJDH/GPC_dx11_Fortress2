@@ -3,7 +3,7 @@
 
 
 Map_manager::Map_manager() :minimap_loc{CAM_SIZE_W-MINIMAP_SIZE_W,0},
-name{"sky"}
+name{ "sky" }
 {
     //initialize();
 }

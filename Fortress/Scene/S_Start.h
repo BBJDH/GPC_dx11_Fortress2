@@ -9,7 +9,7 @@ private:
 
     float text_width ;
     float text_height;
-    float       time =0.0f;
+    float time;
 	
     
     bool     Enter();

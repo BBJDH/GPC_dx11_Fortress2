@@ -218,6 +218,7 @@ enum class Color
 #include"./Singleton/Text_manager.h"
 #include"./Singleton/Button_manager.h"
 #include"./Singleton/Tank_manager.h"
+#include"./Singleton/Missile_manager.h"
 
 //#include"Turnmanager.h"
 
@@ -239,5 +240,6 @@ enum class Color
 #define _Button Button_manager::get_singleton()
 #define _Text_manager Text_manager::get_singleton()
 #define _Tank Tank_manager::get_singleton()
+#define _Missile Missile_manager::get_singleton()
 
 

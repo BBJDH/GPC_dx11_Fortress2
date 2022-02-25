@@ -19,16 +19,13 @@ private:
     Engine::Rendering::Image::UI ui_text_img;
 
     //각도 UI 상수 설정
-    SIZE const angle_text_size = { 30,15 };
-    int const tilt_angle_text_location_x = 125;
-    int const launch_angle_text_location_x = 185;
-    int const angle_text_location_y = 667;
 
-    //fps UI 상수 설정
-    int const fps_loc_x = 50;
-    int const fps_loc_y = 15;
-    int const fps_width = 80;
-    int const fps_heght = 25;
+
+    ////fps UI 상수 설정
+    //int const fps_loc_x = 50;
+    //int const fps_loc_y = 15;
+    //int const fps_width = 80;
+    //int const fps_heght = 25;
 
     //void render_tank_text(Tank const & tank);
     void render_single_text(Engine::Rendering::Image::Component text,

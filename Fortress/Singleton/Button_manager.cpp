@@ -38,7 +38,8 @@ void Button_manager::init_tank_buttons()
 		else
 		{
 			set_slot_button(tank_button, "Lobby/tank",
-				{ location_x + offset_x * (i - 6), location_y + offset_y }, { width, heght });
+				{ location_x + offset_x * (i - 6), location_y + offset_y },
+				{ width, heght });
 		}
 	}
 }
@@ -72,6 +73,108 @@ void Button_manager::init_lobby_buttons()
 	init_map_button();
 	init_slot_buttons();
 	init_tank_buttons();
+}
+
+void Button_manager::render_slot_base()
+{
+	_float2 const pos = {88, 140};
+	_float2 const length = {153, 40};
+
+	float const tank_button_offset_y = 44;
+	for (int i = 0; i < 8; ++i)
+	{
+		_Image_manager->render_selected_slot
+		(
+			{
+				pos.x ,
+				pos.y + tank_button_offset_y * i
+			},
+			length
+		);
+	}
+}
+
+void Button_manager::render_tank_selected()
+{
+	_float2 const pos = {38,140};
+	_float2 const length = {30,30};
+	float const tank_button_offset_y = 44;
+
+	for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter)
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			if ("slot_" + std::to_string(i) == std::get<0>(*iter)) //벡터의 해당슬롯을 검색
+			{
+				_Image_manager->render_tank_image
+				(
+					std::get<1>(*iter),
+					{
+						pos.x ,
+						pos.y + tank_button_offset_y * i
+					},
+					length
+				);
+			}
+		}
+	}
+}
+
+void Button_manager::render_slot_color()
+{
+	_float2 pos = { 135,140 };
+	_float2 length = { 35,22 };
+
+	float const tank_button_offset_y = 44;
+
+	for (int i = 0; i < 8; ++i)
+	{
+		_Image_manager->render_color
+		(
+			static_cast<Color>(i),
+			{
+				pos.x ,
+				pos.y + tank_button_offset_y * i
+			},
+			length
+		);
+	}
+}
+
+void Button_manager::render_slot_text()
+{
+	POINT const pos = { 180, 140 };
+	int const height = 22;
+	int const tank_button_offset_y = 44;
+
+
+	int player_num = 1;
+	for (auto iter = _Button->player_set.begin(); iter != _Button->player_set.end(); ++iter, ++player_num)
+	{
+		for (int i = 0; i < 8; ++i)
+		{
+			if (std::get<0>(*iter) == "slot_" + std::to_string(i)) //해당 슬롯을 검색
+				_Text_manager->render_text_ui
+				(
+					{
+						pos.x ,
+						pos.y + tank_button_offset_y * i
+					},
+					height,
+					"player " + std::to_string(player_num),
+					static_cast<Text_manager::Font>(std::get<2>(*iter))
+				);
+		}
+	}
+}
+
+void Button_manager::render_lobby_button_images()
+{
+	render_tank_button_image(); //탱크버튼 위에 그릴 이미지
+	render_slot_base();         //슬롯 베이스 출력
+	render_tank_selected();
+	render_slot_color();
+	render_slot_text();
 }
 
 std::string Button_manager::get_map_name()
@@ -320,13 +423,9 @@ void Button_manager::init_exit_button()
 
 void Button_manager::render_tank_button_image()
 {
-	float const tank_button_location_x = 70;
-	float const tank_button_location_y = 552;
-	float const tank_button_width = 80;
-	float const tank_button_heght = 50;
-	float const tank_button_offset_x = tank_button_width + 18;
-	float const tank_button_offset_y = tank_button_heght + 18;
-
+	_float2 const pos = {70,552};
+	_float2 const length = {80,50};
+	_float2 const offset = { length.x +18,length.y+18};
 	for (int i = 0; i < 12; i++)
 	{
 		if (i < 6)
@@ -335,10 +434,10 @@ void Button_manager::render_tank_button_image()
 			(
 				_Button->tank_name[i],
 				{
-					tank_button_location_x + tank_button_offset_x * i,
-					tank_button_location_y
+					pos.x + offset.x * i,
+					pos.y
 				},
-				{ tank_button_width, tank_button_heght }
+				length
 			);
 		}
 		else
@@ -347,10 +446,10 @@ void Button_manager::render_tank_button_image()
 			(
 				_Button->tank_name[i],
 				{
-					tank_button_location_x + tank_button_offset_x * i,
-					tank_button_location_y
+					pos.x + offset.x * i,
+					pos.y + offset.y
 				},
-				{ tank_button_width, tank_button_heght }
+				length
 			);
 		}
 	}
@@ -378,7 +477,7 @@ void Button_manager::render_lobby_buttons()
 	render();		//각 버튼들의 상태를 업데이트
 	update_map_button_text();
 	update_player_set();
-
+	render_lobby_button_images();
 }
 
 Scene* Button_manager::quit()
@@ -419,7 +518,7 @@ void Button_manager::init_skip_button()
              Button<bool>
              (
                  "Battle/skip",
-                 std::bind(&Button_manager::bool_func_default, this),
+                 std::bind(&Turnmanager::next_turn, _Turn),
 				 std::bind(&Button_manager::bool_func_default, this),
 				 pos,
 				 length

@@ -3,7 +3,7 @@
 class Input_manager : public SingletonT<Input_manager>
 {
 private:
-	float interval = 0;
+	float interval;
 	float const speed = 0.03f;
 
 	void debug_left_button(std::vector<Tank>& tank);
@@ -16,6 +16,7 @@ private:
 	void key_down(Tank & tank);
 	void key_space(Tank & tank,std::vector<Missile>& missile);
 public:
+	Input_manager();
 	void input(std::vector<Tank>& tank, std::vector<Missile>& missile,
 		std::vector<Patterns>& patterns, float const deltha);
 	void find_nextstep(HDC const& hmapdc,  Tank & tank,  bool const isright);

@@ -1,9 +1,26 @@
 #include "stdafx.h"
 #include "Animation.h"
 
-Animation::Animation()
+Animation::Animation() :loading_time{ 0 }, background_time{0}
 {
-    initialize();
+
+    //loading[0].Name = "Animation/Screen/loading_0";
+    //loading[1].Name = "Animation/Screen/loading_1";
+    //loading[2].Name = "Animation/Screen/loading_2";
+    //loading[3].Name = "Animation/Screen/loading_3";
+    //loading[4].Name = "Animation/Screen/loading_4";
+    //loading[5].Name = "Animation/Screen/loading_5";
+    //loading[6].Name = "Animation/Screen/loading_6";
+    //loading[7].Name = "Animation/Screen/loading_7";
+    //loading[8].Name = "Animation/Screen/loading_8";
+
+    //for (size_t i = 0; i < 8; i++)
+    //{
+    //    loading[i].Duration = 0.5f;
+    //    loading[i].Repeatable = false;
+    //    loading[i].Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    //    loading[i].Location = { 0,0 };
+    //}
 }
 //
 //void Animation::render_loading(float const delta)
@@ -19,7 +36,7 @@ Animation::Animation()
 //    }
 //}
 
-void Animation::render_loading_end(float const delta)
+void Animation::render_loading_fade_out(float const delta)
 {
     loading_time += delta;
 
@@ -55,33 +72,6 @@ float const Animation::get_loading_time()
 {
     return loading_time;
 }
-
-void Animation::initialize()
-{
-    loading_time =0.0f;
-    background_time = 0.0f;
-
-    //loading[0].Name = "Animation/Screen/loading_0";
-    //loading[1].Name = "Animation/Screen/loading_1";
-    //loading[2].Name = "Animation/Screen/loading_2";
-    //loading[3].Name = "Animation/Screen/loading_3";
-    //loading[4].Name = "Animation/Screen/loading_4";
-    //loading[5].Name = "Animation/Screen/loading_5";
-    //loading[6].Name = "Animation/Screen/loading_6";
-    //loading[7].Name = "Animation/Screen/loading_7";
-    //loading[8].Name = "Animation/Screen/loading_8";
-
-    //for (size_t i = 0; i < 8; i++)
-    //{
-    //    loading[i].Duration = 0.5f;
-    //    loading[i].Repeatable = false;
-    //    loading[i].Length = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
-    //    loading[i].Location = { 0,0 };
-    //}
-
-
-}
-
 
 void Animation::render_tanks(std::vector<Tank> & tank)
 {

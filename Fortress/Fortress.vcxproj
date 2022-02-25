@@ -45,6 +45,7 @@
     <ClInclude Include="Singleton\Image_manager.h" />
     <ClInclude Include="Singleton\Input_manager.h" />
     <ClInclude Include="Singleton\Map_manager.h" />
+    <ClInclude Include="Singleton\Missile_manager.h" />
     <ClInclude Include="Singleton\Mouse.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Patterns.h" />
@@ -73,6 +74,7 @@
     <ClCompile Include="Singleton\Image_manager.cpp" />
     <ClCompile Include="Singleton\Input_manager.cpp" />
     <ClCompile Include="Singleton\Map_manager.cpp" />
+    <ClCompile Include="Singleton\Missile_manager.cpp" />
     <ClCompile Include="Singleton\Mouse.cpp" />
     <ClCompile Include="Scene\S_Battle.cpp" />
     <ClCompile Include="Singleton\Physics_Manager.cpp" />

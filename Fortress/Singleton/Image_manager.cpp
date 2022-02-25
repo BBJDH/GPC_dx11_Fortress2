@@ -29,13 +29,6 @@ void Image_manager::render_loading()
     world_image.Render();
 }
 
-//void Image_manager::render_background(_float2 const& position, _float2 const& length)
-//{
-//    set_background(position, length);
-//    world_image.Render();
-//}
-
-
 void Image_manager::render_back_ui(Tank const & tank)
 {
     render_back_pannel();
@@ -58,10 +51,12 @@ void Image_manager::render_back_ui(Tank const & tank)
     ui_angle_line(UI_ANGLE_Length, support_angle + max_angle, 1, Color::Yellow);
     ui_angle_line(UI_ANGLE_Length, support_angle + min_angle + barrel_angle, 1, Color::Red);
 
-    if (abs(img_angle) <= 40) //40도 이하는 흰선 길이가 짧아보여서 보정
-        white_line_addtional_length = 10;
+    if (abs(img_angle) < 30) //지평면각 길이 보정
+        white_line_addtional_length = 14;
+    else if (abs(img_angle) < 52) 
+        white_line_addtional_length = 4;
     else
-        white_line_addtional_length = 5;
+        white_line_addtional_length = -2;
     //탱크가 서있는 지표면의 각도
     ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle, 2,  Color::White);
     ui_angle_line(UI_ANGLE_Length+white_line_addtional_length, img_angle+180, 2,  Color::White);

@@ -68,6 +68,10 @@ void Text_manager::set_text(Engine::Rendering::Text::Component& text, POINT cons
 
 void Text_manager::render_tank_angle(Tank const& tank)
 {
+	SIZE const angle_text_size = { 30,15 };
+	int const tilt_angle_text_location_x = 125;
+	int const launch_angle_text_location_x = 185;
+	int const angle_text_location_y = 667;
 
 	int  img_angle = -static_cast<int>(tank.getimage_angle() / Radian);
 	int  barrel_angle = tank.getangle();
@@ -158,12 +162,13 @@ void Text_manager::render_fps()
 	float const delta = Engine::Time::Get::Delta();
 	std::string const value = std::to_string(static_cast<int>(1 / delta));
 	text.Font.Bold = true;
-
+	POINT const pos = { 50,15 };
+	SIZE const size = { 80,25 };
 	set_text
 	(
 		text,
-		{ fps_loc_x, fps_loc_y },
-		{ fps_width, fps_heght },
+		pos ,
+		size,
 		value,
 		Color::Red
 	);

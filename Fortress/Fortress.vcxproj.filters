@@ -126,6 +126,9 @@
     <ClInclude Include="Singleton\Tank_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton\Missile_manager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fortress.cpp">
@@ -195,6 +198,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Tank_manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton\Missile_manager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

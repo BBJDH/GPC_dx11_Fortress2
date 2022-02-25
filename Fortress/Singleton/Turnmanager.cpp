@@ -121,12 +121,20 @@ void Turnmanager::checkturn(std::vector<Tank>& tank, std::vector<Missile>& missi
 	{	
 		return ;
 	}
+	next_turn();
 
-	index++;	
+}
+
+bool Turnmanager::next_turn()
+{
+	_Tank->tanks[whosturn()].setmyturn(false);
+	index++;
 	set_wind();
-	if(index>= players)
+	if (index >= players)
 		rerand();
-	tankturn_start(tank);
+	tankturn_start(_Tank->tanks[whosturn()]);
+
+	return true;
 }
 
 void Turnmanager::set_wind()
@@ -141,11 +149,11 @@ void Turnmanager::set_wind()
 
 }
 
-void Turnmanager::tankturn_start(std::vector<Tank>& tank)
+void Turnmanager::tankturn_start(Tank  & tank)
 {
-	tank[whosturn()].setmyturn(true);
+	tank.setmyturn(true);
 	_CAM->focus_on();
-	tank[whosturn()].turn_setting();
+	tank.turn_setting();
 }
 
 

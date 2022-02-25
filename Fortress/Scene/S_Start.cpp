@@ -36,6 +36,7 @@ void S_Start::render()
 void S_Start::Start()   
 {
     Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H + 200);
+    time = 0.0f;
     text_width = TEXT_W;
     text_height = TEXT_H;
 }

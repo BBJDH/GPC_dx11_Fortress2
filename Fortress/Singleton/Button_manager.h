@@ -35,13 +35,20 @@ private:
 
 	//  ==================== Lobby ==================
 
-	void    init_map_button_set();
 	void    init_start_button();
 	void    init_exit_button();
+	void    init_map_button_set();
 	void	init_map_button();
 	void    init_slot_buttons();
 	void    init_tank_buttons();
+
 	void    update_player_set();
+	void    render_tank_button_image();
+	void    render_slot_base();
+	void    render_tank_selected();
+	void    render_slot_color();
+	void    render_slot_text();
+	void    render_lobby_button_images();
 
 	//  ==================== Battle ==================
 	void    init_playing_exit_button();
@@ -54,9 +61,9 @@ public:
 	void clear_buttons();
 	//void render_
 	//  ==================== Lobby ==================
-	void render_lobby_buttons();
-	void render_tank_button_image();
-	void init_lobby_buttons();
+	void    init_lobby_buttons();
+	void    render_lobby_buttons();
+
 
 	
 	//  ==================== Battle ==================

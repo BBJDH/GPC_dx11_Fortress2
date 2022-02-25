@@ -19,11 +19,8 @@ Scene * S_Battle::Update()
 void S_Battle::End()
 {
     _Button->clear_buttons();
-    _Tank->clear();
-    missile.clear();
-    std::vector<Missile>().swap(missile);
-
-
+    _Tank->release_singleton();
+    _Missile->release_singleton();
     _Anime->release_singleton();
     _Input_manager->release_singleton();
     _Turn->release_singleton();
@@ -40,7 +37,8 @@ void S_Battle::initialize()
     pattern_name = pattern_name_list[rand()% list_size];
     state = State::Loading;
     playing_time = 0.0f;
-    Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
+    interval = 0.0;
+    _CAM->init_camera();
     _Map_manager->initialize();
     _Tank->create_tanks();
     _Button->init_battle_buttons();
@@ -97,8 +95,7 @@ void S_Battle::create_pattern(std::string const& name)
         );
         break;
     }
-    default:
-        break;
+
     }
 
     patterns.back().ballistics_initialize(0, 0);
@@ -111,8 +108,9 @@ Scene * S_Battle::update_scene()
     {
     case S_Battle::State::Loading:
     {
-        Camera.Location = { 0,0 };
-        Camera.Set();
+        float const fadeout_time = 0.5f;
+        _CAM->init_camera();
+
         //셰이더로 로딩씬 그리기
         //TODO: 포스트 이펙트 블러(화면넘길때 사용)
         Engine::Rendering::Pipeline::Effect::set_y((playing_time/ min_loading_time)* CAM_SIZE_H);
@@ -125,25 +123,24 @@ Scene * S_Battle::update_scene()
             dispose_objects();
             if (!_Turn->check_tank_falling(_Tank->tanks) and playing_time > min_loading_time)
             {
-                _Anime->render_loading_end(Engine::Time::Get::Delta());
-                if(_Anime->get_loading_time() < 0.1f and playing_time > min_loading_time+ 0.5f)
+                _Anime->render_loading_fade_out(Engine::Time::Get::Delta());
+                if( playing_time > min_loading_time + fadeout_time)
                 {
                     Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H+200); //UI사이즈만큼 더함
-                    _Turn->tankturn_start(_Tank->tanks);
+                    _Turn->tankturn_start(_Tank->tanks[_Turn->whosturn()]);
                     this->state = State::Playing;
                     break;
                 }
             }
         }
+
         break;
     }
     case S_Battle::State::Playing:
     {
-
-        _Turn->checkturn(_Tank->tanks,missile);	//턴체크후 다음턴 부여
-        _Input_manager->input(_Tank->tanks,missile,patterns,Engine::Time::Get::Delta());
-
-        dispose_objects();            //이동계산 및 충돌검사
+        _Turn->checkturn(_Tank->tanks, _Missile->missiles);	//턴체크후 다음턴 부여
+        _Input_manager->input(_Tank->tanks, _Missile->missiles,patterns,Engine::Time::Get::Delta());
+        dispose_objects();            //이동계산 및 충돌검사, 무늬 생성
         render_playing();            //렌더링
        
         if (_Turn->is_gameover(_Tank->tanks))
@@ -155,18 +152,16 @@ Scene * S_Battle::update_scene()
     }
     case S_Battle::State::GameOver:
     {
+
+        _CAM->init_camera();
         _Button->init_gameover_exit_button();
-        Camera.Location = { _CAM->pos.x,_CAM->pos.y };
-        Camera.Set();
         _Image_manager->render_gameover();
         _Button->render();
 
         //버튼을 누르면 시작화면으로
         return _Button->scene_button_on();
     }
-    break;
-    default:
-        break;
+
     }
     return nullptr;
 }
@@ -180,18 +175,15 @@ void S_Battle::dispose_objects()
         create_pattern(pattern_name);
         interval = 0;
     }
-    _Physics_manager->ballistics(_Tank->tanks,missile,patterns, delta);//이동계산과 낙하, 맵밖 삭제
-    _Physics_manager->Collide_objects(_Tank->tanks,missile,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
+    _Physics_manager->ballistics(_Tank->tanks, _Missile->missiles,patterns, delta);//이동계산과 낙하, 맵밖 삭제
+    _Physics_manager->Collide_objects(_Tank->tanks, _Missile->missiles,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
 }
 
 void S_Battle::render_playing() //Update
 {
     _CAM->update();
-    Camera.Location = { _CAM->pos.x,_CAM->pos.y };
-    Camera.Set();
-
     _Map_manager->render_map(patterns);
-    _Anime->render(_Tank->tanks,missile);
+    _Anime->render(_Tank->tanks, _Missile->missiles);
     _Text_manager->render(_Tank->tanks);
     _Image_manager->render_ui(_Tank->tanks);
     _Map_manager->render_minimap(_Tank->tanks);
@@ -201,5 +193,4 @@ void S_Battle::render_playing() //Update
     //_Debug_manager->set_delta(Engine::Time::Get::Delta());
     //_Debug_manager->rendering();
 
-    //타겟을 다 결합하고 한번에 다 그리는 방식
 }

@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Input_manager.h"
 
+Input_manager::Input_manager() :interval{ 0 }
+{
+}
 
 
 void Input_manager::debug_right_button()
@@ -94,6 +97,7 @@ void Input_manager::key_space(Tank& tank,std::vector<Missile>& missile)
     if ((GetAsyncKeyState(VK_SPACE) & 0x8000))
         fire(tank,missile,true);
 }
+
 
 void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile, std::vector<Patterns>& patterns, float const deltha)
 {
