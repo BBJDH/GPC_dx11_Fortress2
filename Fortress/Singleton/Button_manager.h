@@ -28,37 +28,48 @@ private:
 	std::map <std::string, std::pair< _float2, _float2>> map_button_set;
 
 private:
-	//  ==================== Lobby ==================
-
-	void check_buttons();
+	void	update_map_button_text();
 	result  slot_toggle(std::vector < Button < bool >>& slot_button);
 	void set_slot_button(std::vector<Button<bool>>& slot,
 		std::string const& location, _float2 const& position, _float2 const& size);
-	void update_player_set();
-
-
-public:
 
 	//  ==================== Lobby ==================
-	void init_map_button_set();
-	void render_buttons();
-	void render_tank_button_image();
 
+	void    init_map_button_set();
 	void    init_start_button();
 	void    init_exit_button();
 	void	init_map_button();
 	void    init_slot_buttons();
 	void    init_tank_buttons();
-	void	update_map_button_text();
+	void    update_player_set();
+
+	//  ==================== Battle ==================
+	void    init_playing_exit_button();
+	void    init_skip_button();
+	void    init_power_arrow_button();
+public:
+	Scene* scene_button_on();
+	void render();	//버튼 업데이트 후 렌더링, 만약 따로 업데이트할내용이 있다면
+					//별도 씬에따라 만듬
+	void clear_buttons();
+	//void render_
+	//  ==================== Lobby ==================
+	void render_lobby_buttons();
+	void render_tank_button_image();
+	void init_lobby_buttons();
+
 	
 	//  ==================== Battle ==================
 	std::string get_map_name();
+	void	init_battle_buttons();
+	void    init_gameover_exit_button();
 
-	//버튼의 기능들을 여기에 나열
-	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
 	
 	
 	//  ==================== 버튼 기능 ==================
+	//버튼의 기능들을 여기에 나열
+	//상점 가는 버튼, 캐릭터 선택 버튼, 플레이어 변경버튼, 맵 변경버튼 등
+
 	class Scene * quit();  //시작화면으로 돌아감
 	class Scene * to_lobby();//로비로 
 	class Scene * to_battle();//스타트버튼
@@ -69,9 +80,7 @@ public:
 	bool  bool_func_default();//버튼 기본셋
 	bool  check_ready();//플레이어 둘이상인지 확인
 
-	//클릭되면 슬롯이 토글됨
-	//기존 켜져있던 슬롯 key(std::string)를 기억하고
-	//새로운 버튼이 클릭되면 해당을롯 토글 온 기존 것 off
+
 
 
 	//함수 포인터는 코드영역, 컴파일타임에 정해짐

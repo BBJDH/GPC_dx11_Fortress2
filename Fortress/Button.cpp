@@ -9,14 +9,29 @@ Button<T>::Button() :state(State::De_Activated), collide_box{ Point{0,0},Point{0
 }
 
 template<typename T>
-Button<T>::Button(std::function<T(void)> const& function, std::string const& name) :
+Button<T>::Button(std::string const& name, std::function<T(void)> const& function) :
 	state(State::Activated), collide_box{ Point{0,0},Point{0,0} },
 	click_function{ function }, function_button_on{ nullptr }, name{ name },
-	on{ false }, function_button_toggle{nullptr}
+	on{ false }
 {
 }
-template Button<Scene*>::Button(std::function<Scene* (void)> const& function, std::string const& name);
-template Button<bool>::Button(std::function<bool(void)> const& function, std::string const& name);
+template Button<Scene*>::Button(std::string const& name, std::function<Scene*(void)> const& function);
+template Button<bool>::Button(std::string const& name, std::function<bool(void)> const& function);
+
+template<typename T>
+Button<T>::Button(std::string const& name, std::function<T(void)> const& onclick,
+	std::function<bool(void)> const& active, _float2 const& position, _float2 const& length) :
+	state(State::Activated), collide_box{ Point{position.x,position.y},Point{length.x,length.y} },
+	click_function{ onclick }, function_button_on{ active }, name{ name },
+	on{ false }
+{
+	init_image_location(position);
+	init_image_size(length);
+}
+template Button<Scene*>::Button(std::string const& name, std::function<Scene*(void)> const& onclick,
+	std::function<bool(void)> const& active, _float2 const& position, _float2 const& length);
+template Button<bool>::Button(std::string const& name, std::function<bool(void)> const& onclick,
+	std::function<bool(void)> const& active, _float2 const& position, _float2 const& length);
 
 
 template<typename T>
@@ -53,7 +68,7 @@ template void Button<Scene*>::init_image_location(_float2 const& postion);
 
 
 template<typename T>
-void Button<T>::check_state()
+void Button<T>::update_state_and_render()
 {
 
 
@@ -87,10 +102,10 @@ void Button<T>::check_state()
 
 		}
 	}
-	set_button_image();
+	render();
 }
-template void Button<bool>::check_state();
-template void Button<Scene*>::check_state();
+template void Button<bool>::update_state_and_render();
+template void Button<Scene*>::update_state_and_render();
 
 
 template<typename T>
@@ -112,7 +127,7 @@ template bool Button<Scene*>::get_on();
 
 
 template<typename T>
-void Button<T>::set_button_image()
+void Button<T>::render()
 {
 	std::string  location_name = "";
 	if (this->on)
@@ -154,8 +169,8 @@ void Button<T>::set_button_image()
 	}
 	image.Render();
 }
-template void Button<bool>::set_button_image();
-template void Button<Scene*>::set_button_image();
+template void Button<bool>::render();
+template void Button<Scene*>::render();
 
 template<typename T>
 bool Button<T>::activated()

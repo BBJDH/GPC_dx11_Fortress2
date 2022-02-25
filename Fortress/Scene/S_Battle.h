@@ -28,25 +28,13 @@ private:
     float interval=0.0;
     
 private:
-    //버튼설정
-    float const playing_exit_x = 1200;
-    float const playing_exit_y = 705;
-    float const playing_exit_w = 130;
-    float const playing_exit_h = 18;
 
-    float const gameover_exit_x = 1180;
-    float const gameover_exit_y = 697;
-    float const gameover_exit_w = 170;
-    float const gameover_exit_h = 30;
 
     //패턴 파일 이름
     std::string const pattern_name_list[2] = { "pinwheel","ufo" };
     unsigned const list_size = 2;
 private:
     void    initialize();
-    void    set_playing_exit_button();
-    void    set_gameover_exit_button();
-    void    set_power_collide_box();
     void    create_pattern(std::string const & name);
     void    dispose_objects();
     void    render_playing();

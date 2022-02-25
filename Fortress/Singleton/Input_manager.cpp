@@ -102,7 +102,7 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile
     {
         interval = 0;
         //debug_left_button(tank);
-        debug_left_button(patterns);
+        //debug_left_button(patterns);
         debug_right_button();
         if (!tank[_Turn->whosturn()].is_dead()&&!tank[_Turn->whosturn()].is_falling())
         {

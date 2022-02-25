@@ -18,7 +18,7 @@ Scene * S_Battle::Update()
 
 void S_Battle::End()
 {
-    _Button->scene_buttons.erase("exit");
+    _Button->clear_buttons();
     _Tank->clear();
     missile.clear();
     std::vector<Missile>().swap(missile);
@@ -43,63 +43,8 @@ void S_Battle::initialize()
     Camera.Sight = Vector<2>(CAM_SIZE_W, CAM_SIZE_H);
     _Map_manager->initialize();
     _Tank->create_tanks();
-    set_playing_exit_button();
-    set_power_collide_box();
-   
+    _Button->init_battle_buttons();
 }
-
-void S_Battle::set_playing_exit_button()
-{
-    _Button->scene_buttons.insert
-    (
-        {
-            "exit",
-             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"Battle/playing_exit")
-        }
-    );
-    _Button->scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
-
-
-    _Button->scene_buttons.at("exit").init_image_location({ playing_exit_x, playing_exit_y });
-    _Button->scene_buttons.at("exit").init_image_size({playing_exit_w, playing_exit_h});
-}
-
-void S_Battle::set_gameover_exit_button()
-{
-    _Button->scene_buttons.insert
-    (
-        {
-            "exit",
-             Button<Scene*>(std::bind(&Button_manager::to_lobby,_Button),"Battle/gameover_exit")
-        }
-    );
-    _Button->scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
-
-
-    _Button->scene_buttons.at("exit").init_image_location({ gameover_exit_x, gameover_exit_y });
-    _Button->scene_buttons.at("exit").init_image_size({ gameover_exit_w, gameover_exit_h });
-
-}
-
-void S_Battle::set_power_collide_box()
-{
-    _float2 pos = { 770 ,668 };
-    _float2 length = { 650 ,20 };
-
-    _Button->nomal_buttons.insert
-    (
-        {
-            "guide",
-             Button<bool>(std::bind(&Button_manager::set_power_guide,_Button),"Battle/guide")
-        }
-    );
-    _Button->nomal_buttons.at("guide").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
-
-    _Button->nomal_buttons.at("guide").init_image_location({ pos.x, pos.y });
-    _Button->nomal_buttons.at("guide").init_image_size({ length.x, length.y });
-
-}
-
 
 
 void S_Battle::create_pattern(std::string const& name)
@@ -190,7 +135,6 @@ Scene * S_Battle::update_scene()
                 }
             }
         }
-
         break;
     }
     case S_Battle::State::Playing:
@@ -200,40 +144,25 @@ Scene * S_Battle::update_scene()
         _Input_manager->input(_Tank->tanks,missile,patterns,Engine::Time::Get::Delta());
 
         dispose_objects();            //이동계산 및 충돌검사
-
         render_playing();            //렌더링
-
        
         if (_Turn->is_gameover(_Tank->tanks))
         {
-            _Button->scene_buttons.erase("exit");
-            _Button->nomal_buttons.erase("guide");
+            _Button->clear_buttons();
             this->state = State::GameOver;
         }
-        _Button->render_buttons();
-        for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
-        {
-            if (iter->second.clicked())	//상태에 따라 이벤트 처리
-                return iter->second.execute();
-        }
-        return nullptr;
+        return _Button->scene_button_on();
     }
     case S_Battle::State::GameOver:
     {
-        set_gameover_exit_button();
+        _Button->init_gameover_exit_button();
         Camera.Location = { _CAM->pos.x,_CAM->pos.y };
         Camera.Set();
         _Image_manager->render_gameover();
+        _Button->render();
 
         //버튼을 누르면 시작화면으로
-        _Button->render_buttons();
-        for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
-        {
-            if (iter->second.clicked())	//상태에 따라 이벤트 처리
-                return iter->second.execute();
-        }
-        return nullptr;
-
+        return _Button->scene_button_on();
     }
     break;
     default:
@@ -260,14 +189,13 @@ void S_Battle::render_playing() //Update
     _CAM->update();
     Camera.Location = { _CAM->pos.x,_CAM->pos.y };
     Camera.Set();
-    _Map_manager->render_map(patterns);
 
+    _Map_manager->render_map(patterns);
     _Anime->render(_Tank->tanks,missile);
     _Text_manager->render(_Tank->tanks);
-
     _Image_manager->render_ui(_Tank->tanks);
-
     _Map_manager->render_minimap(_Tank->tanks);
+    _Button->render();
 
 
     //_Debug_manager->set_delta(Engine::Time::Get::Delta());

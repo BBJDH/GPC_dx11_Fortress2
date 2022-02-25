@@ -19,21 +19,21 @@ private:
 	State state;
 	std::function<T(void)> click_function; //클릭시 동작할 함수포인터
 	std::function<bool(void)> function_button_on;	//버튼을 활성화할 함수포인터
-	std::function<bool(void)> function_button_toggle;	//버튼을 활성화할 함수포인터
 	bool on;
 
 private:
-	void set_button_image();
+	void render();
 	bool activated();
 
 public:
 	Button();
-	Button(std::function<T(void)> const & function, std::string const& name);
-
+	Button(std::string const& name, std::function<T(void)> const& function);
+	Button(std::string const& name, std::function<T(void)> const& onclick,
+		std::function<bool(void)> const& active,_float2 const & position, _float2 const & length);
 	void set_name(std::string const& name);
 	void init_image_size(_float2 const& size);
 	void init_image_location(_float2 const & postion);
-	void check_state();
+	void update_state_and_render();
 	//비활성화 상태라면 어떤 동작도 하지않음,
 	//토글상태인지 아닌지는 활성화(activated )상태에서 나누어서 출력
 

@@ -43,6 +43,14 @@ void Button_manager::init_tank_buttons()
 	}
 }
 
+void Button_manager::clear_buttons()
+{
+	scene_buttons.clear();
+	nomal_buttons.clear();
+	  slot_button.clear();
+	  tank_button.clear();
+}
+
 void Button_manager::update_map_button_text()
 {
 	if (nomal_buttons.find("map") != nomal_buttons.end())
@@ -54,6 +62,16 @@ void Button_manager::update_map_button_text()
 		nomal_buttons.find("map")->second.init_image_size(length);
 		_Map_manager->name = map_name[map_index];
 	}
+}
+
+void Button_manager::init_lobby_buttons()
+{
+	init_map_button_set();
+	init_start_button();
+	init_exit_button();
+	init_map_button();
+	init_slot_buttons();
+	init_tank_buttons();
 }
 
 std::string Button_manager::get_map_name()
@@ -116,22 +134,32 @@ void Button_manager::init_map_button_set()
 	);
 }
 
-void Button_manager::check_buttons()
+void Button_manager::render()
 {
 	for (auto iter = scene_buttons.begin(); iter != scene_buttons.end(); ++iter)
-		iter->second.check_state();
+		iter->second.update_state_and_render();
 	for (auto iter = nomal_buttons.begin(); iter != nomal_buttons.end(); ++iter)
 	{
-		iter->second.check_state();
+		iter->second.update_state_and_render();
 		if (iter->second.clicked())	//상태에 따라 이벤트 처리
 			iter->second.execute();
-
 	}
 	for (auto iter = slot_button.begin(); iter != slot_button.end(); ++iter)
-		iter->check_state();
+		iter->update_state_and_render();
 	for (auto iter = tank_button.begin(); iter != tank_button.end(); ++iter)
-		iter->check_state();
-	update_map_button_text();
+		iter->update_state_and_render();
+}
+
+Scene* Button_manager::scene_button_on()
+{
+	for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
+	{
+		if (iter->second.clicked())	//상태에 따라 이벤트 처리
+		{
+			return iter->second.execute();
+		}
+	}
+	return nullptr;
 }
 
 Button_manager::result Button_manager::slot_toggle(std::vector<Button<bool>>& slot)
@@ -170,12 +198,19 @@ void Button_manager::set_slot_button(std::vector<Button<bool>>& slot,
 	slot.push_back
 	(
 		{
-			 Button<bool>(std::bind(&Button_manager::bool_func_default,_Button),location)
+			 Button<bool>
+			 (
+				 location,
+				 std::bind(&Button_manager::bool_func_default,_Button),
+				 std::bind(&Button_manager::bool_func_default, _Button),
+				 position,
+				 size
+			)
 		}
 	);
-	slot.back().bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
-	slot.back().init_image_location(position);
-	slot.back().init_image_size(size);
+	//slot.back().bind_activated_func();
+	//slot.back().init_image_location(position);
+	//slot.back().init_image_size(size);
 }
 
 void Button_manager::update_player_set()
@@ -234,40 +269,52 @@ void Button_manager::update_player_set()
 
 void Button_manager::init_start_button()
 {
-	float const start_x = 100;
-	float const start_y = 690;
-	float const start_w = 170;
-	float const start_h = 30;
+
+	_float2 const& postion = {100,690};
+	_float2 const& length = {170,30};
 	scene_buttons.insert
 	(
 		{
 			"start",
-			 Button<Scene*>(std::bind(&Button_manager::to_battle,_Button),"Lobby/start")
+			 Button<Scene*>
+			 (
+				 "Lobby/start",
+				 std::bind(&Button_manager::to_battle,this),
+				 std::bind(&Button_manager::check_ready, this),
+				 postion,
+				 length
+			 )
 		}
 	);
-	scene_buttons.at("start").bind_activated_func(std::bind(&Button_manager::check_ready, _Button));
-	scene_buttons.at("start").init_image_location({ start_x, start_y });
-	scene_buttons.at("start").init_image_size({ start_w, start_h });
+	//scene_buttons.at("start").bind_activated_func(std::bind(&Button_manager::check_ready, _Button));
+	//scene_buttons.at("start").init_image_location({ start_x, start_y });
+	//scene_buttons.at("start").init_image_size({ start_w, start_h });
 }
 
 void Button_manager::init_exit_button()
 {
-	float const exit_x = 1150;
-	float const exit_y = 690;
-	float const exit_w = 170;
-	float const exit_h = 30;
+
+	_float2 const& postion = { 1150,690 };
+	_float2 const& length = { 170,30 };
 
 	scene_buttons.insert
 	(
 		{
 			"exit",
-			 Button<Scene*>(std::bind(&Button_manager::quit,_Button),"Lobby/exit")
+			 Button<Scene*>
+			 (
+				 "Lobby/exit",
+				 std::bind(&Button_manager::quit,this),
+				 std::bind(&Button_manager::bool_func_default, this),
+				 postion,
+				 length
+			 )
 		}
 	);
-	scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+	//scene_buttons.at("exit").bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
 
-	scene_buttons.at("exit").init_image_location({ exit_x, exit_y });
-	scene_buttons.at("exit").init_image_size({ exit_w, exit_h });
+	//scene_buttons.at("exit").init_image_location({ exit_x, exit_y });
+	//scene_buttons.at("exit").init_image_size({ exit_w, exit_h });
 
 }
 
@@ -311,27 +358,25 @@ void Button_manager::render_tank_button_image()
 
 void Button_manager::init_map_button()
 {
-	//float const exit_x = 1100;
-	//float const exit_y = 540;
-	//float const exit_w = 45;
-	//float const exit_h = 20;
+
 
 	nomal_buttons.insert
 	(
 		std::make_pair
 		(
 			"map",
-			Button<bool>(std::bind(&Button_manager::switch_map,_Button),"Lobby/sky")
+			Button<bool>("Lobby/sky", std::bind(&Button_manager::switch_map,this))
 		)
 	);
-	nomal_buttons.find("map")->second.bind_activated_func(std::bind(&Button_manager::bool_func_default, _Button));
+	nomal_buttons.find("map")->second.bind_activated_func(std::bind(&Button_manager::bool_func_default,this));
 	update_map_button_text();
 }
 
 
-void Button_manager::render_buttons()
+void Button_manager::render_lobby_buttons()
 {
-	check_buttons();		//각 버튼들의 상태를 업데이트
+	render();		//각 버튼들의 상태를 업데이트
+	update_map_button_text();
 	update_player_set();
 
 }
@@ -341,14 +386,108 @@ Scene* Button_manager::quit()
 	PostQuitMessage(0);
     return nullptr;
 }
+
+void Button_manager::init_playing_exit_button()
+{
+	_float2 const pos = { 1200,705 };
+	_float2 const length = { 130,18 };
+	scene_buttons.insert
+	(
+		{
+			"exit",
+			 Button<Scene*>
+			 (
+				 "Battle/playing_exit",
+				 std::bind(&Button_manager::to_lobby,this),
+				 std::bind(&Button_manager::bool_func_default, this),
+				 pos,
+				 length
+			 )
+		}
+	);
+}
+
+void Button_manager::init_skip_button()
+{
+	_float2 const pos = { 1199,599 };
+    _float2 const length = { 150,18 };
+
+    nomal_buttons.insert
+    (
+        {
+            "skip",
+             Button<bool>
+             (
+                 "Battle/skip",
+                 std::bind(&Button_manager::bool_func_default, this),
+				 std::bind(&Button_manager::bool_func_default, this),
+				 pos,
+				 length
+             )
+        }
+    );
+}
+
+void Button_manager::init_power_arrow_button()
+{
+	_float2 const pos = { 770 ,669 };
+	_float2 const length = { 655 ,35 };
+
+	nomal_buttons.insert
+	(
+		{
+			"guide",
+			 Button<bool>
+			 (
+				 "Battle/guide",
+				 std::bind(&Button_manager::set_power_guide,this),
+				 std::bind(&Button_manager::bool_func_default, this),
+				 pos,
+				 length
+			 )
+		}
+	);
+}
+
+void Button_manager::init_battle_buttons()
+{
+	init_playing_exit_button();
+	init_skip_button();
+	init_power_arrow_button();
+}
+
+void Button_manager::init_gameover_exit_button()
+{
+	_float2 const position = {1180,697} ;
+	_float2 const length = {170,30} ;
+	scene_buttons.insert
+	(
+		{
+			"exit",
+			 Button<Scene*>
+			 (
+				 "Battle/gameover_exit",
+				 std::bind(&Button_manager::to_lobby,this),
+				 std::bind(&Button_manager::bool_func_default, this),
+				 position,
+				 length
+			 )
+		}
+	);
+}
+
 Scene* Button_manager::to_lobby()
 {
 	return  new S_Lobby;
 }
+
 Scene* Button_manager::to_battle()
 {
 	return new S_Battle;
 }
+
+
+
 bool Button_manager::bool_func_default()
 {
 	return true;

@@ -115,7 +115,7 @@ void S_Lobby::render()
 {
     _Anime->render_background({ 832,-576 }, { 220,205 }, Engine::Time::Get::Delta()); //로비 맵 배경 그리기
     _Image_manager->render_lobby_back();
-    _Button->render_buttons();
+    _Button->render_lobby_buttons();
     render_button_images();
 }
 
@@ -123,38 +123,19 @@ void S_Lobby::render()
 void S_Lobby::Start()
 {
     _Button->player_set.clear();
-    _Button->init_map_button_set();
-    _Button->init_exit_button();
-    _Button->init_start_button();
-    _Button->init_map_button();
-    _Button->init_slot_buttons();
-    _Button->init_tank_buttons();
+    _Button->init_lobby_buttons();
 }
 
 Scene* S_Lobby::Update()
 {
     render();
 
-    for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
-    {
-        if (iter->second.clicked())	//상태에 따라 이벤트 처리
-            return iter->second.execute();
-    }
-    //for (auto iter = _Button->nomal_buttons.begin(); iter != _Button->nomal_buttons.end(); ++iter)
-    //{
-    //    if (iter->second.clicked())	//상태에 따라 이벤트 처리
-    //        iter->second.execute();
-    //}
-    return nullptr;
+    return _Button->scene_button_on();
 
 }
 
 void S_Lobby::End()
 {
-    _Button->scene_buttons.erase("exit");
-    _Button->scene_buttons.erase("start");
-    _Button->nomal_buttons.clear();
-    _Button->slot_button.clear();
-    _Button->tank_button.clear();
+    _Button->clear_buttons();
 
 }

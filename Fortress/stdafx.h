@@ -23,10 +23,10 @@ struct _float2
 	float x; 
 	float y;
 public:
-	float width()  { return x; }
-	float height() { return y; }
-	float value1() { return x; }
-	float value2() { return y; }
+	float width() const  { return x; } 
+	float height() const { return y; }
+	float value1() const { return x; }
+	float value2() const { return y; }
 };
 enum class Color
 {
