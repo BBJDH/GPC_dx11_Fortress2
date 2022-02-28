@@ -186,9 +186,9 @@ enum class Color
 
 //게임안 보여질 객체들
 //#include"Object.h"
-#include"Tank.h"
-#include"Missile.h"
-#include"Patterns.h"
+#include"./Object/Tank/Canon.h"
+#include"./Object/Missile/Missile.h"
+#include"./Object/Patterns.h"
 #include"Button.h"
 
 //랜덤추출함수
@@ -216,8 +216,8 @@ enum class Color
 #include"./Singleton/Input_manager.h"
 #include"./Singleton/Animation.h"
 #include"./Singleton/Text_manager.h"
-#include"./Singleton/Button_manager.h"
 #include"./Singleton/Tank_manager.h"
+#include"./Singleton/Button_manager.h"
 #include"./Singleton/Missile_manager.h"
 
 //#include"Turnmanager.h"

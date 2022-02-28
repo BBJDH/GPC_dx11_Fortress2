@@ -1,8 +1,14 @@
 #include "stdafx.h"
 #include "Tank_manager.h"
 
+
 Tank_manager::Tank_manager()
 {
+}
+
+void Tank_manager::create_tank(std::string const& tank_name)
+{
+    //탱크 위치, 플레이어 이름, 색상
 }
 
 void Tank_manager::create_tanks()
@@ -18,12 +24,13 @@ void Tank_manager::create_tanks()
         float const loc_x = (static_cast<float>(r.GetResult(i) * rand_mul + (rand() % rand_mul) + 10));
         tanks.push_back
         (
-            Tank
+            Canon
             (
                 { loc_x, 0 },
                 Tank_SIZE,
                 Tank_SIZE,
                 "player " + std::to_string(i + 1),
+                "canon",
                 std::get<2>(_Button->player_set[i])
             )
         );

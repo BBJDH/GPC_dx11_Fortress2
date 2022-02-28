@@ -1,5 +1,5 @@
 #pragma once
-#include "Object.h"
+#include "./Object/Object.h"
 
 
 class Tank : public Object
@@ -34,6 +34,10 @@ public:
 	{
 		Left, Right //...
 	};
+	enum class Missile_Type
+	{
+		Normal, Special  //...
+	};
 private:
 	//상수 세팅
 	int const NAME_LOCATION_X = -8;
@@ -48,8 +52,10 @@ private:
 	State		    state;
 	Side		    side;
 	Color			color;
-	std::string		name;
-	std::string		damage;				//받은 데미지 기록
+	Missile_Type	missile_type;
+	std::string	const	player_name;
+	std::string	const	tank_name;
+	std::string		damage;				//받은 데미지 문자로 저장
 	unsigned	    hp;
 	unsigned	    fuel;
 	unsigned const	max_fuel;
@@ -81,14 +87,16 @@ private:
 
 public:
 
-	Tank(_float2 const& pos, unsigned const width, unsigned const height, 
-		std::string const& name, Color const color);
+	Tank(_float2 const& pos, unsigned const width, unsigned const height,
+		std::string const& player_name, std::string const& tank_name, Color const color);
 	Tank & operator=(Tank const & other_tank);
 	Tank::State get_state()const;
 	Tank::Side get_side()const;
 	std::string get_name()const;
 	std::string get_damage()const;
 
+	Color get_color()const;
+	Missile_Type get_missile_type()const;
 	float const get_ani_playtime()const;
 	float const get_damage_showtime()const;
 	unsigned const gethp() const;
@@ -102,11 +110,11 @@ public:
 	int const get_power_guide()const;
 	int const get_power_record()const;
 	bool is_dead()const;
-	Color get_color()const;
-	void check_state();
-	void take_damage(unsigned const damage);
 	void set_side(Side const side);
 	void setstate(State const state);
+	void set_missile_type(Missile_Type const type);
+	void check_state();
+	void take_damage(unsigned const damage);
 	void set_power_guide(int const value);
 	void set_power_record(int const value);
 	void plus_angle(int angle);
@@ -115,7 +123,6 @@ public:
 	void turn_setting();
 	void ani_render(float const delta);
 	void ani_start();
-	void text_render();
 	
 };
 

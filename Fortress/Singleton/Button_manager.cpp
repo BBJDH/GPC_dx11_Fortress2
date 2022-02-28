@@ -108,7 +108,7 @@ void Button_manager::render_tank_selected()
 			{
 				_Image_manager->render_tank_image
 				(
-					std::get<1>(*iter),
+					_Tank->tank_name[ static_cast<int>(std::get<1>(*iter))].c_str(),
 					{
 						pos.x ,
 						pos.y + tank_button_offset_y * i
@@ -337,9 +337,9 @@ void Button_manager::update_player_set()
 		{
 			if ("slot_" + std::to_string(slot_result.index) == std::get<0>(*iter))//벡터하는 일치하는 슬롯이 존재한다면
 			{
-				if (tank_name[tank_result.index] != "")	//변경시도
+				if (_Tank->tank_name[tank_result.index] != "")	//변경시도
 				{
-					std::get<1>(*iter) = tank_name[tank_result.index];
+					std::get<1>(*iter) = static_cast<Tank_manager::Tank_Name>(tank_result.index);
 				}
 				else//제거
 				{
@@ -349,14 +349,14 @@ void Button_manager::update_player_set()
 				return;
 			}
 		}
-		if (tank_name[tank_result.index] != "")
+		if (_Tank->tank_name[tank_result.index] != "")
 		{
 			player_set.push_back
 			(
 				std::make_tuple
 				(
 					"slot_" + std::to_string(slot_result.index),
-					tank_name[tank_result.index],
+					static_cast<Tank_manager::Tank_Name>(tank_result.index),
 					static_cast<Color>(slot_result.index)
 				)
 			);
@@ -432,7 +432,7 @@ void Button_manager::render_tank_button_image()
 		{
 			_Image_manager->render_tank_image
 			(
-				_Button->tank_name[i],
+				_Tank->tank_name[i],
 				{
 					pos.x + offset.x * i,
 					pos.y
@@ -444,7 +444,7 @@ void Button_manager::render_tank_button_image()
 		{
 			_Image_manager->render_tank_image
 			(
-				_Button->tank_name[i],
+				_Tank->tank_name[i],
 				{
 					pos.x + offset.x * i,
 					pos.y + offset.y

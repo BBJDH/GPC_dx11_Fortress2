@@ -36,7 +36,8 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
                 },
                 Tank_SIZE,
                 Tank_SIZE,
-                "Temp",
+                "test",
+                "canon",
                 Color::Red
             )
         );
@@ -200,12 +201,12 @@ void Input_manager::fire(Tank& tank, std::vector<Missile>& missile, bool const k
             int min_x = static_cast<int>(FIRE_MIN_Length * cosval );
             int min_y = static_cast<int>(FIRE_MIN_Length * sinval ); 
             int const power = tank.getpower();
+            tank.set_power_record(power);
+            tank.setmyturn(false);
             missile.push_back(Missile({ tank.getpos().x+min_x,tank.getpos().y -min_y}, 31, 33));
             missile.back().ballistics_initialize(
                 angle,
                 static_cast<float const>(power * FIRE_MUL));
-            tank.set_power_record(power);
-            tank.setmyturn(false);
             missile.back().setmyturn(true);
         }
     }

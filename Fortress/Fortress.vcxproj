@@ -20,8 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Pipeline.h" />
-    <ClInclude Include="Missile.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="Object\Missile\Missile.h" />
+    <ClInclude Include="Object\Object.h" />
+    <ClInclude Include="Object\Tank\Canon.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Scene\S_Lobby.h" />
     <ClInclude Include="Scene\S_Start.h" />
@@ -48,7 +49,7 @@
     <ClInclude Include="Singleton\Missile_manager.h" />
     <ClInclude Include="Singleton\Mouse.h" />
     <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Patterns.h" />
+    <ClInclude Include="Object\Patterns.h" />
     <ClInclude Include="Singleton\Physics_Manager.h" />
     <ClInclude Include="Singleton\SingletonT.h" />
     <ClInclude Include="Scene\S_Battle.h" />
@@ -56,12 +57,13 @@
     <ClInclude Include="Singleton\Text_manager.h" />
     <ClInclude Include="Singleton\Turnmanager.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Tank.h" />
+    <ClInclude Include="Object\Tank\Tank.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Missile.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Patterns.cpp" />
+    <ClCompile Include="Object\Missile\Missile.cpp" />
+    <ClCompile Include="Object\Object.cpp" />
+    <ClCompile Include="Object\Patterns.cpp" />
+    <ClCompile Include="Object\Tank\Canon.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene\S_Lobby.cpp" />
     <ClCompile Include="Scene\S_Start.cpp" />
@@ -85,7 +87,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="Object\Tank\Tank.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

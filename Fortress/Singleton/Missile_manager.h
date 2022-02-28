@@ -9,5 +9,6 @@ public:
 private:
 public:
     Missile_manager();
+    void push_missile(Tank const & tank);
     void clear();
 };

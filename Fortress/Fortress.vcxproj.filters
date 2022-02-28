@@ -69,16 +69,16 @@
     <ClInclude Include="Singleton\Mouse.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
+    <ClInclude Include="Object\Object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Missile.h">
+    <ClInclude Include="Object\Missile\Missile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
+    <ClInclude Include="Object\Tank\Tank.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Singleton\Debug_manager.h">
@@ -120,13 +120,16 @@
     <ClInclude Include="Scene\S_Lobby.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Patterns.h">
+    <ClInclude Include="Object\Patterns.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Singleton\Tank_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Singleton\Missile_manager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Tank\Canon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -146,16 +149,16 @@
     <ClCompile Include="Singleton\Mouse.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
+    <ClCompile Include="Object\Object.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Missile.cpp">
+    <ClCompile Include="Object\Missile\Missile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
+    <ClCompile Include="Object\Tank\Tank.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Debug_manager.cpp">
@@ -194,13 +197,16 @@
     <ClCompile Include="Scene\S_Lobby.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Patterns.cpp">
+    <ClCompile Include="Object\Patterns.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Tank_manager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Missile_manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Tank\Canon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

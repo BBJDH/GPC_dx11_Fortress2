@@ -16,12 +16,12 @@ public:
 	std::vector < Button < bool >> tank_button;
 	
 	//플레이어가 설정된 슬롯, 탱크, 색상
-	std::vector<std::tuple< std::string, std::string, Color>> player_set;
+	//std::vector<std::tuple< std::string, std::string, Color>> player_set;
+	std::vector<std::tuple< std::string, Tank_manager::Tank_Name, Color>> player_set;
 
 private:
 	//기본 설정
 	//버튼 구현한 탱크는 반드시 여기에 기재(출력할 이미지명으로 들어감)
-	std::string const tank_name[12] = { "canon","super", };
 	//맵 버튼 문자 이미지 위치, 크기 설정
 	std::string const map_name[4] = { "sky","friends","the artificial satellite","the valley of city"};
 	int map_index=0;
