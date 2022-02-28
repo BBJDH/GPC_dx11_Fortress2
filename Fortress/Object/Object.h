@@ -30,6 +30,7 @@ protected:
 
 public:
 	Object();
+	virtual ~Object() =default;
 	Object(_float2 const & pos, unsigned const width, unsigned const height);
 	Object(_float2 const & pos, unsigned const width, unsigned const height,float const speed);
 	Object(Object  const & obj);

@@ -17,7 +17,7 @@ private:
 
 	bool is_obj_turn(Object const & obj);
 	bool is_tank_turn(std::vector<Tank>& tank);
-	bool is_missile_turn(std::vector<Missile>& missile);
+	bool is_missile_turn(std::vector<Missile*>& missile);
 	void rerand();
 	void set_wind();
 
@@ -33,6 +33,6 @@ public:
 	bool check_tank_falling(std::vector<Tank>& tank);
 	bool is_gameover(std::vector<Tank>& tank);
 	void tankturn_start(Tank & tank);
-	void checkturn(std::vector<Tank> & tank, std::vector<Missile> & missile);
+	void checkturn(std::vector<Tank> & tank, std::vector<Missile*> & missile);
 
 };

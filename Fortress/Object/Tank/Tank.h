@@ -38,6 +38,10 @@ public:
 	{
 		Normal, Special  //...
 	};
+	enum class Tank_Type
+	{
+		Canon, Super
+	};
 private:
 	//상수 세팅
 	int const NAME_LOCATION_X = -8;
@@ -52,6 +56,7 @@ private:
 	State		    state;
 	Side		    side;
 	Color			color;
+	Tank_Type		tank_type;
 	Missile_Type	missile_type;
 	std::string	const	player_name;
 	std::string	const	tank_name;
@@ -97,6 +102,7 @@ public:
 
 	Color get_color()const;
 	Missile_Type get_missile_type()const;
+	Tank::Tank_Type get_tank_type()const;
 	float const get_ani_playtime()const;
 	float const get_damage_showtime()const;
 	unsigned const gethp() const;
@@ -113,6 +119,7 @@ public:
 	void set_side(Side const side);
 	void setstate(State const state);
 	void set_missile_type(Missile_Type const type);
+	void set_tank_type(Tank_Type const type);
 	void check_state();
 	void take_damage(unsigned const damage);
 	void set_power_guide(int const value);

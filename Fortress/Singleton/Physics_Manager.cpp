@@ -81,7 +81,7 @@ bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 	return false;
 }
 
-void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missile>& missile, HDC const& hmapdc)
+void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missile*>& missile, HDC const& hmapdc)
 {
 	if (!tank.empty())
 	{
@@ -94,19 +94,19 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 	{
 		for (size_t i = 0; i < missile.size(); i++)
 		{
-			if (missile[i].is_falling() and Collide_object(missile[i], hmapdc))
+			if (missile[i]->is_falling() and Collide_object(*(missile[i]), hmapdc))
 			{
 				//부딪혔다면 폭발 후 제거
-				missile[i].boom(hmapdc);  //맵파괴
-				missile[i].set_state(Missile::State::Boom);
-				missile[i].ani_start();
-				collide_bomb(missile[i],tank);  //충돌판정
+				missile[i]->boom(hmapdc);  //맵파괴
+				missile[i]->set_state(Missile::State::Boom);
+				missile[i]->ani_start();
+				collide_bomb(*(missile[i]),tank);  //충돌판정
 			}
 		}
 	}
 }
 // 탄도학 계산 
-void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& missile,
+void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile*>& missile,
 	std::vector<Patterns>& patterns, float const delta)
 {
 	if (!tank.empty())
@@ -125,10 +125,13 @@ void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile>& m
 	{
 		for (size_t i = 0; i < missile.size(); i++)
 		{
-			missile[i].ballistics_equation(delta,_Turn->get_wind());
-			//화면밖으로 나가면 제거
-			if(missile[i].is_out() or missile[i].get_state() == Missile::State::Delete)
+			missile[i]->ballistics_equation(delta,_Turn->get_wind());
+			//화면밖으로 나갔거나 파괴되었을때
+			if (missile[i]->is_out() or missile[i]->get_state() == Missile::State::Delete)
+			{
+				delete missile[i];
 				missile.erase(missile.begin()+i);
+			}
 		}
 	}
 	if (!patterns.empty())

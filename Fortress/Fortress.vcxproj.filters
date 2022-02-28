@@ -129,7 +129,13 @@
     <ClInclude Include="Singleton\Missile_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Tank\Canon.h">
+    <ClInclude Include="Object\Tank\Canon\Canon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Missile\Canon\Canon_Normal.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Missile\Canon\Canon_Special.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,7 +212,13 @@
     <ClCompile Include="Singleton\Missile_manager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Tank\Canon.cpp">
+    <ClCompile Include="Object\Tank\Canon\Canon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Missile\Canon\Canon_Normal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

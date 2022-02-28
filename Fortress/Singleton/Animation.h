@@ -27,8 +27,8 @@ public:
 	void render_loading_fade_out(float const delta);
 	void render_background(_float2 const& position, _float2 const& length, float const delta);
 	void render_tanks(std::vector<Tank> & tank);
-	void render_missile(std::vector<Missile> & missile);
+	void render_missile(std::vector<Missile*> & missile);
 	void render_patterns(std::vector<Patterns> & patterns);
 	void render_arrow(Tank const & tank);
-	void render(std::vector<Tank> & tank, std::vector<Missile> & missile);
+	void render(std::vector<Tank> & tank, std::vector<Missile*> & missile);
 };

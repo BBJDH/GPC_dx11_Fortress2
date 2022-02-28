@@ -6,9 +6,49 @@ Tank_manager::Tank_manager()
 {
 }
 
-void Tank_manager::create_tank(std::string const& tank_name)
+void Tank_manager::create_tank(_float2 const & position, std::string const& player_name, Tank::Tank_Type const tank_name, Color const color)
 {
-    //탱크 위치, 플레이어 이름, 색상
+    //위치, 탱크 이름, 플레이어 이름, 색상
+    int  tank_size = 50;
+
+    switch (tank_name)
+    {
+    case Tank::Tank_Type::Canon:
+    {
+        tanks.push_back
+        (
+            Canon
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Canon",
+                color
+            )
+        );
+        break;
+    }
+    case Tank::Tank_Type::Super:
+    {
+        tanks.push_back
+        (
+            Canon
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Canon",
+                color
+            )
+        );
+        break;
+    }
+
+    }
+
+    tanks.back().ballistics_initialize(0, 0);
 }
 
 void Tank_manager::create_tanks()
@@ -22,19 +62,25 @@ void Tank_manager::create_tanks()
     {
         //float const loc_x = static_cast<float>(r.GetResult(i));
         float const loc_x = (static_cast<float>(r.GetResult(i) * rand_mul + (rand() % rand_mul) + 10));
-        tanks.push_back
+        create_tank
         (
-            Canon
-            (
-                { loc_x, 0 },
-                Tank_SIZE,
-                Tank_SIZE,
-                "player " + std::to_string(i + 1),
-                "canon",
-                std::get<2>(_Button->player_set[i])
-            )
+            { loc_x ,0},
+            "player " + std::to_string(i + 1),
+            std::get<1>(_Button->player_set[i]),
+            std::get<2>(_Button->player_set[i])
         );
-        tanks.back().ballistics_initialize(0, 0);
+        //tanks.push_back
+        //(
+        //    Canon
+        //    (
+        //        { position.x, 0 },
+        //        Tank_SIZE,
+        //        Tank_SIZE,
+        //        "player " + std::to_string(i + 1),
+        //        "canon",
+        //        std::get<2>(_Button->player_set[i])
+        //    )
+        //);
     }
 }
 

@@ -339,7 +339,7 @@ void Button_manager::update_player_set()
 			{
 				if (_Tank->tank_name[tank_result.index] != "")	//변경시도
 				{
-					std::get<1>(*iter) = static_cast<Tank_manager::Tank_Name>(tank_result.index);
+					std::get<1>(*iter) = static_cast<Tank::Tank_Type>(tank_result.index);
 				}
 				else//제거
 				{
@@ -356,7 +356,7 @@ void Button_manager::update_player_set()
 				std::make_tuple
 				(
 					"slot_" + std::to_string(slot_result.index),
-					static_cast<Tank_manager::Tank_Name>(tank_result.index),
+					static_cast<Tank::Tank_Type>(tank_result.index),
 					static_cast<Color>(slot_result.index)
 				)
 			);

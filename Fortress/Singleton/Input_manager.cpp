@@ -93,14 +93,14 @@ void Input_manager::key_down(Tank & tank)
     }
 }
 
-void Input_manager::key_space(Tank& tank,std::vector<Missile>& missile)
+void Input_manager::key_space(Tank& tank,std::vector<Missile*>& missile)
 {
     if ((GetAsyncKeyState(VK_SPACE) & 0x8000))
         fire(tank,missile,true);
 }
 
 
-void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile>& missile, std::vector<Patterns>& patterns, float const deltha)
+void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile*>& missile, std::vector<Patterns>& patterns, float const deltha)
 {
     interval += deltha;
     if (interval > speed)
@@ -170,7 +170,7 @@ void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isri
     }
 }
 //30도 위에 15도로 사격, 뒤돌면 210도 방향으로부터 -15도이므로 195도
-void Input_manager::fire(Tank& tank, std::vector<Missile>& missile, bool const keyon)
+void Input_manager::fire(Tank& tank, std::vector<Missile*>& missile, bool const keyon)
 {
     if (tank.is_myturn()and!tank.is_falling())
     {
@@ -200,14 +200,16 @@ void Input_manager::fire(Tank& tank, std::vector<Missile>& missile, bool const k
             double sinval = sin(angle*Radian); 
             int min_x = static_cast<int>(FIRE_MIN_Length * cosval );
             int min_y = static_cast<int>(FIRE_MIN_Length * sinval ); 
-            int const power = tank.getpower();
-            tank.set_power_record(power);
+
             tank.setmyturn(false);
-            missile.push_back(Missile({ tank.getpos().x+min_x,tank.getpos().y -min_y}, 31, 33));
-            missile.back().ballistics_initialize(
+
+            _Missile->create_missiles
+            (
+                { tank.getpos().x + min_x,tank.getpos().y - min_y },
                 angle,
-                static_cast<float const>(power * FIRE_MUL));
-            missile.back().setmyturn(true);
+                tank
+            );
+            
         }
     }
 }

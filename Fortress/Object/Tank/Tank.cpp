@@ -9,7 +9,8 @@ Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height,
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
 	state{ State::Fall }, side{ static_cast<Side>(rand()%2) },
 	ani_playtime{ 0.0f }, player_name{ player_name }, tank_name{ tank_name }, damage{ "" }, color{ color },
-	power_record{ 0 }, power_guide{ 0 }, missile_type{ Missile_Type::Normal}
+	power_record{ 0 }, power_guide{ 0 }, missile_type{ Missile_Type::Special},
+	tank_type{ Tank::Tank_Type::Canon}
 {
 	ani_set_normal();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
@@ -105,6 +106,11 @@ Tank::Missile_Type Tank::get_missile_type() const
 	return missile_type;
 }
 
+Tank::Tank_Type Tank::get_tank_type() const
+{
+	return tank_type;
+}
+
 void Tank::plus_power()
 {
 	if(fire_velocity<UI_POWER_MAX)
@@ -185,6 +191,11 @@ void Tank::setstate(State const state)
 void Tank::set_missile_type(Missile_Type const type)
 {
 	this->missile_type = type;
+}
+
+void Tank::set_tank_type(Tank_Type const type)
+{
+	this->tank_type = type;
 }
 
 void Tank::set_power_guide(int const value)

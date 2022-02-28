@@ -14,11 +14,11 @@ private:
 	void key_right(Tank & tank);
 	void key_up(Tank & tank);
 	void key_down(Tank & tank);
-	void key_space(Tank & tank,std::vector<Missile>& missile);
+	void key_space(Tank & tank,std::vector<Missile*>& missile);
 public:
 	Input_manager();
-	void input(std::vector<Tank>& tank, std::vector<Missile>& missile,
+	void input(std::vector<Tank>& tank, std::vector<Missile*>& missile,
 		std::vector<Patterns>& patterns, float const deltha);
 	void find_nextstep(HDC const& hmapdc,  Tank & tank,  bool const isright);
-	void fire(Tank& tank, std::vector<Missile>& missile, bool const keyon);
+	void fire(Tank& tank, std::vector<Missile*>& missile, bool const keyon);
 };

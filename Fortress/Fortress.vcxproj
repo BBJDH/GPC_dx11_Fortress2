@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Pipeline.h" />
+    <ClInclude Include="Object\Missile\Canon\Canon_Normal.h" />
+    <ClInclude Include="Object\Missile\Canon\Canon_Special.h" />
     <ClInclude Include="Object\Missile\Missile.h" />
     <ClInclude Include="Object\Object.h" />
-    <ClInclude Include="Object\Tank\Canon.h" />
+    <ClInclude Include="Object\Tank\Canon\Canon.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Scene\S_Lobby.h" />
     <ClInclude Include="Scene\S_Start.h" />
@@ -60,10 +62,12 @@
     <ClInclude Include="Object\Tank\Tank.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Missile\Canon\Canon_Normal.cpp" />
+    <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp" />
     <ClCompile Include="Object\Missile\Missile.cpp" />
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Object\Patterns.cpp" />
-    <ClCompile Include="Object\Tank\Canon.cpp" />
+    <ClCompile Include="Object\Tank\Canon\Canon.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene\S_Lobby.cpp" />
     <ClCompile Include="Scene\S_Start.cpp" />

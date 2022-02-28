@@ -39,14 +39,14 @@ void Missile::check_state()
 
 void Missile::ani_set_throw()
 {
-	animation.Name = "Animation/Bomb/bomb";
+	animation.Name = "Animation/Missile/Canon/normal";
 	animation.Duration = ANI_Bomb_Throw;
 	animation.Repeatable = true;
 }
 
 void Missile::ani_set_boom()
 {
-	animation.Name = "Animation/Bomb/explosion";
+	animation.Name = "Animation/Missile/explosion";
 	animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
 	animation.Duration = ANI_Bomb_Boom;
 	animation.Repeatable = false;

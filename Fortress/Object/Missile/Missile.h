@@ -11,28 +11,31 @@ public:
 	{
 		Throw, Boom, Delete
 	};
-private:
+protected:
 	Engine::Rendering::Animation::Component animation;
 	float ani_playtime;
-
 	int const damage;
 	State state;
 	int const bomb_range_w;
 	int const bomb_range_h;
 	//Type     explosion_type;
 
+
+
+private:
 	void check_state();
 	void ani_set_throw();
 	void ani_set_boom();
 
 public:
 	Missile(_float2 const& pos, unsigned const width, unsigned const height);
+	virtual ~Missile() = default;
 	Missile & operator=(Missile const& other_miss);
 	int const get_range_w()const;
 	int const get_damage()const;
 	State get_state()const;
 	void boom(HDC const& hmapdc);
-	void ani_render(float const delta);
+	virtual void ani_render(float const delta);
 	void ani_start();
 	void set_state(State const state);
 

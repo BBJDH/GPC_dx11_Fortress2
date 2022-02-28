@@ -185,10 +185,22 @@ enum class Color
 //=====================================
 
 //게임안 보여질 객체들
-//#include"Object.h"
-#include"./Object/Tank/Canon.h"
+
+
+//Tank
+#include"./Object/Tank/Tank.h"
+#include"./Object/Tank/Canon/Canon.h"
+
+
+//Missile
 #include"./Object/Missile/Missile.h"
+#include"./Object/Missile/Canon/Canon_Normal.h"
+#include"./Object/Missile/Canon/Canon_Special.h"
+
+//기타 오브젝트 상속
 #include"./Object/Patterns.h"
+
+//버튼
 #include"Button.h"
 
 //랜덤추출함수
@@ -205,7 +217,9 @@ enum class Color
 #include "./Scene/S_Start.h"
 #include "./Scene//S_Lobby.h"
 
-//싱글톤 생성
+//매니저(싱글톤) 
+#include"./Singleton/Tank_manager.h"
+#include"./Singleton/Missile_manager.h"
 #include"./Singleton/Mouse.h"
 #include"./Singleton/Camera.h"
 #include"./Singleton/Debug_manager.h"
@@ -216,11 +230,8 @@ enum class Color
 #include"./Singleton/Input_manager.h"
 #include"./Singleton/Animation.h"
 #include"./Singleton/Text_manager.h"
-#include"./Singleton/Tank_manager.h"
 #include"./Singleton/Button_manager.h"
-#include"./Singleton/Missile_manager.h"
 
-//#include"Turnmanager.h"
 
 
 

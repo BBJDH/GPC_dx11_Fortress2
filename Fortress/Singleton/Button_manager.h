@@ -17,7 +17,7 @@ public:
 	
 	//플레이어가 설정된 슬롯, 탱크, 색상
 	//std::vector<std::tuple< std::string, std::string, Color>> player_set;
-	std::vector<std::tuple< std::string, Tank_manager::Tank_Name, Color>> player_set;
+	std::vector<std::tuple< std::string, Tank::Tank_Type, Color>> player_set;
 
 private:
 	//기본 설정

@@ -86,13 +86,13 @@ void Animation::render_tanks(std::vector<Tank> & tank)
     }
 }
 
-void Animation::render_missile(std::vector<Missile> & missile)
+void Animation::render_missile(std::vector<Missile*> & missile)
 {
     if (!missile.empty())
     {
         for (size_t i = 0; i < missile.size(); i++)
         {
-            missile[i].ani_render(Engine::Time::Get::Delta());
+            missile[i]->ani_render(Engine::Time::Get::Delta());
         }
     }
 }
@@ -115,7 +115,7 @@ void Animation::render_arrow(Tank const & tank)
     animation.Render();
 }
 
-void Animation::render(std::vector<Tank>& tank, std::vector<Missile>& missile)
+void Animation::render(std::vector<Tank>& tank, std::vector<Missile*>& missile)
 {
     render_tanks(tank);
     render_missile(missile);
