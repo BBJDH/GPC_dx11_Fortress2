@@ -161,7 +161,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 			tank_rect.Length = {static_cast<float const>(tank[i].getwidth()),static_cast<float const>(tank[i].getheight())};
 			if (bomb_circle.Collide(tank_rect))
 			{
-				int const range = missile.get_range_w();
+				int const range = static_cast<int const>(missile.get_range_w());
 				int const length = this->length(tank[i].getpos(),missile.getpos());
 				unsigned   dmg_mul =0;
 				if((range - length) <=0)

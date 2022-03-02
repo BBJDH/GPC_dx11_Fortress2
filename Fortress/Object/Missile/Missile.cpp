@@ -3,8 +3,16 @@
 #include "Missile.h"
 
 Missile::Missile(_float2 const& pos, unsigned const width, unsigned const height):
-	Object(pos, width, height,10),bomb_range_w(100),bomb_range_h(80),
-	damage{100}, ani_playtime{ 0.0f }, state{ State::Throw }
+	Object(pos, width, height, 10), bomb_range{100,80},
+	damage{300}, ani_playtime{ 0.0f }, state{ State::Throw }
+{
+	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
+}
+
+Missile::Missile(_float2 const& pos, unsigned const width, unsigned const height,
+	_float2 const& range, int const dagame)
+	:Object(pos, width, height, 10), bomb_range{ range },
+	damage{ dagame }, ani_playtime{ 0.0f }, state{ State::Throw }
 {
 	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
 }
@@ -59,9 +67,9 @@ Missile& Missile::operator=(Missile const& other_miss)
 	return *this;
 }
 
-int const Missile::get_range_w() const
+float const Missile::get_range_w() const
 {
-	return bomb_range_w;
+	return bomb_range.width();
 }
 
 int const Missile::get_damage() const
@@ -82,7 +90,9 @@ void Missile::boom(HDC const& hmapdc)
 	SelectObject(hmapdc, hNewPen);
 	int const x = static_cast<int const>(pos.x);
 	int const y = static_cast<int const>(pos.y);
-	Ellipse(hmapdc, x-bomb_range_w, y-bomb_range_h, x+bomb_range_w, y+bomb_range_h);
+	int const range_w = static_cast<int const>(bomb_range.width());
+	int const range_h = static_cast<int const>(bomb_range.height());
+	Ellipse(hmapdc, x- range_w, y- range_h, x+ range_w, y+ range_h);
 	SelectObject(hmapdc, hOldBmp);
 	DeleteObject(hNewBrush);
 	DeleteObject(hNewPen);

@@ -3,7 +3,7 @@ class Canon_Special : public Missile
 {
 
 private:
-	float const explosion_time = 0.7f;
+	float const explosion_time = 1.25f;
 private:
 	void check_state();
 	void ani_set_throw();

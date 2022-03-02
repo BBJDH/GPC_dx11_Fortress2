@@ -106,7 +106,7 @@ void Button_manager::render_tank_selected()
 		{
 			if ("slot_" + std::to_string(i) == std::get<0>(*iter)) //벡터의 해당슬롯을 검색
 			{
-				_Image_manager->render_tank_image
+				_Image_manager->render_tank_icon
 				(
 					_Tank->tank_name[ static_cast<int>(std::get<1>(*iter))].c_str(),
 					{
@@ -117,6 +117,27 @@ void Button_manager::render_tank_selected()
 				);
 			}
 		}
+	}
+}
+
+void Button_manager::render_missile_icon()
+{
+	_float2 const location = { 28 ,700 };
+	_float2 const length = { 50 ,35 };
+
+	float const offset = 240;
+
+	switch (_Tank->tanks[_Turn->whosturn()].get_tank_type())
+	{
+	case Tank::Tank_Type::Canon:
+	case Tank::Tank_Type::Super:
+
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		set_slot_button(slot_button, "Battle/missile",
+			{ location.x + offset * i , location.y }, { length.width(), length.height() });
 	}
 }
 
@@ -255,7 +276,7 @@ void Button_manager::render()
 
 Scene* Button_manager::scene_button_on()
 {
-	for (auto iter = _Button->scene_buttons.begin(); iter != _Button->scene_buttons.end(); ++iter)
+	for (auto iter = scene_buttons.begin(); iter != scene_buttons.end(); ++iter)
 	{
 		if (iter->second.clicked())	//상태에 따라 이벤트 처리
 		{
@@ -430,7 +451,7 @@ void Button_manager::render_tank_button_image()
 	{
 		if (i < 6)
 		{
-			_Image_manager->render_tank_image
+			_Image_manager->render_tank_icon
 			(
 				_Tank->tank_name[i],
 				{
@@ -442,7 +463,7 @@ void Button_manager::render_tank_button_image()
 		}
 		else
 		{
-			_Image_manager->render_tank_image
+			_Image_manager->render_tank_icon
 			(
 				_Tank->tank_name[i],
 				{
@@ -547,12 +568,27 @@ void Button_manager::init_power_arrow_button()
 		}
 	);
 }
+void Button_manager::init_slot_missile_button()
+{
+	_float2 const location = { 28 ,700 };
+	_float2 const length = { 50 ,35 };
+
+	float const offset = 240;
+
+	for (int i = 0; i < 2; i++)
+	{
+		set_slot_button(slot_button, "Battle/missile",
+			{ location.x + offset * i , location.y }, { length.width(), length.height() });
+	}
+	slot_button.front().set_on(true);
+}
 
 void Button_manager::init_battle_buttons()
 {
 	init_playing_exit_button();
 	init_skip_button();
 	init_power_arrow_button();
+	init_slot_missile_button();
 }
 
 void Button_manager::init_gameover_exit_button()
@@ -603,6 +639,24 @@ bool Button_manager::switch_map()
 	if (map_index > map_name->size())
 		map_index = 0;
 	return true;
+}
+
+void Button_manager::update_missile()
+{
+	//if (selected_missile.clicked)
+	//{
+	//	Tank::Missile_Type selected = static_cast<Tank::Missile_Type>(selected_missile.index);
+	//	_Tank->tanks[_Turn->whosturn()].set_missile_type(selected);
+	//}
+	//else
+	//{
+	//	slot_button.at(0);
+	//}
+	int const index = static_cast<int>(_Tank->tanks[_Turn->whosturn()].get_missile_type());
+	slot_button.at(index).make_clicked();
+	result const selected_missile = slot_toggle(slot_button);
+	Tank::Missile_Type selected = static_cast<Tank::Missile_Type>(selected_missile.index);
+	_Tank->tanks[_Turn->whosturn()].set_missile_type(selected);
 }
 
 bool Button_manager::set_power_guide()

@@ -2,7 +2,7 @@
 #include "Canon_Special.h"
 
 Canon_Special::Canon_Special(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height)
+	:Missile(pos, width, height, {50,40}, 500)
 {
 }
 //가상 소멸자 오바라이딩이 제대로 되었는가
@@ -59,7 +59,7 @@ void Canon_Special::ani_set_throw()
 
 void Canon_Special::ani_set_boom()
 {
-	animation.Name = "Animation/Missile/explosion2";
+	animation.Name = "Animation/Missile/explosion";
 	animation.Length = Vector<2>(150, 150);
 	animation.Duration = explosion_time;
 	animation.Repeatable = false;

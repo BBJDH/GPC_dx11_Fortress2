@@ -109,6 +109,14 @@ template void Button<Scene*>::update_state_and_render();
 
 
 template<typename T>
+void Button<T>::make_clicked()
+{
+	this->state = State::Clicked_Up;
+}
+template void Button<bool>::make_clicked();
+template void Button<Scene*>::make_clicked();
+
+template<typename T>
 bool Button<T>::clicked()
 {
 	return this->state == State::Clicked_Up;

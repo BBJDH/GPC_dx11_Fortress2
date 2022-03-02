@@ -38,6 +38,7 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
                 Tank_SIZE,
                 "test",
                 "canon",
+                Tank::Tank_Type::Canon,
                 Color::Red
             )
         );

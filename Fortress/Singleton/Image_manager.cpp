@@ -132,12 +132,12 @@ void Image_manager::render_lobby_back()
 
 }
 
-void Image_manager::render_tank_image(std::string const& name, _float2 const& position, _float2 const& length)
+void Image_manager::render_tank_icon(std::string const& name, _float2 const& position, _float2 const& length)
 {
     if (name.empty())
         return;
 
-    std::string const location = "Image/Tank/" + name;
+    std::string const location = "Image/Icon/" + name + "/" + name;
     view_image.Name = location.c_str();
     set_image(view_image, position, length);
     view_image.Render();
@@ -159,6 +159,20 @@ void Image_manager::render_selected_slot(_float2 const& position, _float2 const&
     view_image.Name = "Image/Button/Lobby/selected_slot";
     set_image(view_image, position, length);
     view_image.Render();
+}
+
+void Image_manager::render_missile_icon(std::string const& tank, std::string const& missile, _float2 const& position, _float2 const& length)
+{
+    if (tank.empty() or missile.empty())
+        return;
+
+    std::string const location = "Image/Icon/" + tank + "/" + missile;
+    view_image.Name = location.c_str();
+    set_image(view_image, position, length);
+    view_image.Render();
+    //현재 미사일을 그릴 탱크 타입
+    //미사일 타입
+
 }
 
 //void Image_manager::set_background(_float2 const& position ,_float2 const& length)

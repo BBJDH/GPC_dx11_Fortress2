@@ -4,7 +4,7 @@
 
 
 Canon_Normal::Canon_Normal(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height)
+	:Missile(pos, width, height, {100,80},350)
 {
 }
 

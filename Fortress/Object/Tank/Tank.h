@@ -93,7 +93,8 @@ private:
 public:
 
 	Tank(_float2 const& pos, unsigned const width, unsigned const height,
-		std::string const& player_name, std::string const& tank_name, Color const color);
+		std::string const& player_name, std::string const& tank_name,
+		Tank::Tank_Type const type, Color const color);
 	Tank & operator=(Tank const & other_tank);
 	Tank::State get_state()const;
 	Tank::Side get_side()const;

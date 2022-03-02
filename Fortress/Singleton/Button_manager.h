@@ -54,6 +54,9 @@ private:
 	void    init_playing_exit_button();
 	void    init_skip_button();
 	void    init_power_arrow_button();
+	void    init_slot_missile_button();
+	void    render_missile_icon();
+
 public:
 	Scene* scene_button_on();
 	void render();	//버튼 업데이트 후 렌더링, 만약 따로 업데이트할내용이 있다면
@@ -70,6 +73,7 @@ public:
 	std::string get_map_name();
 	void	init_battle_buttons();
 	void    init_gameover_exit_button();
+	void	update_missile();
 
 	
 	

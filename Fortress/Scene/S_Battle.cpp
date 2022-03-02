@@ -187,6 +187,7 @@ void S_Battle::render_playing() //Update
     _Text_manager->render(_Tank->tanks);
     _Image_manager->render_ui(_Tank->tanks);
     _Map_manager->render_minimap(_Tank->tanks);
+    _Button->update_missile();
     _Button->render();
 
 

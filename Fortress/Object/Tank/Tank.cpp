@@ -3,14 +3,15 @@
 
 
 Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height,
-	std::string const& player_name, std::string const& tank_name, Color const color)
+	std::string const& player_name, std::string const& tank_name,
+	Tank::Tank_Type const type, Color const color)
 	: Object(pos, width, height), hp{ TANK_HP }, max_fuel{200}, fuel{ max_fuel },
 	fire_angle_min{25}, fire_angle_max{55},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
 	state{ State::Fall }, side{ static_cast<Side>(rand()%2) },
 	ani_playtime{ 0.0f }, player_name{ player_name }, tank_name{ tank_name }, damage{ "" }, color{ color },
-	power_record{ 0 }, power_guide{ 0 }, missile_type{ Missile_Type::Special},
-	tank_type{ Tank::Tank_Type::Canon}
+	power_record{ 0 }, power_guide{ 0 }, missile_type{ Missile_Type::Normal},
+	tank_type{ type }
 {
 	ani_set_normal();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);

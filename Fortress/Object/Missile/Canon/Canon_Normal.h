@@ -6,6 +6,8 @@ class Canon_Normal : public Missile
 	//	Circle, Ellipse
 	//};
 private:
+	float const explosion_time = 1.25f;
+private:
 	void check_state();
 	void ani_set_throw();
 	void ani_set_boom();

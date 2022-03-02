@@ -68,11 +68,12 @@ public:
 
     //  ==================== Lobby ===================
     void render_lobby_back();
-    void render_tank_image(std::string const& name, _float2 const& position, _float2 const& length);
+    void render_tank_icon(std::string const& name, _float2 const& position, _float2 const& length);
     void render_color(Color color, _float2 const& position, _float2 const& length);
     void render_selected_slot(_float2 const& position, _float2 const& length);
     //  ==================== Battle ==================
-    
+    void render_missile_icon(std::string const& tank, std::string const& missile, _float2 const& position, _float2 const& length);
+
     //Battle(loading)
     void render_loading();
 

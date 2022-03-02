@@ -13,11 +13,10 @@ public:
 	};
 protected:
 	Engine::Rendering::Animation::Component animation;
+	State state;
 	float ani_playtime;
 	int const damage;
-	State state;
-	int const bomb_range_w;
-	int const bomb_range_h;
+	_float2 bomb_range;
 	//Type     explosion_type;
 
 
@@ -29,9 +28,11 @@ private:
 
 public:
 	Missile(_float2 const& pos, unsigned const width, unsigned const height);
+	Missile(_float2 const& pos, unsigned const width, unsigned const height,
+		_float2 const& missile_range, int const dagame);
 	virtual ~Missile() = default;
 	Missile & operator=(Missile const& other_miss);
-	int const get_range_w()const;
+	float const get_range_w()const;
 	int const get_damage()const;
 	State get_state()const;
 	void boom(HDC const& hmapdc);

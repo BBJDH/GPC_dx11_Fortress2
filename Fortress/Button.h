@@ -36,7 +36,7 @@ public:
 	void update_state_and_render();
 	//비활성화 상태라면 어떤 동작도 하지않음,
 	//토글상태인지 아닌지는 활성화(activated )상태에서 나누어서 출력
-
+	void make_clicked();
 	bool clicked();
 	bool get_on();
 	T execute() const;
