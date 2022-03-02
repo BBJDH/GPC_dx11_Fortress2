@@ -81,13 +81,13 @@ bool Physics_Manager::Collide_object(Object& obj, HDC const& hmapdc)
 	return false;
 }
 
-void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missile*>& missile, HDC const& hmapdc)
+void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missile*>& missile, HDC const& hmapdc)
 {
 	if (!tank.empty())
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			tank[i].check_state();
+			tank[i]->check_state();
 		}
 	}
 	if (!missile.empty())
@@ -106,18 +106,18 @@ void Physics_Manager::Collide_objects(std::vector<Tank>& tank,std::vector<Missil
 	}
 }
 // ÅºµµÇÐ °è»ê 
-void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile*>& missile,
+void Physics_Manager::ballistics(std::vector<Tank*>& tank,std::vector<Missile*>& missile,
 	std::vector<Patterns>& patterns, float const delta)
 {
 	if (!tank.empty())
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			tank[i].ballistics_equation(delta);
-			if (tank[i].is_out())
+			tank[i]->ballistics_equation(delta);
+			if (tank[i]->is_out())
 			{
-				tank[i].take_damage(TANK_HP);
-				tank[i].stop_move(0.0f);
+				tank[i]->take_damage(TANK_HP);
+				tank[i]->stop_move(0.0f);
 			}
 		}
 	}
@@ -146,7 +146,7 @@ void Physics_Manager::ballistics(std::vector<Tank>& tank,std::vector<Missile*>& 
 	}
 }
 
-void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& tank)
+void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& tank)
 {
 	if (!tank.empty())
 	{
@@ -157,12 +157,12 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 		for (size_t i = 0; i < tank.size(); i++)
 		{
 			Engine::Physics::Component<Quadrangle> tank_rect;
-			tank_rect.Center = {tank[i].getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-tank[i].getpos().y};
-			tank_rect.Length = {static_cast<float const>(tank[i].getwidth()),static_cast<float const>(tank[i].getheight())};
+			tank_rect.Center = {tank[i]->getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-tank[i]->getpos().y};
+			tank_rect.Length = {static_cast<float const>(tank[i]->getwidth()),static_cast<float const>(tank[i]->getheight())};
 			if (bomb_circle.Collide(tank_rect))
 			{
 				int const range = static_cast<int const>(missile.get_range_w());
-				int const length = this->length(tank[i].getpos(),missile.getpos());
+				int const length = this->length(tank[i]->getpos(),missile.getpos());
 				unsigned   dmg_mul =0;
 				if((range - length) <=0)
 					dmg_mul =1;
@@ -171,9 +171,9 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank>& ta
 				 
 				unsigned const dmg = missile.get_damage() * dmg_mul / range;
 
-				tank[i].ballistics_initialize(0,0);
-				tank[i].take_damage(dmg);
-				tank[i].ani_start();
+				tank[i]->ballistics_initialize(0,0);
+				tank[i]->take_damage(dmg);
+				tank[i]->ani_start();
 
 				_CAM->earthquake_start();
 			}

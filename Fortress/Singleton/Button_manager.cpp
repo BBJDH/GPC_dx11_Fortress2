@@ -122,23 +122,27 @@ void Button_manager::render_tank_selected()
 
 void Button_manager::render_missile_icon()
 {
-	_float2 const location = { 28 ,700 };
-	_float2 const length = { 50 ,35 };
+	_float2 const position = { 28 ,700 };
+	_float2 const length = { 30 ,20 };
 
 	float const offset = 240;
 
-	switch (_Tank->tanks[_Turn->whosturn()].get_tank_type())
-	{
-	case Tank::Tank_Type::Canon:
-	case Tank::Tank_Type::Super:
+	_Image_manager->render_missile_icon
+	(
+		_Tank->tanks[_Turn->whosturn()]->get_tank_name(),
+		"normal",
+		{ position.x , position.y },
+		length
+	);
 
-	}
+	_Image_manager->render_missile_icon
+	(
+		_Tank->tanks[_Turn->whosturn()]->get_tank_name(),
+		"special",
+		{ position.x +  offset , position.y },
+		length
+	);
 
-	for (int i = 0; i < 2; i++)
-	{
-		set_slot_button(slot_button, "Battle/missile",
-			{ location.x + offset * i , location.y }, { length.width(), length.height() });
-	}
 }
 
 void Button_manager::render_slot_color()
@@ -611,6 +615,13 @@ void Button_manager::init_gameover_exit_button()
 	);
 }
 
+void Button_manager::render_battle_button()
+{
+	update_missile();
+	render();
+	render_missile_icon();
+}
+
 Scene* Button_manager::to_lobby()
 {
 	return  new S_Lobby;
@@ -643,25 +654,16 @@ bool Button_manager::switch_map()
 
 void Button_manager::update_missile()
 {
-	//if (selected_missile.clicked)
-	//{
-	//	Tank::Missile_Type selected = static_cast<Tank::Missile_Type>(selected_missile.index);
-	//	_Tank->tanks[_Turn->whosturn()].set_missile_type(selected);
-	//}
-	//else
-	//{
-	//	slot_button.at(0);
-	//}
-	int const index = static_cast<int>(_Tank->tanks[_Turn->whosturn()].get_missile_type());
+	int const index = static_cast<int>(_Tank->tanks[_Turn->whosturn()]->get_missile_type());
 	slot_button.at(index).make_clicked();
 	result const selected_missile = slot_toggle(slot_button);
 	Tank::Missile_Type selected = static_cast<Tank::Missile_Type>(selected_missile.index);
-	_Tank->tanks[_Turn->whosturn()].set_missile_type(selected);
+	_Tank->tanks[_Turn->whosturn()]->set_missile_type(selected);
 }
 
 bool Button_manager::set_power_guide()
 {//xÁÂÇ¥ 450~1090
 	int const guide_power = static_cast<int const>((_Mouse->x - 450)/5);
-	_Tank->tanks[_Turn->whosturn()].set_power_guide(guide_power);
+	_Tank->tanks[_Turn->whosturn()]->set_power_guide(guide_power);
 	return true;
 }

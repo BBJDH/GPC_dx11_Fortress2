@@ -44,7 +44,7 @@ public:
 	bool is_myturn()const;
 	bool is_out()const;
 	void moveto(_float2 const & pos);
-	void ballistics_equation(float const moving_time, float const wind=0);
+	virtual void ballistics_equation(float const moving_time, float const wind=0);
 	void ballistics_initialize(float const moving_angle, float const velocity);
 	void stop_move(float const thetha);
 	void setmyturn(bool myturn);

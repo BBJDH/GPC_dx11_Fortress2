@@ -53,7 +53,7 @@ private:
     void render_tank_hp_base(_float2 const & position);
     void render_tank_hp_bar(_float2 const & position, int const hp);
     void render_tank_hp(Tank const & tank);
-    void render_tanks_hp(std::vector<Tank> const& tank);
+    void render_tanks_hp(std::vector<Tank*> const& tank);
 
     
     //game over
@@ -81,8 +81,8 @@ public:
     //void render_background(_float2 const& position = { 0,0 },
     //    _float2 const& length = { BackgroundSIZE_W,BackgroundSIZE_H });
     void render_minimap_background();
-    void render_ui(std::vector<Tank> const& tank);
-    void render_minimap_tank(std::vector<Tank> const& tank);
+    void render_ui(std::vector<Tank*> const& tank);
+    void render_minimap_tank(std::vector<Tank*> const& tank);
     void render_minimap_cambox();
 
     // Game Over 

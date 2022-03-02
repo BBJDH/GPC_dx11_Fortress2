@@ -6,7 +6,7 @@ private:
 	float interval;
 	float const speed = 0.03f;
 
-	void debug_left_button(std::vector<Tank>& tank);
+	void debug_left_button(std::vector<Tank*>& tank);
 	void debug_left_button(std::vector<Patterns>& patterns);
 	void debug_right_button();
 
@@ -17,7 +17,7 @@ private:
 	void key_space(Tank & tank,std::vector<Missile*>& missile);
 public:
 	Input_manager();
-	void input(std::vector<Tank>& tank, std::vector<Missile*>& missile,
+	void input(std::vector<Tank*>& tank, std::vector<Missile*>& missile,
 		std::vector<Patterns>& patterns, float const deltha);
 	void find_nextstep(HDC const& hmapdc,  Tank & tank,  bool const isright);
 	void fire(Tank& tank, std::vector<Missile*>& missile, bool const keyon);

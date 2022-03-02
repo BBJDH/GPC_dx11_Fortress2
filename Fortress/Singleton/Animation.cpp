@@ -73,16 +73,16 @@ float const Animation::get_loading_time()
     return loading_time;
 }
 
-void Animation::render_tanks(std::vector<Tank> & tank)
+void Animation::render_tanks(std::vector<Tank*> & tank)
 {
     if (!tank.empty())
     {
         for (size_t i = 0; i < tank.size(); i++)
         {
             if (i != _Turn->whosturn())
-            tank[i].ani_render(Engine::Time::Get::Delta());
+            tank[i]->ani_render(Engine::Time::Get::Delta());
         }
-        tank[_Turn->whosturn()].ani_render(Engine::Time::Get::Delta());
+        tank[_Turn->whosturn()]->ani_render(Engine::Time::Get::Delta());
     }
 }
 
@@ -115,13 +115,13 @@ void Animation::render_arrow(Tank const & tank)
     animation.Render();
 }
 
-void Animation::render(std::vector<Tank>& tank, std::vector<Missile*>& missile)
+void Animation::render(std::vector<Tank*>& tank, std::vector<Missile*>& missile)
 {
     render_tanks(tank);
     render_missile(missile);
     if (_Turn->get_state() == Turnmanager::State::Tank_Turn)
     {
-        render_arrow(tank[_Turn->whosturn()]);
+        render_arrow(*tank[_Turn->whosturn()]);
     }
 
 }

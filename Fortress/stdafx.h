@@ -190,12 +190,16 @@ enum class Color
 //Tank
 #include"./Object/Tank/Tank.h"
 #include"./Object/Tank/Canon/Canon.h"
+#include"./Object/Tank/Super/Super.h"
 
 
 //Missile
 #include"./Object/Missile/Missile.h"
 #include"./Object/Missile/Canon/Canon_Normal.h"
 #include"./Object/Missile/Canon/Canon_Special.h"
+#include"./Object/Missile/Super/Super_Normal.h"
+#include"./Object/Missile/Super/Super_Special.h"
+
 
 //기타 오브젝트 상속
 #include"./Object/Patterns.h"

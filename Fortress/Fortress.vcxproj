@@ -23,8 +23,11 @@
     <ClInclude Include="Object\Missile\Canon\Canon_Normal.h" />
     <ClInclude Include="Object\Missile\Canon\Canon_Special.h" />
     <ClInclude Include="Object\Missile\Missile.h" />
+    <ClInclude Include="Object\Missile\Super\Super_Normal.h" />
+    <ClInclude Include="Object\Missile\Super\Super_Special.h" />
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Object\Tank\Canon\Canon.h" />
+    <ClInclude Include="Object\Tank\Super\Super.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Scene\S_Lobby.h" />
     <ClInclude Include="Scene\S_Start.h" />
@@ -65,9 +68,12 @@
     <ClCompile Include="Object\Missile\Canon\Canon_Normal.cpp" />
     <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp" />
     <ClCompile Include="Object\Missile\Missile.cpp" />
+    <ClCompile Include="Object\Missile\Super\Super_Normal.cpp" />
+    <ClCompile Include="Object\Missile\Super\Super_Special.cpp" />
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Object\Patterns.cpp" />
     <ClCompile Include="Object\Tank\Canon\Canon.cpp" />
+    <ClCompile Include="Object\Tank\Super\Super.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene\S_Lobby.cpp" />
     <ClCompile Include="Scene\S_Start.cpp" />

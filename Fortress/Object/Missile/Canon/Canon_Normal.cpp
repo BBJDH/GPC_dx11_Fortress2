@@ -60,6 +60,6 @@ void Canon_Normal::ani_set_boom()
 {
 	animation.Name = "Animation/Missile/explosion";
 	animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
-	animation.Duration = ANI_Bomb_Boom;
+	animation.Duration = explosion_time;
 	animation.Repeatable = false;
 }

@@ -6,6 +6,11 @@ Tank_manager::Tank_manager()
 {
 }
 
+Tank_manager::~Tank_manager()
+{
+    clear();
+}
+
 void Tank_manager::create_tank(_float2 const & position, std::string const& player_name, Tank::Tank_Type const tank_name, Color const color)
 {
     //위치, 탱크 이름, 플레이어 이름, 색상
@@ -17,7 +22,7 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
     {
         tanks.push_back
         (
-            Canon
+            new Canon
             (
                 position,
                 50,
@@ -33,13 +38,13 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
     {
         tanks.push_back
         (
-            Canon
+            new Super
             (
                 position,
                 50,
                 50,
                 player_name,
-                "Canon",
+                "Super",
                 color
             )
         );
@@ -48,7 +53,7 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
 
     }
 
-    tanks.back().ballistics_initialize(0, 0);
+    tanks.back()->ballistics_initialize(0, 0);
 }
 
 void Tank_manager::create_tanks()
@@ -86,6 +91,10 @@ void Tank_manager::create_tanks()
 
 void Tank_manager::clear()
 {
+    for (auto iter = tanks.begin(); iter != tanks.end(); iter++)
+    {
+        delete *iter;
+    }
 	tanks.clear();
-	std::vector<Tank>().swap(tanks);
+	std::vector<Tank*>().swap(tanks);
 }

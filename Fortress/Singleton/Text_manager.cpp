@@ -129,7 +129,7 @@ void Text_manager::render_tank_name(Tank const& tank)
 			location_x,location_y
 		},
 		12,
-		tank.get_name(),
+		tank.get_player_name(),
 		static_cast<Text_manager::Font>(tank.get_color())
 	);
 }
@@ -175,7 +175,7 @@ void Text_manager::render_fps()
 	text.Font.Bold = false;
 
 }
-void Text_manager::render(std::vector<Tank>& tank)
+void Text_manager::render(std::vector<Tank*>& tank)
 {
 	if (!tank.empty())
 	{
@@ -183,11 +183,11 @@ void Text_manager::render(std::vector<Tank>& tank)
 		{
 			if (i != _Turn->whosturn())
 			{
-				render_tank_name(tank[i]);
+				render_tank_name(*tank[i]);
 			}
 			//
-			render_tank_name(tank[_Turn->whosturn()]);
-			render_damage(tank[i]);
+			render_tank_name(*tank[_Turn->whosturn()]);
+			render_damage(*tank[i]);
 		}
 	}
 }

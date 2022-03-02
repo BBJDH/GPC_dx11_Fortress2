@@ -20,7 +20,7 @@ void Input_manager::debug_right_button()
     }
 }
 
-void Input_manager::debug_left_button(std::vector<Tank>& tank)
+void Input_manager::debug_left_button(std::vector<Tank*>& tank)
 {
     if (Engine::Input::Get::Key::Press(VK_LBUTTON))
     {
@@ -28,7 +28,7 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
         float y = static_cast<float>(_Mouse->y);
         tank.push_back
         (
-            Tank
+            new Tank
             (
                 {
                     static_cast<int>(_Mouse->x)+_CAM->pos_win.x,
@@ -42,7 +42,7 @@ void Input_manager::debug_left_button(std::vector<Tank>& tank)
                 Color::Red
             )
         );
-        tank.back().ballistics_initialize(0, 0);
+        tank.back()->ballistics_initialize(0, 0);
     }  
 }
 void Input_manager::debug_left_button(std::vector<Patterns>& patterns)
@@ -101,7 +101,7 @@ void Input_manager::key_space(Tank& tank,std::vector<Missile*>& missile)
 }
 
 
-void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile*>& missile, std::vector<Patterns>& patterns, float const deltha)
+void Input_manager::input(std::vector<Tank*>& tank, std::vector<Missile*>& missile, std::vector<Patterns>& patterns, float const deltha)
 {
     interval += deltha;
     if (interval > speed)
@@ -110,17 +110,17 @@ void Input_manager::input(std::vector<Tank>& tank, std::vector<Missile*>& missil
         //debug_left_button(tank);
         //debug_left_button(patterns);
         debug_right_button();
-        if (!tank[_Turn->whosturn()].is_dead()&&!tank[_Turn->whosturn()].is_falling())
+        if (!tank[_Turn->whosturn()]->is_dead()&&!tank[_Turn->whosturn()]->is_falling())
         {
-            key_left(tank[_Turn->whosturn()]);
-            key_right(tank[_Turn->whosturn()]);
-            key_up(tank[_Turn->whosturn()]);
-            key_down(tank[_Turn->whosturn()]);
-            key_space(tank[_Turn->whosturn()],missile);
+            key_left(*tank[_Turn->whosturn()]);
+            key_right(*tank[_Turn->whosturn()]);
+            key_up(*tank[_Turn->whosturn()]);
+            key_down(*tank[_Turn->whosturn()]);
+            key_space(*tank[_Turn->whosturn()],missile);
         }
     }
-    if (Engine::Input::Get::Key::Up(VK_SPACE) and !tank[_Turn->whosturn()].is_dead())
-        fire(tank[_Turn->whosturn()],missile,false);
+    if (Engine::Input::Get::Key::Up(VK_SPACE) and !tank[_Turn->whosturn()]->is_dead())
+        fire(*tank[_Turn->whosturn()],missile,false);
 }
 
 void Input_manager::find_nextstep(HDC const& hmapdc, Tank& tank, bool const isright)

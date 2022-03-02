@@ -44,7 +44,7 @@ public:
     void render_damage(Tank const & tank );
     void render_tank_name(Tank const& tank);
     void render_fps();
-    void render(std::vector<Tank>& tank);
+    void render(std::vector<Tank*>& tank);
 
 };
 

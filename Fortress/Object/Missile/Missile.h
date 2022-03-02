@@ -21,7 +21,7 @@ protected:
 
 
 
-private:
+protected:
 	void check_state();
 	void ani_set_throw();
 	void ani_set_boom();

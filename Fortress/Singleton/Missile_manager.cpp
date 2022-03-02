@@ -35,12 +35,12 @@ void Missile_manager::create_missile(_float2 const& position, Tank const& tank)
         {
         case Tank::Missile_Type::Normal:
         {
-            missiles.push_back(new Canon_Normal(position, width, height));
+            missiles.push_back(new Super_Normal(position, width, height));
             break;
         }
         case Tank::Missile_Type::Special:
         {
-            missiles.push_back(new Canon_Normal(position, width, height));
+            missiles.push_back(new Super_Special(position, width, height));
             break;
         }
         }

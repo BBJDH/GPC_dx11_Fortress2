@@ -104,6 +104,7 @@ Color Tank::get_color() const
 
 Tank::Missile_Type Tank::get_missile_type() const
 {
+
 	return missile_type;
 }
 
@@ -136,9 +137,14 @@ Tank::Side Tank::get_side() const
 	return side;
 }
 
-std::string Tank::get_name() const
+std::string Tank::get_player_name() const
 {
 	return player_name;
+}
+
+std::string Tank::get_tank_name() const
+{
+	return tank_name;
 }
 
 std::string Tank::get_damage() const

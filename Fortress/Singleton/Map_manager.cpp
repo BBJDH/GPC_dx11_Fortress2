@@ -61,7 +61,7 @@ void Map_manager::render_map(std::vector<Patterns> & patterns)
 
 
 
-void Map_manager::render_minimap(std::vector<Tank> const& tank)
+void Map_manager::render_minimap(std::vector<Tank*> const& tank)
 {
     _Image_manager->render_minimap_background();
     Engine::Rendering::Pipeline::HmemDC::Render_minimap

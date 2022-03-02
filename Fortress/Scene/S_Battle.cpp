@@ -127,7 +127,7 @@ Scene * S_Battle::update_scene()
                 if( playing_time > min_loading_time + fadeout_time)
                 {
                     Engine::Rendering::Pipeline::Effect::set_y(MAPSIZE_H+200); //UI사이즈만큼 더함
-                    _Turn->tankturn_start(_Tank->tanks[_Turn->whosturn()]);
+                    _Turn->tankturn_start(*_Tank->tanks[_Turn->whosturn()]);
                     this->state = State::Playing;
                     break;
                 }
@@ -187,8 +187,7 @@ void S_Battle::render_playing() //Update
     _Text_manager->render(_Tank->tanks);
     _Image_manager->render_ui(_Tank->tanks);
     _Map_manager->render_minimap(_Tank->tanks);
-    _Button->update_missile();
-    _Button->render();
+    _Button->render_battle_button();
 
 
     //_Debug_manager->set_delta(Engine::Time::Get::Delta());

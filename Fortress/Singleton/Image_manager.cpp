@@ -78,23 +78,23 @@ void Image_manager::render_front_ui(Tank const & tank)
     render_pannel_power_record(tank);
 }
 
-void Image_manager::render_tanks_hp(std::vector<Tank> const& tank)
+void Image_manager::render_tanks_hp(std::vector<Tank*> const& tank)
 {
     if (!tank.empty())
     {
         for (size_t i = 0; i < tank.size(); i++)
         {
-            render_tank_hp(tank[i]);
+            render_tank_hp(*tank[i]);
         }
     }
 }
 
-void Image_manager::render_ui(std::vector<Tank> const& tank)
+void Image_manager::render_ui(std::vector<Tank*> const& tank)
 {
     render_tanks_hp(tank);
-    render_back_ui(tank[_Turn->whosturn()]);
-    render_front_ui(tank[_Turn->whosturn()]);
-    _Text_manager->render_tank_angle(tank[_Turn->whosturn()]);
+    render_back_ui(*tank[_Turn->whosturn()]);
+    render_front_ui(*tank[_Turn->whosturn()]);
+    _Text_manager->render_tank_angle(*tank[_Turn->whosturn()]);
 }
 
 void Image_manager::render_gameover()
@@ -137,7 +137,7 @@ void Image_manager::render_tank_icon(std::string const& name, _float2 const& pos
     if (name.empty())
         return;
 
-    std::string const location = "Image/Icon/" + name + "/" + name;
+    std::string const location = "Image/Icon/" + name + "/icon";
     view_image.Name = location.c_str();
     set_image(view_image, position, length);
     view_image.Render();
@@ -473,18 +473,18 @@ void Image_manager::render_minimap_object(Object const& obj, bool is_turn)
 }
 
 
-void Image_manager::render_minimap_tank(std::vector<Tank> const& tank)
+void Image_manager::render_minimap_tank(std::vector<Tank*> const& tank)
 {
     if (!tank.empty())
     {
         for (size_t i = 0; i < tank.size(); i++)
         {
-            if(i != _Turn->whosturn() and tank[i].get_state() != Tank::State::Dead)
-                render_minimap_object(tank[i],false);
+            if(i != _Turn->whosturn() and tank[i]->get_state() != Tank::State::Dead)
+                render_minimap_object(*tank[i],false);
 
         }
-        if(tank[_Turn->whosturn()].get_state() != Tank::State::Dead)
-            render_minimap_object(tank[_Turn->whosturn()], true);
+        if(tank[_Turn->whosturn()]->get_state() != Tank::State::Dead)
+            render_minimap_object(*tank[_Turn->whosturn()], true);
     }
 }
 

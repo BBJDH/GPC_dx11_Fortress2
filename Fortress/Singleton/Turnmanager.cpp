@@ -26,14 +26,14 @@ float Turnmanager::get_wind() const
 	return wind;
 }
 
-bool Turnmanager::is_gameover(std::vector<Tank>& tank)
+bool Turnmanager::is_gameover(std::vector<Tank*>& tank)
 {
 	unsigned live_count =0;
 	if (!tank.empty())
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			if (!tank[i].is_dead())
+			if (!tank[i]->is_dead())
 			{
 				live_count++;
 			}
@@ -53,15 +53,15 @@ bool Turnmanager::is_obj_turn(Object const& obj)
 	return obj.is_myturn();
 }
 
-bool Turnmanager::is_tank_turn(std::vector<Tank>& tank)
+bool Turnmanager::is_tank_turn(std::vector<Tank*>& tank)
 {
 	if (!tank.empty())
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			if (is_obj_turn(tank[i]) and !tank[i].is_dead())
+			if (is_obj_turn(*tank[i]) and !tank[i]->is_dead())
 			{
-				_CAM->focusing(tank[i]);
+				_CAM->focusing(*tank[i]);
 				this->state = State::Tank_Turn;
 				return true;
 			}
@@ -70,17 +70,17 @@ bool Turnmanager::is_tank_turn(std::vector<Tank>& tank)
 	return false;
 }
 
-bool Turnmanager::check_tank_falling(std::vector<Tank>& tank)
+bool Turnmanager::check_tank_falling(std::vector<Tank*>& tank)
 {
 	if (!tank.empty())
 	{
 		for (size_t i = 0; i < tank.size(); i++)
 		{
-			if (tank[i].get_state() == Tank::State::Fall)
+			if (tank[i]->get_state() == Tank::State::Fall)
 			{
 				_CAM->focus_on();
 
-				_CAM->focusing(tank[i]);
+				_CAM->focusing(*tank[i]);
 
 
 				return true;
@@ -113,7 +113,7 @@ bool Turnmanager::is_missile_turn(std::vector<Missile*>& missile)
 	return false;
 }
 
-void Turnmanager::checkturn(std::vector<Tank>& tank, std::vector<Missile*>& missile)
+void Turnmanager::checkturn(std::vector<Tank*>& tank, std::vector<Missile*>& missile)
 {
 	//누군가 턴을 수행중이면서 살아있거나, 미사일이 날아가고 있거나, 누가 떨어지고있다면 스킵
 	//해당 턴을 받았는데 죽었다면 다음턴으로 넘기기
@@ -127,12 +127,12 @@ void Turnmanager::checkturn(std::vector<Tank>& tank, std::vector<Missile*>& miss
 
 bool Turnmanager::next_turn()
 {
-	_Tank->tanks[whosturn()].setmyturn(false);
+	_Tank->tanks[whosturn()]->setmyturn(false);
 	index++;
 	set_wind();
 	if (index >= players)
 		rerand();
-	tankturn_start(_Tank->tanks[whosturn()]);
+	tankturn_start(*_Tank->tanks[whosturn()]);
 
 	return true;
 }

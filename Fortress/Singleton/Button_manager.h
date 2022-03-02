@@ -56,6 +56,8 @@ private:
 	void    init_power_arrow_button();
 	void    init_slot_missile_button();
 	void    render_missile_icon();
+	void	update_missile();
+
 
 public:
 	Scene* scene_button_on();
@@ -73,8 +75,7 @@ public:
 	std::string get_map_name();
 	void	init_battle_buttons();
 	void    init_gameover_exit_button();
-	void	update_missile();
-
+	void	render_battle_button();
 	
 	
 	//  ==================== 버튼 기능 ==================

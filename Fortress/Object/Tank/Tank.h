@@ -47,7 +47,7 @@ private:
 	int const NAME_LOCATION_X = -8;
 	int const NAME_LOCATION_Y = 15;
 
-private:
+protected:
 
 	Engine::Rendering::Animation::Component animation;
 	//Engine::Rendering::Text::Component damage;
@@ -95,10 +95,13 @@ public:
 	Tank(_float2 const& pos, unsigned const width, unsigned const height,
 		std::string const& player_name, std::string const& tank_name,
 		Tank::Tank_Type const type, Color const color);
+	virtual ~Tank() = default;
+	
 	Tank & operator=(Tank const & other_tank);
 	Tank::State get_state()const;
 	Tank::Side get_side()const;
-	std::string get_name()const;
+	std::string get_player_name()const;
+	std::string get_tank_name()const;
 	std::string get_damage()const;
 
 	Color get_color()const;
@@ -129,7 +132,7 @@ public:
 	void plus_power();
 	void minus_fuel();
 	void turn_setting();
-	void ani_render(float const delta);
+	virtual void ani_render(float const delta);
 	void ani_start();
 	
 };
