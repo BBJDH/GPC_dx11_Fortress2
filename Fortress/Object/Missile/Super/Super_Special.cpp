@@ -78,7 +78,7 @@ void Super_Special::ani_set_throw()
 
 void Super_Special::ani_set_boom()
 {
-	animation.Name = "Animation/Missile/explosion4";
+	animation.Name = "Animation/Effect/explosion4";
 	animation.Length = Vector<2>(350, 350);
 	animation.Duration = explosion_time;
 	animation.Repeatable = false;

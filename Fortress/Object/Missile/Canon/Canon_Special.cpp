@@ -59,7 +59,7 @@ void Canon_Special::ani_set_throw()
 
 void Canon_Special::ani_set_boom()
 {
-	animation.Name = "Animation/Missile/explosion";
+	animation.Name = "Animation/Effect/explosion";
 	animation.Length = Vector<2>(150, 150);
 	animation.Duration = explosion_time;
 	animation.Repeatable = false;

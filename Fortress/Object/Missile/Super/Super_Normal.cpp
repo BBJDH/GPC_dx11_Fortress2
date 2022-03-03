@@ -77,7 +77,7 @@ void Super_Normal::ani_set_throw()
 
 void Super_Normal::ani_set_boom()
 {
-	animation.Name = "Animation/Missile/explosion3";
+	animation.Name = "Animation/Effect/explosion3";
 	animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
 	animation.Duration = explosion_time;
 	animation.Repeatable = false;

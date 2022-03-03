@@ -86,7 +86,7 @@ void Super::ani_render(float const delta)
 	}
 	case Tank::State::Dead:
 	{
-		location = location + "normal";
+		location = location + "dead";
 		this->animation.Name = location.c_str();
 		break;
 	}

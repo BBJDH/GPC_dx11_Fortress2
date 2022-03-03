@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Engine\Pipeline.h" />
     <ClInclude Include="Object\Missile\Canon\Canon_Normal.h" />
     <ClInclude Include="Object\Missile\Canon\Canon_Special.h" />
@@ -65,6 +66,7 @@
     <ClInclude Include="Object\Tank\Tank.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Object\Missile\Canon\Canon_Normal.cpp" />
     <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp" />
     <ClCompile Include="Object\Missile\Missile.cpp" />
