@@ -200,6 +200,10 @@ enum class Color
 #include"./Object/Missile/Super/Super_Normal.h"
 #include"./Object/Missile/Super/Super_Special.h"
 
+//Effect
+#include"Object/Effect/Effect.h"
+#include"Object/Effect/Effect_Normal.h"
+
 
 //기타 오브젝트 상속
 #include"./Object/Patterns.h"

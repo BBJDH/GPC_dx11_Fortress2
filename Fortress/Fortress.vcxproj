@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Object\Effect\Effect.h" />
+    <ClInclude Include="Object\Effect\Effect_Normal.h" />
     <ClInclude Include="Engine\Pipeline.h" />
     <ClInclude Include="Object\Missile\Canon\Canon_Normal.h" />
     <ClInclude Include="Object\Missile\Canon\Canon_Special.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="Engine\Vector.h" />
     <ClInclude Include="Fortress.h" />
     <ClInclude Include="Singleton\Debug_manager.h" />
+    <ClInclude Include="Singleton\Effect_manager.h" />
     <ClInclude Include="Singleton\Image_manager.h" />
     <ClInclude Include="Singleton\Input_manager.h" />
     <ClInclude Include="Singleton\Map_manager.h" />
@@ -66,7 +68,8 @@
     <ClInclude Include="Object\Tank\Tank.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="Object\Effect\Effect.cpp" />
+    <ClCompile Include="Object\Effect\Effect_Normal.cpp" />
     <ClCompile Include="Object\Missile\Canon\Canon_Normal.cpp" />
     <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp" />
     <ClCompile Include="Object\Missile\Missile.cpp" />
@@ -85,6 +88,7 @@
     <ClCompile Include="Singleton\Camera.cpp" />
     <ClCompile Include="Fortress.cpp" />
     <ClCompile Include="Singleton\Debug_manager.cpp" />
+    <ClCompile Include="Singleton\Effect_manager.cpp" />
     <ClCompile Include="Singleton\Image_manager.cpp" />
     <ClCompile Include="Singleton\Input_manager.cpp" />
     <ClCompile Include="Singleton\Map_manager.cpp" />

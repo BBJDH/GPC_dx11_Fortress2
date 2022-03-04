@@ -147,7 +147,13 @@
     <ClInclude Include="Object\Missile\Super\Super_Normal.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Effect\Effect.h">
+    <ClInclude Include="Object\Effect\Effect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Effect\Effect_Normal.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton\Effect_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -242,7 +248,13 @@
     <ClCompile Include="Object\Missile\Super\Super_Special.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Effect\Effect.cpp">
+    <ClCompile Include="Object\Effect\Effect.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Effect\Effect_Normal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton\Effect_manager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
