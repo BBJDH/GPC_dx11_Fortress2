@@ -138,7 +138,7 @@ Scene * S_Battle::update_scene()
     }
     case S_Battle::State::Playing:
     {
-        _Turn->checkturn(_Tank->tanks, _Missile->missiles);	//턴체크후 다음턴 부여
+        _Turn->checkturn(_Tank->tanks, _Missile->missiles,_Effect->effects);	//턴체크후 다음턴 부여
         _Input_manager->input(_Tank->tanks, _Missile->missiles,patterns,Engine::Time::Get::Delta());
         dispose_objects();            //이동계산 및 충돌검사, 무늬 생성
         render_playing();            //렌더링
@@ -183,7 +183,7 @@ void S_Battle::render_playing() //Update
 {
     _CAM->update();
     _Map_manager->render_map(patterns);
-    _Anime->render(_Tank->tanks, _Missile->missiles);
+    _Anime->render(_Tank->tanks, _Missile->missiles, _Effect->effects);
     _Text_manager->render(_Tank->tanks);
     _Image_manager->render_ui(_Tank->tanks);
     _Map_manager->render_minimap(_Tank->tanks);

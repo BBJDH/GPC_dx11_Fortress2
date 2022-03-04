@@ -6,6 +6,11 @@ Missile_manager::Missile_manager()
 
 }
 
+Missile_manager::~Missile_manager()
+{
+    clear();
+}
+
 void Missile_manager::create_missile(_float2 const& position, Tank const& tank)
 {
     int const width = 31;
@@ -62,8 +67,25 @@ void Missile_manager::create_missiles(_float2 const & position, float const angl
     missiles.back()->setmyturn(true);
 }
 
+void Missile_manager::del_missile(Missile const * missile)
+{
+    delete missile;
+    missile = nullptr;
+}
+
 void Missile_manager::clear()
 {
-	missiles.clear();
-	std::vector<Missile*>().swap(missiles);
+    if (!missiles.empty())
+    {   
+        for (int i = 0; i < missiles.size(); i++)
+        {
+            if (missiles[i] != nullptr)
+            {
+                del_missile(missiles[i]);
+            }
+        }
+	    missiles.clear();
+	    std::vector<Missile*>().swap(missiles);
+    }
+
 }

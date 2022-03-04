@@ -4,8 +4,9 @@
 
 
 Super_Normal::Super_Normal(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, {100,80},350)
+	:Missile(pos, width, height, {60,48},350, Effect::Type::Super_Normal, Missile::Type::Multiple_Hit,3)
 {
+	ani_set();
 }
 
 Super_Normal::~Super_Normal()
@@ -16,9 +17,9 @@ Super_Normal::~Super_Normal()
 void Super_Normal::ani_render(float const delta)
 {
 	ani_playtime += delta;
-	check_state();
-	this->animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
-	this->animation.Render();
+	//check_state();
+	animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
+	animation.Render();
 }
 
 void Super_Normal::ballistics_equation(float const delta, float const wind)
@@ -42,22 +43,25 @@ void Super_Normal::ballistics_equation(float const delta, float const wind)
 
 void Super_Normal::check_state()
 {
-
 	switch (this->state)
 	{
-	case Missile::State::Throw:
+	case Missile::State::In_Air:
 	{
-		ani_set_throw();
 		break;
 	}
-	case Missile::State::Boom:
+
+	case Missile::State::Collide:
 	{
-		if (ani_playtime > explosion_time)
+		reduce();
+		hit_count++;
+		if (hit_count >= hit_limit)
 		{
-			set_state(State::Delete);
+			state = State::Delete;
+			break;
 		}
-		else
-			ani_set_boom();
+
+		state = State::In_Air;
+		falling = true;
 		break;
 	}
 	case Missile::State::Delete:
@@ -68,17 +72,24 @@ void Super_Normal::check_state()
 	}
 }
 
-void Super_Normal::ani_set_throw()
+void Super_Normal::ani_set()
 {
 	animation.Name = "Animation/Missile/Super/normal";
 	animation.Duration = ANI_Bomb_Throw;
 	animation.Repeatable = true;
 }
 
-void Super_Normal::ani_set_boom()
+void Super_Normal::reduce()
 {
-	animation.Name = "Animation/Effect/explosion3";
-	animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
-	animation.Duration = explosion_time;
-	animation.Repeatable = false;
+	_float2 const reduction = { bomb_range.width() * 0.5f * hit_count , bomb_range.height() * 0.5f * hit_count };
+	bomb_range = { bomb_range.width() - reduction.width() ,bomb_range.height() - reduction.height() };
+	damage = static_cast<int>(damage* 0.6);
 }
+
+//void Super_Normal::ani_set_boom()
+//{
+//	animation.Name = "Animation/Effect/explosion3";
+//	animation.Length = Vector<2>(Missile_Explosion_SIZE, Missile_Explosion_SIZE);
+//	animation.Duration = explosion_time;
+//	animation.Repeatable = false;
+//}

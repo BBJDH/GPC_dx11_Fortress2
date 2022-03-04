@@ -22,6 +22,8 @@
     <ClInclude Include="Object\Effect\Effect.h" />
     <ClInclude Include="Object\Effect\Effect_Normal.h" />
     <ClInclude Include="Engine\Pipeline.h" />
+    <ClInclude Include="Object\Effect\Effect_Super_Normal.h" />
+    <ClInclude Include="Object\Effect\Effect_Super_Special.h" />
     <ClInclude Include="Object\Missile\Canon\Canon_Normal.h" />
     <ClInclude Include="Object\Missile\Canon\Canon_Special.h" />
     <ClInclude Include="Object\Missile\Missile.h" />
@@ -70,6 +72,8 @@
   <ItemGroup>
     <ClCompile Include="Object\Effect\Effect.cpp" />
     <ClCompile Include="Object\Effect\Effect_Normal.cpp" />
+    <ClCompile Include="Object\Effect\Effect_Super_Normal.cpp" />
+    <ClCompile Include="Object\Effect\Effect_Super_Special.cpp" />
     <ClCompile Include="Object\Missile\Canon\Canon_Normal.cpp" />
     <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp" />
     <ClCompile Include="Object\Missile\Missile.cpp" />

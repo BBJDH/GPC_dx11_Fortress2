@@ -86,13 +86,40 @@ void Animation::render_tanks(std::vector<Tank*> & tank)
     }
 }
 
-void Animation::render_missile(std::vector<Missile*> & missile)
+void Animation::render_missile(std::vector<Missile*> & missiles)
 {
-    if (!missile.empty())
+    if (!missiles.empty())
     {
-        for (size_t i = 0; i < missile.size(); i++)
+        for (size_t i = 0; i < missiles.size(); i++)
         {
-            missile[i]->ani_render(Engine::Time::Get::Delta());
+            missiles[i]->check_state();
+            if (missiles[i]->get_state() == Missile::State::Delete)
+            {
+                delete  missiles[i];
+                missiles[i] = nullptr;
+                missiles.erase(missiles.begin()+ i);
+                break;
+            }
+            missiles[i]->ani_render(Engine::Time::Get::Delta());
+        }
+    }
+}
+
+void Animation::render_effect(std::vector<Effect*>& effects)
+{
+    if (!effects.empty())
+    {
+        for (int i = 0; i < effects.size(); ++i)
+        {
+            effects[i]->check_state();
+            if (effects[i]->get_state() == Effect::State::Delete)
+            {
+                delete  effects[i];
+                effects[i] = nullptr;
+                effects.erase(effects.begin() + i);
+                break;
+            }
+            effects[i]->render();
         }
     }
 }
@@ -115,13 +142,14 @@ void Animation::render_arrow(Tank const & tank)
     animation.Render();
 }
 
-void Animation::render(std::vector<Tank*>& tank, std::vector<Missile*>& missile)
+void Animation::render(std::vector<Tank*>& tank, std::vector<Missile*>& missile, std::vector<Effect*>& effects)
 {
+    //맵위와 ui 사이에 그려질 애니메이션
     render_tanks(tank);
     render_missile(missile);
     if (_Turn->get_state() == Turnmanager::State::Tank_Turn)
     {
         render_arrow(*tank[_Turn->whosturn()]);
     }
-
+    render_effect(effects);
 }

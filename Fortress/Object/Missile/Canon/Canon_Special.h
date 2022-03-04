@@ -3,11 +3,10 @@ class Canon_Special : public Missile
 {
 
 private:
-	float const explosion_time = 1.25f;
 private:
-	void check_state();  // ani_set_throw(),ani_set_boom() 사용
-	void ani_set_throw();	//바뀌는내용
-	void ani_set_boom(); //바뀌는내용
+	//void check_state();  // ani_set_throw(),ani_set_boom() 사용
+	void ani_set()override;	//바뀌는내용
+	//void ani_set_boom(); //바뀌는내용
 
 public:
 	Canon_Special(_float2 const& pos, unsigned const width, unsigned const height);

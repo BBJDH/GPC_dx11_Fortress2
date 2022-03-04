@@ -89,12 +89,25 @@ void Tank_manager::create_tanks()
     }
 }
 
+void Tank_manager::del_tank(Tank const* tank)
+{
+    delete tank;
+    tank = nullptr;
+}
+
 void Tank_manager::clear()
 {
-    for (auto iter = tanks.begin(); iter != tanks.end(); iter++)
+    if (!tanks.empty())
     {
-        delete *iter;
+        for (int i = 0; i < tanks.size(); i++)
+        {
+            if (tanks[i] != nullptr)
+            {
+                del_tank(tanks[i]);
+            }
+        }
+        tanks.clear();
+        std::vector<Tank*>().swap(tanks);
     }
-	tanks.clear();
-	std::vector<Tank*>().swap(tanks);
+
 }

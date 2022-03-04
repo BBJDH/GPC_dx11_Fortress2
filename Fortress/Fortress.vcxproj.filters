@@ -156,6 +156,12 @@
     <ClInclude Include="Singleton\Effect_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Effect\Effect_Super_Normal.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Effect\Effect_Super_Special.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fortress.cpp">
@@ -255,6 +261,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Effect_manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Effect\Effect_Super_Normal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Effect\Effect_Super_Special.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,13 +3,12 @@
 class Effect_manager :public SingletonT<Effect_manager>
 {
 public:
-	enum class Type
-	{
-		Normal, Super_Normal, Super_Special,
-	};
-private:
-	std::vector<Effect*> Effects;
+
+public:
+	std::vector<Effect*> effects;
 public:
 	Effect_manager();
-	void push_effect(Type const type, _float2 const & position);
+	void push_effect(Effect::Type const type, _float2 const & position);
+	//void render();
+	void del_effect(Effect const * effect);
 };

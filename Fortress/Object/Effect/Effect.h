@@ -1,9 +1,14 @@
 #pragma once
 class Effect : public Object
 {
+public:
 	enum class State
 	{
 		Playing, Delete
+	};
+	enum class Type
+	{
+		Normal_Big, Normal_Small, Super_Normal, Super_Special,
 	};
 
 protected:
@@ -14,11 +19,11 @@ protected:
 	float playtime;
 
 protected:
-	void check_state();
 public:
 	Effect(std::string const & location, _float2 const & position,
 		_float2 const& size, float const duration);
 	virtual ~Effect()=default;
+	void check_state();
 	void render();
 	State get_state();
 };

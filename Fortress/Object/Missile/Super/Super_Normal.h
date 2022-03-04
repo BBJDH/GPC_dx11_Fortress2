@@ -6,11 +6,9 @@ class Super_Normal : public Missile
 	//	Circle, Ellipse
 	//};
 private:
-	float const explosion_time = 0.7f;
-private:
-	void check_state();
-	void ani_set_throw();
-	void ani_set_boom();
+	void check_state()override;
+	void ani_set()override;
+	void reduce();
 public:
 	Super_Normal(_float2 const& pos, unsigned const width, unsigned const height);
 

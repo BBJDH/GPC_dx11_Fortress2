@@ -3,8 +3,7 @@ class Effect_Normal : public Effect
 {
 
 private:
-	float const explosion_time = 0.7f;
 public:
-	Effect_Normal(_float2 const & position);
+	Effect_Normal(_float2 const & position, _float2 const& size);
 	~Effect_Normal() override;
 };

@@ -186,24 +186,28 @@ enum class Color
 
 //게임안 보여질 객체들
 
+//상속
+#include"Object/Object.h"
+#include"Object/Effect/Effect.h"
+#include"./Object/Missile/Missile.h"
+#include"./Object/Tank/Tank.h"
+
 
 //Tank
-#include"./Object/Tank/Tank.h"
 #include"./Object/Tank/Canon/Canon.h"
 #include"./Object/Tank/Super/Super.h"
 
 
 //Missile
-#include"./Object/Missile/Missile.h"
 #include"./Object/Missile/Canon/Canon_Normal.h"
 #include"./Object/Missile/Canon/Canon_Special.h"
 #include"./Object/Missile/Super/Super_Normal.h"
 #include"./Object/Missile/Super/Super_Special.h"
 
 //Effect
-#include"Object/Effect/Effect.h"
 #include"Object/Effect/Effect_Normal.h"
-
+#include"Object/Effect/Effect_Super_Normal.h"
+#include"Object/Effect/Effect_Super_Special.h"
 
 //기타 오브젝트 상속
 #include"./Object/Patterns.h"
@@ -239,6 +243,7 @@ enum class Color
 #include"./Singleton/Animation.h"
 #include"./Singleton/Text_manager.h"
 #include"./Singleton/Button_manager.h"
+#include"./Singleton/Effect_manager.h"
 
 
 
@@ -260,5 +265,5 @@ enum class Color
 #define _Text_manager Text_manager::get_singleton()
 #define _Tank Tank_manager::get_singleton()
 #define _Missile Missile_manager::get_singleton()
-
+#define _Effect Effect_manager::get_singleton()
 

@@ -113,11 +113,35 @@ bool Turnmanager::is_missile_turn(std::vector<Missile*>& missile)
 	return false;
 }
 
-void Turnmanager::checkturn(std::vector<Tank*>& tank, std::vector<Missile*>& missile)
+bool Turnmanager::is_effect_turn(std::vector<Effect*>& effects)
+{
+	if (!effects.empty())
+	{
+		for (size_t i = 0; i < effects.size(); i++)
+		{
+			if (is_obj_turn(*(effects[i])))
+			{
+				_CAM->focus_on();
+
+				_CAM->focusing(*(effects.back()));
+				//미사일은 여러개일수 있으므로 마지막 미사일만 추적(멀탱)
+				this->state = State::Effect_turn;
+
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void Turnmanager::checkturn(std::vector<Tank*>& tank, std::vector<Missile*>& missile, std::vector<Effect*>& effects)
 {
 	//누군가 턴을 수행중이면서 살아있거나, 미사일이 날아가고 있거나, 누가 떨어지고있다면 스킵
 	//해당 턴을 받았는데 죽었다면 다음턴으로 넘기기
-	if (check_tank_falling(tank) or is_tank_turn(tank) or is_missile_turn(missile))
+	if (check_tank_falling(tank) 
+		or is_tank_turn(tank) 
+		or is_missile_turn(missile) 
+		or is_effect_turn(effects))
 	{	
 		return ;
 	}

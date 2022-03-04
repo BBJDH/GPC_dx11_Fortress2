@@ -9,34 +9,44 @@ class Missile : public Object
 public:
 	enum class State 
 	{
-		Throw, Boom, Delete
+		In_Air, Collide, Delete
+	};
+	enum class Type
+	{
+		Single_Hit, Multiple_Hit
 	};
 protected:
 	Engine::Rendering::Animation::Component animation;
-	State state;
-	float ani_playtime;
-	int const damage;
-	_float2 bomb_range;
-	//Type     explosion_type;
+	State		state;
+	Type		type;
+	Effect::Type	effect_type;
+	_float2	 bomb_range;
+	float	 ani_playtime;
+	int 	damage;
+	int		hit_count;
+	int const hit_limit;
 
 
 
 protected:
-	void check_state();
-	void ani_set_throw();
-	void ani_set_boom();
+	virtual void ani_set();
+	//void ani_set_boom();
 
 public:
-	Missile(_float2 const& pos, unsigned const width, unsigned const height);
 	Missile(_float2 const& pos, unsigned const width, unsigned const height,
-		_float2 const& missile_range, int const dagame);
+		Effect::Type const effect_type, Type const type = Type::Single_Hit, int const hit_limit = 1 );
+	Missile(_float2 const& pos, unsigned const width, unsigned const height,
+		_float2 const& missile_range, int const dagame, Effect::Type const effect_type, Type const type = Type::Single_Hit, int const hit_limit = 1);
 	virtual ~Missile() = default;
 	Missile & operator=(Missile const& other_miss);
 	float const get_range_w()const;
 	int const get_damage()const;
 	State get_state()const;
+	Type get_type()const;
+	Effect::Type get_effect_type()const;
+	virtual void check_state();					//미사일에 따라 다단히트 등 메커니즘 다름
 	void boom(HDC const& hmapdc);
-	virtual void ani_render(float const delta);
+	virtual void ani_render(float const delta); //미사일에 따라 각수정필요
 	void ani_start();
 	void set_state(State const state);
 

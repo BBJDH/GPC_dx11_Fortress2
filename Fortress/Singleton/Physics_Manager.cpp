@@ -3,7 +3,6 @@
 
 
 
-
 unsigned const Physics_Manager::length(_float2 start, _float2 dest)
 {
 	return static_cast<unsigned const>(sqrt(pow((dest.x - start.x),2) + pow((dest.y - start.y),2)));
@@ -94,12 +93,14 @@ void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missi
 	{
 		for (size_t i = 0; i < missile.size(); i++)
 		{
-			if (missile[i]->is_falling() and Collide_object(*(missile[i]), hmapdc))
+			unsigned const poistion_x = static_cast<const unsigned>(missile[i]->getpos().x);//이미지 가운데 x좌표
+			unsigned const poistion_y = static_cast<const unsigned>(missile[i]->getpos().y + missile[i]->getheight() / 2);
+			if (missile[i]->is_falling() and Collide(hmapdc, poistion_x, poistion_y))
 			{
 				//부딪혔다면 폭발 후 제거
 				missile[i]->boom(hmapdc);  //맵파괴
-				missile[i]->set_state(Missile::State::Boom);
-				missile[i]->ani_start();
+				missile[i]->set_state(Missile::State::Collide);
+				_Effect->push_effect(missile[i]->get_effect_type(), missile[i]->getpos());
 				collide_bomb(*(missile[i]),tank);  //충돌판정
 			}
 		}
@@ -127,10 +128,9 @@ void Physics_Manager::ballistics(std::vector<Tank*>& tank,std::vector<Missile*>&
 		{
 			missile[i]->ballistics_equation(delta,_Turn->get_wind());
 			//화면밖으로 나갔거나 파괴되었을때
-			if (missile[i]->is_out() or missile[i]->get_state() == Missile::State::Delete)
+			if (missile[i]->is_out())
 			{
-				delete missile[i];
-				missile.erase(missile.begin()+i);
+				missile[i]->set_state(Missile::State::Delete);
 			}
 		}
 	}
