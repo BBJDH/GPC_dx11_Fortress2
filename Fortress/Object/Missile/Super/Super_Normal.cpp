@@ -4,7 +4,7 @@
 
 
 Super_Normal::Super_Normal(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, {60,48},350, Effect::Type::Super_Normal, Missile::Type::Multiple_Hit,3)
+	:Missile(pos, width, height, {55,48},350, Effect::Type::Super_Normal, Missile::Type::Multiple_Hit,4)
 {
 	ani_set();
 }
@@ -16,6 +16,7 @@ Super_Normal::~Super_Normal()
 
 void Super_Normal::ani_render(float const delta)
 {
+
 	ani_playtime += delta;
 	//check_state();
 	animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
@@ -81,7 +82,10 @@ void Super_Normal::ani_set()
 
 void Super_Normal::reduce()
 {
-	_float2 const reduction = { bomb_range.width() * 0.5f * hit_count , bomb_range.height() * 0.5f * hit_count };
+	if (hit_count == 1)
+		int i = 0;
+	float const mul = 0.3f * hit_count;
+	_float2 const reduction = { bomb_range.width() * mul, bomb_range.height() * mul };
 	bomb_range = { bomb_range.width() - reduction.width() ,bomb_range.height() - reduction.height() };
 	damage = static_cast<int>(damage* 0.6);
 }

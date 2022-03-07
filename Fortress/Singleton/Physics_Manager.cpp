@@ -98,8 +98,8 @@ void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missi
 			if (missile[i]->is_falling() and Collide(hmapdc, poistion_x, poistion_y))
 			{
 				//ºÎµúÇû´Ù¸é Æø¹ß ÈÄ Á¦°Å
-				missile[i]->boom(hmapdc);  //¸ÊÆÄ±«
 				missile[i]->set_state(Missile::State::Collide);
+				missile[i]->boom(hmapdc);  //¸ÊÆÄ±«
 				_Effect->push_effect(missile[i]->get_effect_type(), missile[i]->getpos());
 				collide_bomb(*(missile[i]),tank);  //Ãæµ¹ÆÇÁ¤
 			}

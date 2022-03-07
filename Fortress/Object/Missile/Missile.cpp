@@ -102,6 +102,9 @@ Effect::Type Missile::get_effect_type() const
 
 void Missile::boom(HDC const& hmapdc)
 {
+	if (hit_count == 0)
+		bomb_range;
+
 	HBRUSH hNewBrush = CreateSolidBrush(RGB(255,0,255));
 	HPEN hNewPen = CreatePen(PS_SOLID, 2, 0xff00ff);
 	HBITMAP hOldBmp = static_cast<HBITMAP>(SelectObject(hmapdc, hNewBrush));

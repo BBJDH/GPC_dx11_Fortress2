@@ -11,10 +11,32 @@ Missile_manager::~Missile_manager()
     clear();
 }
 
-void Missile_manager::create_missile(_float2 const& position, Tank const& tank)
+void Missile_manager::create_missile( Tank const& tank)
 {
     int const width = 31;
     int const height = 33;
+
+    float angle;
+    if (tank.get_side() == Tank::Side::Right)
+    {
+        angle = -tank.getimage_angle() / Radian
+            + tank.getangle_min() + tank.getangle();
+    }
+    else
+    {
+        angle = (-tank.getimage_angle() / Radian + 180.0f)
+            - (tank.getangle_min() + tank.getangle());
+    }
+    float const power = static_cast<float const>(tank.getpower());
+    //60분법으로 받음
+    double cosval = cos(angle * Radian);
+    double sinval = sin(angle * Radian);
+    int min_x = static_cast<int>(FIRE_MIN_Length * cosval);
+    int min_y = static_cast<int>(FIRE_MIN_Length * sinval);
+
+    _float2 const position = { tank.getpos().x + min_x,tank.getpos().y - min_y };
+
+
     switch (tank.get_tank_type())
     {
     case Tank::Tank_Type::Canon:
@@ -24,11 +46,19 @@ void Missile_manager::create_missile(_float2 const& position, Tank const& tank)
         case Tank::Missile_Type::Normal:
         {
             missiles.push_back(new Canon_Normal(position, width, height));
+            missiles.back()->ballistics_initialize(
+                angle ,
+                power * FIRE_MUL);
+            missiles.back()->setmyturn(true);
             break;
         }
         case Tank::Missile_Type::Special:
         {
             missiles.push_back(new Canon_Special(position, width, height));
+            missiles.back()->ballistics_initialize(
+                angle ,
+                power * FIRE_MUL);
+            missiles.back()->setmyturn(true);
             break;
         }
         }
@@ -40,12 +70,23 @@ void Missile_manager::create_missile(_float2 const& position, Tank const& tank)
         {
         case Tank::Missile_Type::Normal:
         {
-            missiles.push_back(new Super_Normal(position, width, height));
+            for (int i=0; i<1; i++)
+            {
+                missiles.push_back(new Super_Normal(position, width, height));
+                missiles.back()->ballistics_initialize(
+                    angle-static_cast<float>(i*4),
+                    (power + static_cast<float>(i*5)) * FIRE_MUL);
+                missiles.back()->setmyturn(true);
+            }
             break;
         }
         case Tank::Missile_Type::Special:
         {
             missiles.push_back(new Super_Special(position, width, height));
+            missiles.back()->ballistics_initialize(
+                angle ,
+                power * FIRE_MUL);
+            missiles.back()->setmyturn(true);
             break;
         }
         }
@@ -55,16 +96,13 @@ void Missile_manager::create_missile(_float2 const& position, Tank const& tank)
 
 }
 
-void Missile_manager::create_missiles(_float2 const & position, float const angle, Tank & tank)
+void Missile_manager::create_missiles(Tank & tank)
 {//위치, 각도, 파워, 사이즈
 
     int const power = tank.getpower();
     tank.set_power_record(power);
-    create_missile(position, tank);
-    missiles.back()->ballistics_initialize(
-        angle,
-        static_cast<float const>(tank.getpower() * FIRE_MUL));
-    missiles.back()->setmyturn(true);
+    create_missile(tank);
+
 }
 
 void Missile_manager::del_missile(Missile const * missile)

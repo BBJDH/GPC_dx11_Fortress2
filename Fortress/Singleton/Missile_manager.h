@@ -10,11 +10,11 @@ public:
     std::vector<Missile*> missiles;
 
 private:
-    void create_missile(_float2 const& position, Tank const& tank);
+    void create_missile(Tank const& tank);
 public:
     Missile_manager();
     ~Missile_manager();
-    void create_missiles(_float2 const& position, float const angle, Tank & tank);
+    void create_missiles(Tank & tank);
     void del_missile(Missile const * missile);
     void clear();
 };

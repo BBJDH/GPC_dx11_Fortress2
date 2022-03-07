@@ -185,32 +185,27 @@ void Input_manager::fire(Tank& tank, std::vector<Missile*>& missile, bool const 
             tank.setstate(Tank::State::Fire);
             tank.ani_start();
             //미사일 생성
-            float angle;
-            if (tank.get_side() == Tank::Side::Right)
-            {
-                angle = -tank.getimage_angle() / Radian 
-                    + tank.getangle_min() + tank.getangle() ;
-            }
-            else
-            {
-                angle = (-tank.getimage_angle() / Radian +180.0f)
-                    - (tank.getangle_min() + tank.getangle()) ;
-            }
-            //60분법으로 받음
-            double cosval = cos(angle*Radian);
-            double sinval = sin(angle*Radian); 
-            int min_x = static_cast<int>(FIRE_MIN_Length * cosval );
-            int min_y = static_cast<int>(FIRE_MIN_Length * sinval ); 
+            //float angle;
+            //if (tank.get_side() == Tank::Side::Right)
+            //{
+            //    angle = -tank.getimage_angle() / Radian 
+            //        + tank.getangle_min() + tank.getangle() ;
+            //}
+            //else
+            //{
+            //    angle = (-tank.getimage_angle() / Radian +180.0f)
+            //        - (tank.getangle_min() + tank.getangle()) ;
+            //}
+            ////60분법으로 받음
+            //double cosval = cos(angle*Radian);
+            //double sinval = sin(angle*Radian); 
+            //int min_x = static_cast<int>(FIRE_MIN_Length * cosval );
+            //int min_y = static_cast<int>(FIRE_MIN_Length * sinval ); 
 
-            tank.setmyturn(false);
 
-            _Missile->create_missiles
-            (
-                { tank.getpos().x + min_x,tank.getpos().y - min_y },
-                angle,
-                tank
-            );
+            _Missile->create_missiles (tank );
             
+            tank.setmyturn(false);
         }
     }
 }
