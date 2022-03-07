@@ -35,13 +35,15 @@ void Missile::check_state()
 
 	case Missile::State::Collide:
 	{
-		hit_count++;
 		if (hit_count >= hit_limit)
 		{
 			state = State::Delete;
 			break;
 		}
 		state = State::In_Air;
+		boom(_Map_manager->hmapdc);  //¸ÊÆÄ±«
+		_Effect->push_effect(get_effect_type(), getpos());
+		hit_count++;
 		falling = true;
 		break;
 	}
@@ -102,8 +104,6 @@ Effect::Type Missile::get_effect_type() const
 
 void Missile::boom(HDC const& hmapdc)
 {
-	if (hit_count == 0)
-		bomb_range;
 
 	HBRUSH hNewBrush = CreateSolidBrush(RGB(255,0,255));
 	HPEN hNewPen = CreatePen(PS_SOLID, 2, 0xff00ff);

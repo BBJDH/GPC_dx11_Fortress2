@@ -61,6 +61,8 @@ protected:
 	std::string	const	player_name;
 	std::string	const	tank_name;
 	std::string		damage;				//받은 데미지 문자로 저장
+	int				accrue_damage;				//받은 데미지 문자로 저장
+
 	unsigned	    hp;
 	unsigned	    fuel;
 	unsigned const	max_fuel;
@@ -74,7 +76,7 @@ protected:
 	int			power_record;
 	int			power_guide;
 
-	void set_text_damage(unsigned const damage);
+	void set_text_damage();
 	void check_render_damage();
 	void ani_set_flip();
 	void ani_set_normal();
@@ -132,9 +134,10 @@ public:
 	void plus_power();
 	void minus_fuel();
 	void turn_setting();
-	virtual void ani_render(float const delta);
 	void ani_start();
 	
+	//렌더링
+	virtual void ani_render(float const delta);
 };
 
 

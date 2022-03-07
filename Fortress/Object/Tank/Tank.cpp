@@ -11,7 +11,7 @@ Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height,
 	state{ State::Fall }, side{ static_cast<Side>(rand()%2) },
 	ani_playtime{ 0.0f }, player_name{ player_name }, tank_name{ tank_name }, damage{ "" }, color{ color },
 	power_record{ 0 }, power_guide{ 0 }, missile_type{ Missile_Type::Normal},
-	tank_type{ type }
+	tank_type{ type }, accrue_damage{0}
 {
 	ani_set_normal();
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
@@ -156,17 +156,18 @@ void Tank::take_damage(unsigned const damage)
 {
 	if (state != State::Dead)
 	{
+		accrue_damage += damage;
 		if (damage >= this->hp)
 		{
 			this->hp =0;
 			state = State::Dead;
 			ani_start();
-			set_text_damage(damage);
+			set_text_damage();
 			return;
 		}
 		state = State::Hit;
 		ani_start();
-		set_text_damage(damage);
+		set_text_damage();
 		this->hp -= damage;
 	}
 }
@@ -240,9 +241,9 @@ void Tank::set_idle_state()
 	}
 }
 
-void Tank::set_text_damage(unsigned const damage)
+void Tank::set_text_damage()
 {
-	this->damage = "-" + std::to_string(damage);
+	this->damage = "-" + std::to_string(accrue_damage);
 	damage_showtime = 0;
 }
 
@@ -252,6 +253,7 @@ void Tank::check_render_damage()
 	{
 		this->damage.clear();
 		damage_showtime = 0;
+		accrue_damage = 0;
 	}
 }
 

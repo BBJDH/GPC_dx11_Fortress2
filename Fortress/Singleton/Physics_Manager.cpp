@@ -95,12 +95,12 @@ void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missi
 		{
 			unsigned const poistion_x = static_cast<const unsigned>(missile[i]->getpos().x);//ÀÌ¹ÌÁö °¡¿îµ¥ xÁÂÇ¥
 			unsigned const poistion_y = static_cast<const unsigned>(missile[i]->getpos().y + missile[i]->getheight() / 2);
-			if (missile[i]->is_falling() and Collide(hmapdc, poistion_x, poistion_y))
+			if (missile[i]->is_falling() and 
+				(Collide(hmapdc, poistion_x, poistion_y)  or collide_missile_tanks(missile[i],tank) ) ) //ÅÊÅ©¿Í Ãæµ¹ Ãß°¡
 			{
 				//ºÎµúÇû´Ù¸é Æø¹ß ÈÄ Á¦°Å
 				missile[i]->set_state(Missile::State::Collide);
-				missile[i]->boom(hmapdc);  //¸ÊÆÄ±«
-				_Effect->push_effect(missile[i]->get_effect_type(), missile[i]->getpos());
+				missile[i]->moveto({ missile[i]->getpos().x  , missile[i]->getpos().y + missile[i]->getheight() / 2 });
 				collide_bomb(*(missile[i]),tank);  //Ãæµ¹ÆÇÁ¤
 			}
 		}
@@ -170,6 +170,8 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& t
 					dmg_mul = range - length;
 				 
 				unsigned const dmg = missile.get_damage() * dmg_mul / range;
+				//test
+				std::cout << dmg << std::endl;
 
 				tank[i]->ballistics_initialize(0,0);
 				tank[i]->take_damage(dmg);
@@ -188,4 +190,45 @@ bool Physics_Manager::collide_button(Engine::Physics::Component<Quadrangle> cons
 	point.y = static_cast<float>(_Mouse->y);
 
 	return button.Collide(point);
+}
+
+//bool Physics_Manager::collide_missile_tank(Missile const& missile, Tank const& tank)
+//{
+//	Engine::Physics::Component<Point> missile_point;
+//	missile_point.x = missile.getpos().x;
+//	missile_point.y = missile.getpos().y;
+//
+//	Engine::Physics::Component<Quadrangle> tank_rect;
+//	tank_rect.Center.x = tank.getpos().x;
+//	tank_rect.Center.y = tank.getpos().y;
+//
+//	tank_rect.Length.x = tank.getwidth();
+//	tank_rect.Length.y = tank.getheight();
+//
+//	return missile_point.Collide(tank_rect);
+//}
+
+bool Physics_Manager::collide_missile_tanks(Missile const * missile, std::vector<Tank*>& tank)
+{
+	if (!tank.empty())
+	{
+		Engine::Physics::Component<Point> missile_point;
+		Engine::Physics::Component<Quadrangle> tank_rect;
+		missile_point.x = missile->getpos().x - MAPSIZE_W / 2;
+		missile_point.y = MAPSIZE_H / 2 - missile->getpos().y;
+
+		for (size_t i = 0; i < tank.size(); i++)
+		{
+			
+			tank_rect.Center = { tank[i]->getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank[i]->getpos().y };
+			tank_rect.Length = { static_cast<float const>(tank[i]->getwidth()),static_cast<float const>(tank[i]->getheight()) };
+			if (missile_point.Collide(tank_rect))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+
+
 }

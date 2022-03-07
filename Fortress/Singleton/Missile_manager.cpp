@@ -13,8 +13,8 @@ Missile_manager::~Missile_manager()
 
 void Missile_manager::create_missile( Tank const& tank)
 {
-    int const width = 31;
-    int const height = 33;
+    int const width = tank.getwidth();
+    int const height = tank.getheight();
 
     float angle;
     if (tank.get_side() == Tank::Side::Right)
@@ -31,8 +31,8 @@ void Missile_manager::create_missile( Tank const& tank)
     //60분법으로 받음
     double cosval = cos(angle * Radian);
     double sinval = sin(angle * Radian);
-    int min_x = static_cast<int>(FIRE_MIN_Length * cosval);
-    int min_y = static_cast<int>(FIRE_MIN_Length * sinval);
+    int min_x = static_cast<int>(width * cosval);
+    int min_y = static_cast<int>(height * sinval);
 
     _float2 const position = { tank.getpos().x + min_x,tank.getpos().y - min_y };
 
@@ -70,11 +70,11 @@ void Missile_manager::create_missile( Tank const& tank)
         {
         case Tank::Missile_Type::Normal:
         {
-            for (int i=0; i<1; i++)
+            for (int i=0; i<3; i++)
             {
                 missiles.push_back(new Super_Normal(position, width, height));
                 missiles.back()->ballistics_initialize(
-                    angle-static_cast<float>(i*4),
+                    angle-static_cast<float>(i*2),
                     (power + static_cast<float>(i*5)) * FIRE_MUL);
                 missiles.back()->setmyturn(true);
             }

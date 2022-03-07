@@ -12,5 +12,7 @@ public:
 	bool Collide_object(Object & obj, HDC const& hmapdc);
 	void collide_bomb(Missile const & missile,std::vector<Tank*>& tank);
 	bool collide_button(Engine::Physics::Component<Quadrangle> const & button);
+	//bool collide_missile_tank(Missile const & missile, Tank const & tank);
+	bool collide_missile_tanks(Missile const * missile, std::vector<Tank*>& tank);
 	void ballistics(std::vector<Tank*>& tank,std::vector<Missile*>& missile, std::vector<Patterns>& patterns, float const delta);
 };

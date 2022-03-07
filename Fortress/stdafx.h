@@ -1,5 +1,7 @@
 #pragma once
 //공용 헤더
+#include<iostream>
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #include<Windows.h>
 #include<math.h>
 #include<time.h>

@@ -5,7 +5,7 @@ Super::Super(_float2 const& pos, unsigned const width, unsigned const height,
 	std::string const& player_name, std::string const& tank_name, Color const color)
 	:Tank(pos, width, height, player_name, tank_name, Tank::Tank_Type::Super, color)
 {
-	this->animation.Length = Vector<2>(50, 50);
+	this->animation.Length = Vector<2>(60, 60);
 
 }
 
