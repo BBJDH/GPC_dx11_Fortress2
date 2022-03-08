@@ -175,15 +175,17 @@ void S_Battle::dispose_objects()
         create_pattern(pattern_name);
         interval = 0;
     }
-    _Physics_manager->ballistics(_Tank->tanks, _Missile->missiles,patterns, delta);//이동계산과 낙하, 맵밖 삭제
-    _Physics_manager->Collide_objects(_Tank->tanks, _Missile->missiles,_Map_manager->hmapdc);//계산한 자리에서 충돌 및 삭제 처리
+    _Physics_manager->ballistics(_Tank->tanks, _Missile->missiles,patterns, delta);
+    //이동계산 후 맵영역 이탈한 오브젝트를 delete state 기록 (문양은 별도 처리없이 바로 삭제)
+    _Physics_manager->Collide_objects(_Tank->tanks, _Missile->missiles,_Map_manager->hmapdc);
+    //충돌검사 및 데미지계산, 없어지는 인스턴스 delete state 기록 
 }
 
 void S_Battle::render_playing() //Update
 {
     _CAM->update();
-    _Map_manager->render_map(patterns);
-    _Anime->render(_Tank->tanks, _Missile->missiles, _Effect->effects);
+    _Map_manager->render_map(patterns); //배경 -> 패턴 -> 맵
+    _Anime->render(_Tank->tanks, _Missile->missiles, _Effect->effects);  // 탱크 -> 미사일 -> 이펙트
     _Text_manager->render(_Tank->tanks);
     _Image_manager->render_ui(_Tank->tanks);
     _Map_manager->render_minimap(_Tank->tanks);

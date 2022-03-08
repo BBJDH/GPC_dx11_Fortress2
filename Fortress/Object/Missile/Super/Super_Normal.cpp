@@ -4,7 +4,7 @@
 
 
 Super_Normal::Super_Normal(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, {45,45},150, Effect::Type::Super_Normal, Missile::Type::Multiple_Hit,3)
+	:Missile(pos, width, height, {45,45},200, Effect::Type::Super_Normal, Missile::Type::Multiple_Hit,3)
 {
 	ani_set();
 }
@@ -56,11 +56,14 @@ void Super_Normal::check_state()
 		if (hit_count >= hit_limit)
 		{
 			state = State::Delete;
+			//log
+			std::cout << "delete!" << std::endl << std::endl;
 			break;
 		}
 		state = State::In_Air;
 		reduce();
 		boom(_Map_manager->hmapdc);  //¸ÊÆÄ±«
+		_Physics_manager->collide_bomb(*this, _Tank->tanks);
 		_Effect->push_effect(get_effect_type(), getpos());
 		hit_count++;
 		falling = true;

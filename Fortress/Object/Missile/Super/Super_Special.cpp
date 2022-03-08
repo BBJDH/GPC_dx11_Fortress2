@@ -2,7 +2,7 @@
 #include "Super_Special.h"
 
 Super_Special::Super_Special(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, {50,40}, 500, Effect::Type::Super_Special)
+	:Missile(pos, width, height, { 28,28 }, 90, Effect::Type::Super_Special)
 {
 	ani_set();
 }

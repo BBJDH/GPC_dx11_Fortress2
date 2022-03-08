@@ -151,7 +151,7 @@ void Turnmanager::checkturn(std::vector<Tank*>& tank, std::vector<Missile*>& mis
 
 bool Turnmanager::next_turn()
 {
-	std::cout <<"next turn" << std::endl;
+
 	_Tank->tanks[whosturn()]->setmyturn(false);
 	index++;
 	set_wind();
@@ -159,6 +159,8 @@ bool Turnmanager::next_turn()
 		rerand();
 	tankturn_start(*_Tank->tanks[whosturn()]);
 
+	//log
+	std::cout << "next turn : "<< _Tank->tanks[whosturn()]->get_player_name() << std::endl << std::endl;
 	return true;
 }
 

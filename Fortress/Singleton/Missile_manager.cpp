@@ -13,8 +13,8 @@ Missile_manager::~Missile_manager()
 
 void Missile_manager::create_missile( Tank const& tank)
 {
-    int const width = tank.getwidth();
-    int const height = tank.getheight();
+    int const width = 30;
+    int const height = 30;
 
     float angle;
     if (tank.get_side() == Tank::Side::Right)
@@ -82,11 +82,22 @@ void Missile_manager::create_missile( Tank const& tank)
         }
         case Tank::Missile_Type::Special:
         {
-            missiles.push_back(new Super_Special(position, width, height));
-            missiles.back()->ballistics_initialize(
-                angle ,
-                power * FIRE_MUL);
-            missiles.back()->setmyturn(true);
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    missiles.push_back(new Super_Special(position, width, height));
+                    missiles.back()->ballistics_initialize(
+                        angle - static_cast<float>(i*2 ),
+                        (power + static_cast<float>(j*2 )) * FIRE_MUL);
+                    missiles.back()->setmyturn(true);
+                }
+            }
+            //missiles.push_back(new Super_Special(position, width, height));
+            //missiles.back()->ballistics_initialize(
+            //    angle ,
+            //    power * FIRE_MUL);
+            //missiles.back()->setmyturn(true);
             break;
         }
         }

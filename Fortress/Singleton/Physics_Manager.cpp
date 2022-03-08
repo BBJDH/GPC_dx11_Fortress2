@@ -94,14 +94,14 @@ void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missi
 		for (size_t i = 0; i < missile.size(); i++)
 		{
 			unsigned const poistion_x = static_cast<const unsigned>(missile[i]->getpos().x);//이미지 가운데 x좌표
-			unsigned const poistion_y = static_cast<const unsigned>(missile[i]->getpos().y + missile[i]->getheight() / 2);
+			unsigned const poistion_y = static_cast<const unsigned>(missile[i]->getpos().y );
 			if (missile[i]->is_falling() and 
 				(Collide(hmapdc, poistion_x, poistion_y)  or collide_missile_tanks(missile[i],tank) ) ) //탱크와 충돌 추가
 			{
 				//부딪혔다면 폭발 후 제거
+				std::cout << "Hit!! Missile [" << i + 1 << " of "<< missile.size() <<"] : "<<std::endl;
 				missile[i]->set_state(Missile::State::Collide);
-				missile[i]->moveto({ missile[i]->getpos().x  , missile[i]->getpos().y + missile[i]->getheight() / 2 });
-				collide_bomb(*(missile[i]),tank);  //충돌판정
+				//collide_bomb(*(missile[i]),tank);  //충돌판정
 			}
 		}
 	}
@@ -170,7 +170,8 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& t
 					dmg_mul = range - length;
 				 
 				unsigned const dmg = missile.get_damage() * dmg_mul / range;
-				//test
+
+				//log
 				std::cout << dmg << std::endl;
 
 				tank[i]->ballistics_initialize(0,0);
@@ -179,6 +180,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& t
 
 				_CAM->earthquake_start();
 			}
+
 		}
 	}
 }
@@ -221,7 +223,8 @@ bool Physics_Manager::collide_missile_tanks(Missile const * missile, std::vector
 		{
 			
 			tank_rect.Center = { tank[i]->getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank[i]->getpos().y };
-			tank_rect.Length = { static_cast<float const>(tank[i]->getwidth()),static_cast<float const>(tank[i]->getheight()) };
+			//tank_rect.Length = { static_cast<float const>(tank[i]->getwidth()),static_cast<float const>(tank[i]->getheight()) };
+			tank_rect.Length = { 30,30 };
 			if (missile_point.Collide(tank_rect))
 			{
 				return true;

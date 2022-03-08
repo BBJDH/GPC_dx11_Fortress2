@@ -38,10 +38,14 @@ void Missile::check_state()
 		if (hit_count >= hit_limit)
 		{
 			state = State::Delete;
+			//log
+			std::cout << "delete!" << std::endl;
+
 			break;
 		}
 		state = State::In_Air;
 		boom(_Map_manager->hmapdc);  //¸ÊÆÄ±«
+		_Physics_manager->collide_bomb(*this,_Tank->tanks);
 		_Effect->push_effect(get_effect_type(), getpos());
 		hit_count++;
 		falling = true;
@@ -49,6 +53,7 @@ void Missile::check_state()
 	}
 	case Missile::State::Delete:
 	{
+
 		break;
 	}
 
