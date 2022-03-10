@@ -8,12 +8,15 @@ public:
 	{
 		Tank_Turn, Missile_Turn, Effect_turn, Event, Over,
 	};
+	//int ¹ø ÅÊÅ© intµî 
+	std::map<int, int> player_record;
 private:
 	Random rand_array;
 	State state;
 	unsigned players;
 	unsigned index;
 	float	 wind;
+	int		 dead_count;
 
 	bool is_obj_turn(Object const & obj);
 	bool is_tank_turn(std::vector<Tank*>& tank);

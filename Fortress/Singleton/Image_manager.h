@@ -57,7 +57,9 @@ private:
 
     
     //game over
-
+    void render_background();
+    void render_winner_text();
+    void render_winner_player();
 
 public:
     Image_manager();

@@ -5,10 +5,11 @@
 Turnmanager::Turnmanager() : 
 index{ 0 }, state{ State::Tank_Turn },
 players{ static_cast<unsigned>(_Button->player_set.size()) },
-wind{0}
+wind{ 0 }, dead_count{0}
 {
 	rand_array = Random(0, players - 1, players);
 	set_wind();
+	
 }
 
 unsigned const Turnmanager::whosturn()const
@@ -28,24 +29,49 @@ float Turnmanager::get_wind() const
 
 bool Turnmanager::is_gameover(std::vector<Tank*>& tank)
 {
-	unsigned live_count =0;
+	//if (!tank.empty())
+	//{
+	//	for (size_t i = 0; i < tank.size(); i++)
+	//	{
+	//		if (!tank[i]->is_dead())
+	//		{
+	//			live_count++;
+	//		}
+	//	}
+	//	if (live_count < 2)
+	//	{
+	//		this->state = State::Over;
+	//		return true;
+	//	}
+	//}
+	//return false;
+
 	if (!tank.empty())
 	{
-		for (size_t i = 0; i < tank.size(); i++)
+		for (int i = 0; i < tank.size(); i++)
 		{
-			if (!tank[i]->is_dead())
+			int ranking = players - dead_count;
+			if (player_record.find(i) == player_record.end() and tank[i]->is_dead())
 			{
-				live_count++;
+				player_record.insert({ i, ranking });
+				//std::cout << "ÅÊÅ© ÀÎµ¦½º : " << i << ", µî¼ö : " << ranking << std::endl;
+				dead_count++;
+			}
+			if (ranking < 2 )
+			{
+				if(!tank[i]->is_dead())
+					player_record.insert({ i, 1 });
+				else
+					player_record.insert({ whosturn(), 1 });
+
+				this->state = State::Over;
+				//std::cout << "ÅÊÅ© ÀÎµ¦½º : " << i << ", µî¼ö : " <<1 << std::endl;
+				return true;
 			}
 		}
-		if (live_count < 2)
-		{
-			this->state = State::Over;
-			return true;
-		}
+
 	}
 	return false;
-
 }
 
 bool Turnmanager::is_obj_turn(Object const& obj)

@@ -93,11 +93,7 @@ void Missile_manager::create_missile( Tank const& tank)
                     missiles.back()->setmyturn(true);
                 }
             }
-            //missiles.push_back(new Super_Special(position, width, height));
-            //missiles.back()->ballistics_initialize(
-            //    angle ,
-            //    power * FIRE_MUL);
-            //missiles.back()->setmyturn(true);
+
             break;
         }
         }

@@ -2,8 +2,8 @@
 #include "Super_Special.h"
 
 Super_Special::Super_Special(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, { 28,28 }, 90, Effect::Type::Super_Special), state{ State::Crusing },
-	guide_target{ 0,0 }, guide_range{200}
+	:Missile(pos, width, height, { 28,28 }, 60, Effect::Type::Super_Special), state{ State::Crusing },
+	guide_target{ 0,0 }, guide_range{ 200 }, guide_speed{700}
 {
 	ani_set();
 }
@@ -21,20 +21,64 @@ void Super_Special::ani_render(float const delta)
 	this->animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
 	//this->animation.Angle = -this->image_angle / Radian;
 	this->animation.Render();
+	if (state == State::Guide)
+	{
+		lock_on.Location = { guide_target.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - guide_target.y };
+		lock_on.Render();
+	}
 }
 
 void Super_Special::ballistics_equation(float const delta, float const wind)
 {
 	_float2 const previous = { pos };
-	if (falling)
+	switch (state)
+	{
+	case Super_Special::State::Crusing:
 	{
 		velocity0.x += wind * delta;
 		this->moving_time += delta * speed;
 		this->pos.x = this->pos0.x + (velocity0.x) * moving_time;
 		this->pos.y = this->pos0.y - velocity0.y * moving_time
 			+ (grav_accerl * static_cast<float>(pow(moving_time, 2))) / 2;
+
+		if(previous.y <pos.y)
+			state = State::Ready;
+
+		break;
 	}
-	animation.Angle = -atan2(pos.y- previous.y, pos.x - previous.x)*180/PI;
+	case Super_Special::State::Ready:
+	{
+		if(check_guide_range())
+		{ 
+			state = State::Guide;
+			break;
+		}
+		velocity0.x += wind * delta;
+		this->moving_time += delta * speed;
+		this->pos.x = this->pos0.x + (velocity0.x) * moving_time;
+		this->pos.y = this->pos0.y - velocity0.y * moving_time
+			+ (grav_accerl * static_cast<float>(pow(moving_time, 2))) / 2;
+		break;
+	}
+	case Super_Special::State::Guide:
+	{
+		float const guide_angle = -atan2(guide_target.y - pos.y, guide_target.x - pos.x);
+		float const cos_val = guide_speed * cos(guide_angle) * delta ;
+		float const sin_val = guide_speed * sin(guide_angle) * delta ;
+
+		pos.x = pos.x + cos_val;
+		pos.y = pos.y - sin_val;
+
+		break;
+	}
+	default:
+		break;
+	}
+	//if (falling)
+	//{
+
+	//}
+	animation.Angle = -atan2(pos.y- previous.y, pos.x - previous.x)*180/PI;			//미사일 이미지각
 
 	if (this->pos.y > MAPSIZE_H + OUT_RANGE or this->pos.x > MAPSIZE_W + OUT_RANGE or this->pos.x < 0 - OUT_RANGE - MAPSIZE_W)
 	{
@@ -43,19 +87,31 @@ void Super_Special::ballistics_equation(float const delta, float const wind)
 }
 
 
-void Super_Special::check_guide_range()
+bool Super_Special::check_guide_range()
 {
-	if (!_Tank->tanks.empty() and state == State::Crusing)
+	_float2 target_pos = { 0,0 };
+	unsigned target_length = 0;
+	if (!_Tank->tanks.empty() )
 	{
 		for (int i = 0; i < _Tank->tanks.size(); i++)
 		{
-			if(_Physics_manager->collide_guide_range(this, guide_range, _Tank->tanks[i]))
+			if(_Tank->tanks[i]->get_state()!=Tank::State::Dead 
+				and  _Physics_manager->collide_guide_range(this, guide_range, _Tank->tanks[i]))
 			{
-				state = State::Guide;
-				guide_target = _Tank->tanks[i]->getpos();
+				target_pos = _Tank->tanks[i]->getpos();
+				unsigned const temp_length = _Physics_manager->length(this->pos, target_pos);
+				if (target_length == 0 or temp_length < target_length)
+				{
+					target_length = temp_length;
+					guide_target = target_pos;
+				}
 			}
+
 		}
 	}
+
+	return target_length != 0;
+
 }
 
 void Super_Special::ani_set()
@@ -63,6 +119,11 @@ void Super_Special::ani_set()
 	animation.Name = "Animation/Missile/Super/special";
 	animation.Duration = ANI_Bomb_Throw;
 	animation.Repeatable = true;
+	lock_on.Name = "Animation/Missile/lock_on";
+	lock_on.Duration = 0.3f;
+	lock_on.Repeatable = true;
+	lock_on.Length = { 100,100 };
+
 }
 
 //void Super_Special::ani_set_boom()

@@ -3,6 +3,7 @@
 
 
 
+
 Image_manager::Image_manager()
 {
 
@@ -99,9 +100,9 @@ void Image_manager::render_ui(std::vector<Tank*> const& tank)
 
 void Image_manager::render_gameover()
 {
-    view_image.Name = "Image/Screen/gameover";
-    set_image(view_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
-    view_image.Render();
+    render_background();
+    render_winner_text();
+    render_winner_player();
 }
 
 
@@ -541,3 +542,42 @@ void Image_manager::render_minimap_cambox()
     );
 }
 
+void Image_manager::render_background()
+{
+    view_image.Name = "Image/Screen/gameover";
+    set_image(view_image, { CAM_SIZE_W / 2, CAM_SIZE_H / 2 }, { CAM_SIZE_W, CAM_SIZE_H });
+    view_image.Render();
+}
+
+void Image_manager::render_winner_text()
+{
+    view_image.Name = "Image/Text/winner";
+    set_image(view_image, {400, 170 }, { 250, 100 });
+    view_image.Render();
+}
+
+void Image_manager::render_winner_player()
+{
+    int winner_index =-1;
+    for (auto iter = _Turn->player_record.begin(); iter != _Turn->player_record.end(); iter++)
+    {
+        if (iter->second == 1)
+            winner_index = iter->first;
+    }
+    _Text_manager->render_text
+    (
+        {
+            510,-170
+        },
+        50,
+        _Tank->tanks[winner_index]->get_player_name(),
+        static_cast<Text_manager::Font>(_Tank->tanks[winner_index]->get_color())
+    );
+//    _Text_manager->render_text_ui
+//    (
+//        {800 , 170},
+//        50,
+//        "player" +std::to_string(winner_index),
+//        static_cast<Text_manager::Font>(std::get<2>(_Button->player_set[winner_index]))
+//    );
+}
