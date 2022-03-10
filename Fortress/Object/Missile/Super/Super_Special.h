@@ -1,8 +1,21 @@
 #pragma once
 class Super_Special : public Missile
 {
+public:
+public:
+	enum class State
+	{
+		Crusing, Guide,
+	};
 
 private:
+	State state;
+	_float2 guide_target;
+	float const guide_range;
+
+private:
+	void check_guide_range();
+
 private:
 	//void check_state();
 	void ani_set();

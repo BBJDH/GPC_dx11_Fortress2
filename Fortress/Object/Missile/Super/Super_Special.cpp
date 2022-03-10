@@ -2,7 +2,8 @@
 #include "Super_Special.h"
 
 Super_Special::Super_Special(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, { 28,28 }, 90, Effect::Type::Super_Special)
+	:Missile(pos, width, height, { 28,28 }, 90, Effect::Type::Super_Special), state{ State::Crusing },
+	guide_target{ 0,0 }, guide_range{200}
 {
 	ani_set();
 }
@@ -40,26 +41,22 @@ void Super_Special::ballistics_equation(float const delta, float const wind)
 		this->out = true;
 	}
 }
-//
-//void Super_Special::check_state()
-//{
-//	
-//	switch (this->state)
-//	{
-//	case Missile::State::In_Air:
-//	{
-//		ani_set_throw();
-//		break;
-//	}
-//
-//	case Missile::State::Collide:
-//	{
-//		break;
-//	}
-//
-//	}
-//	
-//}
+
+
+void Super_Special::check_guide_range()
+{
+	if (!_Tank->tanks.empty() and state == State::Crusing)
+	{
+		for (int i = 0; i < _Tank->tanks.size(); i++)
+		{
+			if(_Physics_manager->collide_guide_range(this, guide_range, _Tank->tanks[i]))
+			{
+				state = State::Guide;
+				guide_target = _Tank->tanks[i]->getpos();
+			}
+		}
+	}
+}
 
 void Super_Special::ani_set()
 {

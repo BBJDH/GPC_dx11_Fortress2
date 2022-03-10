@@ -57,7 +57,7 @@ void Super_Normal::check_state()
 		{
 			state = State::Delete;
 			//log
-			std::cout << "delete!" << std::endl << std::endl;
+			//std::cout << "delete!" << std::endl << std::endl;
 			break;
 		}
 		state = State::In_Air;

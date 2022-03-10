@@ -39,7 +39,7 @@ void Missile::check_state()
 		{
 			state = State::Delete;
 			//log
-			std::cout << "delete!" << std::endl;
+			//std::cout << "delete!" << std::endl;
 
 			break;
 		}

@@ -99,7 +99,7 @@ void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missi
 				(Collide(hmapdc, poistion_x, poistion_y)  or collide_missile_tanks(missile[i],tank) ) ) //ÅÊÅ©¿Í Ãæµ¹ Ãß°¡
 			{
 				//ºÎµúÇû´Ù¸é Æø¹ß ÈÄ Á¦°Å
-				std::cout << "Hit!! Missile [" << i + 1 << " of "<< missile.size() <<"] : "<<std::endl;
+				//std::cout << "Hit!! Missile [" << i + 1 << " of "<< missile.size() <<"] : "<<std::endl;
 				missile[i]->set_state(Missile::State::Collide);
 				//collide_bomb(*(missile[i]),tank);  //Ãæµ¹ÆÇÁ¤
 			}
@@ -146,6 +146,18 @@ void Physics_Manager::ballistics(std::vector<Tank*>& tank,std::vector<Missile*>&
 	}
 }
 
+bool Physics_Manager::collide_guide_range(Missile const* const missile, float const guide_range, Tank const* tank)
+{
+	Engine::Physics::Component<Circle> guide_missile;
+	guide_missile.Center = { missile->getpos().x,missile->getpos().y };
+	guide_missile.Radius = guide_range;
+	Engine::Physics::Component<Point> tank_pos;
+	tank_pos.x = tank->getpos().x;
+	tank_pos.y = tank->getpos().y;
+
+	return guide_missile.Collide(tank_pos);
+}
+
 void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& tank)
 {
 	if (!tank.empty())
@@ -172,7 +184,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& t
 				unsigned const dmg = missile.get_damage() * dmg_mul / range;
 
 				//log
-				std::cout << dmg << std::endl;
+				//std::cout << dmg << std::endl;
 
 				tank[i]->ballistics_initialize(0,0);
 				tank[i]->take_damage(dmg);
@@ -224,7 +236,7 @@ bool Physics_Manager::collide_missile_tanks(Missile const * missile, std::vector
 			
 			tank_rect.Center = { tank[i]->getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank[i]->getpos().y };
 			//tank_rect.Length = { static_cast<float const>(tank[i]->getwidth()),static_cast<float const>(tank[i]->getheight()) };
-			tank_rect.Length = { 30,30 };
+			tank_rect.Length = { 15,15 };
 			if (missile_point.Collide(tank_rect))
 			{
 				return true;

@@ -160,7 +160,7 @@ bool Turnmanager::next_turn()
 	tankturn_start(*_Tank->tanks[whosturn()]);
 
 	//log
-	std::cout << "next turn : "<< _Tank->tanks[whosturn()]->get_player_name() << std::endl << std::endl;
+	//std::cout << "next turn : "<< _Tank->tanks[whosturn()]->get_player_name() << std::endl << std::endl;
 	return true;
 }
 

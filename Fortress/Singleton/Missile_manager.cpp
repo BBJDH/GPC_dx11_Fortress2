@@ -13,8 +13,8 @@ Missile_manager::~Missile_manager()
 
 void Missile_manager::create_missile( Tank const& tank)
 {
-    int const width = 30;
-    int const height = 30;
+    int const width = 15;
+    int const height = 15;
 
     float angle;
     if (tank.get_side() == Tank::Side::Right)
@@ -74,8 +74,8 @@ void Missile_manager::create_missile( Tank const& tank)
             {
                 missiles.push_back(new Super_Normal(position, width, height));
                 missiles.back()->ballistics_initialize(
-                    angle-static_cast<float>(i*2),
-                    (power + static_cast<float>(i*5)) * FIRE_MUL);
+                    angle-static_cast<float>(i),
+                    (power + static_cast<float>(i*4)) * FIRE_MUL);
                 missiles.back()->setmyturn(true);
             }
             break;
