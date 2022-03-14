@@ -8,7 +8,7 @@ public:
 	{
 		Tank_Turn, Missile_Turn, Effect_turn, Event, Over,
 	};
-	//int ¹ø ÅÊÅ© intµî 
+	//int ¹ø ÅÊÅ©, intµî 
 	std::map<int, int> player_record;
 private:
 	Random rand_array;

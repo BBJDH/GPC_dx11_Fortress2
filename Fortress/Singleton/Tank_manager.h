@@ -8,11 +8,11 @@ public:
     
 private:
     void create_tank(_float2 const& position, std::string const& player_name, Tank::Tank_Type const tank_name, Color const color);
+    void del_tank(Tank const * tank);
 
 public:
     Tank_manager();
     ~Tank_manager();
     void create_tanks();
-    void del_tank(Tank const * tank);
     void clear();
 };

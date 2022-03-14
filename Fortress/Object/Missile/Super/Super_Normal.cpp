@@ -41,7 +41,7 @@ void Super_Normal::ballistics_equation(float const delta, float const wind)
 		this->out = true;
 	}
 }
-//TODO: 다단히트에따른 탱크충돌 추가, 다단히트 데미지 누적
+
 void Super_Normal::check_state()
 {
 	switch (this->state)

@@ -11,4 +11,6 @@ public:
 	void push_effect(Effect::Type const type, _float2 const & position);
 	//void render();
 	void del_effect(Effect const * effect);
+	void clear();
+	~Effect_manager();
 };

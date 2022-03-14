@@ -28,6 +28,7 @@
     <ClInclude Include="Object\Missile\Canon\Canon_Special.h" />
     <ClInclude Include="Object\Missile\Missile.h" />
     <ClInclude Include="Object\Missile\Super\Super_Normal.h" />
+    <ClInclude Include="Object\Missile\Guide_Missile.h" />
     <ClInclude Include="Object\Missile\Super\Super_Special.h" />
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Object\Tank\Canon\Canon.h" />
@@ -78,6 +79,7 @@
     <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp" />
     <ClCompile Include="Object\Missile\Missile.cpp" />
     <ClCompile Include="Object\Missile\Super\Super_Normal.cpp" />
+    <ClCompile Include="Object\Missile\Guide_Missile.cpp" />
     <ClCompile Include="Object\Missile\Super\Super_Special.cpp" />
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Object\Patterns.cpp" />

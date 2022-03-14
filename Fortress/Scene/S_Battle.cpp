@@ -21,6 +21,7 @@ void S_Battle::End()
     _Button->clear_buttons();
     _Tank->release_singleton();
     _Missile->release_singleton();
+    _Effect->release_singleton();
     _Anime->release_singleton();
     _Input_manager->release_singleton();
     _Turn->release_singleton();

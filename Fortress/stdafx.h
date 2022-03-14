@@ -193,6 +193,7 @@ enum class Color
 #include"Object/Object.h"
 #include"Object/Effect/Effect.h"
 #include"./Object/Missile/Missile.h"
+#include"./Object/Missile/Guide_Missile.h"
 #include"./Object/Tank/Tank.h"
 
 

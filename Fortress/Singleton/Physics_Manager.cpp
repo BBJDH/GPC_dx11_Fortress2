@@ -171,7 +171,7 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& t
 			Engine::Physics::Component<Quadrangle> tank_rect;
 			tank_rect.Center = {tank[i]->getpos().x-MAPSIZE_W/2,MAPSIZE_H/2-tank[i]->getpos().y};
 			tank_rect.Length = {static_cast<float const>(tank[i]->getwidth()),static_cast<float const>(tank[i]->getheight())};
-			if (bomb_circle.Collide(tank_rect))
+			if (bomb_circle.Collide(tank_rect) )
 			{
 				int const range = static_cast<int const>(missile.get_range_w());
 				int const length = this->length(tank[i]->getpos(),missile.getpos());
@@ -189,8 +189,8 @@ void Physics_Manager::collide_bomb(Missile const& missile, std::vector<Tank*>& t
 				tank[i]->ballistics_initialize(0,0);
 				tank[i]->take_damage(dmg);
 				tank[i]->ani_start();
-
-				_CAM->earthquake_start();
+				if(tank[i]->get_state() != Tank::State::Dead)
+					_CAM->earthquake_start();
 			}
 
 		}

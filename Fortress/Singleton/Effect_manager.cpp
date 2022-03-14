@@ -62,3 +62,24 @@ void Effect_manager::del_effect(Effect const* effect)
 	delete effect;
 	effect = nullptr;
 }
+
+void Effect_manager::clear()
+{
+	if (!effects.empty())
+	{
+		for (int i = 0; i < effects.size(); i++)
+		{
+			if (effects[i] != nullptr)
+			{
+				del_effect(effects[i]);
+			}
+		}
+		effects.clear();
+		std::vector<Effect*>().swap(effects);
+	}
+}
+
+Effect_manager::~Effect_manager()
+{
+	clear();
+}

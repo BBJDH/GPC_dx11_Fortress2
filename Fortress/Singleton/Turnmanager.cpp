@@ -46,12 +46,13 @@ bool Turnmanager::is_gameover(std::vector<Tank*>& tank)
 	//}
 	//return false;
 
+	bool is_gameover = false;
 	if (!tank.empty())
 	{
+		int ranking = players - dead_count;
 		for (int i = 0; i < tank.size(); i++)
 		{
-			int ranking = players - dead_count;
-			if (player_record.find(i) == player_record.end() and tank[i]->is_dead())
+			if (tank[i]->is_dead() and player_record.find(i) == player_record.end())
 			{
 				player_record.insert({ i, ranking });
 				//std::cout << "ÅÊÅ© ÀÎµ¦½º : " << i << ", µî¼ö : " << ranking << std::endl;
@@ -59,19 +60,19 @@ bool Turnmanager::is_gameover(std::vector<Tank*>& tank)
 			}
 			if (ranking < 2 )
 			{
-				if(!tank[i]->is_dead())
-					player_record.insert({ i, 1 });
-				else
-					player_record.insert({ whosturn(), 1 });
+				//if(!tank[i]->is_dead())
+				player_record.insert({ i, 1 });
+				//else
+					//player_record.insert({ whosturn(), 1 });
 
 				this->state = State::Over;
 				//std::cout << "ÅÊÅ© ÀÎµ¦½º : " << i << ", µî¼ö : " <<1 << std::endl;
-				return true;
+				is_gameover = true;
 			}
 		}
-
 	}
-	return false;
+
+	return is_gameover;
 }
 
 bool Turnmanager::is_obj_turn(Object const& obj)
