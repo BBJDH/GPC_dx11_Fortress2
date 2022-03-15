@@ -189,7 +189,12 @@ enum class Color
 
 //게임안 보여질 객체들
 
+
+
 //상속
+//오브젝트 풀링
+#include"Object/Object_Poolable.h"
+#include"Object/Pool_manager.h"
 #include"Object/Object.h"
 #include"Object/Effect/Effect.h"
 #include"./Object/Missile/Missile.h"
