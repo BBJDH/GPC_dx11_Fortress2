@@ -8,17 +8,18 @@ public:
 public:
 	virtual ~Object_Poolable() = default;
 
-	virtual void SetRecycle()
+	virtual void recycle() //오브젝트 재사용시 호출
+	{
+		CanRecylcable = false;
+	}
+	
+	virtual void set_recycle_able()  //오브젝트 수명이 다한 후 호출
 	{
 		CanRecylcable = true;
 	}
 
-	virtual void OnRecycle()
-	{
-		CanRecylcable = false;
-	}
 
-	virtual void Update()
+	virtual void update()
 	{
 		if (CanRecylcable) return;
 	}

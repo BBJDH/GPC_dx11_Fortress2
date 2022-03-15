@@ -36,7 +36,7 @@ void Missile_manager::create_missile( Tank const& tank)
 
     _float2 const position = { tank.getpos().x + min_x,tank.getpos().y - min_y };
 
-
+    //각도, 파워, 애니메이션, 
     switch (tank.get_tank_type())
     {
     case Tank::Tank_Type::Canon:
