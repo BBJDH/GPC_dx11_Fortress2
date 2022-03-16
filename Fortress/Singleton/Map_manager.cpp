@@ -27,7 +27,7 @@ void Map_manager::initialize()
     DeleteObject(hmapbit);
 }
 
-void Map_manager::render_map(std::vector<Patterns> & patterns)
+void Map_manager::render_map(std::vector<Patterns*> & patterns)
 {
 
     //x, y 좌표는 (전체 지형맵의 크기 - 캠사이즈)/2의 절대값 만큼 좌우로 이동

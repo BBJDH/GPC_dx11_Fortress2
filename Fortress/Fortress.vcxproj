@@ -103,6 +103,7 @@
     <ClCompile Include="Singleton\Missile_manager.cpp" />
     <ClCompile Include="Singleton\Mouse.cpp" />
     <ClCompile Include="Scene\S_Battle.cpp" />
+    <ClCompile Include="Singleton\Pattern_manager.cpp" />
     <ClCompile Include="Singleton\Physics_Manager.cpp" />
     <ClCompile Include="Singleton\Tank_manager.cpp" />
     <ClCompile Include="Singleton\Text_manager.cpp" />

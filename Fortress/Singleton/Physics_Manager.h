@@ -14,7 +14,7 @@ public:
 	bool collide_button(Engine::Physics::Component<Quadrangle> const & button);
 	//bool collide_missile_tank(Missile const & missile, Tank const & tank);
 	bool collide_missile_tanks(Missile const * missile, std::vector<Tank*>& tank);
-	void ballistics(std::vector<Tank*>& tank,std::vector<Missile*>& missile, std::vector<Patterns>& patterns, float const delta);
+	void ballistics(std::vector<Tank*>& tank,std::vector<Missile*>& missile, float const delta);
 	bool collide_guide_range(Missile const* const missile,
 		float const guide_range, Tank const* tank);
 };

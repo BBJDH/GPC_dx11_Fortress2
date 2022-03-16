@@ -124,11 +124,12 @@ void Animation::render_effect(std::vector<Effect*>& effects)
     }
 }
 
-void Animation::render_patterns(std::vector<Patterns> &  patterns)
+void Animation::render_patterns(std::vector<Patterns*> &  patterns)
 {
     for (auto iter = patterns.begin(); iter != patterns.end(); iter++)
     {
-        iter->render();
+        if(!(*iter)->check_recyclable())
+            (*iter)->render();
     }
 }
 

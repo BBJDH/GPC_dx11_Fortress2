@@ -5,7 +5,8 @@ Super::Super(_float2 const& pos, unsigned const width, unsigned const height,
 	std::string const& player_name, std::string const& tank_name, Color const color)
 	:Tank(pos, width, height, player_name, tank_name, Tank::Tank_Type::Super, color)
 {
-	this->animation.Length = Vector<2>(60, 60);
+	//this->animation.Length = Vector<2>(60, 60);
+	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);
 
 }
 
@@ -56,7 +57,7 @@ void Super::ani_render(float const delta)
 	}
 	case Tank::State::Move:
 	{
-		location = location + "normal";
+		location = location + "move";
 		this->animation.Name = location.c_str();
 		break;
 	}

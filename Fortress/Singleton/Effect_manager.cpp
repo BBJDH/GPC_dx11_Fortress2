@@ -37,25 +37,6 @@ void Effect_manager::push_effect(Effect::Type const type, _float2 const& positio
 	
 }
 
-//void Effect_manager::render()
-//{
-//	if (!effects.empty())
-//	{
-//		for (int i = 0; i < effects.size(); ++i)
-//		{
-//			effects[i]->check_state();
-//			if (effects[i]->get_state() == Effect::State::Delete)
-//			{
-//				delete  effects[i];
-//				effects[i] = nullptr;
-//				break;
-//			}
-//			effects[i]->render();
-//		}
-//		effects.clear();
-//		std::vector<Effect*>().swap(effects);
-//	}
-//}
 
 void Effect_manager::del_effect(Effect const* effect)
 {

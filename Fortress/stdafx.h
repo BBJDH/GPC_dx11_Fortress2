@@ -1,7 +1,7 @@
 #pragma once
 //공용 헤더
-//#include<iostream>
-//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#include<iostream>
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 #include<Windows.h>
 #include<math.h>
@@ -193,13 +193,13 @@ enum class Color
 
 //상속
 //오브젝트 풀링
-#include"Object/Object_Poolable.h"
-#include"Object/Pool_manager.h"
+
 #include"Object/Object.h"
 #include"Object/Effect/Effect.h"
 #include"./Object/Missile/Missile.h"
 #include"./Object/Missile/Guide_Missile.h"
 #include"./Object/Tank/Tank.h"
+#include"./Object/Patterns.h"
 
 
 //Tank
@@ -253,6 +253,7 @@ enum class Color
 #include"./Singleton/Text_manager.h"
 #include"./Singleton/Button_manager.h"
 #include"./Singleton/Effect_manager.h"
+#include"./Singleton/Pattern_manager.h"
 
 
 
@@ -275,4 +276,5 @@ enum class Color
 #define _Tank Tank_manager::get_singleton()
 #define _Missile Missile_manager::get_singleton()
 #define _Effect Effect_manager::get_singleton()
+#define _Patterns Pattern_manager::get_singleton()
 

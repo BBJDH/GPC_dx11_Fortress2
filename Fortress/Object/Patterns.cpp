@@ -1,10 +1,15 @@
 #include "stdafx.h"
 #include "Patterns.h"
 
-Patterns::Patterns(std::string const& name, _float2 const& pos) :Object{ pos ,100,100,1 }, name{ name }
+Patterns::Patterns(std::string const& name, _float2 const& pos) :Object{ pos ,100,100,1 },
+name{ name }, recyclable{false}
 {
 	ani.Duration = 1.0f;
 	ani.Length = Vector<2>(width, height);
+}
+bool Patterns::check_recyclable()
+{
+	return recyclable;
 }
 void Patterns::render()
 {
@@ -15,8 +20,11 @@ void Patterns::render()
 	ani.Render();
 }
 
-void Patterns::recycle()
+void Patterns::recycle(std::string const& name, _float2 const& pos)
 {
+	this->name = name;
+	this->pos = pos;
+	this->out = false;
 	recyclable = false;
 }
 
@@ -24,6 +32,8 @@ void Patterns::set_recycle_able()
 {
 	recyclable = true;
 }
+
+
 
 Patterns::~Patterns()
 {

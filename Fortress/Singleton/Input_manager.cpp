@@ -101,7 +101,7 @@ void Input_manager::key_space(Tank& tank,std::vector<Missile*>& missile)
 }
 
 
-void Input_manager::input(std::vector<Tank*>& tank, std::vector<Missile*>& missile, std::vector<Patterns>& patterns, float const deltha)
+void Input_manager::input(std::vector<Tank*>& tank, std::vector<Missile*>& missile, float const deltha)
 {
     interval += deltha;
     if (interval > speed)

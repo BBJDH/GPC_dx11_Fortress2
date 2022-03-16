@@ -22,7 +22,7 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
     {
         tanks.push_back
         (
-            new Canon
+            new (std::nothrow) Canon
             (
                 position,
                 50,
@@ -38,7 +38,7 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
     {
         tanks.push_back
         (
-            new Super
+            new (std::nothrow) Super
             (
                 position,
                 50,
@@ -52,6 +52,9 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
     }
 
     }
+    if(tanks.back() == nullptr)
+        std::cout << "tank alloc fail!" << std::endl;
+
 
     tanks.back()->ballistics_initialize(0, 0);
 }

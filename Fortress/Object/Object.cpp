@@ -57,6 +57,7 @@ void Object::moveto(_float2 const & pos)
 
 void Object::ballistics_initialize(float const moving_angle, float const velocity)
 {
+	this->moving_time = 0.0f;
 	this->moving_angle = round(moving_angle)*Radian;
 	this->velocity0.x = velocity*static_cast<float>(cos(this->moving_angle));
 	this->velocity0.y = velocity*static_cast<float>(sin(this->moving_angle));

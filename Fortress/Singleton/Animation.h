@@ -29,7 +29,7 @@ public:
 	void render_tanks(std::vector<Tank*> & tank);
 	void render_missile(std::vector<Missile*> & missiles);
 	void render_effect(std::vector<Effect*> & effects);
-	void render_patterns(std::vector<Patterns> & patterns);
+	void render_patterns(std::vector<Patterns*> & patterns);
 	void render_arrow(Tank const & tank);
 	void render(std::vector<Tank*> & tank, std::vector<Missile*> & missile, std::vector<Effect*>& effects);
 };

@@ -3,7 +3,7 @@
 
 Guide_Missile::Guide_Missile(_float2 const& pos, unsigned const width, unsigned const height)
 	:Missile(pos, width, height, { 28,28 }, 60, Effect::Type::Super_Special), state{ State::Crusing },
-	guide_target{ 0,0 }, guide_range{ 200 }, guide_speed{700}
+	guide_target{ 0,0 }, guide_range{ 200 }, guide_speed{1500}
 {
 	ani_set();
 }

@@ -99,16 +99,15 @@ void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missi
 				(Collide(hmapdc, poistion_x, poistion_y)  or collide_missile_tanks(missile[i],tank) ) ) //탱크와 충돌 추가
 			{
 				//부딪혔다면 폭발 후 제거
-				//std::cout << "Hit!! Missile [" << i + 1 << " of "<< missile.size() <<"] : "<<std::endl;
+				std::cout << "Hit!! Missile [" << i + 1 << " of "<< missile.size() <<"] : "<<std::endl;
 				missile[i]->set_state(Missile::State::Collide);
-				//collide_bomb(*(missile[i]),tank);  //충돌판정
 			}
 		}
 	}
 }
 // 탄도학 계산 
 void Physics_Manager::ballistics(std::vector<Tank*>& tank,std::vector<Missile*>& missile,
-	std::vector<Patterns>& patterns, float const delta)
+	float const delta)
 {
 	if (!tank.empty())
 	{
@@ -134,16 +133,7 @@ void Physics_Manager::ballistics(std::vector<Tank*>& tank,std::vector<Missile*>&
 			}
 		}
 	}
-	if (!patterns.empty())
-	{
-		for (size_t i = 0; i < patterns.size(); i++)
-		{
-			patterns[i].ballistics_equation(delta,_Turn->get_wind());
-			//화면밖으로 나가면 제거
-			if (patterns[i].is_out())
-				patterns.erase(patterns.begin() + i);
-		}
-	}
+	_Patterns->ballistics(delta);
 }
 
 bool Physics_Manager::collide_guide_range(Missile const* const missile, float const guide_range, Tank const* tank)
@@ -236,7 +226,7 @@ bool Physics_Manager::collide_missile_tanks(Missile const * missile, std::vector
 			
 			tank_rect.Center = { tank[i]->getpos().x - MAPSIZE_W / 2,MAPSIZE_H / 2 - tank[i]->getpos().y };
 			//tank_rect.Length = { static_cast<float const>(tank[i]->getwidth()),static_cast<float const>(tank[i]->getheight()) };
-			tank_rect.Length = { 15,15 };
+			tank_rect.Length = { 20,20 };
 			if (missile_point.Collide(tank_rect))
 			{
 				return true;

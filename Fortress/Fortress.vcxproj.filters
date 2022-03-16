@@ -281,5 +281,8 @@
     <ClCompile Include="Object\Missile\Super\Super_Special.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Singleton\Pattern_manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

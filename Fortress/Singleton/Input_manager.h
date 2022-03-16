@@ -18,7 +18,7 @@ private:
 public:
 	Input_manager();
 	void input(std::vector<Tank*>& tank, std::vector<Missile*>& missile,
-		std::vector<Patterns>& patterns, float const deltha);
+		 float const deltha);
 	void find_nextstep(HDC const& hmapdc,  Tank & tank,  bool const isright);
 	void fire(Tank& tank, std::vector<Missile*>& missile, bool const keyon);
 };
