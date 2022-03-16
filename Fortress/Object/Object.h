@@ -2,7 +2,7 @@
 
 
 
-class Object : public Object_Poolable
+class Object 
 {
 public:
 	enum class Type {Tank,Missile,Item};

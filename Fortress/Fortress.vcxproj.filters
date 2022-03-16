@@ -165,10 +165,10 @@
     <ClInclude Include="Object\Missile\Super\Super_Special.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Object_Poolable.h">
+    <ClInclude Include="Object\Pool_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Pool_manager.h">
+    <ClInclude Include="Singleton\Pattern_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

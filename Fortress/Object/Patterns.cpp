@@ -14,3 +14,17 @@ void Patterns::render()
 	ani.Repeatable = true;
 	ani.Render();
 }
+
+void Patterns::recycle()
+{
+	recyclable = false;
+}
+
+void Patterns::set_recycle_able()
+{
+	recyclable = true;
+}
+
+Patterns::~Patterns()
+{
+}

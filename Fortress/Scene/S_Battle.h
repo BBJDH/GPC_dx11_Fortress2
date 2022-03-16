@@ -16,7 +16,6 @@ private:
 
     //std::vector<Object> obj;
     State state;
-    std::vector<Patterns> patterns;
     //Engine::Rendering::Camera Camera;
     std::string pattern_name;
     float playing_time;

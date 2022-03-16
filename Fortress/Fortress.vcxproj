@@ -32,7 +32,6 @@
     <ClInclude Include="Object\Missile\Super\Super_Special.h" />
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Object\Pool_manager.h" />
-    <ClInclude Include="Object\Object_Poolable.h" />
     <ClInclude Include="Object\Tank\Canon\Canon.h" />
     <ClInclude Include="Object\Tank\Super\Super.h" />
     <ClInclude Include="Random.h" />
@@ -63,6 +62,7 @@
     <ClInclude Include="Singleton\Mouse.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Object\Patterns.h" />
+    <ClInclude Include="Singleton\Pattern_manager.h" />
     <ClInclude Include="Singleton\Physics_Manager.h" />
     <ClInclude Include="Singleton\SingletonT.h" />
     <ClInclude Include="Scene\S_Battle.h" />
