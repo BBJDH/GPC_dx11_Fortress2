@@ -31,6 +31,12 @@ void Effect_manager::push_effect(Effect::Type const type, _float2 const& positio
 
 		break;
 	}
+	case Effect::Type::Ion_Normal:
+	{
+		effects.push_back(new Effect_Ion_Normal(position));
+
+		break;
+	}
 	default:
 		break;
 	}

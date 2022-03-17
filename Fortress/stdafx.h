@@ -205,6 +205,7 @@ enum class Color
 //Tank
 #include"./Object/Tank/Canon/Canon.h"
 #include"./Object/Tank/Super/Super.h"
+#include"./Object/Tank/Ion_Attacker/Ion_Attacker.h"
 
 
 //Missile
@@ -212,11 +213,14 @@ enum class Color
 #include"./Object/Missile/Canon/Canon_Special.h"
 #include"./Object/Missile/Super/Super_Normal.h"
 #include"./Object/Missile/Super/Super_Special.h"
+#include"./Object/Missile/Ion_Attacker/Ion_Normal.h"
+#include"./Object/Missile/Ion_Attacker/Ion_Special.h"
 
 //Effect
 #include"Object/Effect/Effect_Normal.h"
 #include"Object/Effect/Effect_Super_Normal.h"
 #include"Object/Effect/Effect_Super_Special.h"
+#include"Object/Effect/Effect_Ion_Normal.h"
 
 //기타 오브젝트 상속
 #include"./Object/Patterns.h"

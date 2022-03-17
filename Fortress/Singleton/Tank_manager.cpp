@@ -50,6 +50,22 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
         );
         break;
     }
+    case Tank::Tank_Type::Ion_Attacker:
+    {
+        tanks.push_back
+        (
+            new (std::nothrow) Ion_Attacker
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Ion_Attacker",
+                color
+            )
+        );
+        break;
+    }
 
     }
     if(tanks.back() == nullptr)

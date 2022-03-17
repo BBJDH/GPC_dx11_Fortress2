@@ -40,7 +40,7 @@ public:
 	};
 	enum class Tank_Type
 	{
-		Canon, Super
+		Canon, Super, Ion_Attacker
 	};
 private:
 	//상수 세팅

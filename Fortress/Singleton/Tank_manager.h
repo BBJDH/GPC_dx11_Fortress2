@@ -3,7 +3,7 @@
 class Tank_manager :public SingletonT<Tank_manager>
 {
 public:
-    std::string const tank_name[12] = { "Canon","Super", };
+    std::string const tank_name[12] = { "Canon","Super","Ion_Attacker",};
     std::vector<Tank*> tanks;
     
 private:

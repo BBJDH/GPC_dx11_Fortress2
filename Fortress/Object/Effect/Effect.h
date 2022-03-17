@@ -8,7 +8,7 @@ public:
 	};
 	enum class Type
 	{
-		Normal_Big, Normal_Small, Super_Normal, Super_Special,
+		Normal_Big, Normal_Small, Super_Normal, Super_Special, Ion_Normal, Ion_Special
 	};
 
 protected:
