@@ -20,6 +20,7 @@ void Satellite_Missile::check_state()
 		break;
 	}
 	//TODO: 위성소환을 여기서 할지 방정식 함수에서 이동계산을 할지 고민/결정 해야함
+	// 이동하는동안 별도 애니메이션 재생, 정지 후 위성 작동 애니메이션 내보냄 
 	//레이저는 이펙트로 처리, 레이저 종료후 폭발 이펙트 생성 및 delete로 넘어감
 	case Missile::State::Collide:
 	{	
