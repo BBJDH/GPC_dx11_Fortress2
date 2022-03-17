@@ -4,8 +4,9 @@
 
 
 Ion_Special::Ion_Special(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, { 100,80 }, 200, Effect::Type::Ion_Normal)
+	:Missile(pos, width, height, { 66,50 }, 280, Effect::Type::Ion_Normal)
 {
+	ani_set();
 }
 
 Ion_Special::~Ion_Special()

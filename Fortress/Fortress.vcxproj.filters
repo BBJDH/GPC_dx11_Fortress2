@@ -132,19 +132,13 @@
     <ClInclude Include="Object\Tank\Canon\Canon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Missile\Canon\Canon_Normal.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Missile\Canon\Canon_Special.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Tank\Super\Super.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Missile\Guide_Missile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Missile\Super\Super_Normal.h">
+    <ClInclude Include="Object\Missile\Multi_Hit_Missile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Effect\Effect.h">
@@ -162,22 +156,16 @@
     <ClInclude Include="Object\Effect\Effect_Super_Special.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Missile\Super\Super_Special.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton\Pattern_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Tank\Ion_Attacker\Ion_Attacker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Missile\Ion_Attacker\Ion_Normal.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Missile\Ion_Attacker\Ion_Special.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Effect\Effect_Ion_Normal.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Missile\Satellite_Missile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -257,16 +245,10 @@
     <ClCompile Include="Object\Tank\Canon\Canon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Missile\Canon\Canon_Normal.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Missile\Canon\Canon_Special.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object\Tank\Super\Super.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Missile\Super\Super_Normal.cpp">
+    <ClCompile Include="Object\Missile\Multi_Hit_Missile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Missile\Guide_Missile.cpp">
@@ -287,22 +269,16 @@
     <ClCompile Include="Object\Effect\Effect_Super_Special.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Missile\Super\Super_Special.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Singleton\Pattern_manager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Tank\Ion_Attacker\Ion_Attacker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Missile\Ion_Attacker\Ion_Normal.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Missile\Ion_Attacker\Ion_Special.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object\Effect\Effect_Ion_Normal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Missile\Satellite_Missile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

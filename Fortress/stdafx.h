@@ -211,7 +211,7 @@ enum class Color
 //Missile
 #include"./Object/Missile/Canon/Canon_Normal.h"
 #include"./Object/Missile/Canon/Canon_Special.h"
-#include"./Object/Missile/Super/Super_Normal.h"
+#include"./Object/Missile/Multi_Hit_Missile.h"
 #include"./Object/Missile/Super/Super_Special.h"
 #include"./Object/Missile/Ion_Attacker/Ion_Normal.h"
 #include"./Object/Missile/Ion_Attacker/Ion_Special.h"

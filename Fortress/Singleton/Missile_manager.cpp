@@ -45,7 +45,8 @@ void Missile_manager::create_missile( Tank const& tank)
         {
         case Tank::Missile_Type::Normal:
         {
-            missiles.push_back(new Canon_Normal(position, width, height));
+            missiles.push_back(new Missile("Canon/normal", position, width, height, { 78,65 }, 140, Effect::Type::Normal_Big));
+
             missiles.back()->ballistics_initialize(
                 angle ,
                 power * FIRE_MUL);
@@ -54,7 +55,8 @@ void Missile_manager::create_missile( Tank const& tank)
         }
         case Tank::Missile_Type::Special:
         {
-            missiles.push_back(new Canon_Special(position, width, height));
+            missiles.push_back(new Missile("Canon/special", position, width, height, { 35,30 }, 420, Effect::Type::Normal_Small));
+
             missiles.back()->ballistics_initialize(
                 angle ,
                 power * FIRE_MUL);
@@ -72,7 +74,7 @@ void Missile_manager::create_missile( Tank const& tank)
         {
             for (int i=0; i<3; i++)
             {
-                missiles.push_back(new Super_Normal(position, width, height));
+                missiles.push_back(new Multi_Hit_Missile("Super/normal", position, width, height, {45,40}, 200, Effect::Type::Super_Normal));
                 missiles.back()->ballistics_initialize(
                     angle-static_cast<float>(i),
                     (power + static_cast<float>(i*3)) * FIRE_MUL);
@@ -86,7 +88,8 @@ void Missile_manager::create_missile( Tank const& tank)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    missiles.push_back(new Super_Special(position, width, height));
+                    //missiles.push_back(new Super_Special(position, width, height));
+                    missiles.push_back(new Guide_Missile("Super/special",position, width, height, 200, 1500, Effect::Type::Super_Special));
                     missiles.back()->ballistics_initialize(
                         angle - static_cast<float>(i*2 ),
                         (power + static_cast<float>(j*2 )) * FIRE_MUL);
@@ -94,6 +97,33 @@ void Missile_manager::create_missile( Tank const& tank)
                 }
             }
 
+            break;
+        }
+        }
+        return;
+    }
+    case Tank::Tank_Type::Ion_Attacker:
+    {
+        switch (tank.get_missile_type())
+        {
+        case Tank::Missile_Type::Normal:
+        {
+            //missiles.push_back(new Ion_Normal(position, width, height));
+            missiles.push_back(new Missile("Ion_Attacker/normal", position, width, height, {48,40},170, Effect::Type::Ion_Normal,Missile::Angle_Type::Angle));
+            missiles.back()->ballistics_initialize(
+                angle,
+                power * FIRE_MUL);
+            missiles.back()->setmyturn(true);
+            break;
+        }
+        case Tank::Missile_Type::Special:
+        {
+            //missiles.push_back(new Ion_Special(position, width, height));
+            missiles.push_back(new Missile("Ion_Attacker/special", position, width, height, { 66,50 }, 280, Effect::Type::Ion_Normal, Missile::Angle_Type::Angle));
+            missiles.back()->ballistics_initialize(
+                angle,
+                power * FIRE_MUL);
+            missiles.back()->setmyturn(true);
             break;
         }
         }

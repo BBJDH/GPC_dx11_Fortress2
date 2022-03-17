@@ -12,7 +12,7 @@ void Super_Special::ani_set()
 	lock_on.Length = { 100,100 };
 }
 
-Super_Special::Super_Special(_float2 const& pos, unsigned const width, unsigned const height):Guide_Missile(pos,width,height)
+Super_Special::Super_Special(_float2 const& pos, unsigned const width, unsigned const height):Guide_Missile("Super/special", pos, width, height,200,1500,Effect::Type::Super_Special)
 {
 }
 

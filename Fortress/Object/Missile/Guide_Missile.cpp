@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Guide_Missile.h"
 
-Guide_Missile::Guide_Missile(_float2 const& pos, unsigned const width, unsigned const height)
-	:Missile(pos, width, height, { 28,28 }, 60, Effect::Type::Super_Special), state{ State::Crusing },
-	guide_target{ 0,0 }, guide_range{ 200 }, guide_speed{1500}
+Guide_Missile::Guide_Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height, float const guide_range, float const guide_speed, Effect::Type const effect_type)
+	:Missile(name,pos, width, height, { 28,28 }, 60, effect_type, Missile::Angle_Type::Angle), state{ State::Crusing },
+	guide_target{ 0,0 }, guide_range{ guide_range }, guide_speed{ guide_speed } // 200 1500
 {
 	ani_set();
 }
