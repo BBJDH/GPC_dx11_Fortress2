@@ -192,15 +192,12 @@ enum class Color
 
 
 //상속
-//오브젝트 풀링
 
 #include"Object/Object.h"
 #include"Object/Effect/Effect.h"
 #include"./Object/Missile/Missile.h"
-#include"./Object/Missile/Guide_Missile.h"
 #include"./Object/Tank/Tank.h"
 #include"./Object/Patterns.h"
-
 
 //Tank
 #include"./Object/Tank/Canon/Canon.h"
@@ -209,12 +206,14 @@ enum class Color
 
 
 //Missile
-#include"./Object/Missile/Canon/Canon_Normal.h"
-#include"./Object/Missile/Canon/Canon_Special.h"
+//#include"./Object/Missile/Canon/Canon_Normal.h"
+//#include"./Object/Missile/Canon/Canon_Special.h"
+#include"./Object/Missile/Guide_Missile.h"
 #include"./Object/Missile/Multi_Hit_Missile.h"
-#include"./Object/Missile/Super/Super_Special.h"
-#include"./Object/Missile/Ion_Attacker/Ion_Normal.h"
-#include"./Object/Missile/Ion_Attacker/Ion_Special.h"
+#include"./Object/Missile/Satellite_Missile.h"
+//#include"./Object/Missile/Super/Super_Special.h"
+//#include"./Object/Missile/Ion_Attacker/Ion_Normal.h"
+//#include"./Object/Missile/Ion_Attacker/Ion_Special.h"
 
 //Effect
 #include"Object/Effect/Effect_Normal.h"
@@ -258,9 +257,13 @@ enum class Color
 #include"./Singleton/Button_manager.h"
 #include"./Singleton/Effect_manager.h"
 #include"./Singleton/Pattern_manager.h"
+#include"./Singleton/Sound_manager.h"
 
-
-
+//Fmod
+// #include "../Libs/Fmod/fmod.hpp"
+// #pragma comment (lib, "../Libs/Fmod/fmodL_vc.lib")
+//디버깅 - 환경 - path에 추가(디버깅 환경에서 경로 추가)
+//(c++ dll 포함 시키는 방법 참고)
 
 
 //=====================================
@@ -281,4 +284,5 @@ enum class Color
 #define _Missile Missile_manager::get_singleton()
 #define _Effect Effect_manager::get_singleton()
 #define _Patterns Pattern_manager::get_singleton()
+#define _Sound Sound_manager::get_singleton()
 

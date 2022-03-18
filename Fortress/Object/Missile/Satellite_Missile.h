@@ -9,6 +9,7 @@ private:
 	Satellite_State satellite_state;
 	void check_state()override;
 	_float2 target_point;
+	float animate_time;
 	float const satellite_speed = 500;
 public:
 	Satellite_Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height,
@@ -30,7 +31,8 @@ public:
 // 목표 좌표 저장, 위성 위치 설정 및 애니메이션 설정
 // 
 // 미사일 충돌시
-// ballistics에서 미사일의 pos를 타겟 포인트로 저장
+// 위성위치로부터 타겟 포인트까지 x좌표 고정 y좌표 픽셀 충돌검사
+// 충돌 한 픽셀을 ballistics에서 미사일의 pos를 타겟 포인트로 저장
 // 이동 상태
 // 렌더 애니메이션은 미사일에서 위성_이동 애니메이션으로 변환
 // y좌표를 최상단에서 델타식으로 아래 100만큼 하방 이동

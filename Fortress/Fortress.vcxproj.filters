@@ -144,16 +144,7 @@
     <ClInclude Include="Object\Effect\Effect.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Effect\Effect_Normal.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton\Effect_manager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Effect\Effect_Super_Normal.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Effect\Effect_Super_Special.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Singleton\Pattern_manager.h">
@@ -162,10 +153,10 @@
     <ClInclude Include="Object\Tank\Ion_Attacker\Ion_Attacker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Effect\Effect_Ion_Normal.h">
+    <ClInclude Include="Object\Missile\Satellite_Missile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Missile\Satellite_Missile.h">
+    <ClInclude Include="Singleton\Sound_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -257,16 +248,7 @@
     <ClCompile Include="Object\Effect\Effect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Effect\Effect_Normal.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Singleton\Effect_manager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Effect\Effect_Super_Normal.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Effect\Effect_Super_Special.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Singleton\Pattern_manager.cpp">
@@ -275,10 +257,10 @@
     <ClCompile Include="Object\Tank\Ion_Attacker\Ion_Attacker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Effect\Effect_Ion_Normal.cpp">
+    <ClCompile Include="Object\Missile\Satellite_Missile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Missile\Satellite_Missile.cpp">
+    <ClCompile Include="Singleton\Sound_manager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
