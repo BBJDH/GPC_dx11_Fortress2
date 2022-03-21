@@ -112,7 +112,7 @@ Scene * S_Battle::update_scene()
         _CAM->init_camera();
 
         //셰이더로 로딩씬 그리기
-        //TODO: 포스트 이펙트 블러(화면넘길때 사용)
+        //TODO: 포스트 이펙트 블러->가우시안 블러 사용(화면넘길때 사용)
         Engine::Rendering::Pipeline::Effect::set_y((playing_time/ min_loading_time)* CAM_SIZE_H);
         _Image_manager->render_loading();
 
