@@ -45,7 +45,7 @@ void Missile_manager::create_missile( Tank const& tank)
         {
         case Tank::Missile_Type::Normal:
         {
-            missiles.push_back(new Missile("Canon/normal", position, width, height, { 78,65 }, 140, Effect::Type::Normal_Big));
+            missiles.push_back(new Missile("Canon/normal", position, width, height, { 78,65 }, 280, Effect::Type::Normal_Big));
 
             missiles.back()->ballistics_initialize(
                 angle ,
@@ -55,7 +55,7 @@ void Missile_manager::create_missile( Tank const& tank)
         }
         case Tank::Missile_Type::Special:
         {
-            missiles.push_back(new Missile("Canon/special", position, width, height, { 35,30 }, 420, Effect::Type::Normal_Small));
+            missiles.push_back(new Missile("Canon/special", position, width, height, { 35,30 }, 500, Effect::Type::Normal_Small));
 
             missiles.back()->ballistics_initialize(
                 angle ,
@@ -107,7 +107,7 @@ void Missile_manager::create_missile( Tank const& tank)
         {
         case Tank::Missile_Type::Normal:
         {
-            missiles.push_back(new Missile("Ion_Attacker/normal", position, width, height, {48,40},170, Effect::Type::Ion_Normal,Missile::Angle_Type::Angle));
+            missiles.push_back(new Missile("Ion_Attacker/normal", position, width, height, {48,40},250, Effect::Type::Ion_Normal,Missile::Angle_Type::Angle));
             missiles.back()->ballistics_initialize(
                 angle,
                 power * FIRE_MUL);
@@ -117,7 +117,7 @@ void Missile_manager::create_missile( Tank const& tank)
         case Tank::Missile_Type::Special:
         {
             //missiles.push_back(new Missile("Ion_Attacker/special", position, width, height, { 66,50 }, 280, Effect::Type::Ion_Normal, Missile::Angle_Type::Angle));
-            missiles.push_back(new Satellite_Missile("Ion_Attacker/special", position, width, height, { 66,50 }, 280, Effect::Type::Ion_Normal));
+            missiles.push_back(new Satellite_Missile("Ion_Attacker/special", position, width, height, { 66,50 }, 350, Effect::Type::Ion_Normal));
             missiles.back()->ballistics_initialize(
                 angle,
                 power * FIRE_MUL);

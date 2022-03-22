@@ -26,7 +26,7 @@ void Satellite_Missile::check_state()
 	case Missile::State::Collide:
 	{	
 		//위성 이동 및 Ion 이펙트 소환은 ballistics_equation에서 생성
-		if (satellite_state == Satellite_State::Launch and animate_time > 1.75f)
+		if (satellite_state == Satellite_State::Launch and animate_time > 1.0f)
 		{
 
 			hit_count++;
@@ -91,7 +91,7 @@ void Satellite_Missile::ballistics_equation(float const delta, float const wind)
 			//위성의 pos와 착탄점(target_point) 가운데 y값을 구함
 
 			animate_time += delta;
-			if (animate_time > 1.0f)//차징완료
+			if (animate_time > 0.25f)//차징완료
 			{
 				_float2 const satellite_pos = pos;
 				_Physics_manager->Collide_object(*this, _Map_manager->hmapdc, static_cast<unsigned>(target_point.y));

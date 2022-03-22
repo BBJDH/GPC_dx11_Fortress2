@@ -50,7 +50,7 @@ void Effect_manager::push_effect(Effect::Type const type, _float2 const& positio
 	}
 	case Effect::Type::Satellite_Active:
 	{
-		effects.push_back(new Effect("satellite_active", position, { 150,150 }, 1.75f));
+		effects.push_back(new Effect("satellite_active", position, { 150,150 }, 1.0f));
 		break;
 	}
 	default:
