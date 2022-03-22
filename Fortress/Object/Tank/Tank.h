@@ -26,7 +26,7 @@ public:
 	// Dead
 
 
-	enum class State
+	enum class State //상태
 	{
 		Nomal, Idle, Idle2, Steady, Fire, Move, Stop, Fall, Hit, Danger, Dead, //...
 	};
@@ -141,3 +141,18 @@ public:
 };
 
 
+
+
+//이동 대기, 공격 피격, 점프,
+
+//이동 {달리기 걷기}
+
+//공격{강공격 손 발, 약공격}
+
+//피격{어디 맞았는지 따라 공중에서 맞았을대 }
+
+
+//update() <- 상태를 업데이트 해주는 함수
+//플레이어.애니메이션.render()
+
+//state 패턴
