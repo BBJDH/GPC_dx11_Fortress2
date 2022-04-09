@@ -5,39 +5,72 @@ Effect_manager::Effect_manager()
 {
 }
 
-void Effect_manager::push_effect(Effect::Type const type, _float2 const& position)
+void Effect_manager::push_effect(Effect::Type const type, _float2 const& position, float const size_mul)
 {
+	float effect_size = 0;
 	switch (type)
 	{
+		
 	case Effect::Type::Normal_Big:
 	{
-		//effects.push_back(new Effect_Normal(position, {300,300}));
-		effects.push_back(new Effect("explosion", position, { 300,300 }, 0.7f));
+		effect_size = 300 * size_mul;
+		effects.push_back(new Effect("explosion", position, { effect_size,effect_size }, 0.7f));
 		break;
 	}
 	case Effect::Type::Normal_Small:
 	{
-		//effects.push_back(new Effect_Normal(position, { 150,150 }));
-		effects.push_back(new Effect("explosion", position, { 150,150 }, 0.7f));
-		break;
-	}
-	case Effect::Type::Super_Normal:
-	{
-		//effects.push_back(new Effect_Super_Normal(position));
-		effects.push_back(new Effect("explosion_super", position, { 300,300 }, 0.5f));
-		break;
-	}
-	case Effect::Type::Super_Special:
-	{
-		//effects.push_back(new Effect_Super_Special(position));
-		effects.push_back(new Effect("explosion_missile", position, { 350,350 }, 0.5f));
+		effect_size = 150 * size_mul;
 
+		effects.push_back(new Effect("explosion", position, { effect_size,effect_size }, 0.7f));
+		break;
+	}
+	case Effect::Type::Explosion_Super:
+	{
+		effect_size = 300 * size_mul;
+
+		effects.push_back(new Effect("explosion_super", position, { effect_size,effect_size }, 0.5f));
+		break;
+	}
+	case Effect::Type::Explosion_Missile:
+	{
+		effect_size = 400 * size_mul;
+
+		effects.push_back(new Effect("explosion_missile", position, { effect_size,effect_size }, 0.5f));
+		break;
+	}
+	case Effect::Type::Missile_Special:
+	{
+		effect_size = 500 * size_mul;
+
+		effects.push_back(new Effect("explosion_special_missile", position, { effect_size,effect_size }, 0.5f));
 		break;
 	}
 	case Effect::Type::Ion_Normal:
 	{
-		effects.push_back(new Effect("explosion_ion", position, { 300,300 }, 0.5f));
+		effect_size = 300 * size_mul;
 
+		effects.push_back(new Effect("explosion_ion", position, { effect_size,effect_size }, 0.5f));
+		break;
+	}
+	case Effect::Type::Explosion_Secwind:
+	{
+		effect_size = 400 * size_mul;
+
+		effects.push_back(new Effect("explosion_secwind", position, { effect_size,effect_size }, 0.5f));
+		break;
+	}
+	case Effect::Type::Explosion_Laser:
+	{
+		effect_size = 400 * size_mul;
+
+		effects.push_back(new Effect("explosion_laser", position, { effect_size,effect_size }, 0.5f));
+		break;
+	}
+	case Effect::Type::Explosion_Special_Laser:
+	{
+		effect_size = 400 * size_mul;
+
+		effects.push_back(new Effect("explosion_special_laser", position, { effect_size,effect_size }, 0.5f));
 		break;
 	}
 	case Effect::Type::Ion:

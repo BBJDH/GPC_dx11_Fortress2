@@ -1,7 +1,7 @@
 #pragma once
 //공용 헤더
-#include<iostream>
-#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+//#include<iostream>
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 #include<Windows.h>
 #include<math.h>
@@ -203,11 +203,17 @@ enum class Color
 #include"./Object/Tank/Canon/Canon.h"
 #include"./Object/Tank/Super/Super.h"
 #include"./Object/Tank/Ion_Attacker/Ion_Attacker.h"
+#include"./Object/Tank/Multi_Missile/Multi_Missile.h"
+#include"./Object/Tank/Carrot/Carrot.h"
+#include"./Object/Tank/Missile_Tank/Missile_Tank.h"
+#include"./Object/Tank/Secwind/Secwind.h"
+#include"./Object/Tank/Laser/Laser.h"
 
 
 //Missile
 //#include"./Object/Missile/Canon/Canon_Normal.h"
 //#include"./Object/Missile/Canon/Canon_Special.h"
+#include"./Object/Missile/R_Missile.h"
 #include"./Object/Missile/Guide_Missile.h"
 #include"./Object/Missile/Multi_Hit_Missile.h"
 #include"./Object/Missile/Satellite_Missile.h"

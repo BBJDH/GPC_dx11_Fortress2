@@ -13,19 +13,19 @@
 //}
 
 Missile::Missile(_float2 const& pos, unsigned const width, unsigned const height,
-	_float2 const& missile_range, int const dagame, Effect::Type const effect_type,
+	_float2 const& missile_range, int const damage, Effect::Type const effect_type,
 	Hit_Type const hit_type, int const hit_limit)
 	:Object(pos, width, height, 10), bomb_range{ missile_range },
-	damage{ dagame }, ani_playtime{ 0.0f }, state{ State::In_Air }, hit_type{ hit_type },
+	damage{ damage }, ani_playtime{ 0.0f }, state{ State::In_Air }, hit_type{ hit_type },
 	hit_count{ 0 }, hit_limit{ hit_limit }, effect_type{ effect_type }
 {
 	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
 	ani_set();
 }
 
-Missile::Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height, _float2 const& missile_range, int const dagame, Effect::Type const effect_type, Angle_Type const angle_type, Hit_Type const hit_type, int const hit_limit)
+Missile::Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height, _float2 const& missile_range, int const damage, Effect::Type const effect_type, Angle_Type const angle_type, Hit_Type const hit_type, int const hit_limit)
 	:Object(pos, width, height, 10), bomb_range{ missile_range }, name{ name },
-	damage{ dagame }, ani_playtime{ 0.0f }, state{ State::In_Air }, hit_type{ hit_type },
+	damage{ damage }, ani_playtime{ 0.0f }, state{ State::In_Air }, hit_type{ hit_type },
 	hit_count{ 0 }, hit_limit{ hit_limit }, effect_type{ effect_type }, angle_type{ angle_type }
 {
 	animation.Length = Vector<2>(Missile_SIZE, Missile_SIZE);
@@ -52,7 +52,7 @@ void Missile::check_state()
 		{
 			state = State::Delete;
 			//log
-			std::cout << "delete!" << std::endl;
+			//std::cout << "delete!" << std::endl;
 		}
 		else
 		{

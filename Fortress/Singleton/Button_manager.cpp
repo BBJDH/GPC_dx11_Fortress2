@@ -471,7 +471,7 @@ void Button_manager::render_tank_button_image()
 			(
 				_Tank->tank_name[i],
 				{
-					pos.x + offset.x * i,
+					pos.x + offset.x * (i-6),
 					pos.y + offset.y
 				},
 				length

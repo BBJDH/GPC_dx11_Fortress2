@@ -21,7 +21,7 @@ private:
 
 public:
 	Guide_Missile(std::string const & name, _float2 const& pos, unsigned const width, unsigned const height,
-		float const guide_range, float const guide_speed, Effect::Type const effect_type);
+		_float2 const& missile_range, int const damage, float const guide_range, float const guide_speed, Effect::Type const effect_type);
 	~Guide_Missile()override;
 	void ani_render(float const delta)override;
 	void ballistics_equation(float const delta, float const wind = 0)override;

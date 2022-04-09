@@ -64,8 +64,8 @@ void Pattern_manager::recycle_pattern(std::string const& name, _float2 const& po
     {
 
         patterns.push_back(poolObj = new (std::nothrow) Patterns(name, pos));
-        if (poolObj == nullptr)
-            std::cout << "pattern alloc fail!" << std::endl;
+        //if (poolObj == nullptr)
+        //    std::cout << "pattern alloc fail!" << std::endl;
         poolObj->ballistics_initialize(0, 0);
 
         return ;
@@ -84,8 +84,8 @@ void Pattern_manager::recycle_pattern(std::string const& name, _float2 const& po
     {
         patterns.push_back(poolObj = new (std::nothrow) Patterns(name, pos));
 
-        if (poolObj == nullptr)
-            std::cout << "pattern alloc fail!" << std::endl;
+        //if (poolObj == nullptr)
+        //    std::cout << "pattern alloc fail!" << std::endl;
         poolObj->ballistics_initialize(0, 0);
 
         return ;

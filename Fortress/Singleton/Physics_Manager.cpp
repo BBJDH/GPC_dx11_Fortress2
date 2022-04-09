@@ -99,7 +99,7 @@ void Physics_Manager::Collide_objects(std::vector<Tank*>& tank,std::vector<Missi
 				(Collide(hmapdc, poistion_x, poistion_y)  or collide_missile_tanks(missile[i],tank) ) ) //ÅÊÅ©¿Í Ãæµ¹ Ãß°¡
 			{
 				//ºÎµúÇû´Ù¸é Æø¹ß ÈÄ Á¦°Å
-				std::cout << "Hit!! Missile [" << i + 1 << " of "<< missile.size() <<"] : "<<std::endl;
+				//std::cout << "Hit!! Missile [" << i + 1 << " of "<< missile.size() <<"] : "<<std::endl;
 				missile[i]->set_state(Missile::State::Collide);
 			}
 		}

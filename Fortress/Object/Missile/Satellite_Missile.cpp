@@ -37,7 +37,7 @@ void Satellite_Missile::check_state()
 			{
 				state = Missile::State::Delete;
 				//log
-				std::cout << "delete!" << std::endl << std::endl;
+				//std::cout << "delete!" << std::endl << std::endl;
 			}
 			else
 			{

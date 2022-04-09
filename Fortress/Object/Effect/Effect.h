@@ -8,8 +8,9 @@ public:
 	};
 	enum class Type
 	{
-		Normal_Big, Normal_Small, Super_Normal, Super_Special,
-		Ion_Normal, Ion_Special, Ion, Satellite_Active
+		Normal_Big, Normal_Small, Explosion_Super, Explosion_Missile,
+		Missile_Special, Explosion_Secwind, Explosion_Laser, Explosion_Special_Laser,
+		Ion_Normal, Ion_Special, Ion, Satellite_Active,
 	};
 
 protected:

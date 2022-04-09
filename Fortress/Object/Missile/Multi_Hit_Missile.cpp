@@ -3,8 +3,8 @@
 
 
 
-Multi_Hit_Missile::Multi_Hit_Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height, _float2 const& missile_range, int const damage, Effect::Type const effect_type)
-	:Missile(name, pos, width, height, missile_range, damage, effect_type, Missile::Angle_Type::Angle, Missile::Hit_Type::Multiple_Hit,3)
+Multi_Hit_Missile::Multi_Hit_Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height, _float2 const& missile_range, int const damage, int const hit_count, Effect::Type const effect_type)
+	:Missile(name, pos, width, height, missile_range, damage, effect_type, Missile::Angle_Type::Angle, Missile::Hit_Type::Multiple_Hit, hit_count)
 {
 }
 
@@ -35,7 +35,7 @@ void Multi_Hit_Missile::check_state()
 		{
 			state = State::Delete;
 			//log
-			std::cout << "delete!" << std::endl << std::endl;
+			//std::cout << "delete!" << std::endl << std::endl;
 		}
 		else
 		{
@@ -57,7 +57,7 @@ void Multi_Hit_Missile::check_state()
 
 void Multi_Hit_Missile::reduce()
 {
-	_float2 reduction = { 15, 15};
+	_float2 reduction = { 12, 10};
 	if (hit_count == 0)
 		reduction= {0,0};
 	float const mul = static_cast<float>(hit_count);

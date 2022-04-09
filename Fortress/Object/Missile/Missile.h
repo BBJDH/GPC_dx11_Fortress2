@@ -43,9 +43,9 @@ public:
 	//Missile(_float2 const& pos, unsigned const width, unsigned const height,
 	//	Effect::Type const effect_type, Type const type = Type::Single_Hit, int const hit_limit = 1 );
 	Missile(_float2 const& pos, unsigned const width, unsigned const height,
-		_float2 const& missile_range, int const dagame, Effect::Type const effect_type, Hit_Type const hit_type = Hit_Type::Single_Hit, int const hit_limit = 1);
+		_float2 const& missile_range, int const damage, Effect::Type const effect_type, Hit_Type const hit_type = Hit_Type::Single_Hit, int const hit_limit = 1);
 	Missile(std::string const & name, _float2 const& pos, unsigned const width, unsigned const height,
-		_float2 const& missile_range, int const dagame, Effect::Type const effect_type,
+		_float2 const& missile_range, int const damage, Effect::Type const effect_type,
 		Angle_Type const angle_type = Angle_Type::Non_Angle, Hit_Type const hit_type = Hit_Type::Single_Hit, int const hit_limit = 1);
 	
 	virtual ~Missile() = default;

@@ -66,10 +66,89 @@ void Tank_manager::create_tank(_float2 const & position, std::string const& play
         );
         break;
     }
-
+    case Tank::Tank_Type::Multi_Missile:
+    {
+        tanks.push_back
+        (
+            new (std::nothrow) Multi_Missile
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Multi_Missile",
+                color
+            )
+        );
+        break;
     }
-    if(tanks.back() == nullptr)
-        std::cout << "tank alloc fail!" << std::endl;
+    case Tank::Tank_Type::Carrot:
+    {
+        tanks.push_back
+        (
+            new (std::nothrow) Carrot
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Carrot",
+                color
+            )
+        );
+        break;
+    }
+    case Tank::Tank_Type::Missile_Tank:
+    {
+        tanks.push_back
+        (
+            new (std::nothrow) Missile_Tank
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Missile_Tank",
+                color
+            )
+        );
+        break;
+    }
+    case Tank::Tank_Type::Secwind:
+    {
+        tanks.push_back
+        (
+            new (std::nothrow) Secwind
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Secwind",
+                color
+            )
+        );
+        break;
+    }
+    case Tank::Tank_Type::Laser:
+    {
+        tanks.push_back
+        (
+            new (std::nothrow) Laser
+            (
+                position,
+                50,
+                50,
+                player_name,
+                "Laser",
+                color
+            )
+        );
+        break;
+    }
+    }
+    //if(tanks.back() == nullptr)
+    //    std::cout << "tank alloc fail!" << std::endl;
 
 
     tanks.back()->ballistics_initialize(0, 0);
@@ -93,18 +172,6 @@ void Tank_manager::create_tanks()
             std::get<1>(_Button->player_set[i]),
             std::get<2>(_Button->player_set[i])
         );
-        //tanks.push_back
-        //(
-        //    Canon
-        //    (
-        //        { position.x, 0 },
-        //        Tank_SIZE,
-        //        Tank_SIZE,
-        //        "player " + std::to_string(i + 1),
-        //        "canon",
-        //        std::get<2>(_Button->player_set[i])
-        //    )
-        //);
     }
 }
 
