@@ -2,11 +2,11 @@
 #include "./Object/Object.h"
 
 
-Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height,
+Tank::Tank(_float2 const& pos, unsigned const width, unsigned const height, _float2 const angle_range,
 	std::string const& player_name, std::string const& tank_name,
 	Tank::Tank_Type const type, Color const color)
 	: Object(pos, width, height), hp{ TANK_HP }, max_fuel{200}, fuel{ max_fuel },
-	fire_angle_min{25}, fire_angle_max{55},//{25,55}
+	fire_angle_min{ angle_range.value1()}, fire_angle_max{ angle_range.value2()},//{25,55}
 	fire_angle{ 0 }, fire_velocity{ 0.0f }, fire_angle_left_value{0.0f},
 	state{ State::Fall }, side{ static_cast<Side>(rand()%2) },
 	ani_playtime{ 0.0f }, player_name{ player_name }, tank_name{ tank_name }, damage{ "" }, color{ color },

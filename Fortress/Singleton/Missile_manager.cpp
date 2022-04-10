@@ -210,7 +210,7 @@ void Missile_manager::create_missile( Tank const& tank)
         case Tank::Missile_Type::Special:
         {
 
-            missiles.push_back(new Guide_Missile("Missile_Tank/special", position, width, height, { 32,32 }, 120, 300, 1500, Effect::Type::Explosion_Missile));
+            missiles.push_back(new Guide_Missile("Missile_Tank/special", position, width, height, { 32,32 }, 120, 250, 1500, Effect::Type::Explosion_Missile));
 
             //missiles.push_back(new Missile("Missile_Tank/special", position, width, height, { 40,32 }, 200, Effect::Type::Missile_Special, Missile::Angle_Type::Angle));
             missiles.back()->ballistics_initialize(angle, power* FIRE_MUL);
@@ -238,16 +238,12 @@ void Missile_manager::create_missile( Tank const& tank)
         }
         case Tank::Missile_Type::Special:
         {
-            for (int i = 0; i < 2; i++)
-            {
+            missiles.push_back(new R_Missile("Secwind/special", position, width, height, { 45,40 }, 200, 10, Effect::Type::Explosion_Secwind));
+            missiles.back()->ballistics_initialize( angle, power * FIRE_MUL);
+            missiles.push_back(new R_Missile("Secwind/special", position, width, height, { 45,40 }, 200, -10, Effect::Type::Explosion_Secwind));
+            missiles.back()->ballistics_initialize(angle, power* FIRE_MUL);
 
-                missiles.push_back(new Missile("Secwind/special", position, width, height, { 45,40 }, 200, Effect::Type::Explosion_Secwind));
-                missiles.back()->ballistics_initialize(
-                    angle,
-                    (power + static_cast<float>(i * 2)) * FIRE_MUL);
-                missiles.back()->setmyturn(true);
-
-            }
+            missiles.back()->setmyturn(true);
 
             break;
         }
@@ -260,7 +256,6 @@ void Missile_manager::create_missile( Tank const& tank)
         {
         case Tank::Missile_Type::Normal:
         {
-
             missiles.push_back(new Missile("Laser/normal", position, width, height, { 70,60 }, 270, Effect::Type::Explosion_Laser, Missile::Angle_Type::Angle));
             missiles.back()->ballistics_initialize(angle, power * FIRE_MUL);
             missiles.back()->setmyturn(true);
@@ -269,17 +264,15 @@ void Missile_manager::create_missile( Tank const& tank)
         }
         case Tank::Missile_Type::Special:
         {
-            for (int i = 0; i < 3; i++)
-            {
+            missiles.push_back(new R_Missile("Laser/special", position, width, height, { 45,35 }, 130, 15, Effect::Type::Explosion_Special_Laser));
+            missiles.back()->ballistics_initialize(angle, power* FIRE_MUL);
+            missiles.push_back(new R_Missile("Laser/special", position, width, height, { 45,35 }, 130, -15, Effect::Type::Explosion_Special_Laser));
+            missiles.back()->ballistics_initialize(angle, power* FIRE_MUL);
+            missiles.push_back(new R_Missile("Laser/special", position, width, height, { 45,35 }, 130, 0, Effect::Type::Explosion_Special_Laser));
+            missiles.back()->ballistics_initialize(angle, power* FIRE_MUL);
 
-                missiles.push_back(new Missile("Laser/special", position, width, height, { 40,35 }, 130, Effect::Type::Explosion_Special_Laser));
-                missiles.back()->ballistics_initialize(
-                    angle,
-                    (power + static_cast<float>(i * 2)) * FIRE_MUL);
-                missiles.back()->setmyturn(true);
 
-            }
-
+            missiles.back()->setmyturn(true);
             break;
         }
         }

@@ -18,9 +18,9 @@ Guide_Missile::~Guide_Missile()
 void Guide_Missile::ani_render(float const delta)
 {
 	ani_playtime += delta;
-	//check_state();
+	std::string const location = "Animation/Missile/" + name;
+	animation.Name = location.c_str();
 	this->animation.Location = { this->pos.x - MAPSIZE_W / 2,MAPSIZE_H / 2 - this->pos.y };
-	//this->animation.Angle = -this->image_angle / Radian;
 	this->animation.Render();
 	if (state == State::Guide)
 	{
@@ -117,7 +117,7 @@ bool Guide_Missile::check_guide_range()
 
 void Guide_Missile::ani_set()
 {
-	animation.Name = "Animation/Missile/Super/special";
+	//animation.Name = "Animation/Missile/Super/special";
 	animation.Duration = ANI_Bomb_Throw;
 	animation.Repeatable = true;
 	lock_on.Name = "Animation/Missile/lock_on";

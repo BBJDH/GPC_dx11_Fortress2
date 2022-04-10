@@ -3,7 +3,7 @@
 
 Secwind::Secwind(_float2 const& pos, unsigned const width, unsigned const height,
 	std::string const& player_name, std::string const& tank_name, Color const color)
-	:Tank(pos, width, height, player_name, tank_name, Tank::Tank_Type::Secwind, color)
+	:Tank(pos, width, height, {0,40}, player_name, tank_name, Tank::Tank_Type::Secwind, color)
 {
 	//this->animation.Length = Vector<2>(60, 60);
 	this->animation.Length = Vector<2>(Tank_ANI_SIZE, Tank_ANI_SIZE);

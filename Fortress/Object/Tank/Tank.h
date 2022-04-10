@@ -94,7 +94,7 @@ protected:
 
 public:
 
-	Tank(_float2 const& pos, unsigned const width, unsigned const height,
+	Tank(_float2 const& pos, unsigned const width, unsigned const height, _float2 const angle_range,
 		std::string const& player_name, std::string const& tank_name,
 		Tank::Tank_Type const type, Color const color);
 	virtual ~Tank() = default;

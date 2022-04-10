@@ -1,16 +1,12 @@
 #pragma once
 class R_Missile : public Missile
 {
-	//enum class Type 
-	//{
-	//	Circle, Ellipse
-	//};
 private:
-	//void check_state()override;
-	//void reduce();
+	float const sin_mul;
+	_float2 center_pos;
 public:
 	R_Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height,
-		_float2 const& missile_range, int const damage, Effect::Type const effect_type);
+		_float2 const& missile_range, int const damage, float const sin_mul, Effect::Type const effect_type);
 	~R_Missile()override;
 	void ballistics_equation(float const delta, float const wind = 0)override;
 

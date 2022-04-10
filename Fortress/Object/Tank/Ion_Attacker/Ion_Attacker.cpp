@@ -2,7 +2,7 @@
 #include "Ion_Attacker.h"
 
 Ion_Attacker::Ion_Attacker(_float2 const& pos, unsigned const width, unsigned const height, std::string const& player_name, std::string const& tank_name, Color const color)
-	:Tank(pos, width, height, player_name, tank_name, Tank::Tank_Type::Ion_Attacker, color)
+	:Tank(pos, width, height, { 20,55 }, player_name, tank_name, Tank::Tank_Type::Ion_Attacker, color)
 {
 }
 

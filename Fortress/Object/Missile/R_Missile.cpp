@@ -3,8 +3,8 @@
 
 
 R_Missile::R_Missile(std::string const& name, _float2 const& pos, unsigned const width, unsigned const height,
-	_float2 const& missile_range, int const damage, Effect::Type const effect_type)
-	:Missile(name, pos, width, height, missile_range, damage, effect_type)
+	_float2 const& missile_range, int const damage, float const sin_mul, Effect::Type const effect_type)
+	:Missile(name, pos, width, height, missile_range, damage, effect_type), sin_mul{ sin_mul }, center_pos{}
 {
 }
 
@@ -17,10 +17,11 @@ void R_Missile::ballistics_equation(float const delta, float const wind)
 	_float2 const previous = { pos };
 	if (falling)
 	{
+		float const rount_trip_height = sin_mul * sin(moving_time);
 		velocity0.x += wind * delta;
 		this->moving_time += delta * speed;
 		this->pos.x = this->pos0.x + (velocity0.x) * moving_time;
-		this->pos.y = this->pos0.y - velocity0.y * moving_time
+		this->pos.y = this->pos0.y - velocity0.y * moving_time + rount_trip_height
 			+ (grav_accerl * static_cast<float>(pow(moving_time, 2))) / 2;
 	}
 	if (angle_type == Angle_Type::Angle)
